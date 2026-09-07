@@ -1,0 +1,215 @@
+{
+	"life_time": 300,
+	"animation_type": "random_static",
+	"animation_speed": 1.0,
+
+	"size": {
+		"width": 8,
+		"height": 8
+	},
+
+	"textures": [
+		"item_particles:piece/blocks/stone/deepslate_piece_0.png",
+		"item_particles:piece/blocks/stone/deepslate_piece_1.png",
+		"item_particles:piece/blocks/stone/deepslate_piece_2.png"
+	],
+	
+	"holders": [
+		{
+			"item": "minecraft:deepslate",
+			"spawn_area": "#full",
+			"spawn_count": [0, 3],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:infested_deepslate",
+			"spawn_area": "#full",
+			"spawn_count": [0, 3],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:reinforced_deepslate",
+            "spawn_area": {
+                "minecraft:block/reinforced_deepslate_bottom": "3d/reinforced_deepslate_bottom_piece.png",
+                "minecraft:block/reinforced_deepslate_side": "3d/reinforced_deepslate_side_piece.png",
+                "minecraft:block/reinforced_deepslate_top": "3d/reinforced_deepslate_top_piece.png"
+            },
+			"spawn_count": [0, 1],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:deepslate_coal_ore",
+            "spawn_area": {
+                "minecraft:block/deepslate_coal_ore": "3d/deepslate_coal_ore_piece.png"
+            },
+			"spawn_count": [0, 3],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:deepslate_iron_ore",
+            "spawn_area": {
+                "minecraft:block/deepslate_iron_ore": "3d/deepslate_iron_ore_piece.png"
+            },
+			"spawn_count": [0, 3],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:deepslate_copper_ore",
+            "spawn_area": {
+                "minecraft:block/deepslate_copper_ore": "3d/deepslate_copper_ore_piece.png"
+            },
+			"spawn_count": [0, 3],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:deepslate_gold_ore",
+            "spawn_area": {
+                "minecraft:block/deepslate_gold_ore": "3d/deepslate_gold_ore_piece.png"
+            },
+			"spawn_count": [0, 3],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:deepslate_redstone_ore",
+            "spawn_area": {
+                "minecraft:block/deepslate_redstone_ore": "3d/deepslate_redstone_ore_piece.png"
+            },
+			"spawn_count": [0, 3],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:deepslate_emerald_ore",
+            "spawn_area": {
+                "minecraft:block/deepslate_emerald_ore": "3d/deepslate_emerald_ore_piece.png"
+            },
+			"spawn_count": [0, 3],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:deepslate_lapis_ore",
+            "spawn_area": {
+                "minecraft:block/deepslate_lapis_ore": "3d/deepslate_lapis_ore_piece.png"
+            },
+			"spawn_count": [0, 3],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:deepslate_diamond_ore",
+            "spawn_area": {
+                "minecraft:block/deepslate_diamond_ore": "3d/deepslate_diamond_ore_piece.png"
+            },
+			"spawn_count": [0, 3],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		}
+	],
+	"physics": {
+		"base": {
+			"xz_speed": {
+				"impulse": [-1.0, 1.0],
+				"impulse_bidirectional": false,
+				"acceleration": 0.0,
+				"acceleration_bidirectional": false,
+				"max_acceleration": [-100.0, 100.0],
+				"braking": 0.01,
+				"turbulence": [0.0, 0.0],
+				"impulse_inherit_coefficient": 1.0
+			},
+			"y_speed": {
+				"impulse": [-0.25, 0.0],
+				"impulse_bidirectional": false,
+				"acceleration": 0.2,
+				"acceleration_bidirectional": false,
+				"max_acceleration": [-100.0, 100.0],
+				"braking": 0.0,
+				"turbulence": [-0.1, 0.1],
+				"impulse_inherit_coefficient": 1.0
+			},
+			"angle_speed": {
+				"impulse": [0.0, 0.0],
+				"impulse_bidirectional": false,
+				"acceleration": 0.0,
+				"acceleration_bidirectional": false,
+				"max_acceleration": [-100.0, 100.0],
+				"braking": 0.0,
+				"turbulence": [0.0, 0.0]
+			}
+		},
+		"rotation": {
+			"particle": {
+				"spawn_angle": [0.0, 0.0],
+				"rotate_in_movement_direction": false,
+				"speed": {
+					"impulse": [0.0, 0.0],
+					"impulse_bidirectional": false,
+					"acceleration": 0.0,
+					"acceleration_bidirectional": false,
+					"max_acceleration": 0.0,
+					"braking": 0.0,
+					"turbulence": [0.0, 0.0]
+				}
+			},
+			"texture": {
+				"spawn_angle": [0.0, 360.0],
+				"rotate_in_movement_direction": false,
+				"speed": {
+					"impulse": [3.0, 9.0],
+					"impulse_bidirectional": true,
+					"acceleration": 0.0,
+					"acceleration_bidirectional": false,
+					"max_acceleration": 0.0,
+					"braking": 0.0,
+					"turbulence": [0.0, 0.0]
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,611 @@
+{
+	"life_time": 20,
+	"animation_type": "onetime",
+	"animation_speed": 2.0,
+	
+	"size": {
+		"width": 8,
+		"height": 8
+	},
+
+	"textures": [
+		"item_particles:glint/gold_glint1_0.png",
+		"item_particles:glint/gold_glint1_1.png",
+		"item_particles:glint/gold_glint1_2.png",
+		"item_particles:glint/gold_glint1_3.png",
+		"item_particles:glint/gold_glint1_4.png"
+	],
+	
+	"holders": [
+		{
+			"item": "minecraft:gold_ore",
+            "spawn_area": {
+                "minecraft:block/gold_ore": "3d/gold_ore_glint.png"
+            },
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:deepslate_gold_ore",
+            "spawn_area": {
+                "minecraft:block/deepslate_gold_ore": "3d/deepslate_gold_ore_glint.png"
+            },
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:nether_gold_ore",
+            "spawn_area": {
+                "minecraft:block/nether_gold_ore": "3d/nether_gold_ore_glint.png"
+            },
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:gilded_blackstone",
+            "spawn_area": {
+                "minecraft:block/gilded_blackstone": "3d/gilded_blackstone_glint.png"
+            },
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:raw_gold",
+			"spawn_area": "2d/raw_gold_glint.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:raw_gold_block",
+			"spawn_area": "#full",
+			"spawn_count": [0, 4],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:gold_nugget",
+			"spawn_area": "2d/gold_nugget_glint.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:gold_ingot",
+			"spawn_area": "2d/gold_ingot_glint.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:gold_block",
+			"spawn_area": "#full",
+			"spawn_count": [0, 4],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:light_weighted_pressure_plate",
+			"spawn_area": "2d/pressure_plate.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:golden_pickaxe",
+			"spawn_area": "2d/golden_pickaxe_glint.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:golden_axe",
+			"spawn_area": "2d/golden_axe_glint.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:golden_sword",
+			"spawn_area": "2d/golden_sword_glint.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:golden_shovel",
+			"spawn_area": "2d/golden_shovel_glint.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:golden_hoe",
+			"spawn_area": "2d/golden_hoe_glint.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:golden_spear",
+			"spawn_area": "2d/golden_spear_glint.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:golden_helmet",
+			"spawn_area": "2d/golden_helmet_glint.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:golden_chestplate",
+			"spawn_area": "2d/golden_chestplate_glint.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:golden_leggings",
+			"spawn_area": "2d/golden_leggings_glint.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:golden_boots",
+			"spawn_area": "2d/golden_boots_glint.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:golden_horse_armor",
+			"spawn_area": "2d/golden_horse_armor_glint.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:netherite_horse_armor",
+			"spawn_area": "2d/netherite_horse_armor_glint_1.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:golden_nautilus_armor",
+			"spawn_area": "2d/golden_nautilus_armor_glint.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		//? if <=1.21.4 {
+		
+		/*{
+			"item": "minecraft:evoker_spawn_egg",
+			"spawn_area": "2d/spawn_egg.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:piglin_brute_spawn_egg",
+			"spawn_area": "2d/spawn_egg.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:piglin_spawn_egg",
+			"spawn_area": "2d/spawn_egg.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:trader_llama_spawn_egg",
+			"spawn_area": "2d/spawn_egg.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:wandering_trader_spawn_egg",
+			"spawn_area": "2d/spawn_egg.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		*///?} else {
+		{
+			"item": "minecraft:evoker_spawn_egg",
+			"spawn_area": "2d/evoker_spawn_egg_glint.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:piglin_brute_spawn_egg",
+			"spawn_area": "2d/piglin_brute_spawn_egg_glint.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:piglin_spawn_egg",
+			"spawn_area": "2d/piglin_spawn_egg_glint.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:trader_llama_spawn_egg",
+			"spawn_area": "2d/trader_llama_spawn_egg_glint.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:wandering_trader_spawn_egg",
+			"spawn_area": "2d/wandering_trader_spawn_egg_glint_1.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		//?}
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:golden_apple",
+			"spawn_area": "2d/golden_apple_glint.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:enchanted_golden_apple",
+			"spawn_area": "2d/enchanted_golden_apple_glint.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:golden_carrot",
+			"spawn_area": "2d/golden_carrot_glint.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:golden_dandelion",
+			"spawn_area": "2d/golden_dandelion.png",
+			"spawn_count": [
+				0,
+				2
+			],
+			"spawn_frequency": [
+				20,
+				35
+			],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:glistering_melon_slice",
+			"spawn_area": "2d/glistering_melon_slice_glint.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:bell",
+			"spawn_area": "2d/bell_glint.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:clock",
+			"spawn_area": "2d/clock_glint.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:spyglass",
+            "spawn_area": {
+                "minecraft:item/spyglass_model": "3d/spyglass_model_glint_gold.png"
+            },
+			"spawn_count": [0, 1],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:totem_of_undying",
+			"spawn_area": "2d/totem_of_undying_glint_gold.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:powered_rail",
+			"spawn_area": "2d/powered_rail_glint_gold.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:dark_oak_door",
+			"spawn_area": "2d/dark_oak_door_glint.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:music_disc_pigstep",
+			"spawn_area": "2d/music_disc_pigstep_glint.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:music_disc_creator",
+			"spawn_area": "2d/music_disc_creator_glint_gold.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:music_disc_creator_music_box",
+			"spawn_area": "2d/music_disc_creator_music_box_glint_gold.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		}
+	],
+	"physics": {
+		"base": {
+			"xz_speed": {
+				"impulse": [0.0, 0.0],
+				"impulse_bidirectional": false,
+				"acceleration": 0.0,
+				"acceleration_bidirectional": false,
+				"max_acceleration": [-100.0, 100.0],
+				"braking": 0.0,
+				"turbulence": [0.0, 0.0],
+				"impulse_inherit_coefficient": 0.0
+			},
+			"y_speed": {
+				"impulse": [0.0, 0.0],
+				"impulse_bidirectional": false,
+				"acceleration": 0.0,
+				"acceleration_bidirectional": false,
+				"max_acceleration": [-100.0, 100.0],
+				"braking": 0.0,
+				"turbulence": [0.0, 0.0],
+				"impulse_inherit_coefficient": 0.0
+			},
+			"angle_speed": {
+				"impulse": [0.0, 1.5],
+				"impulse_bidirectional": false,
+				"acceleration": 0.0,
+				"acceleration_bidirectional": false,
+				"max_acceleration": [-100.0, 100.0],
+				"braking": 0.1,
+				"turbulence": [0.0, 0.0]
+			}
+		},
+		"rotation": {
+			"particle": {
+				"spawn_angle": [0.0, 360.0],
+				"rotate_in_movement_direction": false,
+				"speed": {
+					"impulse": [0.0, 0.0],
+					"impulse_bidirectional": false,
+					"acceleration": 0.0,
+					"acceleration_bidirectional": false,
+					"max_acceleration": 0.0,
+					"braking": 0.0,
+					"turbulence": [0.0, 0.0]
+				}
+			},
+			"texture": {
+				"spawn_angle": [0.0, 0.0],
+				"rotate_in_movement_direction": false,
+				"speed": {
+					"impulse": [0.0, 0.0],
+					"impulse_bidirectional": false,
+					"acceleration": 0.0,
+					"acceleration_bidirectional": false,
+					"max_acceleration": 0.0,
+					"braking": 0.0,
+					"turbulence": [0.0, 0.0]
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,105 @@
+{
+	"modmenu.descriptionTranslation.${mod_id}": "${mod_description}",
+	"${mod_id}.modmenu.title": "§l${mod_name} Конфигурация",
+
+	"${mod_id}.modmenu.category.general.name": "Основное",
+
+	"${mod_id}.modmenu.group.main.name": "Главное",
+	"${mod_id}.modmenu.group.main.description": "Главные настройки мода.",
+
+	"${mod_id}.modmenu.option.mod_enabled.name": "Включить мод",
+	"${mod_id}.modmenu.option.mod_enabled.description": "Если включено, вы увидите частицы вокруг предметов в вашем мире; если отключено, не увидите.",
+
+	"${mod_id}.modmenu.option.debug_mode_enabled.name": "Включить режим отладки",
+	"${mod_id}.modmenu.option.debug_mode_enabled.description": "Если включено, вы увидите некоторую информацию для отладки в логах игры; если отключено, не увидите.",
+
+	"${mod_id}.modmenu.option.nbt_debug_mode_enabled.name": "Включить режим отладки NBT",
+	"${mod_id}.modmenu.option.nbt_debug_mode_enabled.description": "Если включено, вы увидите некоторую информацию о NBT тегах предметов в логах игры, для более удобной откладки ресурс паков; если отключено, не увидите.",
+
+	"${mod_id}.modmenu.category.particles_spawn.name": "Появление частиц",
+
+	"${mod_id}.modmenu.group.global_section.name": "[Глобально]",
+	"${mod_id}.modmenu.group.global_section.description": "Глобальные настройки для всех контекстов. Они будут применяться дополнительно к специфичным для контекста настройкам.",
+
+	"${mod_id}.modmenu.group.first_person_section.name": "[От первого лица]",
+	"${mod_id}.modmenu.group.first_person_section.description": "Частицы, которые будут появляться вокруг предмета в ваших руках при виде от первого лица.",
+
+	"${mod_id}.modmenu.group.third_person_section.name": "[От третьего лица]",
+	"${mod_id}.modmenu.group.third_person_section.description": "Частицы, которые будут появляться вокруг предмета в руках любого существа, включая вас при виде от третьего лица.",
+
+	"${mod_id}.modmenu.group.dropped_item_section.name": "[Брошенный предмет]",
+	"${mod_id}.modmenu.group.dropped_item_section.description": "Частицы, которые будут появляться вокруг предметов, лежащих на земле.",
+
+	"${mod_id}.modmenu.group.item_frame_section.name": "[Рамка]",
+	"${mod_id}.modmenu.group.item_frame_section.description": "Частицы, которые будут появляться вокруг предметов в рамках.",
+
+	"${mod_id}.modmenu.group.shelf_section.name": "[Полка]",
+	"${mod_id}.modmenu.group.shelf_section.description": "Частицы, которые будут появляться вокруг предметов, лежащих на полках.",
+
+	"${mod_id}.modmenu.option.spawn_enabled.name": "Включить появление",
+	"${mod_id}.modmenu.option.spawn_enabled.description": "Если включено, для этого контекста будут создаваться частицы; если отключено, не будут.",
+
+	"${mod_id}.modmenu.option.count_coefficient.name": "Коэффициент количества",
+	"${mod_id}.modmenu.option.count_coefficient.description": "Множитель для количества частиц, которые могут появиться в этом контексте.",
+
+	"${mod_id}.modmenu.option.cooldown_coefficient.name": "Коэффициент частоты",
+	"${mod_id}.modmenu.option.cooldown_coefficient.description": "Множитель для времени между появлениями частиц в этом контексте.",
+
+	"${mod_id}.modmenu.option.whitelist_mode.disabled": "Отключено",
+	"${mod_id}.modmenu.option.whitelist_mode.whitelist": "Белый список",
+	"${mod_id}.modmenu.option.whitelist_mode.blacklist": "Чёрный список",
+
+	"${mod_id}.modmenu.option.whitelist_mode.name": "Режим белого списка",
+	"${mod_id}.modmenu.option.whitelist_mode.description": "Определяет, как будет применён белый список. Белый список — только предметы из списка будут создавать частицы; Чёрный список — предметы из списка не будут создавать частицы.",
+
+	"${mod_id}.modmenu.option.whitelist_items.name": "Предметы белого списка",
+	"${mod_id}.modmenu.option.whitelist_items.description": "Указывайте здесь айди предметов через пробел. Их можно взять из подсказки предмета (F3 + H).",
+
+	"${mod_id}.modmenu.group.visual.name": "Визуальное",
+	"${mod_id}.modmenu.group.visual.description": "Настройки внешнего вида частиц.",
+
+	"${mod_id}.modmenu.option.particles_transparency.name": "Прозрачность частиц",
+	"${mod_id}.modmenu.option.particles_transparency.description": "Контролирует прозрачность всех частиц на экране.",
+
+	"${mod_id}.modmenu.group.family_generation.name": "Генерация семейных частиц",
+	"${mod_id}.modmenu.group.family_generation.description": "Определяет, для каких модов и предметов будет работать автоматическая генерация семейных частиц. Семейные частицы создаются для предметов из модов на основе их отрисованного вида. Предмет должен пройти и фильтр модов, и фильтр предметов. \n\n!!!!! ВНИМАНИЕ: после изменения списков нужно перегенерировать частицы — удалите старый кэш кнопкой «Сбросить кэш сейчас» ниже, затем перезагрузите ресурсы через F3 + T.",
+
+	"${mod_id}.modmenu.option.family_generation_mode.blacklist": "Чёрный список",
+	"${mod_id}.modmenu.option.family_generation_mode.whitelist": "Белый список",
+
+	"${mod_id}.modmenu.option.family_generation_mods_mode.name": "[Моды] Режим списка",
+	"${mod_id}.modmenu.option.family_generation_mods_mode.description": "Как применяется список модов. Чёрный список — семейные частицы создаются для всех модов, кроме указанных в списке; Белый список — семейные частицы создаются только для модов из списка.",
+
+	"${mod_id}.modmenu.option.family_generation_mods.name": "[Моды] Список",
+	"${mod_id}.modmenu.option.family_generation_mods.description": "Айди модов (пространства имён) для фильтрации, через пробел. Например: \"minecraft create farmersdelight\". Оставьте пустым, чтобы отключить фильтрацию (в режиме чёрного списка). ",
+
+	"${mod_id}.modmenu.option.family_generation_items_mode.name": "[Предметы] Режим списка",
+	"${mod_id}.modmenu.option.family_generation_items_mode.description": "Как применяется список предметов. Чёрный список — семейные частицы создаются для всех предметов, кроме указанных в списке; Белый список — семейные частицы создаются только для предметов из списка.",
+
+	"${mod_id}.modmenu.option.family_generation_items.name": "[Предметы] Список",
+	"${mod_id}.modmenu.option.family_generation_items.description": "Айди предметов для фильтрации, через пробел. Например: \"minecraft:diamond create:wrench\". Айди можно скопировать из подсказки предмета (F3 + H). Оставьте пустым, чтобы отключить фильтрацию (в режиме чёрного списка). ",
+
+	"${mod_id}.modmenu.group.cache.name": "Кэш текстур частиц",
+	"${mod_id}.modmenu.group.cache.description": "Настройки кэширования текстур частиц для предметов из модов.",
+
+	"${mod_id}.modmenu.option.invalidate_mode.name": "Режим сброса",
+	"${mod_id}.modmenu.option.invalidate_mode.description": "Когда следует удалять кэшированные текстуры частиц для предметов из модов, чтобы он создались заново.",
+
+	"${mod_id}.modmenu.option.invalidate_mode.after_resource_reloading": "После перезагрузки ресурсов",
+	"${mod_id}.modmenu.option.invalidate_mode.after_joining_world": "После входа в мир",
+	"${mod_id}.modmenu.option.invalidate_mode.after_game_launch": "После запуска игры",
+	"${mod_id}.modmenu.option.invalidate_mode.manual_invalidate": "Ручной сброс (кнопка снизу)",
+
+	"${mod_id}.modmenu.option.invalidate_now.name": "Сбросить кэш сейчас",
+	"${mod_id}.modmenu.option.invalidate_now.description": "Инвалидирует/удаляет кэшированные текстуры частиц для предметов из модов.",
+
+	"${mod_id}.particles_linking.title": "Привязывание частиц к предметам",
+	"${mod_id}.particles_linking.loading": "Прогресс: %s / %s",
+	"${mod_id}.particles_linking.average_time": "Среднее время: %sс",
+	"${mod_id}.particles_linking.remaining_time": "Осталось ждать: ~%sм",
+
+	"${mod_id}.notice_message": "§a[${mod_name}]§e Привет, %s§e! Спасибо за установку Item Particles!\n\n§r Хочу дать знать, что данный мод поддерживает предметы из других модов тоже!\n\nКак это работает: мод генерирует текстуры частиц для предметов из модов по своим *паттернам*. Это может занять некоторое время в зависимости от количества модовых предметов в игре §e(сейчас их %s§e!).§r\n\nЧтобы следить за прогрессом, откройте инвентарь и наведите курсор в правый верхний угол.\n\nОбычно это не влияет на производительность игры, но во время генерации в редких случаях могут быть совсем небольшие просадки FPS. Это нормально и сама генерация происходит только один раз.\n\nПосле завершения генерации всё будет кэшировано/сохранено и загружаться очень быстро.\n\nЧтобы очистить кэш или изменить его поведение, откройте меню настроек мода.\n\n§eСпасибо за внимание! Это сообщение больше не будет показываться.\nУдачной игры!",
+
+	"${mod_id}.modmenu.formatter.enabled_or_disabled.true": "Включено",
+	"${mod_id}.modmenu.formatter.enabled_or_disabled.false": "Выключено"
+}

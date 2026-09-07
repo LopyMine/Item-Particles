@@ -1,0 +1,111 @@
+{
+	"life_time": 300,
+	"animation_type": "random_static",
+	"animation_speed": 1.0,
+
+	"size": {
+		"width": 8,
+		"height": 8
+	},
+
+	"textures": [
+		"item_particles:drip/crying_obsidian_drip_0.png",
+		"item_particles:drip/crying_obsidian_drip_1.png",
+		"item_particles:drip/crying_obsidian_drip_2.png"
+	],
+	
+	"holders": [
+		{
+			"item": "minecraft:crying_obsidian",
+            "spawn_area": {
+                "minecraft:block/crying_obsidian": "3d/crying_obsidian_drip.png"
+            },
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:respawn_anchor",
+            "spawn_area": {
+                "minecraft:block/respawn_anchor_bottom": "3d/respawn_anchor_bottom_drip.png",
+                "minecraft:block/respawn_anchor_side0": "3d/respawn_anchor_side0_drip.png",
+                "minecraft:block/respawn_anchor_side1": "3d/respawn_anchor_side1_drip.png",
+                "minecraft:block/respawn_anchor_side2": "3d/respawn_anchor_side2_drip.png",
+                "minecraft:block/respawn_anchor_side3": "3d/respawn_anchor_side3_drip.png",
+                "minecraft:block/respawn_anchor_side4": "3d/respawn_anchor_side4_drip.png",
+                "minecraft:block/respawn_anchor_top": "3d/respawn_anchor_top_drip.png",
+                "minecraft:block/respawn_anchor_top_off": "3d/respawn_anchor_top_off_drip.png"
+            },
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		}
+	],
+	"physics": {
+		"base": {
+			"xz_speed": {
+				"impulse": [0.0, 0.0],
+				"impulse_bidirectional": false,
+				"acceleration": 0.0,
+				"acceleration_bidirectional": false,
+				"max_acceleration": [-100.0, 100.0],
+				"braking": 0.05,
+				"turbulence": [0.0, 0.0],
+				"impulse_inherit_coefficient": 1.0
+			},
+			"y_speed": {
+				"impulse": [0.0, 0.0],
+				"impulse_bidirectional": false,
+				"acceleration": 0.3,
+				"acceleration_bidirectional": false,
+				"max_acceleration": [-100.0, 100.0],
+				"braking": 0.0,
+				"turbulence": [-0.1, 0.1],
+				"impulse_inherit_coefficient": 1.0
+			},
+			"angle_speed": {
+				"impulse": [0.0, 0.0],
+				"impulse_bidirectional": false,
+				"acceleration": 0.0,
+				"acceleration_bidirectional": false,
+				"max_acceleration": [-100.0, 100.0],
+				"braking": 0.0,
+				"turbulence": [0.0, 0.0]
+			}
+		},
+		"rotation": {
+			"particle": {
+				"spawn_angle": [0.0, 0.0],
+				"rotate_in_movement_direction": false,
+				"speed": {
+					"impulse": [0.0, 0.0],
+					"impulse_bidirectional": false,
+					"acceleration": 0.0,
+					"acceleration_bidirectional": false,
+					"max_acceleration": 0.0,
+					"braking": 0.0,
+					"turbulence": [0.0, 0.0]
+				}
+			},
+			"texture": {
+				"spawn_angle": [0.0, 360.0],
+				"rotate_in_movement_direction": false,
+				"speed": {
+					"impulse": [1.0, 3.0],
+					"impulse_bidirectional": true,
+					"acceleration": 0.0,
+					"acceleration_bidirectional": false,
+					"max_acceleration": 0.0,
+					"braking": 0.0,
+					"turbulence": [0.0, 0.0]
+				}
+			}
+		}
+	}
+}

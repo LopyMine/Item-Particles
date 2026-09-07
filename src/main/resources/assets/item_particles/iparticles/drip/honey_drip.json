@@ -1,0 +1,818 @@
+{
+	"life_time": 300,
+	"animation_type": "random_static",
+	"animation_speed": 1.0,
+	
+	"size": {
+		"width": 8,
+		"height": 8
+	},
+
+	"textures": [
+		"item_particles:drip/honey_drip_0.png",
+		"item_particles:drip/honey_drip_1.png",
+		"item_particles:drip/honey_drip_2.png"
+	],
+	
+	"holders": [
+		{
+			"item": "minecraft:honey_bottle",
+			"spawn_area": "2d/honey_bottle_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+
+		{
+			"item": "minecraft:honey_block",
+			"spawn_area": "#full",
+			"spawn_count": [0, 3],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.4,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		{
+			"item": "minecraft:honeycomb",
+			"spawn_area": "2d/honeycomb_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:honeycomb_block",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:bee_nest",
+			"spawn_area": {
+                "minecraft:block/bee_nest_bottom": "3d/bee_nest_bottom_drip.png",
+                "minecraft:block/bee_nest_front": "3d/bee_nest_front_drip.png",
+                "minecraft:block/bee_nest_front_honey": "3d/bee_nest_front_honey_drip.png",
+                "minecraft:block/bee_nest_side": "3d/bee_nest_side_drip.png",
+                "minecraft:block/bee_nest_top": "3d/bee_nest_top_drip.png"
+            },
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:beehive",
+			"spawn_area": {
+                "minecraft:block/beehive_end": "3d/beehive_end_drip.png",
+                "minecraft:block/beehive_front": "3d/beehive_front_drip.png",
+                "minecraft:block/beehive_front_honey": "3d/beehive_front_honey_drip.png",
+                "minecraft:block/beehive_side": "3d/beehive_side_drip.png"
+            },
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+
+
+		
+
+		{
+			"item": "minecraft:waxed_copper_block",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_cut_copper",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_cut_copper_stairs",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_cut_copper_slab",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_chiseled_copper",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_copper_grate",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_copper_bulb",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_copper_door",
+			"spawn_area": "2d/copper_door_glint.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_copper_trapdoor",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_copper_chain",
+			"spawn_area": "2d/copper_chain_glint.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_copper_bars",
+			"spawn_area": "2d/copper_bars_glint.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_copper_lantern",
+			"spawn_area": "2d/copper_lantern_glint.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_copper_chest",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_copper_golem_statue",
+			"spawn_area": "#full",
+			"spawn_count": [0, 3],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_lightning_rod",
+			"spawn_area": "2d/lightning_rod.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_exposed_copper",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_exposed_cut_copper",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_exposed_cut_copper_stairs",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_exposed_cut_copper_slab",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_exposed_chiseled_copper",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_exposed_copper_grate",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_exposed_copper_bulb",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_exposed_copper_door",
+			"spawn_area": "2d/copper_door_glint.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_exposed_lightning_rod",
+			"spawn_area": "2d/lightning_rod.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_exposed_copper_chain",
+			"spawn_area": "2d/copper_chain_glint.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_exposed_copper_bars",
+			"spawn_area": "2d/copper_bars_glint.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_exposed_copper_lantern",
+			"spawn_area": "2d/copper_lantern_glint.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_exposed_copper_chest",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_exposed_copper_golem_statue",
+			"spawn_area": "#full",
+			"spawn_count": [0, 3],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_exposed_copper_trapdoor",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_weathered_copper",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_weathered_cut_copper",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_weathered_cut_copper_stairs",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_weathered_cut_copper_slab",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_weathered_chiseled_copper",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_weathered_copper_grate",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_weathered_copper_bulb",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_weathered_copper_door",
+			"spawn_area": "2d/copper_door_glint.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_weathered_lightning_rod",
+			"spawn_area": "2d/lightning_rod.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_weathered_copper_chain",
+			"spawn_area": "2d/copper_chain_glint.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_weathered_copper_bars",
+			"spawn_area": "2d/copper_bars_glint.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_weathered_copper_lantern",
+			"spawn_area": "2d/copper_lantern_glint.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_weathered_copper_chest",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_weathered_copper_golem_statue",
+			"spawn_area": "#full",
+			"spawn_count": [0, 3],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_weathered_copper_trapdoor",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_oxidized_copper",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_oxidized_cut_copper",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_oxidized_cut_copper_stairs",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_oxidized_cut_copper_slab",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_oxidized_chiseled_copper",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_oxidized_copper_grate",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_oxidized_copper_bulb",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_oxidized_copper_door",
+			"spawn_area": "2d/copper_door_glint.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_oxidized_copper_trapdoor",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_oxidized_lightning_rod",
+			"spawn_area": "2d/lightning_rod.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_oxidized_copper_chain",
+			"spawn_area": "2d/copper_chain_glint.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_oxidized_copper_bars",
+			"spawn_area": "2d/copper_bars_glint.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_oxidized_copper_lantern",
+			"spawn_area": "2d/copper_lantern_glint.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_oxidized_copper_chest",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_oxidized_copper_golem_statue",
+			"spawn_area": "#full",
+			"spawn_count": [0, 3],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_copper_lantern",
+			"spawn_area": "2d/copper_lantern_copper_fire_flame.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient",
+				"values": ["#FFFFFFFF", "#FFFFFFFF", "#00FFFFFF"],
+				"speed": 20
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_exposed_copper_lantern",
+			"spawn_area": "2d/copper_lantern_copper_fire_flame.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient",
+				"values": ["#FFFFFFFF", "#FFFFFFFF", "#00FFFFFF"],
+				"speed": 20
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_weathered_copper_lantern",
+			"spawn_area": "2d/copper_lantern_copper_fire_flame.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient",
+				"values": ["#FFFFFFFF", "#FFFFFFFF", "#00FFFFFF"],
+				"speed": 20
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:waxed_oxidized_copper_lantern",
+			"spawn_area": "2d/copper_lantern_copper_fire_flame.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [60, 80],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient",
+				"values": ["#FFFFFFFF", "#FFFFFFFF", "#00FFFFFF"],
+				"speed": 20
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		}
+	],
+	"physics": {
+		"base": {
+			"xz_speed": {
+				"impulse": [0.0, 0.0],
+				"impulse_bidirectional": false,
+				"acceleration": 0.0,
+				"acceleration_bidirectional": false,
+				"max_acceleration": [-100.0, 100.0],
+				"braking": 0.05,
+				"turbulence": [0.0, 0.0],
+				"impulse_inherit_coefficient": 1.0
+			},
+			"y_speed": {
+				"impulse": [0.0, 0.0],
+				"impulse_bidirectional": false,
+				"acceleration": 0.3,
+				"acceleration_bidirectional": false,
+				"max_acceleration": [-100.0, 100.0],
+				"braking": 0.0,
+				"turbulence": [-0.1, 0.1],
+				"impulse_inherit_coefficient": 1.0
+			},
+			"angle_speed": {
+				"impulse": [0.0, 0.0],
+				"impulse_bidirectional": false,
+				"acceleration": 0.0,
+				"acceleration_bidirectional": false,
+				"max_acceleration": [-100.0, 100.0],
+				"braking": 0.0,
+				"turbulence": [0.0, 0.0]
+			}
+		},
+		"rotation": {
+			"particle": {
+				"spawn_angle": [0.0, 0.0],
+				"rotate_in_movement_direction": false,
+				"speed": {
+					"impulse": [0.0, 0.0],
+					"impulse_bidirectional": false,
+					"acceleration": 0.0,
+					"acceleration_bidirectional": false,
+					"max_acceleration": 0.0,
+					"braking": 0.0,
+					"turbulence": [0.0, 0.0]
+				}
+			},
+			"texture": {
+				"spawn_angle": [0.0, 360.0],
+				"rotate_in_movement_direction": false,
+				"speed": {
+					"impulse": [1.0, 3.0],
+					"impulse_bidirectional": true,
+					"acceleration": 0.0,
+					"acceleration_bidirectional": false,
+					"max_acceleration": 0.0,
+					"braking": 0.0,
+					"turbulence": [0.0, 0.0]
+				}
+			}
+		}
+	}
+}

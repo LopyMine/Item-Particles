@@ -1,0 +1,894 @@
+{
+	"life_time": 100,
+	"animation_type": "onetime",
+	"animation_speed": 10.0,
+	
+	"size": {
+		"width": 8,
+		"height": 8
+	},
+
+	"textures": [
+		"item_particles:vanilla/generic/generic_0.png",
+		"item_particles:vanilla/generic/generic_1.png",
+		"item_particles:vanilla/generic/generic_2.png",
+		"item_particles:vanilla/generic/generic_3.png"
+	],
+	
+	"holders": [
+		{
+			"item": "minecraft:map",
+			"spawn_area": "2d/map_small_sand.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:filled_map",
+			"spawn_area": "2d/filled_map_small_sand.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:book",
+			"spawn_area": "2d/book_small_sand.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:writable_book",
+			"spawn_area": "2d/writable_book_small_sand.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:written_book",
+			"spawn_area": "2d/written_book_small_sand.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:item_frame",
+			"spawn_area": "2d/item_frame_small_sand.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:glow_item_frame",
+			"spawn_area": "2d/glow_item_frame_small_sand.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:painting",
+			"spawn_area": "2d/painting_small_sand.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:armor_stand",
+			"spawn_area": "2d/armor_stand_small_sand.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:name_tag",
+			"spawn_area": "2d/name_tag_small_sand.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:bowl",
+			"spawn_area": "2d/bowl_small_sand.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:lead",
+			"spawn_area": "2d/lead_small_sand.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:saddle",
+			"spawn_area": "2d/saddle_small_sand.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:bundle",
+			"spawn_area": "2d/bundle_small_sand.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:red_bundle",
+			"spawn_area": "2d/red_bundle_small_sand.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:orange_bundle",
+			"spawn_area": "2d/orange_bundle_small_sand.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:yellow_bundle",
+			"spawn_area": "2d/yellow_bundle_small_sand.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:lime_bundle",
+			"spawn_area": "2d/lime_bundle_small_sand.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:green_bundle",
+			"spawn_area": "2d/green_bundle_small_sand.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:cyan_bundle",
+			"spawn_area": "2d/cyan_bundle_small_sand.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:light_blue_bundle",
+			"spawn_area": "2d/light_blue_bundle_small_sand.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:blue_bundle",
+			"spawn_area": "2d/blue_bundle_small_sand.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:purple_bundle",
+			"spawn_area": "2d/purple_bundle_small_sand.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:magenta_bundle",
+			"spawn_area": "2d/magenta_bundle_small_sand.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:pink_bundle",
+			"spawn_area": "2d/pink_bundle_small_sand.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:brown_bundle",
+			"spawn_area": "2d/brown_bundle_small_sand.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:white_bundle",
+			"spawn_area": "2d/white_bundle_small_sand.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:light_gray_bundle",
+			"spawn_area": "2d/light_gray_bundle_small_sand.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:gray_bundle",
+			"spawn_area": "2d/gray_bundle_small_sand.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:black_bundle",
+			"spawn_area": "2d/black_bundle_small_sand.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:red_bed",
+			"spawn_area": "2d/bed.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:orange_bed",
+			"spawn_area": "2d/bed.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:yellow_bed",
+			"spawn_area": "2d/bed.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:lime_bed",
+			"spawn_area": "2d/bed.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:green_bed",
+			"spawn_area": "2d/bed.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:cyan_bed",
+			"spawn_area": "2d/bed.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:light_blue_bed",
+			"spawn_area": "2d/bed.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:blue_bed",
+			"spawn_area": "2d/bed.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:purple_bed",
+			"spawn_area": "2d/bed.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:magenta_bed",
+			"spawn_area": "2d/bed.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:pink_bed",
+			"spawn_area": "2d/bed.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:brown_bed",
+			"spawn_area": "2d/bed.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:black_bed",
+			"spawn_area": "2d/bed.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:gray_bed",
+			"spawn_area": "2d/bed.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:light_gray_bed",
+			"spawn_area": "2d/bed.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:white_bed",
+			"spawn_area": "2d/bed.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		{
+			"item": "minecraft:skull_banner_pattern",
+			"spawn_area": "2d/skull_banner_pattern_small_sand.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:piglin_banner_pattern",
+			"spawn_area": "2d/piglin_banner_pattern_small_sand.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:mojang_banner_pattern",
+			"spawn_area": "2d/mojang_banner_pattern_small_sand.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:guster_banner_pattern",
+			"spawn_area": "2d/guster_banner_pattern_small_sand.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:globe_banner_pattern",
+			"spawn_area": "2d/globe_banner_pattern_small_sand.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:flower_banner_pattern",
+			"spawn_area": "2d/flower_banner_pattern_small_sand.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:flow_banner_pattern",
+			"spawn_area": "2d/flow_banner_pattern_small_sand.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:field_masoned_banner_pattern",
+			"spawn_area": "2d/field_masoned_banner_pattern_small_sand.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:creeper_banner_pattern",
+			"spawn_area": "2d/creeper_banner_pattern_small_sand.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:bordure_indented_banner_pattern",
+			"spawn_area": "2d/bordure_indented_banner_pattern_small_sand.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#6B6867", "#8B8887"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		}
+	],
+	"physics": {
+		"base": {
+			"xz_speed": {
+				"impulse": [0.0, 0.0],
+				"impulse_bidirectional": false,
+				"acceleration": 0.0,
+				"acceleration_bidirectional": false,
+				"max_acceleration": [-100.0, 100.0],
+				"braking": 0.1,
+				"turbulence": [0.0, 0.0],
+				"impulse_inherit_coefficient": 0.5
+			},
+			"y_speed": {
+				"impulse": [0.0, 0.0],
+				"impulse_bidirectional": false,
+				"acceleration": 0.1,
+				"acceleration_bidirectional": false,
+				"max_acceleration": [-100.0, 3.0],
+				"braking": 0.0,
+				"turbulence": [0.0, 0.0],
+				"impulse_inherit_coefficient": 0.5
+			},
+			"angle_speed": {
+				"impulse": [0.0, 0.0],
+				"impulse_bidirectional": false,
+				"acceleration": 0.0,
+				"acceleration_bidirectional": false,
+				"max_acceleration": [-100.0, 100.0],
+				"braking": 0.0,
+				"turbulence": [0.0, 0.0]
+			}
+		},
+		"rotation": {
+			"particle": {
+				"spawn_angle": [0.0, 0.0],
+				"rotate_in_movement_direction": false,
+				"speed": {
+					"impulse": [0.0, 0.0],
+					"impulse_bidirectional": false,
+					"acceleration": 0.0,
+					"acceleration_bidirectional": false,
+					"max_acceleration": 0.0,
+					"braking": 0.0,
+					"turbulence": [0.0, 0.0]
+				}
+			},
+			"texture": {
+				"spawn_angle": [0.0, 360.0],
+				"rotate_in_movement_direction": false,
+				"speed": {
+					"impulse": [1.0, 3.0],
+					"impulse_bidirectional": true,
+					"acceleration": 0.0,
+					"acceleration_bidirectional": false,
+					"max_acceleration": 0.0,
+					"braking": 0.0,
+					"turbulence": [0.0, 0.0]
+				}
+			}
+		}
+	}
+}

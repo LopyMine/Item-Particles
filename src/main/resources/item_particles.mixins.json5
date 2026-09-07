@@ -1,0 +1,54 @@
+{
+	"required": true,
+	"package": "net.lopymine.itp.mixin",
+	"refmap": "${mod_id}.refmap.json",
+	"compatibilityLevel": "JAVA_${java}",
+	"mixins": [],
+	"client": [
+		//? if >=1.21.5 {
+		"family.ScreenshotMixin",
+		//?}
+		//? if 1.21.5 {
+		/*"family.CompositeRenderTypeMixin",
+		*///?}
+
+		//? if <=1.21.4 {
+		/*"family.GameRendererMixin",
+		*///?}
+
+		//? if neoforge {
+		/*"neoforge.ClientPacketListenerMixin",
+		*///?}
+
+		//? if forge {
+		/*"forge.ClientPacketListenerMixin",
+		*///?}
+
+		//? if >=26.2 {
+		/*"TextureAtlasMixin",
+		*///?}
+
+		//? if >=1.21.9 {
+		"ShelfRendererMixin",
+		//?}
+
+		"ItemFrameRendererMixin",
+		"ItemFrameRenderStateMixin",
+		"AtlasLoaderMixin",
+		"MinecraftRenderCallMixin",
+		"ItemInHandLayerMixin",
+		"ItemInHandRendererMixin",
+		"SpriteContentsAccessor",
+		"RenderTypeAccessor",
+		"RenderSetupAccessor",
+		"TextureBindingAccessor",
+		"ArmedEntityRenderStateMixin",
+		"GameRendererMixin",
+		"ItemEntityRendererMixin",
+		"ItemClusterRenderStateMixin",
+		"ScreenMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

@@ -1,0 +1,90 @@
+package net.lopymine.itp.atlas;
+
+import java.util.Set;
+import java.util.concurrent.Executor;
+import net.lopymine.itp.ItemParticles;
+import net.lopymine.itp.family.atlas.manager.FamilyParticlesAtlasManager;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.components.ChatComponent;
+import net.minecraft.client.renderer.texture.*;
+import net.minecraft.network.chat.*;
+import net.minecraft.resources.Identifier;
+import net.minecraft.server.packs.resources.*;
+import org.jetbrains.annotations.Nullable;
+
+public class ItemParticlesAtlasManager {
+
+	public static final Identifier ATLAS_ID = ItemParticles.id("textures/atlas/iparticles");
+	public static final Identifier FOLDER_ID = ItemParticles.id("iparticles");
+	private static ItemParticlesAtlasManager INSTANCE;
+	private final TextureAtlas atlas;
+
+	public ItemParticlesAtlasManager() {
+		this.atlas = new TextureAtlas(ATLAS_ID);
+		Minecraft.getInstance().getTextureManager().register(ATLAS_ID, this.atlas);
+	}
+
+	public static ItemParticlesAtlasManager getInstance() {
+		if (INSTANCE == null) {
+			return INSTANCE = new ItemParticlesAtlasManager();
+		}
+		return INSTANCE;
+	}
+
+	public void reload(PreparableReloadListener.PreparationBarrier synchronizer, ResourceManager resourceManager, Executor prepareExecutor, Executor applyExecutor) {
+		//? if >=1.21.9 {
+		SpriteLoader.create(this.atlas)
+				.loadAndStitch(resourceManager, FOLDER_ID, 0, prepareExecutor, Set.of())
+				.thenCompose(synchronizer::wait)
+				.thenAcceptAsync(this.atlas::upload, applyExecutor);
+		//?} else {
+		/*SpriteLoader.create(this.atlas)
+				.loadAndStitch(resourceManager, FOLDER_ID, 0, prepareExecutor)
+				.thenCompose(SpriteLoader.Preparations::waitForUpload)
+				.thenCompose(synchronizer::wait)
+				.thenAcceptAsync(this.atlas::upload, applyExecutor);
+		*///?}
+	}
+
+	public void close() {
+		this.atlas.close();
+	}
+
+	public TextureAtlasSprite getSprite(@Nullable Identifier id, @Nullable Identifier atlasId) {
+		try {
+			if (id == null) {
+				return this.getMissingSprite();
+			}
+			if (atlasId == null || ATLAS_ID.equals(atlasId)) {
+				return this.atlas.getSprite(id);
+			}
+			FamilyParticlesAtlasManager familyManager = FamilyParticlesAtlasManager.get(atlasId.getPath());
+			if (familyManager != null) {
+				return familyManager.getSprite(id);
+			}
+			return OtherAtlasManager.getSprite(id, atlasId, this.getMissingSprite());
+		} catch (Exception e) {
+			if (e.getMessage().equals("Tried to lookup sprite, but atlas is not initialized")) {
+				MutableComponent message = Component.literal("[Item Particles] Hey, wait! This error is special, and I don’t know when or why it happens. If you see this message, please report this bug with the !!full game logs!! — they’re important. Thanks!\n")
+						.append("\n Another mod might be breaking Item Particles. \n\n To find it, try disabling half of your active mods at a time until the problem goes away, that will help you find that mod quickly. \nThat would be a huge help <3");
+				//? if >=26.2 {
+				/*ChatComponent chat = Minecraft.getInstance().gui.hud.getChat();
+				*///?} else {
+				ChatComponent chat = Minecraft.getInstance().gui.getChat();
+				 //?}
+				//? if >=26.1 {
+				/*chat.addClientSystemMessage(message);
+				*///?} else {
+				chat.addMessage(message);
+				 //?}
+
+				ItemParticles.LOGGER.error("TRIED TO GET SPRITE FROM ATLAS, BUT IT'S NOT INITIALIZED YET: " + (id == null ? "null" : id.toString()) + " " + (atlasId == null ? "null" : atlasId.toString()));
+			}
+			throw e;
+		}
+	}
+
+	public TextureAtlasSprite getMissingSprite() {
+		return /*? if >=1.21 {*/ this.atlas.missingSprite /*?} else {*/ /*this.atlas.getSprite(MissingTextureAtlasSprite.getLocation()) *//*?}*/;
+	}
+}

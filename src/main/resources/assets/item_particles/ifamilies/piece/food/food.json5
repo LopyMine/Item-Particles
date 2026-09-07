@@ -1,0 +1,75 @@
+{
+	"keywords": [
+		"carrot",
+		"tomato",
+		"potato",
+		"onion",
+		"cucumber",
+		"apple",
+		"pear",
+		"banana",
+		"orange",
+		"lemon",
+		"lime",
+		"strawberry",
+		"cherry",
+		"grape",
+		"watermelon",
+		"melon",
+		"pineapple",
+		"pepper",
+		"broccoli",
+		"cauliflower",
+		"cabbage",
+		"lettuce",
+		"corn",
+		"eggplant",
+		"zucchini",
+		"pumpkin",
+		"avocado",
+		"mushroom",
+		"garlic",
+		"ginger",
+		"beet",
+		"radish"
+	],
+	"tags": [
+		"#c:foods/berry",
+		"#c:foods/bread",
+		"#c:foods/burger",
+		"#c:foods/cheese",
+		"#c:foods/cookie",
+		"#c:foods/dough",
+		"#c:foods/edible_when_placed",
+		"#c:foods/fruit",
+		"#c:foods/ice_cream",
+		"#c:foods/leafy_green",
+		"#c:foods/pasta",
+		"#c:foods/pie",
+		"#c:foods/sushi",
+		"#c:foods/vegetable"
+	],
+	"particles": [
+		{
+			"id": "family/piece/food/food",
+			"textures": [
+				"item_particles:piece/food/piece_0.png",
+				"item_particles:piece/food/piece_1.png",
+				"item_particles:piece/food/piece_2.png"
+			],
+			"texture_generation_mode": {
+				"luminance": true,
+				"saturation": false,
+				"frequency": false
+			},
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		}
+	],
+	"family_groups": [],
+	"compatible": false,
+	"priority": 1000
+}

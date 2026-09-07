@@ -1,0 +1,42 @@
+{
+	"keywords": {
+		"whitelist": [
+			"forest",
+			"tree",
+			"flower"
+		],
+		"blacklist": [
+			"box",
+			"planter",
+			"pot",
+			"urn"
+		]
+	},
+	"tags": [
+		"minecraft:saplings",
+		"c:flowers"
+	],
+	"particles": [
+		{
+			"id": "family/leaves/leaves",
+			"textures": [
+				"item_particles:leaves/small/leaves_0.png",
+				"item_particles:leaves/small/leaves_1.png",
+				"item_particles:leaves/small/leaves_2.png"
+			],
+			"texture_generation_mode": {
+				"luminance": true,
+				"saturation": false,
+				"frequency": false
+			},
+			"spawn_count": [0, 2],
+			"spawn_frequency": [40, 50],
+			"speed_coefficient": 0.4,
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		}
+	],
+	"family_groups": [],
+	"compatible": false,
+	"priority": 1000
+}

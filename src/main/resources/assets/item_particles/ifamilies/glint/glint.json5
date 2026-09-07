@@ -1,0 +1,128 @@
+{
+	"keywords": {
+		"whitelist": [
+			"trowel",
+			"key",
+			"hammer",
+			"hourglass",
+			"star",
+			"wrench",
+			"ring",
+			"wand",
+			"sword",
+			"pickaxe",
+			"axe",
+			"shovel",
+			"hoe",
+			"helmet",
+			"chestplate",
+			"leggings",
+			"boots",
+			"trident",
+			"mace",
+			"spear",
+			"ingot",
+			"ring",
+			"shard",
+			"metal",
+			"copper",
+			"netherite",
+			"quartz",
+			"nugget",
+			"gold",
+			"golden",
+			"emerald",
+			"iron",
+			"mythril",
+			"pyrium",
+			"zinc",
+			"arcane",
+			"silver",
+			"platinum",
+			"steel",
+			"bronze",
+			"brass",
+			"aeternium",
+			"thallasium",
+			"terminite",
+			"electrum",
+			"aluminum",
+			"artifact",
+			"cobalt",
+			"gem",
+			"crystal",
+			"amethyst",
+			"diamond",
+			"figurine",
+			"ore",
+			"rod",
+			"ruby",
+			"sapphire",
+			"bucket",
+			"sheet",
+			"scrap"
+		],
+		"blacklist": [
+			"wood",
+			"wooden",
+			"stone",
+			"leather",
+			"cardboard"
+		]
+	},
+	"tags": [
+		"c:buckets",
+		"c:tools",
+		"c:armors",
+		"c:chains"
+	],
+	"particles": [
+		{
+			"id": "family/glint/glint",
+			"textures": [
+				"item_particles:glint/glint0_0.png",
+				"item_particles:glint/glint0_1.png",
+				"item_particles:glint/glint0_2.png",
+				"item_particles:glint/glint0_3.png",
+				"item_particles:glint/glint0_4.png"
+			],
+			"texture_generation_mode": {
+				"luminance": true,
+				"saturation": false,
+				"frequency": false
+			},
+			"spawn_count": [0, 4],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"id": "family/glint/glint",
+			"textures": [
+				"item_particles:glint/glint1_0.png",
+				"item_particles:glint/glint1_1.png",
+				"item_particles:glint/glint1_2.png",
+				"item_particles:glint/glint1_3.png",
+				"item_particles:glint/glint1_4.png"
+			],
+			"texture_generation_mode": {
+				"luminance": true,
+				"saturation": false,
+				"frequency": false
+			},
+			"spawn_count": [0, 4],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		}
+	],
+	"family_groups": [
+		"#glint"
+	],
+	"compatible": [
+		"#glint"
+	],
+	"priority": 1599
+}

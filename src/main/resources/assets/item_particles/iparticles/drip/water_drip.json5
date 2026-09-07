@@ -1,0 +1,1476 @@
+{
+	"life_time": 300,
+	"animation_type": "random_static",
+	"animation_speed": 1.0,
+	
+	"size": {
+		"width": 8,
+		"height": 8
+	},
+
+	"textures": [
+		"item_particles:drip/water_drip_0.png",
+		"item_particles:drip/water_drip_1.png",
+		"item_particles:drip/water_drip_2.png"
+	],
+	
+	"holders": [
+		{
+			"item": "minecraft:water_bucket",
+			"spawn_area": "2d/water_bucket_drip.png",
+			"spawn_count": [1, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.3,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:cod_bucket",
+			"spawn_area": "2d/cod_bucket_drip.png",
+			"spawn_count": [1, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:salmon_bucket",
+			"spawn_area": "2d/salmon_bucket_drip.png",
+			"spawn_count": [1, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:tropical_fish_bucket",
+			"spawn_area": "2d/tropical_fish_bucket_drip.png",
+			"spawn_count": [1, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:pufferfish_bucket",
+			"spawn_area": "2d/pufferfish_bucket_drip.png",
+			"spawn_count": [1, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:axolotl_bucket",
+			"spawn_area": "2d/axolotl_bucket_drip.png",
+			"spawn_count": [1, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:cod",
+			"spawn_area": "2d/cod_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:salmon",
+			"spawn_area": "2d/salmon_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:tropical_fish",
+			"spawn_area": "2d/tropical_fish_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:pufferfish",
+			"spawn_area": "2d/pufferfish_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:ink_sac",
+			"spawn_area": "2d/ink_sac_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:glow_ink_sac",
+			"spawn_area": "2d/glow_ink_sac_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:frogspawn",
+			"spawn_area": "2d/frogspawn_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:turtle_egg",
+			"spawn_area": "2d/turtle_egg_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:sniffer_egg",
+			"spawn_area": "2d/sniffer_egg_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:turtle_scute",
+			"spawn_area": "2d/turtle_scute_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:turtle_helmet",
+			"spawn_area": "2d/turtle_helmet_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:ochre_froglight",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:verdant_froglight",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:pearlescent_froglight",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:ice",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:packed_ice",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:blue_ice",
+			"spawn_area": "#full",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:wet_sponge",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:cauldron",
+			"spawn_area": "2d/cauldron_drip.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:fishing_rod",
+			"spawn_area": "2d/fishing_rod_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:trident",
+			"spawn_area": {
+				"minecraft:item/trident": "2d/trident_drip.png",
+				"minecraft:textures/entity/trident/trident": "3d/trident_3d.png"
+			},
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:kelp",
+			"spawn_area": "2d/kelp_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:lily_pad",
+			"spawn_area": "2d/lily_pad_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:big_dripleaf",
+			"spawn_area": "2d/big_dripleaf.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:small_dripleaf",
+			"spawn_area": "2d/small_dripleaf.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:sea_pickle",
+			"spawn_area": "2d/sea_pickle_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:seagrass",
+			"spawn_area": "2d/seagrass_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:sugar_cane",
+			"spawn_area": "2d/sugar_cane_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:dripstone_block",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:pointed_dripstone",
+			"spawn_area": "2d/pointed_dripstone_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:sulfur_spike",
+			"spawn_area": "2d/sulfur_spike_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:nautilus_shell",
+			"spawn_area": "2d/nautilus_shell_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:heart_of_the_sea",
+			"spawn_area": "2d/heart_of_the_sea_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:conduit",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:oak_boat",
+			"spawn_area": "2d/oak_boat_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:oak_chest_boat",
+			"spawn_area": "2d/oak_chest_boat_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:dark_oak_boat",
+			"spawn_area": "2d/dark_oak_boat_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:dark_oak_chest_boat",
+			"spawn_area": "2d/dark_oak_chest_boat_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:pale_oak_boat",
+			"spawn_area": "2d/pale_oak_boat_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:pale_oak_chest_boat",
+			"spawn_area": "2d/pale_oak_chest_boat_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:birch_boat",
+			"spawn_area": "2d/birch_boat_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:birch_chest_boat",
+			"spawn_area": "2d/birch_chest_boat_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:spruce_boat",
+			"spawn_area": "2d/spruce_boat_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:spruce_chest_boat",
+			"spawn_area": "2d/spruce_chest_boat_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:cherry_boat",
+			"spawn_area": "2d/cherry_boat_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:cherry_chest_boat",
+			"spawn_area": "2d/cherry_chest_boat_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:mangrove_boat",
+			"spawn_area": "2d/mangrove_boat_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:mangrove_chest_boat",
+			"spawn_area": "2d/mangrove_chest_boat_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:acacia_boat",
+			"spawn_area": "2d/acacia_boat_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:acacia_chest_boat",
+			"spawn_area": "2d/acacia_chest_boat_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:jungle_boat",
+			"spawn_area": "2d/jungle_boat_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:jungle_chest_boat",
+			"spawn_area": "2d/jungle_chest_boat_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:bamboo_raft",
+			"spawn_area": "2d/bamboo_raft_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:bamboo_chest_raft",
+			"spawn_area": "2d/bamboo_chest_raft_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:prismarine_shard",
+			"spawn_area": "2d/prismarine_shard_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:prismarine_crystals",
+			"spawn_area": "2d/prismarine_crystals_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:prismarine",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:prismarine_stairs",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:prismarine_slab",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:prismarine_wall",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:prismarine_bricks",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:prismarine_brick_stairs",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:prismarine_brick_slab",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:dark_prismarine",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:dark_prismarine_stairs",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:dark_prismarine_slab",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:tube_coral_block",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:tube_coral",
+			"spawn_area": "2d/tube_coral_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:tube_coral_fan",
+			"spawn_area": "2d/tube_coral_fan_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:brain_coral_block",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:brain_coral",
+			"spawn_area": "2d/brain_coral_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:brain_coral_fan",
+			"spawn_area": "2d/brain_coral_fan_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:bubble_coral_block",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:bubble_coral",
+			"spawn_area": "2d/bubble_coral_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:bubble_coral_fan",
+			"spawn_area": "2d/bubble_coral_fan_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:fire_coral_block",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:fire_coral",
+			"spawn_area": "2d/fire_coral_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:fire_coral_fan",
+			"spawn_area": "2d/fire_coral_fan_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:horn_coral_block",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:horn_coral",
+			"spawn_area": "2d/horn_coral_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:horn_coral_fan",
+			"spawn_area": "2d/horn_coral_fan_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:mud",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:muddy_mangrove_roots",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:clay_ball",
+			"spawn_area": "2d/clay_ball_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:clay",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		//? if <=1.21.4 {
+		/*{
+			"item": "minecraft:axolotl_spawn_egg",
+			"spawn_area": "2d/spawn_egg.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:cod_spawn_egg",
+			"spawn_area": "2d/spawn_egg.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:dolphin_spawn_egg",
+			"spawn_area": "2d/spawn_egg.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:drowned_spawn_egg",
+			"spawn_area": "2d/spawn_egg.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:elder_guardian_spawn_egg",
+			"spawn_area": "2d/spawn_egg.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:frog_spawn_egg",
+			"spawn_area": "2d/spawn_egg.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:glow_squid_spawn_egg",
+			"spawn_area": "2d/spawn_egg.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:guardian_spawn_egg",
+			"spawn_area": "2d/spawn_egg.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:happy_ghast_spawn_egg",
+			"spawn_area": "2d/spawn_egg.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:nautilus_spawn_egg",
+			"spawn_area": "2d/spawn_egg.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:pufferfish_spawn_egg",
+			"spawn_area": "2d/spawn_egg.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:salmon_spawn_egg",
+			"spawn_area": "2d/spawn_egg.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:squid_spawn_egg",
+			"spawn_area": "2d/spawn_egg.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:tadpole_spawn_egg",
+			"spawn_area": "2d/spawn_egg.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:tropical_fish_spawn_egg",
+			"spawn_area": "2d/spawn_egg.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:turtle_spawn_egg",
+			"spawn_area": "2d/spawn_egg.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:zombie_nautilus_spawn_egg",
+			"spawn_area": "2d/spawn_egg.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		*///?} else {
+		{
+			"item": "minecraft:axolotl_spawn_egg",
+			"spawn_area": "2d/axolotl_spawn_egg_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:cod_spawn_egg",
+			"spawn_area": "2d/cod_spawn_egg_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:dolphin_spawn_egg",
+			"spawn_area": "2d/dolphin_spawn_egg_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:drowned_spawn_egg",
+			"spawn_area": "2d/drowned_spawn_egg_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:elder_guardian_spawn_egg",
+			"spawn_area": "2d/elder_guardian_spawn_egg_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:frog_spawn_egg",
+			"spawn_area": "2d/frog_spawn_egg_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:glow_squid_spawn_egg",
+			"spawn_area": "2d/glow_squid_spawn_egg_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:guardian_spawn_egg",
+			"spawn_area": "2d/guardian_spawn_egg_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:happy_ghast_spawn_egg",
+			"spawn_area": "2d/happy_ghast_spawn_egg_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:nautilus_spawn_egg",
+			"spawn_area": "2d/nautilus_spawn_egg_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:pufferfish_spawn_egg",
+			"spawn_area": "2d/pufferfish_spawn_egg_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:salmon_spawn_egg",
+			"spawn_area": "2d/salmon_spawn_egg_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:squid_spawn_egg",
+			"spawn_area": "2d/squid_spawn_egg_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:tadpole_spawn_egg",
+			"spawn_area": "2d/tadpole_spawn_egg_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:tropical_fish_spawn_egg",
+			"spawn_area": "2d/tropical_fish_spawn_egg_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:turtle_spawn_egg",
+			"spawn_area": "2d/turtle_spawn_egg_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:zombie_nautilus_spawn_egg",
+			"spawn_area": "2d/zombie_nautilus_spawn_egg_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		//?}
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:angler_pottery_sherd",
+			"spawn_area": "2d/angler_pottery_sherd_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:snort_pottery_sherd",
+			"spawn_area": "2d/snort_pottery_sherd_drip.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:coast_armor_trim_smithing_template",
+			"spawn_area": "2d/coast_armor_trim_smithing_template_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:tide_armor_trim_smithing_template",
+			"spawn_area": "2d/tide_armor_trim_smithing_template_drip.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [20, 80],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		}
+	],
+	"physics": {
+		"base": {
+			"xz_speed": {
+				"impulse": [0.0, 0.0],
+				"impulse_bidirectional": false,
+				"acceleration": 0.0,
+				"acceleration_bidirectional": false,
+				"max_acceleration": [-100.0, 100.0],
+				"braking": 0.05,
+				"turbulence": [0.0, 0.0],
+				"impulse_inherit_coefficient": 1.0
+			},
+			"y_speed": {
+				"impulse": [0.0, 0.0],
+				"impulse_bidirectional": false,
+				"acceleration": 0.3,
+				"acceleration_bidirectional": false,
+				"max_acceleration": [-100.0, 100.0],
+				"braking": 0.0,
+				"turbulence": [-0.1, 0.1],
+				"impulse_inherit_coefficient": 1.0
+			},
+			"angle_speed": {
+				"impulse": [0.0, 0.0],
+				"impulse_bidirectional": false,
+				"acceleration": 0.0,
+				"acceleration_bidirectional": false,
+				"max_acceleration": [-100.0, 100.0],
+				"braking": 0.0,
+				"turbulence": [0.0, 0.0]
+			}
+		},
+		"rotation": {
+			"particle": {
+				"spawn_angle": [0.0, 0.0],
+				"rotate_in_movement_direction": false,
+				"speed": {
+					"impulse": [0.0, 0.0],
+					"impulse_bidirectional": false,
+					"acceleration": 0.0,
+					"acceleration_bidirectional": false,
+					"max_acceleration": 0.0,
+					"braking": 0.0,
+					"turbulence": [0.0, 0.0]
+				}
+			},
+			"texture": {
+				"spawn_angle": [0.0, 360.0],
+				"rotate_in_movement_direction": false,
+				"speed": {
+					"impulse": [1.0, 3.0],
+					"impulse_bidirectional": true,
+					"acceleration": 0.0,
+					"acceleration_bidirectional": false,
+					"max_acceleration": 0.0,
+					"braking": 0.0,
+					"turbulence": [0.0, 0.0]
+				}
+			}
+		}
+	}
+}

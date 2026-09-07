@@ -1,0 +1,284 @@
+{
+	"life_time": 200,
+	"animation_type": "onetime",
+	"animation_speed": 2.0,
+	
+	"size": {
+		"width": 8,
+		"height": 8
+	},
+
+	"textures": [
+		"item_particles:vanilla/sculk/sculk_soul/sculk_soul_0.png",
+		"item_particles:vanilla/sculk/sculk_soul/sculk_soul_1.png",
+		"item_particles:vanilla/sculk/sculk_soul/sculk_soul_2.png",
+		"item_particles:vanilla/sculk/sculk_soul/sculk_soul_3.png",
+		"item_particles:vanilla/sculk/sculk_soul/sculk_soul_4.png",
+		"item_particles:vanilla/sculk/sculk_soul/sculk_soul_5.png",
+		"item_particles:vanilla/sculk/sculk_soul/sculk_soul_6.png",
+		"item_particles:vanilla/sculk/sculk_soul/sculk_soul_7.png",
+		"item_particles:vanilla/sculk/sculk_soul/sculk_soul_8.png",
+		"item_particles:vanilla/sculk/sculk_soul/sculk_soul_9.png",
+		"item_particles:vanilla/sculk/sculk_soul/sculk_soul_10.png"
+	],
+	
+	"holders": [
+		{
+			"item": "minecraft:sculk",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:sculk_vein",
+			"spawn_area": "2d/full.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:sculk_catalyst",
+            "spawn_area": {
+                "minecraft:block/sculk_catalyst_bottom": "3d/sculk_catalyst_bottom_sculk.png",
+                "minecraft:block/sculk_catalyst_side_bloom": "3d/sculk_catalyst_side_bloom_sculk.png",
+                "minecraft:block/sculk_catalyst_side": "3d/sculk_catalyst_side_sculk.png",
+                "minecraft:block/sculk_catalyst_top_bloom": "3d/sculk_catalyst_top_bloom_sculk.png",
+                "minecraft:block/sculk_catalyst_top": "3d/sculk_catalyst_top_sculk.png"
+            },
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:sculk_shrieker",
+            "spawn_area": {
+                "minecraft:block/sculk_shrieker_bottom": "3d/sculk_shrieker_bottom_sculk.png",
+                "minecraft:block/sculk_shrieker_can_summon_inner_top": "3d/sculk_shrieker_can_summon_inner_top_sculk.png",
+                "minecraft:block/sculk_shrieker_inner_top": "3d/sculk_shrieker_inner_top_sculk.png",
+                "minecraft:block/sculk_shrieker_side": "3d/sculk_shrieker_side_sculk.png"
+            },
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:sculk_sensor",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:calibrated_sculk_sensor",
+            "spawn_area": {
+                "minecraft:block/calibrated_sculk_sensor_input_side": "3d/calibrated_sculk_sensor_input_side_sculk.png",
+                "minecraft:block/calibrated_sculk_sensor_top": "3d/calibrated_sculk_sensor_top_sculk.png",
+                "minecraft:block/sculk_sensor_bottom": "3d/sculk_sensor_bottom_sculk.png",
+                "minecraft:block/sculk_sensor_side": "3d/sculk_sensor_side_sculk.png",
+                "minecraft:block/sculk_sensor_tendril_active": "3d/sculk_sensor_tendril_active_sculk.png",
+                "minecraft:block/sculk_sensor_tendril_inactive": "3d/sculk_sensor_tendril_inactive_sculk.png"
+            },
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+
+
+
+
+
+		//? if <=1.21.4 {
+		/*{
+			"item": "minecraft:warden_spawn_egg",
+			"spawn_area": "2d/spawn_egg.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		*///?} else {
+		{
+			"item": "minecraft:warden_spawn_egg",
+			"spawn_area": "2d/warden_spawn_egg_sculk.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		//?}
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:echo_shard",
+			"spawn_area": "2d/echo_shard_sculk.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:recovery_compass",
+			"spawn_area": "2d/recovery_compass_sculk.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:mourner_pottery_sherd",
+			"spawn_area": "2d/mourner_pottery_sherd_sculk.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.05,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:music_disc_5",
+			"spawn_area": "2d/music_disc_5_sculk.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:disc_fragment_5",
+			"spawn_area": "2d/disc_fragment_5_sculk.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:silence_armor_trim_smithing_template",
+			"spawn_area": "2d/silence_armor_trim_smithing_template_sculk.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:ward_armor_trim_smithing_template",
+			"spawn_area": "2d/ward_armor_trim_smithing_template_sculk.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		}
+	],
+	"physics": {
+		"base": {
+			"xz_speed": {
+				"impulse": [0.0, 0.0],
+				"impulse_bidirectional": false,
+				"acceleration": 0.0,
+				"acceleration_bidirectional": false,
+				"max_acceleration": [-100.0, 100.0],
+				"braking": 0.0,
+				"turbulence": [0.0, 0.0],
+				"impulse_inherit_coefficient": 0.0
+			},
+			"y_speed": {
+				"impulse": [0.0, 0.0],
+				"impulse_bidirectional": false,
+				"acceleration": -0.2,
+				"acceleration_bidirectional": false,
+				"max_acceleration": [-2.0, 100.0],
+				"braking": 0.0,
+				"turbulence": [0.0, 0.0],
+				"impulse_inherit_coefficient": 0.0
+			},
+			"angle_speed": {
+				"impulse": [0.0, 0.0],
+				"impulse_bidirectional": false,
+				"acceleration": 0.0,
+				"acceleration_bidirectional": false,
+				"max_acceleration": [-100.0, 100.0],
+				"braking": 0.0,
+				"turbulence": [0.0, 0.0]
+			}
+		},
+		"rotation": {
+			"particle": {
+				"spawn_angle": [0.0, 0.0],
+				"rotate_in_movement_direction": false,
+				"speed": {
+					"impulse": [0.0, 0.0],
+					"impulse_bidirectional": false,
+					"acceleration": 0.0,
+					"acceleration_bidirectional": false,
+					"max_acceleration": 0.0,
+					"braking": 0.0,
+					"turbulence": [0.0, 0.0]
+				}
+			},
+			"texture": {
+				"spawn_angle": [0.0, 0.0],
+				"rotate_in_movement_direction": false,
+				"speed": {
+					"impulse": [0.0, 0.0],
+					"impulse_bidirectional": true,
+					"acceleration": 0.0,
+					"acceleration_bidirectional": false,
+					"max_acceleration": 0.0,
+					"braking": 0.0,
+					"turbulence": [0.0, 0.0]
+				}
+			}
+		}
+	}
+}

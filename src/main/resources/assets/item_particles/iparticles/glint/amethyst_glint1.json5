@@ -1,0 +1,219 @@
+{
+	"life_time": 20,
+	"animation_type": "onetime",
+	"animation_speed": 2.0,
+	
+	"size": {
+		"width": 8,
+		"height": 8
+	},
+
+	"textures": [
+		"item_particles:glint/amethyst_glint1_0.png",
+		"item_particles:glint/amethyst_glint1_1.png",
+		"item_particles:glint/amethyst_glint1_2.png",
+		"item_particles:glint/amethyst_glint1_3.png",
+		"item_particles:glint/amethyst_glint1_4.png"
+	],
+	
+	"holders": [
+		{
+			"item": "minecraft:amethyst_shard",
+			"spawn_area": "2d/amethyst_shard_glint.png",
+			"spawn_count": [0, 4],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:small_amethyst_bud",
+			"spawn_area": "2d/small_amethyst_bud_glint.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:medium_amethyst_bud",
+			"spawn_area": "2d/medium_amethyst_bud_glint.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:large_amethyst_bud",
+			"spawn_area": "2d/large_amethyst_bud_glint.png",
+			"spawn_count": [0, 3],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:amethyst_cluster",
+			"spawn_area": "2d/amethyst_cluster_glint.png",
+			"spawn_count": [0, 4],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:amethyst_block",
+			"spawn_area": "#full",
+			"spawn_count": [0, 4],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:budding_amethyst",
+			"spawn_area": "#full",
+			"spawn_count": [0, 4],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		//? if <=1.21.4 {
+		/*{
+			"item": "minecraft:allay_spawn_egg",
+			"spawn_area": "2d/spawn_egg.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		*///?} else {
+		{
+			"item": "minecraft:allay_spawn_egg",
+			"spawn_area": "2d/allay_spawn_egg_glint.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		//?}
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:tinted_glass",
+			"spawn_area": "#full",
+			"spawn_count": [0, 4],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:calibrated_sculk_sensor",
+            "spawn_area": {
+                "minecraft:block/calibrated_sculk_sensor_amethyst": "3d/calibrated_sculk_sensor_amethyst_glint.png",
+                "minecraft:block/calibrated_sculk_sensor_input_side": "3d/calibrated_sculk_sensor_input_side_glint.png",
+                "minecraft:block/calibrated_sculk_sensor_top": "3d/calibrated_sculk_sensor_top_glint.png"
+            },
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		}
+	],
+	"physics": {
+		"base": {
+			"xz_speed": {
+				"impulse": [0.0, 0.0],
+				"impulse_bidirectional": false,
+				"acceleration": 0.0,
+				"acceleration_bidirectional": false,
+				"max_acceleration": [-100.0, 100.0],
+				"braking": 0.0,
+				"turbulence": [0.0, 0.0],
+				"impulse_inherit_coefficient": 0.0
+			},
+			"y_speed": {
+				"impulse": [0.0, 0.0],
+				"impulse_bidirectional": false,
+				"acceleration": 0.0,
+				"acceleration_bidirectional": false,
+				"max_acceleration": [-100.0, 100.0],
+				"braking": 0.0,
+				"turbulence": [0.0, 0.0],
+				"impulse_inherit_coefficient": 0.0
+			},
+			"angle_speed": {
+				"impulse": [0.0, 1.5],
+				"impulse_bidirectional": false,
+				"acceleration": 0.0,
+				"acceleration_bidirectional": false,
+				"max_acceleration": [-100.0, 100.0],
+				"braking": 0.1,
+				"turbulence": [0.0, 0.0]
+			}
+		},
+		"rotation": {
+			"particle": {
+				"spawn_angle": [0.0, 360.0],
+				"rotate_in_movement_direction": false,
+				"speed": {
+					"impulse": [0.0, 0.0],
+					"impulse_bidirectional": false,
+					"acceleration": 0.0,
+					"acceleration_bidirectional": false,
+					"max_acceleration": 0.0,
+					"braking": 0.0,
+					"turbulence": [0.0, 0.0]
+				}
+			},
+			"texture": {
+				"spawn_angle": [0.0, 0.0],
+				"rotate_in_movement_direction": false,
+				"speed": {
+					"impulse": [0.0, 0.0],
+					"impulse_bidirectional": false,
+					"acceleration": 0.0,
+					"acceleration_bidirectional": false,
+					"max_acceleration": 0.0,
+					"braking": 0.0,
+					"turbulence": [0.0, 0.0]
+				}
+			}
+		}
+	}
+}

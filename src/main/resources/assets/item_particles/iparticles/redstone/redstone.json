@@ -1,0 +1,220 @@
+{
+	"life_time": 10,
+	"animation_type": "onetime",
+	"animation_speed": 2.0,
+	"size": {
+		"width": 8,
+		"height": 8
+	},
+
+	"textures": [
+		"item_particles:redstone/redstone_0.png",
+		"item_particles:redstone/redstone_1.png",
+		"item_particles:redstone/redstone_2.png",
+		"item_particles:redstone/redstone_3.png"
+	],
+	"holders": [
+		{
+			"item": "minecraft:redstone",
+			"spawn_area": "2d/redstone_redstone.png",
+			"spawn_count": [1, 2],
+			"spawn_frequency": [1, 4],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:redstone_block",
+			"spawn_area": "#full",
+			"spawn_count": [3, 6],
+			"spawn_frequency": [1, 4],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:redstone_torch",
+			"spawn_area": "2d/redstone_torch_redstone.png",
+			"spawn_count": [1, 2],
+			"spawn_frequency": [1, 4],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:repeater",
+			"spawn_area": "2d/repeater_redstone.png",
+			"spawn_count": [1, 2],
+			"spawn_frequency": [1, 4],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:comparator",
+			"spawn_area": "2d/comparator_redstone.png",
+			"spawn_count": [1, 2],
+			"spawn_frequency": [1, 4],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:redstone_ore",
+            "spawn_area": {
+                "minecraft:block/redstone_ore": "3d/redstone_ore_redstone.png"
+            },
+			"spawn_count": [1, 2],
+			"spawn_frequency": [1, 4],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:deepslate_redstone_ore",
+            "spawn_area": {
+                "minecraft:block/deepslate_redstone_ore": "3d/deepslate_redstone_ore_redstone.png"
+            },
+			"spawn_count": [1, 2],
+			"spawn_frequency": [1, 4],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+
+
+
+
+
+		{
+			"item": "minecraft:crafter",
+            "spawn_area": {
+                "minecraft:block/crafter_east_crafting": "3d/crafter_east_crafting_redstone.png",
+                "minecraft:block/crafter_east": "3d/crafter_east_redstone.png",
+                "minecraft:block/crafter_east_triggered": "3d/crafter_east_triggered_redstone.png",
+                "minecraft:block/crafter_south": "3d/crafter_south_redstone.png",
+                "minecraft:block/crafter_south_triggered": "3d/crafter_south_triggered_redstone.png",
+                "minecraft:block/crafter_top_crafting": "3d/crafter_top_crafting_redstone.png",
+                "minecraft:block/crafter_top": "3d/crafter_top_redstone.png",
+                "minecraft:block/crafter_top_triggered": "3d/crafter_top_triggered_redstone.png",
+                "minecraft:block/crafter_west_crafting": "3d/crafter_west_crafting_redstone.png",
+                "minecraft:block/crafter_west": "3d/crafter_west_redstone.png",
+                "minecraft:block/crafter_west_triggered": "3d/crafter_west_triggered_redstone.png"
+            },
+			"spawn_count": [1, 2],
+			"spawn_frequency": [1, 4],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:powered_rail",
+			"spawn_area": "2d/powered_rail_redstone.png",
+			"spawn_count": [1, 2],
+			"spawn_frequency": [1, 4],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:activator_rail",
+			"spawn_area": "2d/activator_rail_redstone.png",
+			"spawn_count": [1, 4],
+			"spawn_frequency": [1, 4],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:detector_rail",
+			"spawn_area": "2d/detector_rail_redstone.png",
+			"spawn_count": [1, 2],
+			"spawn_frequency": [1, 4],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		}
+	],
+	"physics": {
+		"base": {
+			"xz_speed": {
+				"impulse": [0.0, 0.0],
+				"impulse_bidirectional": false,
+				"acceleration": 0.0,
+				"acceleration_bidirectional": false,
+				"max_acceleration": [-100.0, 100.0],
+				"braking": 0.0,
+				"turbulence": [0.0, 0.0],
+				"impulse_inherit_coefficient": 1.0
+			},
+			"y_speed": {
+				"impulse": [0.0, 0.0],
+				"impulse_bidirectional": false,
+				"acceleration": 0.0,
+				"acceleration_bidirectional": false,
+				"max_acceleration": [-100.0, 100.0],
+				"braking": 0.0,
+				"turbulence": [0.0, 0.0],
+				"impulse_inherit_coefficient": 1.0
+			},
+			"angle_speed": {
+				"impulse": [3.0, 5.0],
+				"impulse_bidirectional": false,
+				"acceleration": 0.0,
+				"acceleration_bidirectional": false,
+				"max_acceleration": [-100.0, 100.0],
+				"braking": 0.0,
+				"turbulence": [0.0, 0.0]
+			}
+		},
+		"rotation": {
+			"particle": {
+				"spawn_angle": [0.0, 360.0],
+				"rotate_in_movement_direction": false,
+				"speed": {
+					"impulse": [0.0, 0.0],
+					"impulse_bidirectional": false,
+					"acceleration": 0.0,
+					"acceleration_bidirectional": false,
+					"max_acceleration": 0.0,
+					"braking": 0.0,
+					"turbulence": [0.0, 0.0]
+				}
+			},
+			"texture": {
+				"spawn_angle": [0.0, 0.0],
+				"rotate_in_movement_direction": true,
+				"speed": {
+					"impulse": [0.0, 0.0],
+					"impulse_bidirectional": false,
+					"acceleration": 0.0,
+					"acceleration_bidirectional": false,
+					"max_acceleration": 0.0,
+					"braking": 0.0,
+					"turbulence": [0.0, 0.0]
+				}
+			}
+		}
+	}
+}

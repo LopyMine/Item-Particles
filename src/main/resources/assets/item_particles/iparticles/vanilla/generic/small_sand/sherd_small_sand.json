@@ -1,0 +1,443 @@
+{
+	"life_time": 100,
+	"animation_type": "onetime",
+	"animation_speed": 10.0,
+	
+	"size": {
+		"width": 8,
+		"height": 8
+	},
+
+	"textures": [
+		"item_particles:vanilla/generic/generic_0.png",
+		"item_particles:vanilla/generic/generic_1.png",
+		"item_particles:vanilla/generic/generic_2.png",
+		"item_particles:vanilla/generic/generic_3.png",
+		"item_particles:vanilla/generic/generic_4.png",
+		"item_particles:vanilla/generic/generic_5.png"
+	],
+	
+	"holders": [
+		{
+			"item": "minecraft:angler_pottery_sherd",
+			"spawn_area": "2d/angler_pottery_sherd_small_sand.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.15,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#643125", "#845145"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:archer_pottery_sherd",
+			"spawn_area": "2d/archer_pottery_sherd_small_sand.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.15,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#643125", "#845145"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:arms_up_pottery_sherd",
+			"spawn_area": "2d/arms_up_pottery_sherd_small_sand.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.15,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#643125", "#845145"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:blade_pottery_sherd",
+			"spawn_area": "2d/blade_pottery_sherd_small_sand.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.15,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#643125", "#845145"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:brewer_pottery_sherd",
+			"spawn_area": "2d/brewer_pottery_sherd_small_sand.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.15,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#643125", "#845145"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:burn_pottery_sherd",
+			"spawn_area": "2d/burn_pottery_sherd_small_sand.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.15,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#643125", "#845145"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:danger_pottery_sherd",
+			"spawn_area": "2d/danger_pottery_sherd_small_sand.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.15,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#643125", "#845145"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:explorer_pottery_sherd",
+			"spawn_area": "2d/explorer_pottery_sherd_small_sand.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.15,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#643125", "#845145"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:flow_pottery_sherd",
+			"spawn_area": "2d/flow_pottery_sherd_small_sand.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.15,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#643125", "#845145"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:friend_pottery_sherd",
+			"spawn_area": "2d/friend_pottery_sherd_small_sand.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.15,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#643125", "#845145"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:guster_pottery_sherd",
+			"spawn_area": "2d/guster_pottery_sherd_small_sand.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.15,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#643125", "#845145"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:heart_pottery_sherd",
+			"spawn_area": "2d/heart_pottery_sherd_small_sand.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.15,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#643125", "#845145"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:heartbreak_pottery_sherd",
+			"spawn_area": "2d/heartbreak_pottery_sherd_small_sand.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.15,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#643125", "#845145"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:howl_pottery_sherd",
+			"spawn_area": "2d/howl_pottery_sherd_small_sand.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.15,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#643125", "#845145"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:miner_pottery_sherd",
+			"spawn_area": "2d/miner_pottery_sherd_small_sand.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.15,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#643125", "#845145"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:mourner_pottery_sherd",
+			"spawn_area": "2d/mourner_pottery_sherd_small_sand.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.15,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#643125", "#845145"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:plenty_pottery_sherd",
+			"spawn_area": "2d/plenty_pottery_sherd_small_sand.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.15,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#643125", "#845145"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:prize_pottery_sherd",
+			"spawn_area": "2d/prize_pottery_sherd_small_sand.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.15,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#643125", "#845145"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:scrape_pottery_sherd",
+			"spawn_area": "2d/scrape_pottery_sherd_small_sand.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.15,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#643125", "#845145"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:sheaf_pottery_sherd",
+			"spawn_area": "2d/sheaf_pottery_sherd_small_sand.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.15,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#643125", "#845145"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:shelter_pottery_sherd",
+			"spawn_area": "2d/shelter_pottery_sherd_small_sand.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.15,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#643125", "#845145"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:skull_pottery_sherd",
+			"spawn_area": "2d/skull_pottery_sherd_small_sand.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.15,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#643125", "#845145"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:snort_pottery_sherd",
+			"spawn_area": "2d/snort_pottery_sherd_small_sand.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.15,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#643125", "#845145"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:decorated_pot",
+			"spawn_area": "2d/decorated_pot.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.15,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#643125", "#845145"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:brick",
+			"spawn_area": "2d/brick_small_sand.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#643125", "#845145"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		}
+	],
+	"physics": {
+		"base": {
+			"xz_speed": {
+				"impulse": [0.0, 0.0],
+				"impulse_bidirectional": false,
+				"acceleration": 0.0,
+				"acceleration_bidirectional": false,
+				"max_acceleration": [-100.0, 100.0],
+				"braking": 0.1,
+				"turbulence": [0.0, 0.0],
+				"impulse_inherit_coefficient": 0.5
+			},
+			"y_speed": {
+				"impulse": [0.0, 0.0],
+				"impulse_bidirectional": false,
+				"acceleration": 0.1,
+				"acceleration_bidirectional": false,
+				"max_acceleration": [-100.0, 3.0],
+				"braking": 0.0,
+				"turbulence": [0.0, 0.0],
+				"impulse_inherit_coefficient": 0.5
+			},
+			"angle_speed": {
+				"impulse": [0.0, 0.0],
+				"impulse_bidirectional": false,
+				"acceleration": 0.0,
+				"acceleration_bidirectional": false,
+				"max_acceleration": [-100.0, 100.0],
+				"braking": 0.0,
+				"turbulence": [0.0, 0.0]
+			}
+		},
+		"rotation": {
+			"particle": {
+				"spawn_angle": [0.0, 0.0],
+				"rotate_in_movement_direction": false,
+				"speed": {
+					"impulse": [0.0, 0.0],
+					"impulse_bidirectional": false,
+					"acceleration": 0.0,
+					"acceleration_bidirectional": false,
+					"max_acceleration": 0.0,
+					"braking": 0.0,
+					"turbulence": [0.0, 0.0]
+				}
+			},
+			"texture": {
+				"spawn_angle": [0.0, 360.0],
+				"rotate_in_movement_direction": false,
+				"speed": {
+					"impulse": [1.0, 3.0],
+					"impulse_bidirectional": true,
+					"acceleration": 0.0,
+					"acceleration_bidirectional": false,
+					"max_acceleration": 0.0,
+					"braking": 0.0,
+					"turbulence": [0.0, 0.0]
+				}
+			}
+		}
+	}
+}

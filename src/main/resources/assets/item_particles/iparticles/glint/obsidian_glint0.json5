@@ -1,0 +1,133 @@
+{
+	"life_time": 20,
+	"animation_type": "onetime",
+	"animation_speed": 2.0,
+	
+	"size": {
+		"width": 8,
+		"height": 8
+	},
+
+	"textures": [
+		"item_particles:glint/obsidian_glint0_0.png",
+		"item_particles:glint/obsidian_glint0_1.png",
+		"item_particles:glint/obsidian_glint0_2.png",
+		"item_particles:glint/obsidian_glint0_3.png",
+		"item_particles:glint/obsidian_glint0_4.png"
+	],
+	
+	"holders": [
+		{
+			"item": "minecraft:obsidian",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:crying_obsidian",
+            "spawn_area": {
+                "minecraft:block/crying_obsidian": "3d/crying_obsidian_glint.png"
+            },
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:respawn_anchor",
+            "spawn_area": {
+                "minecraft:block/respawn_anchor_bottom": "3d/respawn_anchor_bottom_glint.png",
+                "minecraft:block/respawn_anchor_side0": "3d/respawn_anchor_side0_glint.png",
+                "minecraft:block/respawn_anchor_side1": "3d/respawn_anchor_side1_glint.png",
+                "minecraft:block/respawn_anchor_side2": "3d/respawn_anchor_side2_glint.png",
+                "minecraft:block/respawn_anchor_side3": "3d/respawn_anchor_side3_glint.png",
+                "minecraft:block/respawn_anchor_side4": "3d/respawn_anchor_side4_glint.png",
+                "minecraft:block/respawn_anchor_top": "3d/respawn_anchor_top_glint.png",
+                "minecraft:block/respawn_anchor_top_off": "3d/respawn_anchor_top_off_glint.png"
+            },
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:enchanting_table",
+			"spawn_area": "2d/enchanting_table_bottom.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		}
+	],
+	"physics": {
+		"base": {
+			"xz_speed": {
+				"impulse": [0.0, 0.0],
+				"impulse_bidirectional": false,
+				"acceleration": 0.0,
+				"acceleration_bidirectional": false,
+				"max_acceleration": [-100.0, 100.0],
+				"braking": 0.0,
+				"turbulence": [0.0, 0.0],
+				"impulse_inherit_coefficient": 0.0
+			},
+			"y_speed": {
+				"impulse": [0.0, 0.0],
+				"impulse_bidirectional": false,
+				"acceleration": 0.0,
+				"acceleration_bidirectional": false,
+				"max_acceleration": [-100.0, 100.0],
+				"braking": 0.0,
+				"turbulence": [0.0, 0.0],
+				"impulse_inherit_coefficient": 0.0
+			},
+			"angle_speed": {
+				"impulse": [0.0, 1.5],
+				"impulse_bidirectional": false,
+				"acceleration": 0.0,
+				"acceleration_bidirectional": false,
+				"max_acceleration": [-100.0, 100.0],
+				"braking": 0.1,
+				"turbulence": [0.0, 0.0]
+			}
+		},
+		"rotation": {
+			"particle": {
+				"spawn_angle": [0.0, 360.0],
+				"rotate_in_movement_direction": false,
+				"speed": {
+					"impulse": [0.0, 0.0],
+					"impulse_bidirectional": false,
+					"acceleration": 0.0,
+					"acceleration_bidirectional": false,
+					"max_acceleration": 0.0,
+					"braking": 0.0,
+					"turbulence": [0.0, 0.0]
+				}
+			},
+			"texture": {
+				"spawn_angle": [0.0, 0.0],
+				"rotate_in_movement_direction": false,
+				"speed": {
+					"impulse": [0.0, 0.0],
+					"impulse_bidirectional": false,
+					"acceleration": 0.0,
+					"acceleration_bidirectional": false,
+					"max_acceleration": 0.0,
+					"braking": 0.0,
+					"turbulence": [0.0, 0.0]
+				}
+			}
+		}
+	}
+}

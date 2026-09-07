@@ -1,0 +1,142 @@
+{
+	"life_time": 300,
+	"animation_type": "random_static",
+	"animation_speed": 1.0,
+
+	"size": {
+		"width": 8,
+		"height": 8
+	},
+
+	"textures": [
+		"item_particles:piece/blocks/wool/blue_wool_piece_0.png",
+		"item_particles:piece/blocks/wool/blue_wool_piece_1.png",
+		"item_particles:piece/blocks/wool/blue_wool_piece_2.png"
+	],
+	
+	"holders": [
+		{
+			"item": "minecraft:blue_wool",
+			"spawn_area": "#full",
+			"spawn_count": [0, 3],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.2,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:blue_carpet",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:blue_banner",
+            "spawn_area": {
+                "minecraft:entity/banner/banner_base": "3d/banner_base_piece.png"
+            },
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:blue_bed",
+			"spawn_area": {
+                "minecraft:block/bed_down": "3d/bed_down_piece.png",
+                "minecraft:block/bed_head_north": "3d/bed_head_north_piece.png",
+                "minecraft:block/blue_bed_foot_east": "3d/bed_foot_east_piece.png",
+                "minecraft:block/blue_bed_foot_south": "3d/bed_foot_south_piece.png",
+                "minecraft:block/blue_bed_foot_up": "3d/bed_foot_up_piece.png",
+                "minecraft:block/blue_bed_foot_west": "3d/bed_foot_west_piece.png",
+                "minecraft:block/blue_bed_head_east": "3d/bed_head_east_piece.png",
+                "minecraft:block/blue_bed_head_up": "3d/bed_head_up_piece.png",
+                "minecraft:block/blue_bed_head_west": "3d/bed_head_west_piece.png"
+            },
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:blue_harness",
+			"spawn_area": "2d/blue_harness_piece.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.15,
+			"color": "",
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		}
+	],
+	"physics": {
+		"base": {
+			"xz_speed": {
+				"impulse": [-1.0, 1.0],
+				"impulse_bidirectional": false,
+				"acceleration": 0.0,
+				"acceleration_bidirectional": false,
+				"max_acceleration": [-100.0, 100.0],
+				"braking": 0.01,
+				"turbulence": [0.0, 0.0],
+				"impulse_inherit_coefficient": 1.0
+			},
+			"y_speed": {
+				"impulse": [-0.25, 0.0],
+				"impulse_bidirectional": false,
+				"acceleration": 0.2,
+				"acceleration_bidirectional": false,
+				"max_acceleration": [-100.0, 100.0],
+				"braking": 0.0,
+				"turbulence": [-0.1, 0.1],
+				"impulse_inherit_coefficient": 1.0
+			},
+			"angle_speed": {
+				"impulse": [0.0, 0.0],
+				"impulse_bidirectional": false,
+				"acceleration": 0.0,
+				"acceleration_bidirectional": false,
+				"max_acceleration": [-100.0, 100.0],
+				"braking": 0.0,
+				"turbulence": [0.0, 0.0]
+			}
+		},
+		"rotation": {
+			"particle": {
+				"spawn_angle": [0.0, 0.0],
+				"rotate_in_movement_direction": false,
+				"speed": {
+					"impulse": [0.0, 0.0],
+					"impulse_bidirectional": false,
+					"acceleration": 0.0,
+					"acceleration_bidirectional": false,
+					"max_acceleration": 0.0,
+					"braking": 0.0,
+					"turbulence": [0.0, 0.0]
+				}
+			},
+			"texture": {
+				"spawn_angle": [0.0, 360.0],
+				"rotate_in_movement_direction": false,
+				"speed": {
+					"impulse": [3.0, 9.0],
+					"impulse_bidirectional": true,
+					"acceleration": 0.0,
+					"acceleration_bidirectional": false,
+					"max_acceleration": 0.0,
+					"braking": 0.0,
+					"turbulence": [0.0, 0.0]
+				}
+			}
+		}
+	}
+}

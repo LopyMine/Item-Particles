@@ -1,0 +1,105 @@
+{
+	"modmenu.descriptionTranslation.${mod_id}": "${mod_description}",
+	"${mod_id}.modmenu.title": "§l${mod_name} Configuration",
+
+	"${mod_id}.modmenu.category.general.name": "General",
+
+	"${mod_id}.modmenu.group.main.name": "Main",
+	"${mod_id}.modmenu.group.main.description": "Main settings for the mod.",
+
+	"${mod_id}.modmenu.option.mod_enabled.name": "Mod Enabled",
+	"${mod_id}.modmenu.option.mod_enabled.description": "If enabled, you will see particles around your world items; if disabled, won't.",
+
+	"${mod_id}.modmenu.option.debug_mode_enabled.name": "Debug Mode Enabled",
+	"${mod_id}.modmenu.option.debug_mode_enabled.description": "If enabled, you will see some debug info; if disabled, won't.",
+
+	"${mod_id}.modmenu.option.nbt_debug_mode_enabled.name": "Nbt Debug Mode Enabled",
+	"${mod_id}.modmenu.option.nbt_debug_mode_enabled.description": "If enabled, you will some debug info about item nbt in game logs; if disabled, won't.",
+
+	"${mod_id}.modmenu.category.particles_spawn.name": "Particles Spawn",
+
+	"${mod_id}.modmenu.group.global_section.name": "[Global]",
+	"${mod_id}.modmenu.group.global_section.description": "Global settings for all contexts. They will be applied additionally to context-specific settings.",
+
+	"${mod_id}.modmenu.group.first_person_section.name": "[First Person]",
+	"${mod_id}.modmenu.group.first_person_section.description": "Particles that will be spawned around an item held in your own hands, in first person view.",
+
+	"${mod_id}.modmenu.group.third_person_section.name": "[Third Person]",
+	"${mod_id}.modmenu.group.third_person_section.description": "Particles that will be spawned around an item held by any entity, including yourself in third person view.",
+
+	"${mod_id}.modmenu.group.dropped_item_section.name": "[Dropped Item]",
+	"${mod_id}.modmenu.group.dropped_item_section.description": "Particles that will be spawned around items lying on the ground.",
+
+	"${mod_id}.modmenu.group.item_frame_section.name": "[Item Frame]",
+	"${mod_id}.modmenu.group.item_frame_section.description": "Particles that will be spawned around items placed in item frames.",
+
+	"${mod_id}.modmenu.group.shelf_section.name": "[Shelf]",
+	"${mod_id}.modmenu.group.shelf_section.description": "Particles that will be spawned around items placed on shelves.",
+
+	"${mod_id}.modmenu.option.spawn_enabled.name": "Spawn Enabled",
+	"${mod_id}.modmenu.option.spawn_enabled.description": "If enabled, particles will be spawned for this context; if disabled, won't.",
+
+	"${mod_id}.modmenu.option.count_coefficient.name": "Count Coefficient",
+	"${mod_id}.modmenu.option.count_coefficient.description": "Multiplier for the count of particles that can be spawned in this context.",
+
+	"${mod_id}.modmenu.option.cooldown_coefficient.name": "Cooldown Coefficient",
+	"${mod_id}.modmenu.option.cooldown_coefficient.description": "Multiplier for the cooldown between particles spawns in this context.",
+
+	"${mod_id}.modmenu.option.whitelist_mode.disabled": "Disabled",
+	"${mod_id}.modmenu.option.whitelist_mode.whitelist": "Whitelist",
+	"${mod_id}.modmenu.option.whitelist_mode.blacklist": "Blacklist",
+
+	"${mod_id}.modmenu.option.whitelist_mode.name": "Whitelist Mode",
+	"${mod_id}.modmenu.option.whitelist_mode.description": "Controls how the whitelist will be applied. Whitelist — only items in the whitelist will spawn particles; Blacklist — items in the whitelist won't spawn particles.",
+
+	"${mod_id}.modmenu.option.whitelist_items.name": "Whitelist Items",
+	"${mod_id}.modmenu.option.whitelist_items.description": "Write item ids here. You can take it from item's tooltip (with F3 + H enabled). Use space to separate ids.",
+
+	"${mod_id}.modmenu.group.visual.name": "Visual",
+	"${mod_id}.modmenu.group.visual.description": "Settings for particles appearance.",
+
+	"${mod_id}.modmenu.option.particles_transparency.name": "Particles Transparency",
+	"${mod_id}.modmenu.option.particles_transparency.description": "Controls transparency of all particles on the screen.",
+
+	"${mod_id}.modmenu.group.family_generation.name": "Family Particle Generation",
+	"${mod_id}.modmenu.group.family_generation.description": "Controls which mods and items automatic family particle generation will work for. Family particles are generated for modded items based on their rendered look. An item must pass both the mods filter and the items filter. \n\n!!!!! NOTE: after changing these lists you must regenerate particles — delete the old cache with the \"Invalidate Cache Now\" button below, then reload resources with F3 + T.",
+
+	"${mod_id}.modmenu.option.family_generation_mode.blacklist": "Blacklist",
+	"${mod_id}.modmenu.option.family_generation_mode.whitelist": "Whitelist",
+
+	"${mod_id}.modmenu.option.family_generation_mods_mode.name": "[Mods] List Mode",
+	"${mod_id}.modmenu.option.family_generation_mods_mode.description": "How the mods list is applied. Blacklist — family particles are generated for all mods except those in the list; Whitelist — family particles are generated only for mods in the list.",
+
+	"${mod_id}.modmenu.option.family_generation_mods.name": "[Mods] List",
+	"${mod_id}.modmenu.option.family_generation_mods.description": "Mod ids (namespaces) to filter, separated by spaces. E.g. \"minecraft create farmersdelight\". Leave empty for no filtering (with Blacklist mode).",
+
+	"${mod_id}.modmenu.option.family_generation_items_mode.name": "[Items] List Mode",
+	"${mod_id}.modmenu.option.family_generation_items_mode.description": "How the items list is applied. Blacklist — family particles are generated for all items except those in the list; Whitelist — family particles are generated only for items in the list.",
+
+	"${mod_id}.modmenu.option.family_generation_items.name": "[Items] List",
+	"${mod_id}.modmenu.option.family_generation_items.description": "Item ids to filter, separated by spaces. E.g. \"minecraft:diamond create:wrench\". You can copy an id from the item's tooltip (with F3 + H enabled). Leave empty for no filtering (with Blacklist mode).",
+
+	"${mod_id}.modmenu.group.cache.name": "Modded Items Cache",
+	"${mod_id}.modmenu.group.cache.description": "Settings controlling cached assets used for modded items.",
+
+	"${mod_id}.modmenu.option.invalidate_mode.name": "Invalidate Mode",
+	"${mod_id}.modmenu.option.invalidate_mode.description": "When cached assets for modded items should be deleted to be recreated.",
+
+	"${mod_id}.modmenu.option.invalidate_mode.after_resource_reloading": "After resource reloading",
+	"${mod_id}.modmenu.option.invalidate_mode.after_joining_world": "After joining world",
+	"${mod_id}.modmenu.option.invalidate_mode.after_game_launch": "After game launch",
+	"${mod_id}.modmenu.option.invalidate_mode.manual_invalidate": "Manual (button below)",
+
+	"${mod_id}.modmenu.option.invalidate_now.name": "Invalidate Cache Now",
+	"${mod_id}.modmenu.option.invalidate_now.description": "Immediately invalidates cached assets for modded items.",
+
+	"${mod_id}.particles_linking.title": "Linking Particles To Items",
+	"${mod_id}.particles_linking.loading": "Progress: %s / %s",
+	"${mod_id}.particles_linking.average_time": "Average Time: %ss",
+	"${mod_id}.particles_linking.remaining_time": "Remaining Time: ~%sm",
+
+	"${mod_id}.modmenu.formatter.enabled_or_disabled.true": "Enabled",
+	"${mod_id}.modmenu.formatter.enabled_or_disabled.false": "Disabled",
+
+	"${mod_id}.notice_message": "§a[${mod_name}]§e Hello %s§e! Thanks your for installing Item Particles! §r\n\n§rJust want to let you know, that mod has native support for items from other mods!\n\nHow it works: The mod takes items and creates particle textures for them based on it's own *patterns*. This can take some time depending on the number of modded items in the game §e(right now there %s§e!).§r\n\nTo see the progress, open your inventory and hover in the upper-right corner.\n\nUsually it doesn't affect FPS, but in rare cases you may experience a slight frame drop during the generation. This is normal and will only happen once!\n\nOnce complete, everything will be cached/saved and load very quickly.\n\nTo clear the cache or change its behaviour, open the mod's settings menu.\n\n§eThank you for your attention! This message will not appear again.\nEnjoy!"
+}

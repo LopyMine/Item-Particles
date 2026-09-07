@@ -1,0 +1,583 @@
+{
+	"life_time": 100,
+	"animation_type": "onetime",
+	"animation_speed": 10.0,
+	
+	"size": {
+		"width": 8,
+		"height": 8
+	},
+
+	"textures": [
+		"item_particles:vanilla/generic/generic_0.png",
+		"item_particles:vanilla/generic/generic_1.png",
+		"item_particles:vanilla/generic/generic_2.png",
+		"item_particles:vanilla/generic/generic_3.png",
+		"item_particles:vanilla/generic/generic_4.png",
+		"item_particles:vanilla/generic/generic_5.png"
+	],
+	
+	"holders": [
+		{
+			"item": "minecraft:sand",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#C8C08E", "#E8E0AE"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:suspicious_sand",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#C8C08E", "#E8E0AE"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:sandstone",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#C8C08E", "#E8E0AE"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:sandstone_stairs",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#C8C08E", "#E8E0AE"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:sandstone_slab",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#C8C08E", "#E8E0AE"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:sandstone_wall",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#C8C08E", "#E8E0AE"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:chiseled_sandstone",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#C8C08E", "#E8E0AE"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:smooth_sandstone",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#C8C08E", "#E8E0AE"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:smooth_sandstone_stairs",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#C8C08E", "#E8E0AE"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:smooth_sandstone_slab",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#C8C08E", "#E8E0AE"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:cut_sandstone",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#C8C08E", "#E8E0AE"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:cut_sandstone_slab",
+			"spawn_area": "#full",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#C8C08E", "#E8E0AE"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:tnt",
+            "spawn_area": {
+                "minecraft:block/tnt_bottom": "3d/tnt_bottom_sand.png",
+                "minecraft:block/tnt_top": "3d/tnt_top_sand.png"
+            },
+			"spawn_count": [0, 1],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#C8C08E", "#E8E0AE"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:dead_bush",
+			"spawn_area": "2d/dead_bush_sand.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#C8C08E", "#E8E0AE"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:brush",
+			"spawn_area": "2d/brush_sand.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#C8C08E", "#E8E0AE"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:turtle_egg",
+			"spawn_area": "2d/turtle_egg_sand.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#C8C08E", "#E8E0AE"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		//? if <=1.21.4 {
+		/*{
+			"item": "minecraft:rabbit_spawn_egg",
+			"spawn_area": "2d/spawn_egg.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#C8C08E", "#E8E0AE"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:turtle_spawn_egg",
+			"spawn_area": "2d/spawn_egg.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#C8C08E", "#E8E0AE"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:camel_spawn_egg",
+			"spawn_area": "2d/spawn_egg.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#C8C08E", "#E8E0AE"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:husk_spawn_egg",
+			"spawn_area": "2d/spawn_egg.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#C8C08E", "#E8E0AE"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:parched_spawn_egg",
+			"spawn_area": "2d/spawn_egg.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#C8C08E", "#E8E0AE"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:camel_husk_spawn_egg",
+			"spawn_area": "2d/spawn_egg.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#C8C08E", "#E8E0AE"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		*///?} else {
+		{
+			"item": "minecraft:rabbit_spawn_egg",
+			"spawn_area": "2d/rabbit_spawn_egg_sand.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#C8C08E", "#E8E0AE"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:turtle_spawn_egg",
+			"spawn_area": "2d/turtle_spawn_egg_sand.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#C8C08E", "#E8E0AE"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:camel_spawn_egg",
+			"spawn_area": "2d/camel_spawn_egg_sand.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#C8C08E", "#E8E0AE"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:husk_spawn_egg",
+			"spawn_area": "2d/husk_spawn_egg_sand.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#C8C08E", "#E8E0AE"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:parched_spawn_egg",
+			"spawn_area": "2d/parched_spawn_egg_sand.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#C8C08E", "#E8E0AE"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		{
+			"item": "minecraft:camel_husk_spawn_egg",
+			"spawn_area": "2d/camel_husk_spawn_egg_sand.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#C8C08E", "#E8E0AE"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		//?}
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:music_disc_relic",
+			"spawn_area": "2d/music_disc_relic_sand.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#C8C08E", "#E8E0AE"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:plenty_pottery_sherd",
+			"spawn_area": "2d/plenty_pottery_sherd_sand.png",
+			"spawn_count": [0, 1],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#C8C08E", "#E8E0AE"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		},
+		
+		
+		
+		
+		
+		{
+			"item": "minecraft:dune_armor_trim_smithing_template",
+			"spawn_area": "2d/dune_armor_trim_smithing_template_sand.png",
+			"spawn_count": [0, 2],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.1,
+			"color": {
+				"mode": "gradient_random_static",
+				"values": ["#C8C08E", "#E8E0AE"],
+				"speed": 5.0
+			},
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		}
+	],
+	"physics": {
+		"base": {
+			"xz_speed": {
+				"impulse": [0.0, 0.0],
+				"impulse_bidirectional": false,
+				"acceleration": 0.0,
+				"acceleration_bidirectional": false,
+				"max_acceleration": [-100.0, 100.0],
+				"braking": 0.1,
+				"turbulence": [0.0, 0.0],
+				"impulse_inherit_coefficient": 0.5
+			},
+			"y_speed": {
+				"impulse": [0.0, 0.0],
+				"impulse_bidirectional": false,
+				"acceleration": 0.1,
+				"acceleration_bidirectional": false,
+				"max_acceleration": [-100.0, 3.0],
+				"braking": 0.0,
+				"turbulence": [0.0, 0.0],
+				"impulse_inherit_coefficient": 0.5
+			},
+			"angle_speed": {
+				"impulse": [0.0, 0.0],
+				"impulse_bidirectional": false,
+				"acceleration": 0.0,
+				"acceleration_bidirectional": false,
+				"max_acceleration": [-100.0, 100.0],
+				"braking": 0.0,
+				"turbulence": [0.0, 0.0]
+			}
+		},
+		"rotation": {
+			"particle": {
+				"spawn_angle": [0.0, 0.0],
+				"rotate_in_movement_direction": false,
+				"speed": {
+					"impulse": [0.0, 0.0],
+					"impulse_bidirectional": false,
+					"acceleration": 0.0,
+					"acceleration_bidirectional": false,
+					"max_acceleration": 0.0,
+					"braking": 0.0,
+					"turbulence": [0.0, 0.0]
+				}
+			},
+			"texture": {
+				"spawn_angle": [0.0, 360.0],
+				"rotate_in_movement_direction": false,
+				"speed": {
+					"impulse": [1.0, 3.0],
+					"impulse_bidirectional": true,
+					"acceleration": 0.0,
+					"acceleration_bidirectional": false,
+					"max_acceleration": 0.0,
+					"braking": 0.0,
+					"turbulence": [0.0, 0.0]
+				}
+			}
+		}
+	}
+}

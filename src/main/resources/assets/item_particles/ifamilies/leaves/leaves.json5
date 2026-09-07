@@ -1,0 +1,38 @@
+{
+	"keywords": {
+		"whitelist": [
+			"leaves",
+			"leaf"
+		],
+		"blacklist": [
+			"box",
+			"planter",
+			"pot",
+			"urn"
+		]
+	},
+	"tags": [],
+	"particles": [
+		{
+			"id": "family/leaves/leaves",
+			"textures": [
+				"item_particles:leaves/leaves_0.png",
+				"item_particles:leaves/leaves_1.png",
+				"item_particles:leaves/leaves_2.png"
+			],
+			"texture_generation_mode": {
+				"luminance": true,
+				"saturation": false,
+				"frequency": false
+			},
+			"spawn_count": [0, 5],
+			"spawn_frequency": [10, 40],
+			"speed_coefficient": 0.4,
+			"nbt_conditions_match": "any",
+			"nbt_conditions": []
+		}
+	],
+	"family_groups": [],
+	"compatible": false,
+	"priority": 1010
+}
