@@ -158,6 +158,9 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 		HumanoidArm arm = switch (displayContext) {
 			case FIRST_PERSON_RIGHT_HAND -> HumanoidArm.RIGHT;
 			case FIRST_PERSON_LEFT_HAND -> HumanoidArm.LEFT;
+			// Punchy moment
+			case THIRD_PERSON_RIGHT_HAND -> isFirstPersonCameraEntity(entity) ? HumanoidArm.RIGHT : null;
+			case THIRD_PERSON_LEFT_HAND -> isFirstPersonCameraEntity(entity) ? HumanoidArm.LEFT : null;
 			default -> null;
 		};
 
@@ -375,11 +378,12 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 	}
 
 	private static SpawnCategory getArmSpawnCategory(LivingEntity entity) {
+		return isFirstPersonCameraEntity(entity) ? SpawnCategory.FIRST_PERSON : SpawnCategory.THIRD_PERSON;
+	}
+
+	private static boolean isFirstPersonCameraEntity(LivingEntity entity) {
 		Minecraft minecraft = Minecraft.getInstance();
-		if (entity == minecraft.getCameraEntity() && minecraft.options.getCameraType().isFirstPerson()) {
-			return SpawnCategory.FIRST_PERSON;
-		}
-		return SpawnCategory.THIRD_PERSON;
+		return entity == minecraft.getCameraEntity() && minecraft.options.getCameraType().isFirstPerson();
 	}
 
 	@Setter

@@ -18,6 +18,7 @@ mossyDependencies {
 	additional {
 		override("mossyCompileOnly", "oritech")
 		override("mossyCompileOnly", "geckolib")
+		disable("punchy-fpa")
 	}
 }
 

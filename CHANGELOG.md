@@ -1,0 +1,2 @@
+- Added compatibility with Punchy
+- Added compatibility with CIT Resewn Continuation
