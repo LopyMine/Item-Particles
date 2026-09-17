@@ -28,10 +28,10 @@ public class ScreenMixin {
 			//? if >=26.1 {
 			/*method = "extractRenderStateWithTooltipAndSubtitles"
 			*///?} elif >=1.21.9 {
-			method = "renderWithTooltipAndSubtitles"
-			//?} else {
-			/*method = "renderWithTooltip"
-			*///?}
+			/*method = "renderWithTooltipAndSubtitles"
+			*///?} else {
+			method = "renderWithTooltip"
+			//?}
 	)
 	private void renderInventoryParticles(GuiGraphics context, int mouseX, int mouseY, float delta, CallbackInfo ci) {
 		ParticlesLinkingInfo.render(context, this.width - 5 - 8, 5, mouseX, mouseY);

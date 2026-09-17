@@ -1,19 +1,25 @@
 package net.lopymine.itp.mixin;
 
-import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.lopymine.itp.manager.ItemParticleManager;
 import net.minecraft.client.renderer.entity.ItemEntityRenderer;
-import net.minecraft.client.renderer.entity.state.ItemClusterRenderState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.At.Shift;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+//? if >=1.21.4 {
+/*import com.llamalad7.mixinextras.sugar.Local;
+import net.minecraft.client.renderer.entity.state.ItemClusterRenderState;
+*///?} else {
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.world.entity.item.ItemEntity;
+//?}
 
 @Mixin(ItemEntityRenderer.class)
 public class ItemEntityRendererMixin {
 
-	@Inject(at = @At(value = "INVOKE", shift = Shift.AFTER, target = "Lnet/minecraft/client/renderer/item/ItemStackRenderState;submit(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;III)V", ordinal = 0), method = "submitMultipleFromCount(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;ILnet/minecraft/client/renderer/entity/state/ItemClusterRenderState;Lnet/minecraft/util/RandomSource;Lnet/minecraft/world/phys/AABB;)V")
+	//? if >=1.21.4 {
+	/*@Inject(at = @At(value = "INVOKE", shift = Shift.AFTER, target = "Lnet/minecraft/client/renderer/item/ItemStackRenderState;submit(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;III)V", ordinal = 0), method = "submitMultipleFromCount(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;ILnet/minecraft/client/renderer/entity/state/ItemClusterRenderState;Lnet/minecraft/util/RandomSource;Lnet/minecraft/world/phys/AABB;)V")
 	private static void acceptItemParticleRequests1(CallbackInfo ci, @Local(argsOnly = true) ItemClusterRenderState state, @Local(argsOnly = true) PoseStack poseStack) {
 		ItemParticleManager.getInstance().acceptDroppedItemParticleRequests(state.item, poseStack, state);
 	}
@@ -22,5 +28,11 @@ public class ItemEntityRendererMixin {
 	private static void acceptItemParticleRequests2(CallbackInfo ci, @Local(argsOnly = true) ItemClusterRenderState state, @Local(argsOnly = true) PoseStack poseStack) {
 		ItemParticleManager.getInstance().acceptDroppedItemParticleRequests(state.item, poseStack, state);
 	}
+	*///?} else {
+	@Inject(at = @At(value = "INVOKE", shift = Shift.AFTER, target = "Lnet/minecraft/client/renderer/entity/ItemEntityRenderer;renderMultipleFromCount(Lnet/minecraft/client/renderer/entity/ItemRenderer;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/world/item/ItemStack;Lnet/minecraft/client/resources/model/BakedModel;ZLnet/minecraft/util/RandomSource;)V"), method = "render(Lnet/minecraft/world/entity/item/ItemEntity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V")
+	private void acceptItemParticleRequests(ItemEntity itemEntity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource multiBufferSource, int lightCoords, CallbackInfo ci) {
+		ItemParticleManager.getInstance().acceptDroppedItemParticleRequests(itemEntity.getItem(), poseStack, itemEntity);
+	}
+	//?}
 
 }

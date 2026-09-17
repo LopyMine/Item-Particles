@@ -4,7 +4,7 @@ import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import java.util.*;
 import lombok.*;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import static com.mojang.serialization.codecs.RecordCodecBuilder.create;
 import static net.lopymine.mossylib.utils.CodecUtils.option;
 
@@ -33,7 +33,7 @@ public class FamilyParticleConfig {
 			option("priority", 1000, Codec.INT, FamilyParticleConfig::getPriority)
 	).apply(instance, FamilyParticleConfig::new));
 
-	private Identifier location;
+	private ResourceLocation location;
 
 	private WhitelistAndBlacklist keywords;
 	private WhitelistAndBlacklist tags;

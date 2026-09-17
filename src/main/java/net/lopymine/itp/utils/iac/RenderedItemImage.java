@@ -2,7 +2,7 @@ package net.lopymine.itp.utils.iac;
 
 import java.util.*;
 import lombok.*;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 
 @Getter
 @Setter
@@ -15,12 +15,12 @@ public class RenderedItemImage {
 		return anotherColor;
 	}
 
-	public record Pixel(Identifier texture, int x, int y, int color) {
+	public record Pixel(ResourceLocation texture, int x, int y, int color) {
 
 		@Override
 		public boolean equals(Object o) {
-			if (!(o instanceof Pixel(Identifier texture1, int x1, int y1, int color1))) return false;
-			return x() == x1 && y() == y1 && color() == color1 && Objects.equals(texture(), texture1);
+			if (!(o instanceof Pixel pixel)) return false;
+			return x() == pixel.x() && y() == pixel.y() && color() == pixel.color() && Objects.equals(texture(), pixel.texture());
 		}
 
 		@Override

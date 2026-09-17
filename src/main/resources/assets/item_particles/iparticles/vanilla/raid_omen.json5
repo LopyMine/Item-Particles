@@ -44,7 +44,7 @@
 		
 		
 		//? if <=1.21.4 {
-		/*{
+		{
 			"item": "minecraft:pillager_spawn_egg",
 			"spawn_area": "2d/spawn_egg.png",
 			"spawn_count": [0, 1],
@@ -104,8 +104,8 @@
 			"nbt_conditions_match": "any",
 			"nbt_conditions": []
 		},
-		*///?} else {
-		{
+		//?} else {
+		/*{
 			"item": "minecraft:pillager_spawn_egg",
 			"spawn_area": "2d/pillager_spawn_egg_raid_omen.png",
 			"spawn_count": [0, 1],
@@ -165,7 +165,7 @@
 			"nbt_conditions_match": "any",
 			"nbt_conditions": []
 		},
-		//?}
+		*///?}
 		
 		
 		

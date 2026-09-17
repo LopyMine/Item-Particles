@@ -12,7 +12,7 @@ import net.lopymine.mossylib.yacl.utils.EnumWithText;
 import net.minecraft.core.Holder.Reference;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.Item;
 import org.jetbrains.annotations.NotNull;
@@ -117,17 +117,17 @@ public class ItemParticlesItemWhitelistsConfig {
 
 			for (String item : this.items.split(" ")) {
 				try {
-					Identifier itemId = ItemParticles.parseId(item);
+					ResourceLocation itemId = ItemParticles.parseId(item);
 					//? if >=1.21.2 {
-					Optional<Reference<Item>> optional = BuiltInRegistries.ITEM.get(itemId);
+					/*Optional<Reference<Item>> optional = BuiltInRegistries.ITEM.get(itemId);
 					if (optional.isEmpty()) {
 						ItemParticlesClient.LOGGER.warn("Invalid item in whitelist: " + item);
 						continue;
 					}
 					int id = BuiltInRegistries.ITEM.getId(optional.get().value());
-					//?} else {
-					/*int id = BuiltInRegistries.ITEM.getId(BuiltInRegistries.ITEM.get(itemId));
-					 *///?}
+					*///?} else {
+					int id = BuiltInRegistries.ITEM.getId(BuiltInRegistries.ITEM.get(itemId));
+					 //?}
 					if (id == -1) {
 						ItemParticlesClient.LOGGER.warn("Failed to find item in whitelist: " + item);
 						continue;

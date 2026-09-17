@@ -3,7 +3,7 @@ package net.lopymine.itp.element.spawner;
 import java.util.List;
 import java.util.function.Function;
 import net.lopymine.itp.t2o.*;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.Nullable;
@@ -14,7 +14,7 @@ public record AdvancedSpawnArea(IParticleSpawnPos[] positions) implements IParti
 		return new AdvancedSpawnArea(new IParticleSpawnPos[]{AdvancedSpawnPos.FULL_POS});
 	}
 
-	public static AdvancedSpawnArea readFromTexture(@Nullable Identifier texture, @NotNull Identifier mask) {
+	public static AdvancedSpawnArea readFromTexture(@Nullable ResourceLocation texture, @NotNull ResourceLocation mask) {
 		List<AdvancedSpawnPos> positions = Texture2ObjectsManager.readFromTexture(
 				mask,
 				"advanced spawn area",
@@ -29,7 +29,7 @@ public record AdvancedSpawnArea(IParticleSpawnPos[] positions) implements IParti
 		return this.positions.length == 0;
 	}
 
-	public Function<Identifier, @Nullable IParticleSpawnPos> getRandomPosFunction(RandomSource random) {
+	public Function<ResourceLocation, @Nullable IParticleSpawnPos> getRandomPosFunction(RandomSource random) {
 		return (ignored) -> {
 			if (this.isEmpty()) {
 				return null;

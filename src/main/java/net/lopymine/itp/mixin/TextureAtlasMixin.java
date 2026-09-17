@@ -8,7 +8,7 @@ import java.util.function.Consumer;
 import net.lopymine.itp.ItemParticles;
 import net.lopymine.itp.family.atlas.manager.FamilyParticlesAtlasManager;
 import net.minecraft.client.renderer.texture.*;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 
@@ -17,7 +17,7 @@ public class TextureAtlasMixin {
 
 	@Shadow
 	@Final
-	private Identifier location;
+	private ResourceLocation location;
 
 	@WrapOperation(at = @At(value = "INVOKE", target = "Ljava/util/List;forEach(Ljava/util/function/Consumer;)V", ordinal = 0), method = "clearTextureData")
 	private void preventFamilySpritesFromClosingBecauseOfReusing(List<TextureAtlasSprite> instance, Consumer<?> consumer, Operation<Void> original) {

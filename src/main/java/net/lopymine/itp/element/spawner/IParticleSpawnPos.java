@@ -2,7 +2,7 @@ package net.lopymine.itp.element.spawner;
 
 import java.util.Map;
 import net.lopymine.itp.manager.ItemParticleManager.ItemParticleRequest;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import org.joml.Vector3fc;
 import org.jspecify.annotations.Nullable;
 
@@ -13,7 +13,7 @@ public interface IParticleSpawnPos {
 	int y();
 
 	@Nullable
-	default Identifier texture() {
+	default ResourceLocation texture() {
 		return null;
 	}
 

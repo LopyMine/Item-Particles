@@ -5,12 +5,14 @@ import java.util.*;
 import net.lopymine.itp.particle.ItemParticle;
 import net.lopymine.itp.utils.*;
 import net.minecraft.client.*;
-import net.minecraft.client.renderer.feature.FeatureRenderDispatcher;
+//? if >=1.21.9 {
+/*import net.minecraft.client.renderer.feature.FeatureRenderDispatcher;
+*///?}
 //? if >=26.1 {
 /*import net.minecraft.client.renderer.state.level.QuadParticleRenderState;
-*///?} else {
-import net.minecraft.client.renderer.state.QuadParticleRenderState;
-//?}
+*///?} elif >=1.21.9 {
+/*import net.minecraft.client.renderer.state.QuadParticleRenderState;
+*///?}
 import net.minecraft.world.phys.Vec3;
 import org.joml.*;
 //? if >=26.2 {
@@ -22,7 +24,9 @@ public class FirstPersonParticleRenderer {
 	private static final FirstPersonParticleRenderer INSTANCE = new FirstPersonParticleRenderer();
 
 	private final List<ItemParticle> particles = new ArrayList<>();
-	private final QuadParticleRenderState renderState = new QuadParticleRenderState();
+	//? if >=1.21.9 {
+	/*private final QuadParticleRenderState renderState = new QuadParticleRenderState();
+	*///?}
 	//? if >=26.2 {
 	/*private final SubmitNodeStorage submitNodeStorage = new SubmitNodeStorage();
 	*///?}
@@ -34,7 +38,11 @@ public class FirstPersonParticleRenderer {
 	}
 
 	public static double getViewDepth(Vec3 cameraPos, double x, double y, double z) {
-		Vector3fc forward = GameRendererUtils.getMainCamera().forwardVector();
+		//? if >=1.21.9 {
+		/*Vector3fc forward = GameRendererUtils.getMainCamera().forwardVector();
+		*///?} else {
+		Vector3fc forward = GameRendererUtils.getMainCamera().getLookVector();
+		//?}
 		return (x - cameraPos.x()) * forward.x() + (y - cameraPos.y()) * forward.y() + (z - cameraPos.z()) * forward.z();
 	}
 
@@ -53,7 +61,8 @@ public class FirstPersonParticleRenderer {
 		this.clear();
 	}
 
-	public void render(float tickProgress) {
+	//? if >=1.21.9 {
+	/*public void render(float tickProgress) {
 		if (this.particles.isEmpty()) {
 			return;
 		}
@@ -93,9 +102,9 @@ public class FirstPersonParticleRenderer {
 
 		FeatureRenderDispatcher dispatcher = GameRendererUtils.getFeatureRenderDispatcher();
 		//? if >=26.2 {
-		/*this.submitNodeStorage.submitQuadParticleGroup(this.renderState);
+		/^this.submitNodeStorage.submitQuadParticleGroup(this.renderState);
 		dispatcher.renderAllFeatures(this.submitNodeStorage);
-		*///?} else {
+		^///?} else {
 		dispatcher.getSubmitNodeStorage().submitParticleGroup(this.renderState);
 		dispatcher.renderAllFeatures();
 		dispatcher.endFrame();
@@ -103,4 +112,9 @@ public class FirstPersonParticleRenderer {
 
 		modelViewStack.popMatrix();
 	}
+	*///?} else {
+	public void render(float tickProgress) {
+		this.particles.removeIf((particle) -> !particle.isAlive());
+	}
+	//?}
 }

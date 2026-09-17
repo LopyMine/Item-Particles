@@ -11,15 +11,15 @@ import net.lopymine.itp.family.cache.FamilyParticlesAtlasCacheManager;
 import net.lopymine.itp.utils.NativeImageUtils;
 import net.lopymine.itp.utils.NativeImageUtils.*;
 import net.lopymine.itp.utils.iac.RenderedItemImage;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import org.jetbrains.annotations.Nullable;
 
 public class TextureGenerationManager {
 
-	private static final Map<Identifier, Optional<NativeImage>> TEMPLATES = new ConcurrentHashMap<>();
+	private static final Map<ResourceLocation, Optional<NativeImage>> TEMPLATES = new ConcurrentHashMap<>();
 
-	public static GeneratedTextures generateWithReplace(RenderedItemImage renderedItemImage, Identifier itemId, Item item, ArrayList<Identifier> textures, TextureGenerationMode textureGenerationMode) {
+	public static GeneratedTextures generateWithReplace(RenderedItemImage renderedItemImage, ResourceLocation itemId, Item item, ArrayList<ResourceLocation> textures, TextureGenerationMode textureGenerationMode) {
 		if (textures.isEmpty()) {
 			return new GeneratedTextures(new ArrayList<>(), new ArrayList<>());
 		}
@@ -29,14 +29,14 @@ public class TextureGenerationManager {
 
 		SourceColors sourceColors = NativeImageUtils.clusterColors(renderedItemImage.getColors(), textureGenerationMode);
 
-		for (Identifier texture : textures) {
+		for (ResourceLocation texture : textures) {
 			try {
 				NativeImage particleImage = getTemplate(texture);
 				if (particleImage == null) {
 					throw new NullPointerException("Failed to load particle template \"%s\" for \"%s\"".formatted(texture, itemId));
 				}
 
-				Identifier particleId = FamilyParticlesAtlasSpriteManager.unwrapIdForAtlasSprite(texture.withPrefix(itemId.getPath() + "/"));
+				ResourceLocation particleId = FamilyParticlesAtlasSpriteManager.unwrapIdForAtlasSprite(texture.withPrefix(itemId.getPath() + "/"));
 
 				NativeImageAndColor generatedParticle = NativeImageUtils.generateWithReplace(particleImage, sourceColors, item);
 
@@ -60,7 +60,7 @@ public class TextureGenerationManager {
 	}
 
 	@Nullable
-	private static NativeImage getTemplate(Identifier texture) {
+	private static NativeImage getTemplate(ResourceLocation texture) {
 		Optional<NativeImage> cached = TEMPLATES.get(texture);
 		if (cached != null) {
 			return cached.orElse(null);

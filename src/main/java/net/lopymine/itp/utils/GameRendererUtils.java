@@ -3,7 +3,10 @@ package net.lopymine.itp.utils;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.client.renderer.feature.FeatureRenderDispatcher;
+//? if >=1.21.9 {
+/*import net.minecraft.client.renderer.feature.FeatureRenderDispatcher;
+*///?}
+import net.minecraft.world.phys.Vec3;
 import org.joml.*;
 
 public class GameRendererUtils {
@@ -20,12 +23,22 @@ public class GameRendererUtils {
 		//?}
 	}
 
-	public static FeatureRenderDispatcher getFeatureRenderDispatcher() {
+	//? if >=1.21.9 {
+	/*public static FeatureRenderDispatcher getFeatureRenderDispatcher() {
 		GameRenderer gameRenderer = Minecraft.getInstance().gameRenderer;
 		//? if >=26.2 {
-		/*return gameRenderer.featureRenderDispatcher();
-		*///?} else {
+		/^return gameRenderer.featureRenderDispatcher();
+		^///?} else {
 		return gameRenderer.getFeatureRenderDispatcher();
+		//?}
+	}
+	*///?}
+
+	public static Vec3 getPosition(Camera camera) {
+		//? if >=1.21.9 {
+		/*return camera.position();
+		*///?} else {
+		return camera.getPosition();
 		//?}
 	}
 
@@ -34,7 +47,11 @@ public class GameRendererUtils {
 		/*return GameRendererUtils.getMainCamera().getFov();
 		*///?} else {
 		Camera camera = GameRendererUtils.getMainCamera();
-		return Minecraft.getInstance().gameRenderer.getFov(camera, camera.getPartialTickTime(), true);
+		//? if >=1.21.10 {
+		/*return Minecraft.getInstance().gameRenderer.getFov(camera, camera.getPartialTickTime(), true);
+		*///?} else {
+		return (float) Minecraft.getInstance().gameRenderer.getFov(camera, camera.getPartialTickTime(), true);
+		//?}
 		//?}
 	}
 
@@ -45,7 +62,11 @@ public class GameRendererUtils {
 		/*return Minecraft.getInstance().gameRenderer.getGameRenderState().levelRenderState.cameraRenderState.hudFov;
 		*///?} else {
 		Camera camera = GameRendererUtils.getMainCamera();
-		return Minecraft.getInstance().gameRenderer.getFov(camera, camera.getPartialTickTime(), false);
+		//? if >=1.21.10 {
+		/*return Minecraft.getInstance().gameRenderer.getFov(camera, camera.getPartialTickTime(), false);
+		*///?} else {
+		return (float) Minecraft.getInstance().gameRenderer.getFov(camera, camera.getPartialTickTime(), false);
+		//?}
 		//?}
 	}
 

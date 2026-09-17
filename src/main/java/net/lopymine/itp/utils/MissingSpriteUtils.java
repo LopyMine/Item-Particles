@@ -3,6 +3,9 @@ package net.lopymine.itp.utils;
 import com.mojang.blaze3d.platform.NativeImage;
 import net.minecraft.client.renderer.texture.*;
 import net.minecraft.client.resources.metadata.animation.FrameSize;
+//? if >=1.21 && <=1.21.8 {
+import net.minecraft.server.packs.resources.ResourceMetadata;
+//?}
 
 public class MissingSpriteUtils {
 
@@ -12,6 +15,6 @@ public class MissingSpriteUtils {
 		image.copyRect(nativeImage, 0, 0, 1, 1, 6, 6, false, false);
 		image.close();
 
-		return new SpriteContents(MissingTextureAtlasSprite.getLocation(), new FrameSize(8, 8), nativeImage /*? if >=1.21 && <=1.21.8 {*//*,ResourceMetadata.EMPTY *//*?} elif <=1.21.8 {*/ /*, AnimationMetadataSection.EMPTY *//*?}*/);
+		return new SpriteContents(MissingTextureAtlasSprite.getLocation(), new FrameSize(8, 8), nativeImage /*? if >=1.21 && <=1.21.8 {*/,ResourceMetadata.EMPTY /*?} elif <=1.21.8 {*/ /*, AnimationMetadataSection.EMPTY *//*?}*/);
 	}
 }

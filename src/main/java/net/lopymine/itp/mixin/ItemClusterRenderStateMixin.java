@@ -1,6 +1,8 @@
 package net.lopymine.itp.mixin;
 
-import java.util.UUID;
+//? if >=1.21.4 {
+
+/*import java.util.UUID;
 import net.lopymine.itp.utils.mixin.RenderStateWithUUID;
 import net.minecraft.client.renderer.entity.state.ItemClusterRenderState;
 import net.minecraft.client.renderer.item.ItemModelResolver;
@@ -31,3 +33,4 @@ public class ItemClusterRenderStateMixin implements RenderStateWithUUID {
 		this.itemParticles$uuid = uuid;
 	}
 }
+*///?}

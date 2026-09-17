@@ -3,7 +3,7 @@ package net.lopymine.itp.mixin.family;
 //? if >=1.21.5 {
 
 
-import com.llamalad7.mixinextras.injector.wrapoperation.*;
+/*import com.llamalad7.mixinextras.injector.wrapoperation.*;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.blaze3d.platform.NativeImage;
 import java.nio.ByteBuffer;
@@ -23,14 +23,14 @@ public class ScreenshotMixin {
 
 	@WrapOperation(at = @At(value = "INVOKE", target = "Ljava/nio/ByteBuffer;getInt(I)I", ordinal = 0),
 			//? if >=26.1 {
-			/*method = "lambda$takeScreenshot$1"
-			*///?} else {
+			/^method = "lambda$takeScreenshot$1"
+			^///?} else {
 
 			//? if fabric {
 			method = "method_68156"
 			//?} else {
-			/*method = "lambda$takeScreenshot$4"
-			*///?}
+			/^method = "lambda$takeScreenshot$4"
+			^///?}
 
 			//?}
 	)
@@ -40,14 +40,14 @@ public class ScreenshotMixin {
 
 	@WrapOperation(at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/platform/NativeImage;setPixelABGR(III)V", ordinal = 0),
 			//? if >=26.1 {
-			/*method = "lambda$takeScreenshot$1"
-			*///?} else {
+			/^method = "lambda$takeScreenshot$1"
+			^///?} else {
 
 			//? if fabric {
 			method = "method_68156"
 			//?} else {
-			/*method = "lambda$takeScreenshot$4"
-			*///?}
+			/^method = "lambda$takeScreenshot$4"
+			^///?}
 
 			//?}
 	)
@@ -64,4 +64,4 @@ public class ScreenshotMixin {
 
 }
 
-//?}
+*///?}

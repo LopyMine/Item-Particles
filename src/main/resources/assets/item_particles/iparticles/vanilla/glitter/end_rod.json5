@@ -292,7 +292,7 @@
 			"nbt_conditions": []
 		},
 		//? if <=1.21.4 {
-		/*{
+		{
 			"item": "minecraft:shulker_spawn_egg",
 			"spawn_area": "2d/spawn_egg.png",
 			"spawn_count": [0, 1],
@@ -306,8 +306,8 @@
 			"nbt_conditions_match": "any",
 			"nbt_conditions": []
 		},
-		*///?} else {
-		{
+		//?} else {
+		/*{
 			"item": "minecraft:shulker_spawn_egg",
 			"spawn_area": "2d/shulker_spawn_egg_end_rod.png",
 			"spawn_count": [0, 1],
@@ -321,7 +321,7 @@
 			"nbt_conditions_match": "any",
 			"nbt_conditions": []
 		},
-		//?}
+		*///?}
 		
 		
 		

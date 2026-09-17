@@ -7,18 +7,18 @@ import net.lopymine.itp.ItemParticles;
 import net.lopymine.itp.client.ItemParticlesClient;
 import net.lopymine.itp.resourcepack.manager.AbstractConfigsManager;
 import net.lopymine.mossylib.logger.MossyLogger;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
 @Getter
 public class FamilyParticlesConfigManager extends AbstractConfigsManager<FamilyParticleConfig> {
 
-	public static final Set<Identifier> FALLBACK_CONFIG_IDS = Set.of(
+	public static final Set<ResourceLocation> FALLBACK_CONFIG_IDS = Set.of(
 			ItemParticles.id("ifamilies/fallback/standard.json"),
 			ItemParticles.id("ifamilies/fallback/standard.json5")
 	);
 	private static final FamilyParticlesConfigManager INSTANCE = new FamilyParticlesConfigManager();
-	private final Map<Identifier, FamilyParticleConfig> registeredConfigsMap = new HashMap<>();
+	private final Map<ResourceLocation, FamilyParticleConfig> registeredConfigsMap = new HashMap<>();
 	private final List<FamilyParticleConfig> registeredConfigs = new ArrayList<>();
 
 	public static FamilyParticlesConfigManager getInstance() {
@@ -51,7 +51,7 @@ public class FamilyParticlesConfigManager extends AbstractConfigsManager<FamilyP
 	}
 
 	@Override
-	protected void registerConfig(FamilyParticleConfig config, Identifier id) {
+	protected void registerConfig(FamilyParticleConfig config, ResourceLocation id) {
 		config.setLocation(id);
 		this.registeredConfigsMap.computeIfAbsent(id, (key) -> config);
 		this.registeredConfigs.add(config);
@@ -68,7 +68,7 @@ public class FamilyParticlesConfigManager extends AbstractConfigsManager<FamilyP
 
 	@NotNull
 	public FamilyParticleConfig getFallbackConfig() {
-		for (Identifier id : FALLBACK_CONFIG_IDS) {
+		for (ResourceLocation id : FALLBACK_CONFIG_IDS) {
 			FamilyParticleConfig fallbacks = this.registeredConfigsMap.get(id);
 			if (fallbacks == null) {
 				continue;

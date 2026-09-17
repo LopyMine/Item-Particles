@@ -37,7 +37,7 @@
 		
 		
 		//? if <=1.21.4 {
-		/*{
+		{
 			"item": "minecraft:wooden_spear",
 			"spawn_area": "2d/wooden_spear_leaves.png",
 			"spawn_count": [
@@ -52,7 +52,7 @@
 			"color": "",
 			"nbt_conditions_match": "any"
 		},
-		*///?}
+		//?}
 		{
 			"item": "minecraft:stick",
 			"spawn_area": "2d/stick_leaves.png",

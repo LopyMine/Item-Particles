@@ -19,9 +19,11 @@ public class GameRendererMixin {
 
 	//? if >=26.1 {
 	/*@Inject(at = @At(value = "INVOKE", shift = Shift.AFTER, target = "Lnet/minecraft/client/renderer/GameRenderer;renderItemInHand(Lnet/minecraft/client/renderer/state/level/CameraRenderState;FLorg/joml/Matrix4fc;)V"), method = "renderLevel")
+	*///?} elif >=1.21.11 {
+	/*@Inject(at = @At(value = "INVOKE", shift = Shift.AFTER, target = "Lnet/minecraft/client/renderer/GameRenderer;renderItemInHand(FZLorg/joml/Matrix4f;)V"), method = "renderLevel")
 	*///?} else {
-	@Inject(at = @At(value = "INVOKE", shift = Shift.AFTER, target = "Lnet/minecraft/client/renderer/GameRenderer;renderItemInHand(FZLorg/joml/Matrix4f;)V"), method = "renderLevel")
-	 //?}
+	@Inject(at = @At(value = "INVOKE", shift = Shift.AFTER, target = "Lnet/minecraft/client/renderer/GameRenderer;renderItemInHand(Lnet/minecraft/client/Camera;FLorg/joml/Matrix4f;)V"), method = "renderLevel")
+	//?}
 	private void renderFirstPersonParticles(DeltaTracker deltaTracker, CallbackInfo ci) {
 		FirstPersonParticleRenderer.getInstance().render(deltaTracker.getGameTimeDeltaPartialTick(false));
 	}

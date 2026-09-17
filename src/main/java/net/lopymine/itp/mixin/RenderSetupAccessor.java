@@ -1,6 +1,8 @@
 package net.lopymine.itp.mixin;
 
-import java.util.Map;
+//? if >=1.21.4 {
+
+/*import java.util.Map;
 import net.minecraft.client.renderer.rendertype.RenderSetup;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
@@ -12,3 +14,4 @@ public interface RenderSetupAccessor {
 	Map<String, ?> ItemParticles$getTextures();
 
 }
+*///?}

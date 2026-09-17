@@ -11,7 +11,7 @@ import net.lopymine.mossylib.yacl.utils.EnumWithText;
 import net.minecraft.core.Holder.Reference;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.Item;
 import org.jetbrains.annotations.NotNull;
@@ -93,17 +93,17 @@ public class ItemParticlesFamilyGenerationConfig {
 				continue;
 			}
 			try {
-				Identifier itemId = ItemParticles.parseId(item.trim());
+				ResourceLocation itemId = ItemParticles.parseId(item.trim());
 				//? if >=1.21.2 {
-				Optional<Reference<Item>> optional = BuiltInRegistries.ITEM.get(itemId);
+				/*Optional<Reference<Item>> optional = BuiltInRegistries.ITEM.get(itemId);
 				if (optional.isEmpty()) {
 					ItemParticlesClient.LOGGER.warn("Invalid item in family generation list: " + item);
 					continue;
 				}
 				int id = BuiltInRegistries.ITEM.getId(optional.get().value());
-				//?} else {
-				/*int id = BuiltInRegistries.ITEM.getId(BuiltInRegistries.ITEM.get(itemId));
-				 *///?}
+				*///?} else {
+				int id = BuiltInRegistries.ITEM.getId(BuiltInRegistries.ITEM.get(itemId));
+				 //?}
 				if (id == -1) {
 					ItemParticlesClient.LOGGER.warn("Failed to find item in family generation list: " + item);
 					continue;
@@ -118,7 +118,7 @@ public class ItemParticlesFamilyGenerationConfig {
 	}
 
 	public boolean canGenerateFor(Item item) {
-		Identifier itemId = BuiltInRegistries.ITEM.getKey(item);
+		ResourceLocation itemId = BuiltInRegistries.ITEM.getKey(item);
 
 		boolean modListed = this.getCompiledMods().contains(itemId.getNamespace());
 		if ((this.modsMode == Mode.WHITELIST) != modListed) {

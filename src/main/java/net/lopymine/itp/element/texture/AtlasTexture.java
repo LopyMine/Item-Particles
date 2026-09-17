@@ -7,7 +7,7 @@ import net.lopymine.itp.ItemParticles;
 import net.lopymine.itp.atlas.ItemParticlesAtlasManager;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.*;
 import static net.lopymine.mossylib.utils.CodecUtils.option;
 
@@ -15,17 +15,17 @@ import static net.lopymine.mossylib.utils.CodecUtils.option;
 @Setter
 public class AtlasTexture implements ITexture {
 
-	public static final Identifier NO_SPRITE = ItemParticles.id("no_sprite");
+	public static final ResourceLocation NO_SPRITE = ItemParticles.id("no_sprite");
 
 	public static final Codec<AtlasTexture> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
-			option("sprite", NO_SPRITE, Identifier.CODEC, AtlasTexture::getSpriteNotNull),
-			option("atlas", ItemParticlesAtlasManager.ATLAS_ID, Identifier.CODEC, AtlasTexture::getAtlas)
+			option("sprite", NO_SPRITE, ResourceLocation.CODEC, AtlasTexture::getSpriteNotNull),
+			option("atlas", ItemParticlesAtlasManager.ATLAS_ID, ResourceLocation.CODEC, AtlasTexture::getAtlas)
 	).apply(instance, AtlasTexture::new));
 
 	@Nullable
-	private Identifier sprite;
+	private ResourceLocation sprite;
 	@NotNull
-	private Identifier atlas;
+	private ResourceLocation atlas;
 
 	@Nullable
 	private TextureAtlasSprite atlasSprite;
@@ -35,13 +35,13 @@ public class AtlasTexture implements ITexture {
 		this.atlasSprite = sprite;
 	}
 
-	public AtlasTexture(@Nullable Identifier sprite, @Nullable Identifier atlas) {
+	public AtlasTexture(@Nullable ResourceLocation sprite, @Nullable ResourceLocation atlas) {
 		this.sprite = sprite;
 		this.atlas  = atlas == null ? ItemParticlesAtlasManager.ATLAS_ID : atlas;
 	}
 
 	@Override
-	public Identifier getId() {
+	public ResourceLocation getId() {
 		return this.getSpriteNotNull();
 	}
 
@@ -56,7 +56,7 @@ public class AtlasTexture implements ITexture {
 	}
 
 	@NotNull
-	public Identifier getSpriteNotNull() {
+	public ResourceLocation getSpriteNotNull() {
 		return this.sprite == null ? NO_SPRITE : this.sprite;
 	}
 }

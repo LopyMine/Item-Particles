@@ -11,7 +11,7 @@ import net.lopymine.itp.family.atlas.stitch.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.*;
 import net.minecraft.client.renderer.texture.SpriteLoader.Preparations;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.PreparableReloadListener;
 import org.jetbrains.annotations.*;
 
@@ -26,7 +26,7 @@ public class FamilyParticlesAtlasManager {
 
 	@Nullable
 	private LockableAtlasTexture atlasTexture;
-	private Identifier atlasId;
+	private ResourceLocation atlasId;
 
 	public FamilyParticlesAtlasManager(String atlasId) {
 		this.atlasId = ItemParticles.id(atlasId);
@@ -57,7 +57,7 @@ public class FamilyParticlesAtlasManager {
 	}
 
 	@NotNull
-	public TextureAtlasSprite getSprite(Identifier id) {
+	public TextureAtlasSprite getSprite(ResourceLocation id) {
 		if (this.atlasTexture == null) {
 			return ItemParticlesAtlasManager.getInstance().getMissingSprite();
 		}
@@ -78,7 +78,7 @@ public class FamilyParticlesAtlasManager {
 	private LockableAtlasTexture set(@NotNull LockableAtlasTexture texture) {
 		TextureAtlas atlas = texture.getAtlas();
 		this.atlasTexture = texture;
-		Identifier id = atlas.location();
+		ResourceLocation id = atlas.location();
 		Minecraft.getInstance().getTextureManager().register(id, atlas);
 		return this.atlasTexture;
 	}

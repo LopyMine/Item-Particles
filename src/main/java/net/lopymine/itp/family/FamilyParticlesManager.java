@@ -4,7 +4,7 @@ import java.util.*;
 import net.lopymine.itp.client.command.tags.TagsCommand;
 import net.lopymine.itp.config.ItemParticlesConfig;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import org.jetbrains.annotations.*;
 
@@ -22,7 +22,7 @@ public class FamilyParticlesManager {
 
 	@NotNull
 	private static List<FamilyParticleConfig> getFamiliesByItemData(Item item) {
-		Identifier id = BuiltInRegistries.ITEM.getKey(item);
+		ResourceLocation id = BuiltInRegistries.ITEM.getKey(item);
 		ItemMatchData itemData = ItemMatchData.of(id);
 
 		ArrayList<FamilyParticleConfig> configs = new ArrayList<>();
@@ -106,7 +106,7 @@ public class FamilyParticlesManager {
 
 	private record ItemMatchData(String path, String namespace, String[] keys, @Nullable List<String> tags) {
 
-		static ItemMatchData of(Identifier itemId) {
+		static ItemMatchData of(ResourceLocation itemId) {
 			String path = itemId.getPath();
 			return new ItemMatchData(path, itemId.getNamespace(), path.split("_"), TagsCommand.getTags(itemId));
 		}

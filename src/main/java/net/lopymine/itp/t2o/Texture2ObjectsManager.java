@@ -9,13 +9,13 @@ import net.lopymine.itp.config.ItemParticlesConfig;
 import net.lopymine.itp.extension.NativeImageExtension;
 import net.lopymine.mossylib.loader.MossyLoader;
 import net.minecraft.client.Minecraft;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
 
 @ExtensionMethod(NativeImageExtension.class)
 public class Texture2ObjectsManager {
 
-	public static <T> List<T> readFromTexture(NativeImage image, Identifier id, String objectName, Texture2ObjectPixelFilter filter, Texture2Object<T> texture2Object) {
+	public static <T> List<T> readFromTexture(NativeImage image, ResourceLocation id, String objectName, Texture2ObjectPixelFilter filter, Texture2Object<T> texture2Object) {
 		try {
 			List<T> list = new ArrayList<>();
 			Texture2Object<Boolean> test = filter.getFilter();
@@ -42,7 +42,7 @@ public class Texture2ObjectsManager {
 		return List.of();
 	}
 
-	public static <T> List<T> readFromTexture(Identifier id, String objectName, Texture2ObjectPixelFilter filter, Texture2Object<T> texture2Object) {
+	public static <T> List<T> readFromTexture(ResourceLocation id, String objectName, Texture2ObjectPixelFilter filter, Texture2Object<T> texture2Object) {
 		try {
 			Optional<Resource> optional = Minecraft.getInstance().getResourceManager().getResource(id);
 			if (optional.isEmpty()) {

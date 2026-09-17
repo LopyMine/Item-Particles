@@ -25,6 +25,7 @@ import net.lopymine.itp.family.atlas.manager.*;
 import net.lopymine.itp.family.cache.*;
 import net.lopymine.itp.family.generation.*;
 import net.lopymine.itp.family.generation.batch.*;
+import net.lopymine.itp.manager.ItemParticleManager;
 import net.lopymine.itp.utils.ArgbUtils2;
 import net.lopymine.itp.utils.iac.RenderedItemImage;
 import net.lopymine.mossylib.logger.MossyLogger;
@@ -38,7 +39,7 @@ import org.jetbrains.annotations.*;
 
 public class ParticlesConfigsManager extends AbstractConfigsManager<ParticleConfig> {
 
-	public static final Map<Identifier, List<ParticleConfig>> REGISTERED_CONFIGS = new HashMap<>();
+	public static final Map<ResourceLocation, List<ParticleConfig>> REGISTERED_CONFIGS = new HashMap<>();
 	public static final ParticleTexturesData EMPTY_PARTICLES_TEXTURES_DATA = new ParticleTexturesData(new GeneratedTextures(new ArrayList<>(), new ArrayList<>()), null);
 	private static final Map<Item, List<IParticleSpawner>> PER_ITEM_PARTICLE_SPAWNERS = new IdentityHashMap<>();
 	private static final Map<TagKey<Item>, List<IParticleSpawner>> PER_TAG_PARTICLE_SPAWNERS = new HashMap<>();
@@ -63,7 +64,7 @@ public class ParticlesConfigsManager extends AbstractConfigsManager<ParticleConf
 		COMBINED_MAP = new IdentityHashMap<>();
 
 		Map<Boolean, List<Entry<ResourceKey<Item>, Item>>> map = entries.stream().collect(Collectors.partitioningBy(
-				(entry) -> entry.getKey().identifier().getNamespace().equals("minecraft")
+				(entry) -> entry.getKey().location().getNamespace().equals("minecraft")
 		));
 
 		ItemParticlesClient.sendNoticeMessage(map.get(false).size());
@@ -138,6 +139,8 @@ public class ParticlesConfigsManager extends AbstractConfigsManager<ParticleConf
 		}).exceptionally(throwable -> {
 			ItemParticlesClient.LOGGER.error("Failed to update combined particle map:", throwable);
 			return null;
+		}).thenRun(() -> {
+			ItemParticleManager.getInstance().startValidation();
 		});
 	}
 
@@ -168,7 +171,7 @@ public class ParticlesConfigsManager extends AbstractConfigsManager<ParticleConf
 	private static Map<String, List<Entry<ResourceKey<Item>, Item>>> getGroupedItems(Collection<Entry<ResourceKey<Item>, Item>> entries) {
 		Map<String, List<Entry<ResourceKey<Item>, Item>>> groups = new LinkedHashMap<>();
 		for (Entry<ResourceKey<Item>, Item> entry : entries) {
-			groups.computeIfAbsent(entry.getKey().identifier().getNamespace(), (ignored) -> new ArrayList<>()).add(entry);
+			groups.computeIfAbsent(entry.getKey().location().getNamespace(), (ignored) -> new ArrayList<>()).add(entry);
 		}
 		return groups;
 	}
@@ -186,7 +189,7 @@ public class ParticlesConfigsManager extends AbstractConfigsManager<ParticleConf
 				if (isLinkingCanceled(reloadData)) {
 					return false;
 				}
-				Identifier itemId = entry.getKey().identifier();
+				ResourceLocation itemId = entry.getKey().location();
 				Item item = entry.getValue();
 
 				reloadInfo.setCurrentItem(itemId.toString());
@@ -211,7 +214,7 @@ public class ParticlesConfigsManager extends AbstractConfigsManager<ParticleConf
 		List<ItemRenderRequest> renderRequests = new ArrayList<>();
 
 		for (Entry<ResourceKey<Item>, Item> entry : entries) {
-			Identifier itemId = entry.getKey().identifier();
+			ResourceLocation itemId = entry.getKey().location();
 			Item item = entry.getValue();
 
 			if (shouldExtractFamilyItemImage(debug, itemId, item)) {
@@ -222,7 +225,7 @@ public class ParticlesConfigsManager extends AbstractConfigsManager<ParticleConf
 		cache.setImages(ItemRenderBatcher.render(renderRequests));
 	}
 
-	private static boolean shouldExtractFamilyItemImage(boolean debug, Identifier itemId, Item item) {
+	private static boolean shouldExtractFamilyItemImage(boolean debug, ResourceLocation itemId, Item item) {
 		if (debug) {
 			return true;
 		}
@@ -233,7 +236,7 @@ public class ParticlesConfigsManager extends AbstractConfigsManager<ParticleConf
 		return specificSpawners == null || specificSpawners.isEmpty();
 	}
 
-	private static void extractFamilyItemRenderRequests(FamilyLinkCache plan, List<ItemRenderRequest> requests, Identifier itemId, Item item) {
+	private static void extractFamilyItemRenderRequests(FamilyLinkCache plan, List<ItemRenderRequest> requests, ResourceLocation itemId, Item item) {
 		List<FamilyParticleConfig> configs = FamilyParticlesManager.getFamilyConfigsForItem(item);
 		if (configs.isEmpty()) {
 			return;
@@ -272,7 +275,7 @@ public class ParticlesConfigsManager extends AbstractConfigsManager<ParticleConf
 	}
 
 	@SuppressWarnings("deprecation")
-	private static void linkSpawners(Identifier itemId, Item item, ReloadData reloadData, FamilyLinkCache cache, boolean debug) {
+	private static void linkSpawners(ResourceLocation itemId, Item item, ReloadData reloadData, FamilyLinkCache cache, boolean debug) {
 		// debug -> all to family
 		if (debug) {
 			List<IParticleSpawner> familySpawners = extractFamilySpawners(itemId, item, cache);
@@ -311,7 +314,7 @@ public class ParticlesConfigsManager extends AbstractConfigsManager<ParticleConf
 	}
 
 	@Nullable
-	private static List<IParticleSpawner> extractFamilySpawners(Identifier itemId, Item item, FamilyLinkCache cache) {
+	private static List<IParticleSpawner> extractFamilySpawners(ResourceLocation itemId, Item item, FamilyLinkCache cache) {
 		List<FamilyParticleConfig> family = cache.getResolvedFamilyConfigs(item);
 		if (family.isEmpty()) {
 			return null;
@@ -327,7 +330,7 @@ public class ParticlesConfigsManager extends AbstractConfigsManager<ParticleConf
 			List<IParticleSpawner> list = new ArrayList<>();
 
 			for (FamilyParticleData particleData : particles) {
-				Identifier id = ItemParticles.id("%s/%s.json".formatted(getInstance().getFolderName(), particleData.getId().getPath()));
+				ResourceLocation id = ItemParticles.id("%s/%s.json".formatted(getInstance().getFolderName(), particleData.getId().getPath()));
 				List<ParticleConfig> configs = REGISTERED_CONFIGS.get(id);
 				if (configs == null || configs.isEmpty()) {
 					getInstance().getLogger().error("Failed to find config from \"%s\" for family config from \"%s\"!".formatted(id.getPath(), config.getLocation()));
@@ -379,7 +382,7 @@ public class ParticlesConfigsManager extends AbstractConfigsManager<ParticleConf
 	}
 
 	@Nullable
-	private static AdvancedSpawnAreas getParticleSpawnPos(Identifier itemId, ParticleTexturesData data) {
+	private static AdvancedSpawnAreas getParticleSpawnPos(ResourceLocation itemId, ParticleTexturesData data) {
 		List<AdvancedSpawnPos> load = FamilyParticlesSpawnAreasCacheManager.load(itemId);
 		ArrayList<Integer> colors = data.generatedTextures().colors();
 		RenderedItemImage renderedItemImage = data.renderedItemImage();
@@ -405,7 +408,7 @@ public class ParticlesConfigsManager extends AbstractConfigsManager<ParticleConf
 				return false;
 			}).map((pixel) -> new AdvancedSpawnPos(pixel.texture(), pixel.x(), pixel.y())).toList();
 
-			Map<Identifier, AdvancedSpawnAreaId> map2 = convertPixelsToAreasMap(pixels);
+			Map<ResourceLocation, AdvancedSpawnAreaId> map2 = convertPixelsToAreasMap(pixels);
 			FamilyParticlesSpawnAreasCacheManager.add(itemId, pixels);
 			return new AdvancedSpawnAreas(map2);
 		}
@@ -418,8 +421,8 @@ public class ParticlesConfigsManager extends AbstractConfigsManager<ParticleConf
 		return null;
 	}
 
-	private static @NonNull Map<Identifier, AdvancedSpawnAreaId> convertPixelsToAreasMap(List<AdvancedSpawnPos> pixels) {
-		Map<Identifier, List<AdvancedSpawnPos>> map = new HashMap<>();
+	private static @NonNull Map<ResourceLocation, AdvancedSpawnAreaId> convertPixelsToAreasMap(List<AdvancedSpawnPos> pixels) {
+		Map<ResourceLocation, List<AdvancedSpawnPos>> map = new HashMap<>();
 		for (AdvancedSpawnPos pixel : pixels) {
 			if (pixel.texture() == null) {
 				continue;
@@ -427,8 +430,8 @@ public class ParticlesConfigsManager extends AbstractConfigsManager<ParticleConf
 			map.computeIfAbsent(pixel.texture(), (key) -> new ArrayList<>()).add(pixel);
 		}
 
-		Map<Identifier, AdvancedSpawnAreaId> map2 = new HashMap<>();
-		for (Entry<Identifier, List<AdvancedSpawnPos>> entry : map.entrySet()) {
+		Map<ResourceLocation, AdvancedSpawnAreaId> map2 = new HashMap<>();
+		for (Entry<ResourceLocation, List<AdvancedSpawnPos>> entry : map.entrySet()) {
 			AdvancedSpawnArea area = new AdvancedSpawnArea(entry.getValue().toArray(new AdvancedSpawnPos[0]));
 			AdvancedSpawnAreaId id = new AdvancedSpawnAreaId(null, null);
 			id.setArea(area);
@@ -440,8 +443,8 @@ public class ParticlesConfigsManager extends AbstractConfigsManager<ParticleConf
 	}
 
 	@Nullable
-	private static ParticleTexturesData getParticleTexturesData(Identifier itemId, Item item, FamilyParticleData particleData, FamilyLinkCache cache) {
-		List<Identifier> cachedItemTextures = FamilyParticlesAtlasCacheManager.getOrLoadItemTextures(itemId);
+	private static ParticleTexturesData getParticleTexturesData(ResourceLocation itemId, Item item, FamilyParticleData particleData, FamilyLinkCache cache) {
+		List<ResourceLocation> cachedItemTextures = FamilyParticlesAtlasCacheManager.getOrLoadItemTextures(itemId);
 		RenderedItemImages extractedItemImages = cache.getImages();
 
 		if (cachedItemTextures == null) {
@@ -477,7 +480,7 @@ public class ParticlesConfigsManager extends AbstractConfigsManager<ParticleConf
 
 			FamilyParticlesAtlasManager manager = FamilyParticlesAtlasManager.getOrCreate(itemId.getNamespace());
 
-			for (Identifier cachedTexture : cachedItemTextures) {
+			for (ResourceLocation cachedTexture : cachedItemTextures) {
 				ColoredAtlasTexture directTexture = new ColoredAtlasTexture(
 						cachedTexture,
 						manager.getAtlasId(),
@@ -490,7 +493,7 @@ public class ParticlesConfigsManager extends AbstractConfigsManager<ParticleConf
 		}
 	}
 
-	private static int getTextureNumber(Identifier id1) {
+	private static int getTextureNumber(ResourceLocation id1) {
 		String path = id1.getPath();
 		String order = path.substring(path.lastIndexOf("_") + 1).replace(".png", "");
 		try {
@@ -531,12 +534,12 @@ public class ParticlesConfigsManager extends AbstractConfigsManager<ParticleConf
 	}
 
 	@Override
-	protected void registerConfig(ParticleConfig config, Identifier id) {
+	protected void registerConfig(ParticleConfig config, ResourceLocation id) {
 		REGISTERED_CONFIGS.computeIfAbsent(id, (key) -> new ArrayList<>()).add(config);
 
 		for (ParticleHolder holder : config.getHolders()) {
 			ParticleSpawner spawner = holder.createSpawner(config::createParticle);
-			Either<CachedItem, Identifier> itemOrTag = holder.getItemOrTag();
+			Either<CachedItem, ResourceLocation> itemOrTag = holder.getItemOrTag();
 			itemOrTag.ifLeft((cachedItem) -> {
 				Item item = cachedItem.getItem();
 				registerItemSpawner(item, spawner);

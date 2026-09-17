@@ -8,14 +8,14 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.ChatComponent;
 import net.minecraft.client.renderer.texture.*;
 import net.minecraft.network.chat.*;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.*;
 import org.jetbrains.annotations.Nullable;
 
 public class ItemParticlesAtlasManager {
 
-	public static final Identifier ATLAS_ID = ItemParticles.id("textures/atlas/iparticles");
-	public static final Identifier FOLDER_ID = ItemParticles.id("iparticles");
+	public static final ResourceLocation ATLAS_ID = ItemParticles.id("textures/atlas/iparticles");
+	public static final ResourceLocation FOLDER_ID = ItemParticles.id("iparticles");
 	private static ItemParticlesAtlasManager INSTANCE;
 	private final TextureAtlas atlas;
 
@@ -33,24 +33,24 @@ public class ItemParticlesAtlasManager {
 
 	public void reload(PreparableReloadListener.PreparationBarrier synchronizer, ResourceManager resourceManager, Executor prepareExecutor, Executor applyExecutor) {
 		//? if >=1.21.9 {
-		SpriteLoader.create(this.atlas)
+		/*SpriteLoader.create(this.atlas)
 				.loadAndStitch(resourceManager, FOLDER_ID, 0, prepareExecutor, Set.of())
 				.thenCompose(synchronizer::wait)
 				.thenAcceptAsync(this.atlas::upload, applyExecutor);
-		//?} else {
-		/*SpriteLoader.create(this.atlas)
+		*///?} else {
+		SpriteLoader.create(this.atlas)
 				.loadAndStitch(resourceManager, FOLDER_ID, 0, prepareExecutor)
 				.thenCompose(SpriteLoader.Preparations::waitForUpload)
 				.thenCompose(synchronizer::wait)
 				.thenAcceptAsync(this.atlas::upload, applyExecutor);
-		*///?}
+		//?}
 	}
 
 	public void close() {
 		this.atlas.close();
 	}
 
-	public TextureAtlasSprite getSprite(@Nullable Identifier id, @Nullable Identifier atlasId) {
+	public TextureAtlasSprite getSprite(@Nullable ResourceLocation id, @Nullable ResourceLocation atlasId) {
 		try {
 			if (id == null) {
 				return this.getMissingSprite();

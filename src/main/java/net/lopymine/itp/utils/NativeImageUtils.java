@@ -13,7 +13,7 @@ import net.lopymine.itp.utils.iac.RenderedItemImage.Pixel;
 import net.lopymine.mossylib.utils.ArgbUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.*;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.world.item.Item;
 
@@ -206,7 +206,7 @@ public class NativeImageUtils {
 		return (rb << 16) | (gb << 8) | bb;
 	}
 
-	public static NativeImage loadFromResource(Identifier id) {
+	public static NativeImage loadFromResource(ResourceLocation id) {
 		Resource resource = Minecraft.getInstance().getResourceManager().getResource(id).orElse(null);
 		if (resource == null) {
 			AbstractTexture texture = Minecraft.getInstance().getTextureManager().byPath.get(id);

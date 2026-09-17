@@ -6,7 +6,7 @@ import java.util.Map.Entry;
 import net.lopymine.itp.family.atlas.AtlasSprite;
 import net.lopymine.itp.family.cache.FamilyParticlesAtlasCacheManager;
 import net.lopymine.itp.utils.MissingSpriteUtils;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 
 public class FamilyParticlesAtlasSpriteManager {
 
@@ -19,11 +19,11 @@ public class FamilyParticlesAtlasSpriteManager {
 	public static Map<String, Set<AtlasSprite>> createSpritesFromGeneratedTextures() {
 		Map<String, Set<AtlasSprite>> map = new HashMap<>();
 
-		for (Entry<String, Map<Identifier, Map<Identifier, NativeImage>>> e : FamilyParticlesAtlasCacheManager.getNamespaceTextures().entrySet()) {
+		for (Entry<String, Map<ResourceLocation, Map<ResourceLocation, NativeImage>>> e : FamilyParticlesAtlasCacheManager.getNamespaceTextures().entrySet()) {
 			String atlasId = e.getKey();
 			Set<AtlasSprite> set = new HashSet<>();
-			for (Entry<Identifier, Map<Identifier, NativeImage>> ee : e.getValue().entrySet()) {
-				for (Entry<Identifier, NativeImage> entry : ee.getValue().entrySet()) {
+			for (Entry<ResourceLocation, Map<ResourceLocation, NativeImage>> ee : e.getValue().entrySet()) {
+				for (Entry<ResourceLocation, NativeImage> entry : ee.getValue().entrySet()) {
 					AtlasSprite sprite = AtlasSprite.of(unwrapIdForAtlasSprite(entry.getKey()), entry.getValue());
 					set.add(sprite);
 				}
@@ -35,7 +35,7 @@ public class FamilyParticlesAtlasSpriteManager {
 		return map;
 	}
 
-	public static Identifier unwrapIdForAtlasSprite(Identifier id) {
+	public static ResourceLocation unwrapIdForAtlasSprite(ResourceLocation id) {
 		if (id.getPath().endsWith(".png")) {
 			id = id.withPath((path) -> path.substring(0, path.length() - 4));
 			if (id.getPath().startsWith("textures/")) {

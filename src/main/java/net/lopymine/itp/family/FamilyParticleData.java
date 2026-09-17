@@ -14,7 +14,7 @@ import net.lopymine.itp.element.spawner.*;
 import net.lopymine.itp.element.texture.ITexture;
 import net.lopymine.itp.family.generation.TextureGenerationManager;
 import net.lopymine.itp.utils.iac.RenderedItemImage;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.Item;
 import org.jetbrains.annotations.*;
@@ -27,11 +27,11 @@ import static net.lopymine.mossylib.utils.CodecUtils.parseNewInstanceHacky;
 @AllArgsConstructor
 public class FamilyParticleData {
 
-	public static final Identifier NO_PARTICLE_ID = ItemParticles.id("");
+	public static final ResourceLocation NO_PARTICLE_ID = ItemParticles.id("");
 
 	public static final Codec<FamilyParticleData> ADVANCED_CODEC = create((instance) -> instance.group(
-			option("id", NO_PARTICLE_ID, Identifier.CODEC, FamilyParticleData::getId),
-			option("textures", new ArrayList<>(), Identifier.CODEC, FamilyParticleData::getTextures),
+			option("id", NO_PARTICLE_ID, ResourceLocation.CODEC, FamilyParticleData::getId),
+			option("textures", new ArrayList<>(), ResourceLocation.CODEC, FamilyParticleData::getTextures),
 			option("texture_generation_mode", TextureGenerationMode.getNewInstance(), TextureGenerationMode.CODEC, FamilyParticleData::getTextureGenerationMode),
 			option("texture_extract_mode", TextureExtractMode.ITEM, TextureExtractMode.CODEC, FamilyParticleData::getTextureExtractMode),
 			option("nbt_conditions_match", NbtNodeMatch.ANY, NbtNodeMatch.CODEC, FamilyParticleData::getMatch),
@@ -42,9 +42,9 @@ public class FamilyParticleData {
 			option("color", new StandardColorProvider(), ParticleHolder.STANDARD_AND_ADVANCED_COLOR_TYPE_CODEC, FamilyParticleData::getColorProvider),
 			option("speed_coefficient", 1.0D, Codec.DOUBLE, FamilyParticleData::getSpeedCoefficient)
 	).apply(instance, FamilyParticleData::new));
-	private Identifier id;
+	private ResourceLocation id;
 
-	public static final Codec<FamilyParticleData> CODEC = Codec.either(Identifier.CODEC, ADVANCED_CODEC).xmap((either) -> {
+	public static final Codec<FamilyParticleData> CODEC = Codec.either(ResourceLocation.CODEC, ADVANCED_CODEC).xmap((either) -> {
 		var e = either.mapLeft((id) -> {
 			FamilyParticleData created = FamilyParticleData.getNewInstance().get();
 			created.setId(id);
@@ -52,7 +52,7 @@ public class FamilyParticleData {
 		});
 		return e.right().orElseGet(() -> e.left().orElseThrow());
 	}, Either::right);
-	private ArrayList<Identifier> textures;
+	private ArrayList<ResourceLocation> textures;
 	private TextureGenerationMode textureGenerationMode;
 	private TextureExtractMode textureExtractMode;
 	private NbtNodeMatch match;
@@ -72,7 +72,7 @@ public class FamilyParticleData {
 	}
 
 	@NotNull
-	public GeneratedTextures generateFamilyTextures(RenderedItemImage renderedItemImage, Identifier itemId, Item item) {
+	public GeneratedTextures generateFamilyTextures(RenderedItemImage renderedItemImage, ResourceLocation itemId, Item item) {
 		return TextureGenerationManager.generateWithReplace(renderedItemImage, itemId, item, this.textures, this.textureGenerationMode);
 	}
 

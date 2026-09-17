@@ -6,20 +6,20 @@ public class NativeImageExtension {
 
 	public static void setPixelArgb(NativeImage image, int x, int y, int argb) {
 		//? if >=1.21.4 {
-		image.setPixel(x, y, argb);
-		//?} else {
-		/*int actuallyAbgr = swapRedBlueChannels(argb);
+		/*image.setPixel(x, y, argb);
+		*///?} else {
+		int actuallyAbgr = swapRedBlueChannels(argb);
 		image.setPixelRGBA(x, y, actuallyAbgr);
-		*///?}
+		//?}
 	}
 
 	public static int getPixelArgb(NativeImage image, int x, int y) {
 		//? if >=1.21.4 {
-		return image.getPixel(x, y);
-		//?} else {
-		/*int actuallyAbgr = image.getPixelRGBA(x, y);
+		/*return image.getPixel(x, y);
+		*///?} else {
+		int actuallyAbgr = image.getPixelRGBA(x, y);
 		return swapRedBlueChannels(actuallyAbgr);
-		*///?}
+		//?}
 	}
 
 	public static int swapRedBlueChannels(int color) {

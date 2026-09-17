@@ -98,7 +98,7 @@ public class NbtSpawnPredicate implements ISpawnPredicate {
 		if (checkValues.isEmpty() && nodes.isEmpty()) {
 			boolean rightType = switch (node.getType()) {
 				case OBJECT -> element instanceof CompoundTag;
-				case LIST -> element instanceof CollectionTag /*? if <=1.21.4 {*//*<?>*//*?}*/;
+				case LIST -> element instanceof CollectionTag /*? if <=1.21.4 {*/<?>/*?}*/;
 				case STRING -> element instanceof StringTag;
 				case INT -> element instanceof NumericTag;
 			};
@@ -118,17 +118,17 @@ public class NbtSpawnPredicate implements ISpawnPredicate {
 					String value = null;
 					if (element instanceof StringTag) {
 						//? if <=1.21.4 {
-						/*value = element.getAsString();
-						 *///?} else {
-						value = element.asString().orElse(null);
-						//?}
+						value = element.getAsString();
+						 //?} else {
+						/*value = element.asString().orElse(null);
+						*///?}
 					}
 					if (element instanceof NumericTag number) {
 						//? if <=1.21.4 {
-						/*value = String.valueOf(number.getAsInt());
-						 *///?} else {
-						value = number.asInt().map(Object::toString).orElse(null);
-						//?}
+						value = String.valueOf(number.getAsInt());
+						 //?} else {
+						/*value = number.asInt().map(Object::toString).orElse(null);
+						*///?}
 					}
 					if (value == null) {
 						this.debugLog(debugNbtPath, DebugLogReason.NO_VALUE, node.getName());
@@ -145,7 +145,7 @@ public class NbtSpawnPredicate implements ISpawnPredicate {
 				case OBJECT, LIST -> {
 					if (node.getType() == NbtNodeType.LIST) {
 						if (checkValues.size() == 1) {
-							if (element instanceof CollectionTag /*? if <=1.21.4 {*//*<?>*//*?}*/ list) {
+							if (element instanceof CollectionTag /*? if <=1.21.4 {*/<?>/*?}*/ list) {
 								List<String> values = List.of("EMPTY_LIST", "NOT_EMPTY_LIST");
 
 								boolean empty = checkValues.get(0).equals(values.get(0));
@@ -186,10 +186,10 @@ public class NbtSpawnPredicate implements ISpawnPredicate {
 						Tag nextElement = nbt.get(nextNode.getName());
 						if (nextElement == null) {
 							//? if >=1.21.5 {
-							Set<String> set = nbt.keySet();
-							//?} else {
-							/*Set<String> set = nbt.getAllKeys();
-							 *///?}
+							/*Set<String> set = nbt.keySet();
+							*///?} else {
+							Set<String> set = nbt.getAllKeys();
+							 //?}
 							this.debugLog(debugNbtPath, DebugLogReason.NODE_NOT_FOUND, nextNode.getName(), set);
 							return ReadResult.FAILED;
 						}
@@ -199,7 +199,7 @@ public class NbtSpawnPredicate implements ISpawnPredicate {
 					return ReadResult.FAILED;
 				}
 				case LIST -> {
-					if (element instanceof CollectionTag/*? if <=1.21.4 {*//*<?>*//*?}*/ list) {
+					if (element instanceof CollectionTag/*? if <=1.21.4 {*/<?>/*?}*/ list) {
 						for (Tag nbtElement : list) {
 							if (this.readElementByType(nbtElement, nextNode, debugNbtPath) == ReadResult.SUCCESS) {
 								return ReadResult.SUCCESS;

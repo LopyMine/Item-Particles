@@ -24,9 +24,17 @@ mossyDependencies {
 
 repositories {
 	mavenLocal()
+	mavenCentral()
 	maven {
 		name "Mossy Projects"
 		url "https://maven.lopymine.net/releases"
+	}
+}
+
+dependencies {
+	// minecraft ships these annotations itself only since 1.21.4
+	if (stonecutter.compare(stonecutter.current.version, "1.21.4") < 0) {
+		compileOnly "org.jspecify:jspecify:1.0.0"
 	}
 }
 

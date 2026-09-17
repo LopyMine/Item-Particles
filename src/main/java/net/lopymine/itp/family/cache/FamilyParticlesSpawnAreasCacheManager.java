@@ -6,8 +6,8 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import net.lopymine.itp.client.ItemParticlesClient;
 import net.lopymine.itp.element.spawner.AdvancedSpawnPos;
-import net.minecraft.resources.Identifier;
-import net.minecraft.util.Util;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.Util;
 import org.jetbrains.annotations.Nullable;
 
 public class FamilyParticlesSpawnAreasCacheManager {
@@ -27,7 +27,7 @@ public class FamilyParticlesSpawnAreasCacheManager {
 	}
 
 	@Nullable
-	public static List<AdvancedSpawnPos> load(Identifier itemId) {
+	public static List<AdvancedSpawnPos> load(ResourceLocation itemId) {
 		Map<String, List<AdvancedSpawnPos>> map = getOrLoadNamespacePixels(itemId.getNamespace());
 		if (map == null) {
 			return null;
@@ -101,7 +101,7 @@ public class FamilyParticlesSpawnAreasCacheManager {
 					int x = inputStream.readInt();
 					int y = inputStream.readInt();
 
-					Identifier texture = Identifier.tryParse(rawTexture);
+					ResourceLocation texture = ResourceLocation.tryParse(rawTexture);
 					if (texture == null) {
 						ItemParticlesClient.LOGGER.error(
 								"Corrupted spawn areas cache, file {}, unable to parse texture id \"{}\", dropping cache",
@@ -121,7 +121,7 @@ public class FamilyParticlesSpawnAreasCacheManager {
 		return namespacePixels;
 	}
 
-	public static void add(Identifier itemId, List<AdvancedSpawnPos> pixels) {
+	public static void add(ResourceLocation itemId, List<AdvancedSpawnPos> pixels) {
 		String namespace = itemId.getNamespace();
 
 		synchronized (lock(namespace)) {
@@ -196,7 +196,7 @@ public class FamilyParticlesSpawnAreasCacheManager {
 		out.writeInt(pixels.size());
 
 		for (AdvancedSpawnPos pixel : pixels) {
-			Identifier string = pixel.texture();
+			ResourceLocation string = pixel.texture();
 			out.writeUTF(string == null ? "none" : string.toString());
 			out.writeInt(pixel.x());
 			out.writeInt(pixel.y());

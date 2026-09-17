@@ -14,7 +14,7 @@ import net.lopymine.itp.element.predicate.ISpawnPredicate;
 import net.lopymine.itp.element.predicate.nbt.*;
 import net.lopymine.itp.element.spawner.*;
 import net.lopymine.itp.manager.ItemParticleManager.ItemParticleRequest;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import org.jspecify.annotations.NonNull;
 import static net.lopymine.mossylib.utils.CodecUtils.option;
@@ -76,7 +76,7 @@ public class ParticleHolder {
 					}
 
 					@Override
-					public @NonNull Set<Entry<Identifier, AdvancedSpawnAreaId>> entrySet() {
+					public @NonNull Set<Entry<ResourceLocation, AdvancedSpawnAreaId>> entrySet() {
 						return Set.of();
 					}
 				});
@@ -87,12 +87,12 @@ public class ParticleHolder {
 		return Either.right("incompatible format");
 	});
 
-	public static final Codec<Identifier> TAG_CODEC = Codec.STRING.comapFlatMap((s) -> {
+	public static final Codec<ResourceLocation> TAG_CODEC = Codec.STRING.comapFlatMap((s) -> {
 		if (s.startsWith("#")) {
-			return Identifier.read(s.substring(1));
+			return ResourceLocation.read(s.substring(1));
 		}
 		return DataResult.error(() -> "Failed to resolve and item, and tag from string \"%s\"".formatted(s));
-	}, Identifier::toString);
+	}, ResourceLocation::toString);
 
 	public static final Codec<ParticleHolder> CODEC = RecordCodecBuilder.create(instance -> instance.group(
 			option("name", (Supplier<String>) () -> "UnknownParticle@" + RandomSource.create().nextIntBetweenInclusive(0, 100000), Codec.STRING, ParticleHolder::getName),
@@ -107,7 +107,7 @@ public class ParticleHolder {
 	).apply(instance, ParticleHolder::new));
 
 	private String name;
-	private Either<CachedItem, Identifier> itemOrTag;
+	private Either<CachedItem, ResourceLocation> itemOrTag;
 	private NbtNodeMatch match;
 	private HashSet<NbtNode> nbtCondition;
 	private IParticleSpawnArea spawnArea;

@@ -11,7 +11,7 @@ import net.lopymine.itp.element.size.*;
 import net.lopymine.itp.element.spawner.SpawnContext;
 import net.lopymine.itp.element.texture.*;
 import net.lopymine.itp.manager.ItemParticleManager.ItemParticleRequest;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import static net.lopymine.mossylib.utils.CodecUtils.option;
 
 @Getter
@@ -24,7 +24,7 @@ public class ParticleConfig {
 				return either.right().orElseGet(() -> either.left().map(DynamicSizesWithInterpolation::fromStatic).orElse(null));
 			}, Either::right);
 
-	public static final Codec<ITexture> TEXTURE_OR_ITEM_CODEC = Identifier.CODEC.xmap((id) -> {
+	public static final Codec<ITexture> TEXTURE_OR_ITEM_CODEC = ResourceLocation.CODEC.xmap((id) -> {
 		if (id.getPath().endsWith(".png")) {
 			String path = id.getPath();
 			String s = path.substring(0, path.length() - 4);

@@ -8,7 +8,7 @@ import java.util.Locale;
 import java.util.concurrent.atomic.AtomicInteger;
 import net.lopymine.mossylib.logger.MossyLogger;
 import net.minecraft.client.Minecraft;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 
 public abstract class AbstractConfigsManager<C> {
@@ -23,7 +23,7 @@ public abstract class AbstractConfigsManager<C> {
 
 	protected abstract MossyLogger getLogger();
 
-	protected abstract void registerConfig(C config, Identifier id);
+	protected abstract void registerConfig(C config, ResourceLocation id);
 
 	public void reload() {
 		this.getLogger().info("Started registration {} from resources...", this.getConfigName().toUpperCase(Locale.ROOT));

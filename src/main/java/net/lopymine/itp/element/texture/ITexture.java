@@ -1,13 +1,13 @@
 package net.lopymine.itp.element.texture;
 
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 
 public interface ITexture {
 
 	void clear();
 
-	Identifier getId();
+	ResourceLocation getId();
 
 	TextureAtlasSprite getAtlasSprite();
 

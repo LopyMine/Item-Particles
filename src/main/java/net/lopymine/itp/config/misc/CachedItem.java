@@ -6,7 +6,7 @@ import net.lopymine.itp.client.ItemParticlesClient;
 import net.lopymine.itp.config.ItemParticlesConfig;
 import net.lopymine.mossylib.loader.MossyLoader;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 import org.jetbrains.annotations.*;
 
@@ -15,13 +15,13 @@ import org.jetbrains.annotations.*;
 @AllArgsConstructor
 public class CachedItem {
 
-	public static final Codec<CachedItem> CODEC = Identifier.CODEC.xmap(CachedItem::new, CachedItem::getId);
+	public static final Codec<CachedItem> CODEC = ResourceLocation.CODEC.xmap(CachedItem::new, CachedItem::getId);
 
-	private Identifier id;
+	private ResourceLocation id;
 	@Nullable
 	private Item item;
 
-	public CachedItem(Identifier id) {
+	public CachedItem(ResourceLocation id) {
 		this.id = id;
 	}
 
@@ -37,10 +37,10 @@ public class CachedItem {
 	public @NotNull Item getItem() {
 		if (this.item == null) {
 			//? if >=1.21.4 {
-			this.item = BuiltInRegistries.ITEM.getValue(this.id);
-			//?} else {
-			/*this.item = BuiltInRegistries.ITEM.get(this.id);
-			 *///?}
+			/*this.item = BuiltInRegistries.ITEM.getValue(this.id);
+			*///?} else {
+			this.item = BuiltInRegistries.ITEM.get(this.id);
+			 //?}
 			if (this.item == Items.AIR && !this.id.toString().equals("minecraft:air")) {
 				if (ItemParticlesConfig.getInstance().getMainConfig().isDebugModeEnabled() || MossyLoader.isDevelopmentEnvironment()) {
 					ItemParticlesClient.LOGGER.error("Failed to find item with id \"{}\"", id);

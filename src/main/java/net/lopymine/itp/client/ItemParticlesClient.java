@@ -1,58 +1,45 @@
 package net.lopymine.itp.client;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-//import net.fabricmc.fabric.api.client.rendering.v1.level.LevelRenderEvents;
 import net.lopymine.itp.ItemParticles;
 import net.lopymine.itp.config.ItemParticlesConfig;
-import net.lopymine.itp.manager.ItemParticleManager;
-import net.lopymine.itp.texel.ModelTexelScanner;
 import net.lopymine.mossylib.loader.MossyLoader;
 import net.lopymine.mossylib.logger.MossyLogger;
-import net.lopymine.mossylib.utils.ArgbUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.ChatComponent;
-import net.minecraft.client.renderer.item.ItemStackRenderState;
-import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
-import net.minecraft.gizmos.Gizmos;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.*;
-//? if >=26.1 {
-/*import net.minecraft.util.LightCoordsUtil;
-*///?} else {
-import net.minecraft.client.renderer.LightTexture;
-//?}
-import net.minecraft.world.phys.Vec3;
-import org.joml.Vector3fc;
+import org.jspecify.annotations.Nullable;
+
 
 public class ItemParticlesClient {
 
-	private static final Vec3 TEST_ORIGIN = new Vec3(0.0D, -58.0D, 0.0D);
-	private static final double TEST_SPACING = 2.0D;
+	public static boolean VALIDATION_ENABLED = false;
+	@Nullable
+	public static String CURRENT_STACK = null;
 	public static MossyLogger LOGGER = ItemParticles.LOGGER.extend("Client");
 
 	public static void onInitializeClient() {
 		LOGGER.info("{} Client Initialized", ItemParticles.MOD_NAME);
 
-		Item[] items = {
-				//? if >=26.2 {
-				/*Items.BED.red(),
-				*///?} else {
-				Items.RED_BED,
-				//?}
-				Items.DIAMOND_SWORD,
-				Items.DIAMOND_SPEAR,
-				Items.DECORATED_POT,
-				Items.SHIELD
-		};
-
-		ItemStackRenderState[] states = new ItemStackRenderState[items.length];
-
-		for (int i = 0; i < states.length; i++) {
-			states[i] = new ItemStackRenderState();
-		}
-
+		//Item[] items = {
+		//	//? if >=26.2 {
+		//	/^Items.BED.red(),
+		//	^///?} else {
+		//	Items.RED_BED,
+		//	//?}
+		//		Items.DIAMOND_SWORD,
+		//		Items.DIAMOND_SPEAR,
+		//		Items.DECORATED_POT,
+		//		Items.SHIELD
+		//};
+//
+		//ItemStackRenderState[] states = new ItemStackRenderState[items.length];
+//
+		//for (int i = 0; i < states.length; i++) {
+		//	states[i] = new ItemStackRenderState();
+		//}
 		//LevelRenderEvents.COLLECT_SUBMITS.register(context -> {
 		//	Minecraft minecraft = Minecraft.getInstance();
 		//	Vec3 camera = minecraft.gameRenderer.mainCamera().position();

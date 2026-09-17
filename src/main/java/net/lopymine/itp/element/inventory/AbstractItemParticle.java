@@ -12,17 +12,21 @@ import net.lopymine.itp.element.size.StaticSize;
 import net.lopymine.itp.element.texture.*;
 import net.lopymine.itp.element.texture.provider.ITextureProvider;
 import net.lopymine.itp.manager.FirstPersonParticleRenderer;
-import net.lopymine.itp.utils.ArgbUtils2;
+import net.lopymine.itp.utils.*;
 import net.lopymine.mossylib.utils.ArgbUtils;
 import net.minecraft.client.*;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.particle.SingleQuadParticle;
+//? if >=1.21.9 {
+/*import net.minecraft.client.particle.SingleQuadParticle;
+*///?} else {
+import net.minecraft.client.particle.TextureSheetParticle;
+//?}
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 //? if >=26.1 {
 /*import net.minecraft.client.renderer.state.level.QuadParticleRenderState;
-*///?} else {
-import net.minecraft.client.renderer.state.QuadParticleRenderState;
-//?}
+*///?} elif >=1.21.9 {
+/*import net.minecraft.client.renderer.state.QuadParticleRenderState;
+*///?}
 import net.minecraft.util.*;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.*;
@@ -30,7 +34,11 @@ import org.joml.*;
 
 @Setter
 @Getter
-public abstract class AbstractItemParticle<E extends AbstractItemParticle<E>> extends SingleQuadParticle implements IElement, IRotatableElement, IRepaintable, IRandomizable, IResizableElement, IBillboardElement {
+//? if >=1.21.9 {
+/*public abstract class AbstractItemParticle<E extends AbstractItemParticle<E>> extends SingleQuadParticle implements IElement, IRotatableElement, IRepaintable, IRandomizable, IResizableElement, IBillboardElement {
+*///?} else {
+public abstract class AbstractItemParticle<E extends AbstractItemParticle<E>> extends TextureSheetParticle implements IElement, IRotatableElement, IRepaintable, IRandomizable, IResizableElement, IBillboardElement {
+//?}
 
 	public static float SIZE_SCALE = 1.0F / 64.0F;
 	public static float SPEED_SCALE = 1.0F / 24.0F;
@@ -67,7 +75,13 @@ public abstract class AbstractItemParticle<E extends AbstractItemParticle<E>> ex
 	private double textureAngle;
 
 	protected AbstractItemParticle(ClientLevel level, double x, double y, double z, TextureAtlasSprite sprite) {
-		super(level, x, y, z, sprite);
+		//? if >=1.21.9 {
+		/*super(level, x, y, z, sprite);
+		*///?} else {
+		// before 1.21.9 the sprite lives on TextureSheetParticle instead of the quad particle itself
+		super(level, x, y, z);
+		this.setSprite(sprite);
+		//?}
 		this.hasPhysics = true;
 		this.gravity    = 0.0F;
 		this.friction   = 1.0F;
@@ -148,7 +162,8 @@ public abstract class AbstractItemParticle<E extends AbstractItemParticle<E>> ex
 
 	protected void processCustomControllers() { }
 
-	@Override
+	//? if >=1.21.9 {
+	/*@Override
 	@SuppressWarnings("NullableProblems")
 	public void extract(QuadParticleRenderState state, Camera camera, float tickProgress) {
 		if (this.isInFrontOfHand(camera, tickProgress)) {
@@ -166,14 +181,19 @@ public abstract class AbstractItemParticle<E extends AbstractItemParticle<E>> ex
 		}
 		this.extractRotatedQuad(state, camera, rotation, tickProgress);
 	}
+	*///?}
 
 	public Quaternionf getBillboardRotation(Camera camera, float tickProgress, Quaternionf dest) {
 		if (!this.spawnedInHand) {
 			return dest.set(camera.rotation());
 		}
 
-		Vec3 cameraPos = camera.position();
-		Vector3fc forward = camera.forwardVector();
+		Vec3 cameraPos = GameRendererUtils.getPosition(camera);
+		//? if >=1.21.9 {
+		/*Vector3fc forward = camera.forwardVector();
+		*///?} else {
+		Vector3fc forward = camera.getLookVector();
+		//?}
 
 		Vector3f normal = new Vector3f(
 				(float) (Mth.lerp(tickProgress, this.xo, this.x) - cameraPos.x() - forward.x() * FIRST_PERSON_FACING_OFFSET),
@@ -198,7 +218,7 @@ public abstract class AbstractItemParticle<E extends AbstractItemParticle<E>> ex
 		}
 
 		double depth = FirstPersonParticleRenderer.getViewDepth(
-				camera.position(),
+				GameRendererUtils.getPosition(camera),
 				Mth.lerp(tickProgress, this.xo, this.x),
 				Mth.lerp(tickProgress, this.yo, this.y),
 				Mth.lerp(tickProgress, this.zo, this.z)
@@ -207,14 +227,15 @@ public abstract class AbstractItemParticle<E extends AbstractItemParticle<E>> ex
 		return depth < this.handDepth - HAND_DEPTH_BIAS;
 	}
 
-	public void extractInHandSpace(QuadParticleRenderState particleTypeRenderState, Camera camera, float tickProgress, Matrix4f levelToHand, float sizeScale) {
+	//? if >=1.21.9 {
+	/*public void extractInHandSpace(QuadParticleRenderState particleTypeRenderState, Camera camera, float tickProgress, Matrix4f levelToHand, float sizeScale) {
 		Quaternionf rotation = this.getBillboardRotation(camera, tickProgress, new Quaternionf());
 
 		if (this.roll != 0.0F) {
 			rotation.rotateZ(Mth.lerp(tickProgress, this.oRoll, this.roll));
 		}
 
-		Vec3 cameraPos = camera.position();
+		Vec3 cameraPos = GameRendererUtils.getPosition(camera);
 		Vector3f position = levelToHand.transformPosition(new Vector3f(
 				(float) (Mth.lerp(tickProgress, this.xo, this.x) - cameraPos.x()),
 				(float) (Mth.lerp(tickProgress, this.yo, this.y) - cameraPos.y()),
@@ -237,12 +258,13 @@ public abstract class AbstractItemParticle<E extends AbstractItemParticle<E>> ex
 				this.getV1(),
 				ARGB.colorFromFloat(this.alpha, this.rCol, this.gCol, this.bCol),
 				//? if >=26.1 {
-				/*this.getLightCoords(tickProgress)
-				*///?} else {
+				/^this.getLightCoords(tickProgress)
+				^///?} else {
 				this.getLightColor(tickProgress)
 				//?}
 		);
 	}
+	*///?}
 
 	@Override
 	@Nullable

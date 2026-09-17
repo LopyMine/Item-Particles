@@ -5,7 +5,7 @@ import net.lopymine.itp.family.FamilyParticleData.TextureExtractMode;
 import net.lopymine.itp.family.generation.batch.*;
 import net.lopymine.itp.utils.iac.RenderedItemImage;
 import net.minecraft.client.Minecraft;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 import org.jetbrains.annotations.Nullable;
 
@@ -26,7 +26,7 @@ public class ItemRenderingManager {
 	}
 
 	@Nullable
-	public static RenderedItemImage renderItemImage(Item item, Identifier itemId, TextureExtractMode textureExtractMode) {
+	public static RenderedItemImage renderItemImage(Item item, ResourceLocation itemId, TextureExtractMode textureExtractMode) {
 		if (Minecraft.getInstance().level == null) {
 			return null;
 		}
@@ -38,7 +38,7 @@ public class ItemRenderingManager {
 	}
 
 	@Nullable
-	public static RenderedItemImage renderItemImageIfSpecial(Identifier itemId, Item item, TextureExtractMode textureExtractMode) {
+	public static RenderedItemImage renderItemImageIfSpecial(ResourceLocation itemId, Item item, TextureExtractMode textureExtractMode) {
 		if (Minecraft.getInstance().level == null) {
 			return null;
 		}

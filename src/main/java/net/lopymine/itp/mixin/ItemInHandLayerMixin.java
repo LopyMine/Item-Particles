@@ -1,6 +1,8 @@
 package net.lopymine.itp.mixin;
 
-import com.llamalad7.mixinextras.sugar.Local;
+//? if >=1.21.4 {
+
+/*import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.lopymine.itp.manager.ItemParticleManager;
 import net.minecraft.client.renderer.entity.layers.ItemInHandLayer;
@@ -20,3 +22,4 @@ public class ItemInHandLayerMixin {
 		ItemParticleManager.getInstance().acceptArmedItemParticleRequests(state, poseStack, arm, entityState);
 	}
 }
+*///?}

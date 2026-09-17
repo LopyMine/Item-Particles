@@ -1,6 +1,8 @@
 package net.lopymine.itp.mixin;
 
-import com.mojang.blaze3d.vertex.PoseStack;
+//? if >=1.21.9 {
+
+/*import com.mojang.blaze3d.vertex.PoseStack;
 import net.lopymine.itp.manager.ItemParticleManager;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.ShelfRenderer;
@@ -27,3 +29,4 @@ public class ShelfRendererMixin {
 		ItemParticleManager.getInstance().acceptShelfItemParticleRequests(itemStackRenderState, poseStack, state.blockPos, slot);
 	}
 }
+*///?}

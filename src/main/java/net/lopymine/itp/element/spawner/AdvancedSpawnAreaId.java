@@ -3,7 +3,7 @@ package net.lopymine.itp.element.spawner;
 import com.mojang.serialization.DataResult;
 import lombok.*;
 import net.lopymine.itp.ItemParticles;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import org.jspecify.annotations.Nullable;
 
 @Getter
@@ -23,20 +23,20 @@ public class AdvancedSpawnAreaId {
 	// id id
 
 	@Nullable
-	private final Identifier baseTexture;
+	private final ResourceLocation baseTexture;
 	@Nullable
-	private final Identifier maskTexture;
+	private final ResourceLocation maskTexture;
 
 	private boolean initialized;
 	@Nullable
 	private AdvancedSpawnArea area;
 
-	public AdvancedSpawnAreaId(@Nullable Identifier baseTexture, @Nullable Identifier maskTexture) {
+	public AdvancedSpawnAreaId(@Nullable ResourceLocation baseTexture, @Nullable ResourceLocation maskTexture) {
 		this.baseTexture = AdvancedSpawnAreaId.getValidatedBaseTexture(baseTexture);
 		this.maskTexture = maskTexture;
 	}
 
-	public static DataResult<AdvancedSpawnAreaId> read(@Nullable Identifier texture, String maskPath) {
+	public static DataResult<AdvancedSpawnAreaId> read(@Nullable ResourceLocation texture, String maskPath) {
 		if (maskPath.isEmpty()) {
 			return DataResult.error(() -> "No mask specified for %s".formatted(texture));
 		} else if (maskPath.startsWith("#")) {
@@ -52,7 +52,7 @@ public class AdvancedSpawnAreaId {
 
 		//"minecraft:block/grass_block_side": "othermod:textures/path_to_spawn_area.png",
 		if (maskPath.contains(":")) {
-			return Identifier.read(path).map((mask) -> new AdvancedSpawnAreaId(texture, mask));
+			return ResourceLocation.read(path).map((mask) -> new AdvancedSpawnAreaId(texture, mask));
 		}
 
 		// "minecraft:item/trident": "2d/trident_drip.png",
@@ -60,7 +60,7 @@ public class AdvancedSpawnAreaId {
 	}
 
 	@Nullable
-	public static Identifier getValidatedBaseTexture(@Nullable Identifier texture) {
+	public static ResourceLocation getValidatedBaseTexture(@Nullable ResourceLocation texture) {
 		if (texture == null) {
 			return null;
 		}

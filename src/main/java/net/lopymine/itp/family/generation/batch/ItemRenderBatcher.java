@@ -12,7 +12,9 @@ import net.lopymine.itp.texel.ModelTexelScanner;
 import net.lopymine.itp.utils.iac.*;
 import net.lopymine.itp.utils.iac.RenderedItemImage.Pixel;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.item.TrackingItemStackRenderState;
+//? if >=1.21.4 {
+/*import net.minecraft.client.renderer.item.TrackingItemStackRenderState;
+*///?}
 import net.minecraft.world.item.*;
 import org.jetbrains.annotations.Nullable;
 

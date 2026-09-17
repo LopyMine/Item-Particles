@@ -3,6 +3,7 @@ package net.lopymine.itp.element.spawner;
 import java.util.*;
 import java.util.function.*;
 import lombok.*;
+import net.lopymine.itp.client.ItemParticlesClient;
 import net.lopymine.itp.config.ItemParticlesConfig;
 import net.lopymine.itp.config.range.IntegerRange;
 import net.lopymine.itp.element.base.TickElement;
@@ -10,7 +11,7 @@ import net.lopymine.itp.element.color.IColorProvider;
 import net.lopymine.itp.element.controller.color.ColorController;
 import net.lopymine.itp.element.predicate.ISpawnPredicate;
 import net.lopymine.itp.manager.ItemParticleManager.ItemParticleRequest;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
@@ -65,23 +66,23 @@ public class ParticleSpawner extends TickElement implements IParticleSpawner {
 	}
 
 	private List<ItemParticleRequest> createParticles(int spawnCount, SpawnContext context, Consumer<ItemParticleRequest> consumer) {
-		if (!this.spawnCondition.test(context.stack())) {
+		if (!ItemParticlesClient.VALIDATION_ENABLED && !this.spawnCondition.test(context.stack())) {
 			return List.of();
 		}
 
 		SpawnCategory category = context.category();
 		ItemParticlesConfig config = ItemParticlesConfig.getInstance();
 
-		if (!config.getParticleConfig().isSpawnEnabled(category)) {
+		if (!ItemParticlesClient.VALIDATION_ENABLED && !config.getParticleConfig().isSpawnEnabled(category)) {
 			return List.of();
 		}
 
-		if (config.getWhitelistsConfig().getConfig(category).cannotProcess(context.stack().getItem())) {
+		if (!ItemParticlesClient.VALIDATION_ENABLED && config.getWhitelistsConfig().getConfig(category).cannotProcess(context.stack().getItem())) {
 			return List.of();
 		}
 
 		float count = (float) ((((float) spawnCount)) * config.getCoefficientsConfig().getCountCoefficient(category));
-		int countOfParticles = count > 0.0F && count < 1.0F ? 1 : (int) count;
+		int countOfParticles = ItemParticlesClient.VALIDATION_ENABLED ? 1 : (count > 0.0F && count < 1.0F ? 1 : (int) count);
 
 		List<ItemParticleRequest> particles = new ArrayList<>();
 		for (int i = 0; i < countOfParticles; i++) {
@@ -102,7 +103,7 @@ public class ParticleSpawner extends TickElement implements IParticleSpawner {
 	}
 
 	@Nullable
-	private Function<Identifier, @Nullable IParticleSpawnPos> getRandomPos(RandomSource random) {
+	private Function<ResourceLocation, @Nullable IParticleSpawnPos> getRandomPos(RandomSource random) {
 		if (this.spawnArea == AdvancedSpawnAreas.FULL) {
 			return (ignored) -> AdvancedSpawnPos.FULL_POS;
 		}

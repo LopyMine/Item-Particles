@@ -2,11 +2,11 @@ package net.lopymine.itp.element.spawner;
 
 import java.util.*;
 import net.lopymine.itp.manager.ItemParticleManager.ItemParticleRequest;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import org.joml.Vector3fc;
 import org.jspecify.annotations.Nullable;
 
-public record AdvancedSpawnPos(@Nullable Identifier texture, int x, int y) implements IParticleSpawnPos {
+public record AdvancedSpawnPos(@Nullable ResourceLocation texture, int x, int y) implements IParticleSpawnPos {
 
 	public static final IParticleSpawnPos FULL_POS = new IParticleSpawnPos() {
 		@Override

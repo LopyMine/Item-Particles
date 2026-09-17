@@ -4,7 +4,7 @@ import java.util.function.Function;
 import lombok.*;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 
 @Getter
@@ -13,7 +13,7 @@ public class ColoredAtlasTexture extends AtlasTexture {
 
 	private Function<Integer, Integer> color;
 
-	public ColoredAtlasTexture(@Nullable Identifier sprite, @Nullable Identifier atlas, Function<Integer, Integer> color) {
+	public ColoredAtlasTexture(@Nullable ResourceLocation sprite, @Nullable ResourceLocation atlas, Function<Integer, Integer> color) {
 		super(sprite, atlas);
 		this.color = color;
 	}

@@ -6,14 +6,10 @@
 	"mixins": [],
 	"client": [
 		//? if >=1.21.5 {
-		"family.ScreenshotMixin",
-		//?}
+		/*"family.ScreenshotMixin",
+		*///?}
 		//? if 1.21.5 {
 		/*"family.CompositeRenderTypeMixin",
-		*///?}
-
-		//? if <=1.21.4 {
-		/*"family.GameRendererMixin",
 		*///?}
 
 		//? if neoforge {
@@ -29,24 +25,28 @@
 		*///?}
 
 		//? if >=1.21.9 {
-		"ShelfRendererMixin",
-		//?}
+		/*"ShelfRendererMixin",
+		*///?}
 
-		"ItemFrameRendererMixin",
-		"ItemFrameRenderStateMixin",
-		"AtlasLoaderMixin",
-		"MinecraftRenderCallMixin",
+		//? if >=1.21.4 {
+		/*"ItemFrameRenderStateMixin",
 		"ItemInHandLayerMixin",
-		"ItemInHandRendererMixin",
-		"SpriteContentsAccessor",
 		"RenderTypeAccessor",
 		"RenderSetupAccessor",
 		"TextureBindingAccessor",
 		"ArmedEntityRenderStateMixin",
+		"ItemClusterRenderStateMixin",
+		*///?}
+
+		"ItemFrameRendererMixin",
+		"AtlasLoaderMixin",
+		"MinecraftRenderCallMixin",
+		"ItemInHandRendererMixin",
+		"SpriteContentsAccessor",
 		"GameRendererMixin",
 		"ItemEntityRendererMixin",
-		"ItemClusterRenderStateMixin",
-		"ScreenMixin"
+		"ScreenMixin",
+		"ParticleEngineMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

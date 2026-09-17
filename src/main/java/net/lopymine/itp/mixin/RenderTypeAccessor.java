@@ -1,6 +1,8 @@
 package net.lopymine.itp.mixin;
 
-import net.minecraft.client.renderer.rendertype.*;
+//? if >=1.21.4 {
+
+/*import net.minecraft.client.renderer.rendertype.*;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
@@ -11,3 +13,4 @@ public interface RenderTypeAccessor {
 	RenderSetup ItemParticles$getState();
 
 }
+*///?}

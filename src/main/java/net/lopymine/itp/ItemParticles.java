@@ -2,7 +2,7 @@ package net.lopymine.itp;
 
 import net.lopymine.mossylib.logger.MossyLogger;
 import net.minecraft.network.chat.*;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 
 public class ItemParticles {
 
@@ -10,19 +10,19 @@ public class ItemParticles {
 	public static final String MOD_ID = /*$ mod_id*/ "item_particles";
 	public static final MossyLogger LOGGER = new MossyLogger(MOD_NAME);
 
-	public static Identifier id(String path) {
+	public static ResourceLocation id(String path) {
 		//? if >=1.21 {
-		return Identifier.fromNamespaceAndPath(MOD_ID, path);
+		return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
 		//?} else {
-		/*return Identifier.tryBuild(MOD_ID, path);
+		/*return ResourceLocation.tryBuild(MOD_ID, path);
 		 *///?}
 	}
 
-	public static Identifier parseId(String path) {
+	public static ResourceLocation parseId(String path) {
 		//? if >=1.21 {
-		return Identifier.parse(path);
+		return ResourceLocation.parse(path);
 		//?} else {
-		/*return new Identifier(path);
+		/*return new ResourceLocation(path);
 		 *///?}
 	}
 

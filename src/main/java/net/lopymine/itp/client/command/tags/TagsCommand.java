@@ -11,7 +11,7 @@ import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.lopymine.itp.ItemParticles;
 import net.lopymine.mossylib.loader.MossyLoader;
 import net.minecraft.commands.*;
-import net.minecraft.commands.arguments.IdentifierArgument;
+import net.minecraft.commands.arguments.ResourceLocationArgument;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Holder.Reference;
 import net.minecraft.core.HolderSet.Named;
@@ -26,12 +26,16 @@ import static net.lopymine.mossylib.utils.CommandUtils.literal;
 
 //? if >=1.21.11 {
 
-import net.minecraft.util.Util;
+/*import net.minecraft.Util;
 import org.jspecify.annotations.Nullable;
 
-//?} else {
-/*import net.minecraft.util.Util;
-*///?}
+*///?} else {
+import net.minecraft.Util;
+//?}
+//? if <1.21.4 {
+import com.mojang.datafixers.util.Pair;
+import java.util.Map.Entry;
+//?}
 
 public class TagsCommand {
 
@@ -40,12 +44,12 @@ public class TagsCommand {
 	public static LiteralArgumentBuilder<FabricClientCommandSource> get() {
 		return literal("tags")
 				.then(literal("items-for-tag")
-						.then(argument("tag", IdentifierArgument.id())
+						.then(argument("tag", ResourceLocationArgument.id())
 								.suggests((context, builder) ->
 										SharedSuggestionProvider.suggest(getAvailableTags(), builder))
 								.executes(TagsCommand::items)))
 				.then(literal("tags-in-item")
-						.then(argument("item", IdentifierArgument.id())
+						.then(argument("item", ResourceLocationArgument.id())
 								.suggests((context, builder) ->
 										SharedSuggestionProvider.suggest(getAvailableItems(), builder))
 								.executes(TagsCommand::tags)))
@@ -53,10 +57,10 @@ public class TagsCommand {
 	}
 
 	//? if <=1.21.1 {
-	/*@SuppressWarnings("deprecation")
-	*///?}
+	@SuppressWarnings("deprecation")
+	//?}
 	private static int tags(CommandContext<FabricClientCommandSource> context) {
-		Identifier item = context.getArgument("item", Identifier.class);
+		ResourceLocation item = context.getArgument("item", ResourceLocation.class);
 
 		if (!getAvailableItems().contains(item.toString())) {
 			return 0;
@@ -68,37 +72,37 @@ public class TagsCommand {
 		return Command.SINGLE_SUCCESS;
 	}
 
-	public static @Nullable List<String> getTags(Identifier item) {
+	public static @Nullable List<String> getTags(ResourceLocation item) {
 		//? if >=1.21.4 {
-		Optional<Reference<Item>> optional = BuiltInRegistries.ITEM.get(item);
+		/*Optional<Reference<Item>> optional = BuiltInRegistries.ITEM.get(item);
 		if (optional.isEmpty()) {
 			return null;
 		}
 
-		return optional.get().tags().map(TagKey::location).map(Identifier::toString).toList();
-		//?} else {
-		/*Item get = BuiltInRegistries.ITEM.get(item);
-		return get.builtInRegistryHolder().tags().map(TagKey::location).map(Identifier::toString).toList();
-		*///?}
+		return optional.get().tags().map(TagKey::location).map(ResourceLocation::toString).toList();
+		*///?} else {
+		Item get = BuiltInRegistries.ITEM.get(item);
+		return get.builtInRegistryHolder().tags().map(TagKey::location).map(ResourceLocation::toString).toList();
+		//?}
 	}
 
 	private static int items(CommandContext<FabricClientCommandSource> context) {
-		Identifier tag = context.getArgument("tag", Identifier.class);
+		ResourceLocation tag = context.getArgument("tag", ResourceLocation.class);
 
 		if (!getAvailableTags().contains(tag.toString())) {
 			return 0;
 		}
 
 		//? if >=1.21.4 {
-		Optional<Named<Item>> optional = BuiltInRegistries.ITEM.get(TagKey.create(Registries.ITEM, tag));
-		//?} else {
-		/*Optional<Named<Item>> optional = BuiltInRegistries.ITEM.getTag(TagKey.create(Registries.ITEM, tag));
-		*///?}
+		/*Optional<Named<Item>> optional = BuiltInRegistries.ITEM.get(TagKey.create(Registries.ITEM, tag));
+		*///?} else {
+		Optional<Named<Item>> optional = BuiltInRegistries.ITEM.getTag(TagKey.create(Registries.ITEM, tag));
+		//?}
 		if (optional.isEmpty()) {
 			return 0;
 		}
 
-		List<String> list = optional.get().stream().map(Holder::value).map(BuiltInRegistries.ITEM::getKey).map(Identifier::toString).toList();
+		List<String> list = optional.get().stream().map(Holder::value).map(BuiltInRegistries.ITEM::getKey).map(ResourceLocation::toString).toList();
 		writeAndOpen("items-with-tag.txt", list);
 		return Command.SINGLE_SUCCESS;
 	}
@@ -128,18 +132,18 @@ public class TagsCommand {
 
 	private static @NotNull List<String> getAvailableTags() {
 		//? if >=1.21.4 {
-		return BuiltInRegistries.ITEM.listTagIds().map(TagKey::location).map(Identifier::toString).toList();
-		//?} else {
-		/*return BuiltInRegistries.ITEM.getTags().map(Pair::getFirst).map(TagKey::location).map(Identifier::toString).toList();
-		*///?}
+		/*return BuiltInRegistries.ITEM.listTagIds().map(TagKey::location).map(ResourceLocation::toString).toList();
+		*///?} else {
+		return BuiltInRegistries.ITEM.getTags().map(Pair::getFirst).map(TagKey::location).map(ResourceLocation::toString).toList();
+		//?}
 	}
 
 	private static @NotNull List<String> getAvailableItems() {
 		//? if >=1.21.4 {
-		return BuiltInRegistries.ITEM.listElementIds().map(ResourceKey::identifier).map(Identifier::toString).toList();
-		//?} else {
-		/*return BuiltInRegistries.ITEM.entrySet().stream().map(Entry::getKey).map(ResourceKey::identifier).map(Identifier::toString).toList();
-		*///?}
+		/*return BuiltInRegistries.ITEM.listElementIds().map(ResourceKey::location).map(ResourceLocation::toString).toList();
+		*///?} else {
+		return BuiltInRegistries.ITEM.entrySet().stream().map(Entry::getKey).map(ResourceKey::location).map(ResourceLocation::toString).toList();
+		//?}
 	}
 
 }

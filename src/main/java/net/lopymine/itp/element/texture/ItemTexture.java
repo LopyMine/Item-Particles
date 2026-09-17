@@ -4,7 +4,7 @@ import lombok.*;
 import net.lopymine.itp.config.misc.CachedItem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.*;
 
@@ -32,7 +32,7 @@ public class ItemTexture implements ITexture {
 	}
 
 	@Override
-	public Identifier getId() {
+	public ResourceLocation getId() {
 		return this.cachedItem.getId();
 	}
 

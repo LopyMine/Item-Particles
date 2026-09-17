@@ -8,10 +8,10 @@ public class ItemExtension {
 		//? if >=26.1 {
 		/*return item.getName(item.getDefaultInstance()).getString();
 		*///?} elif >=1.21.4 {
-		return item.getName().getString();
-		 //?} else {
-		/*return item.getDescription().getString();
-		 *///?}
+		/*return item.getName().getString();
+		 *///?} else {
+		return item.getDescription().getString();
+		 //?}
 	}
 
 }

@@ -6,7 +6,7 @@ import lombok.*;
 import net.lopymine.itp.family.atlas.stitch.OnSpriteUploaded;
 import net.minecraft.client.renderer.texture.SpriteContents;
 import net.minecraft.client.resources.metadata.animation.*;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.*;
 
 //? if >=1.21.1 {
@@ -22,7 +22,7 @@ import net.minecraft.server.packs.resources.ResourceMetadata;
 public class AtlasSprite {
 
 	@NotNull
-	private Identifier spriteId;
+	private ResourceLocation spriteId;
 	@Nullable
 	private SpriteContents contents;
 
@@ -34,12 +34,12 @@ public class AtlasSprite {
 
 	private volatile boolean uploaded;
 
-	public AtlasSprite(@NotNull Identifier spriteId) {
+	public AtlasSprite(@NotNull ResourceLocation spriteId) {
 		this.spriteId = spriteId;
 	}
 
 	@Nullable
-	public static AtlasSprite of(@Nullable Identifier spriteId) {
+	public static AtlasSprite of(@Nullable ResourceLocation spriteId) {
 		if (spriteId == null) {
 			return null;
 		}
@@ -55,7 +55,7 @@ public class AtlasSprite {
 		return atlasSprite;
 	}
 
-	public static AtlasSprite of(Identifier spriteId, NativeImage image) {
+	public static AtlasSprite of(ResourceLocation spriteId, NativeImage image) {
 		AtlasSprite atlasSprite = new AtlasSprite(spriteId);
 		updateContents(atlasSprite, image);
 		return atlasSprite;
@@ -74,10 +74,10 @@ public class AtlasSprite {
 
 		SpriteContents contents = new SpriteContents(sprite.getSpriteId(), dimensions, image, decode, List.of(), decode2);
 		*///?} elif >=1.21.10 {
-		SpriteContents contents = new SpriteContents(sprite.getSpriteId(), dimensions, image);
-		//?} elif >=1.21.1 {
-		/*SpriteContents contents = new SpriteContents(sprite.getSpriteId(), dimensions, image, ResourceMetadata.EMPTY);
-		*///?} else {
+		/*SpriteContents contents = new SpriteContents(sprite.getSpriteId(), dimensions, image);
+		*///?} elif >=1.21.1 {
+		SpriteContents contents = new SpriteContents(sprite.getSpriteId(), dimensions, image, ResourceMetadata.EMPTY);
+		//?} else {
 		/*SpriteContents contents = new SpriteContents(sprite.getSpriteId(), dimensions, image, AnimationMetadataSection.EMPTY);
 		*///?}
 
