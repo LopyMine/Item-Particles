@@ -19,6 +19,7 @@ import net.minecraft.client.multiplayer.ClientLevel;
 //? if >=1.21.9 {
 /*import net.minecraft.client.particle.SingleQuadParticle;
 *///?} else {
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.particle.TextureSheetParticle;
 //?}
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -174,13 +175,40 @@ public abstract class AbstractItemParticle<E extends AbstractItemParticle<E>> ex
 			return;
 		}
 
+		this.extractRotatedQuad(state, camera, this.getRolledBillboardRotation(camera, tickProgress), tickProgress);
+	}
+	*///?} else {
+	@Override
+	public void render(VertexConsumer consumer, Camera camera, float tickProgress) {
+		if (this.isInFrontOfHand(camera, tickProgress)) {
+			return;
+		}
+
+		if (!this.spawnedInHand) {
+			super.render(consumer, camera, tickProgress);
+			return;
+		}
+
+		this.renderRotatedQuad(consumer, camera, this.getRolledBillboardRotation(camera, tickProgress), tickProgress);
+	}
+	//?}
+
+	private Quaternionf getRolledBillboardRotation(Camera camera, float tickProgress) {
 		Quaternionf rotation = this.getBillboardRotation(camera, tickProgress, new Quaternionf());
 		if (this.roll != 0.0F) {
 			rotation.rotateZ(Mth.lerp(tickProgress, this.oRoll, this.roll));
 		}
-		this.extractRotatedQuad(state, camera, rotation, tickProgress);
+		return rotation;
 	}
-	*///?}
+
+	private Vector3f getPositionInHandSpace(Camera camera, float tickProgress, Matrix4f levelToHand) {
+		Vec3 cameraPos = GameRendererUtils.getPosition(camera);
+		return levelToHand.transformPosition(new Vector3f(
+				(float) (Mth.lerp(tickProgress, this.xo, this.x) - cameraPos.x()),
+				(float) (Mth.lerp(tickProgress, this.yo, this.y) - cameraPos.y()),
+				(float) (Mth.lerp(tickProgress, this.zo, this.z) - cameraPos.z())
+		));
+	}
 
 	public Quaternionf getBillboardRotation(Camera camera, float tickProgress, Quaternionf dest) {
 		if (!this.spawnedInHand) {
@@ -228,18 +256,8 @@ public abstract class AbstractItemParticle<E extends AbstractItemParticle<E>> ex
 
 	//? if >=1.21.9 {
 	/*public void extractInHandSpace(QuadParticleRenderState particleTypeRenderState, Camera camera, float tickProgress, Matrix4f levelToHand, float sizeScale) {
-		Quaternionf rotation = this.getBillboardRotation(camera, tickProgress, new Quaternionf());
-
-		if (this.roll != 0.0F) {
-			rotation.rotateZ(Mth.lerp(tickProgress, this.oRoll, this.roll));
-		}
-
-		Vec3 cameraPos = GameRendererUtils.getPosition(camera);
-		Vector3f position = levelToHand.transformPosition(new Vector3f(
-				(float) (Mth.lerp(tickProgress, this.xo, this.x) - cameraPos.x()),
-				(float) (Mth.lerp(tickProgress, this.yo, this.y) - cameraPos.y()),
-				(float) (Mth.lerp(tickProgress, this.zo, this.z) - cameraPos.z())
-		));
+		Quaternionf rotation = this.getRolledBillboardRotation(camera, tickProgress);
+		Vector3f position = this.getPositionInHandSpace(camera, tickProgress, levelToHand);
 
 		particleTypeRenderState.add(
 				this.getLayer(),
@@ -263,7 +281,25 @@ public abstract class AbstractItemParticle<E extends AbstractItemParticle<E>> ex
 				//?}
 		);
 	}
-	*///?}
+	*///?} else {
+	public void renderInHandSpace(VertexConsumer consumer, Camera camera, float tickProgress, Matrix4f levelToHand, float sizeScale) {
+		Quaternionf rotation = this.getRolledBillboardRotation(camera, tickProgress);
+		Vector3f position = this.getPositionInHandSpace(camera, tickProgress, levelToHand);
+
+		float size = this.getQuadSize(tickProgress) * sizeScale;
+		int light = this.getLightColor(tickProgress);
+
+		this.renderVertexInHandSpace(consumer, rotation, position, 1.0F, -1.0F, size, this.getU1(), this.getV1(), light);
+		this.renderVertexInHandSpace(consumer, rotation, position, 1.0F, 1.0F, size, this.getU1(), this.getV0(), light);
+		this.renderVertexInHandSpace(consumer, rotation, position, -1.0F, 1.0F, size, this.getU0(), this.getV0(), light);
+		this.renderVertexInHandSpace(consumer, rotation, position, -1.0F, -1.0F, size, this.getU0(), this.getV1(), light);
+	}
+
+	private void renderVertexInHandSpace(VertexConsumer consumer, Quaternionf rotation, Vector3f position, float offsetX, float offsetY, float size, float u, float v, int light) {
+		Vector3f vertex = new Vector3f(offsetX, offsetY, 0.0F).rotate(rotation).mul(size).add(position);
+		consumer.addVertex(vertex.x(), vertex.y(), vertex.z()).setUv(u, v).setColor(this.rCol, this.gCol, this.bCol, this.alpha).setLight(light);
+	}
+	//?}
 
 	@Override
 	@Nullable

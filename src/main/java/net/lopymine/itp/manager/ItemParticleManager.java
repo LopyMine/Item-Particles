@@ -52,6 +52,9 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 	private final Map<UUID, List<ItemParticleRequest>> itemFrameParticles = new HashMap<>();
 	private final Map<BlockPos, Map<Integer, List<ItemParticleRequest>>> shelfParticles = new HashMap<>();
 	private final Map<BlockPos, List<ItemStack>> trackedShelfItems = new HashMap<>();
+	//? if <1.21.4 {
+	private final List<Runnable> pendingFirstPersonRequests = new ArrayList<>();
+	//?}
 
 	private ItemParticleManager() { }
 
@@ -81,9 +84,17 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 				}
 
 				ItemDisplayContext displayContext = ItemDisplayContext.FIXED;
-				ItemParticlesClient.CURRENT_STACK = "%s [%s]".formatted(stack.getDescriptionId(), displayContext.getSerializedName());
+				ItemParticlesClient.CURRENT_STACK = "%s [%s]".formatted(item.getDescriptionId(), displayContext.getSerializedName());
 				List<ItemParticleRequest> particleRequests = this.createParticleRequests(stack, SpawnCategory.DROPPED_ITEM, Vec3.ZERO);
-				this.acceptItemParticles(getSpawnPositions(stack, displayContext, new PoseStack()), particleRequests);
+
+				//? if >=1.21.4 {
+				/*ItemStackRenderState state = new ItemStackRenderState();
+				Minecraft.getInstance().getItemModelResolver().updateForTopItem(state, stack, displayContext, null, null, 0);
+				SpawnPositions spawnPositions = getSpawnPositions(state, new PoseStack());
+				*///?} else {
+				SpawnPositions spawnPositions = getSpawnPositions(stack, displayContext, new PoseStack());
+				//?}
+				this.acceptItemParticles(spawnPositions, particleRequests);
 			}
 		} finally {
 			ItemParticlesClient.CURRENT_STACK = null;
@@ -147,6 +158,10 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 	*///?} else {
 	private static SpawnPositions getSpawnPositions(ItemStack stack, ItemDisplayContext displayContext, PoseStack poseStack) {
 	//?}
+		if (isCollectingDebugTexels()) {
+			ItemParticleManager.getInstance().getDebugItemTexels().clear();
+		}
+
 		Map<ResourceLocation, Map<PixelPos, Vector3fc[]>> map = new HashMap<>();
 
 		//? if >=1.21.4 {
@@ -164,7 +179,7 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 
 			map.computeIfAbsent(AdvancedSpawnAreaId.getValidatedBaseTexture(texture), (key) -> new HashMap<>()).put(pos, faceCenters);
 
-			if (ItemParticlesConfig.getInstance().getMainConfig().isDebugModeEnabled()) {
+			if (isCollectingDebugTexels()) {
 				for (Vector3fc center : faceCenters) {
 					ItemParticleManager.getInstance().getDebugItemTexels().add(center);
 				}
@@ -280,13 +295,28 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 		}
 
 		List<ItemParticleRequest> requests = this.pollArmRequests(entity.getUUID(), arm);
+		if (requests == null || requests.isEmpty()) {
+			return;
+		}
 
 		//? if >=1.21.4 {
 		/*this.acceptItemParticles(getSpawnPositions(state, poseStack), requests, FirstPersonSpace.getToLevel(new Matrix4f()));
 		*///?} else {
-		this.acceptItemParticles(getSpawnPositions(stack, displayContext, poseStack), requests, null);
+		PoseStack pose = new PoseStack();
+		pose.last().pose().set(poseStack.last().pose());
+		pose.last().normal().set(poseStack.last().normal());
+		this.pendingFirstPersonRequests.add(() -> this.acceptItemParticles(getSpawnPositions(stack, displayContext, pose), requests, FirstPersonSpace.getToLevel(new Matrix4f())));
 		//?}
 	}
+
+	//? if <1.21.4 {
+	public void acceptPendingFirstPersonItemParticleRequests() {
+		for (Runnable request : this.pendingFirstPersonRequests) {
+			request.run();
+		}
+		this.pendingFirstPersonRequests.clear();
+	}
+	//?}
 
 	@Nullable
 	private List<ItemParticleRequest> pollArmRequests(UUID uuid, HumanoidArm arm) {
@@ -327,8 +357,9 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 			return;
 		}
 
-		this.debugUsedTexels.clear();
-		this.debugItemTexels.clear();
+		if (isCollectingDebugTexels()) {
+			this.debugUsedTexels.clear();
+		}
 
 		for (ItemParticleRequest request : requests) {
 			Function<ResourceLocation, @Nullable IParticleSpawnPos> spawnPosFunction = request.getSpawnPosFunction();
@@ -369,7 +400,7 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 			particle.tick();
 			Minecraft.getInstance().particleEngine.add(particle);
 
-			if (ItemParticlesConfig.getInstance().getMainConfig().isDebugModeEnabled()) {
+			if (isCollectingDebugTexels()) {
 				ItemParticleManager.getInstance().getDebugUsedTexels().add(vector);
 			}
 		}
@@ -380,6 +411,9 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 			this.debugItemTexels.clear();
 			this.debugUsedTexels.clear();
 		}
+		//? if <1.21.4 {
+		this.pendingFirstPersonRequests.clear();
+		//?}
 		this.runSoft(() -> {
 			this.createArmItemParticleRequests();
 			this.createDroppedItemParticleRequests();
@@ -536,7 +570,11 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 		//?}
 	}
 
-	private static boolean isFirstPersonCameraEntity(LivingEntity entity) {
+	private static boolean isCollectingDebugTexels() {
+		return ItemParticlesConfig.getInstance().getMainConfig().isDebugModeEnabled() && !ItemParticlesClient.isValidationEnabled();
+	}
+
+	public static boolean isFirstPersonCameraEntity(LivingEntity entity) {
 		Minecraft minecraft = Minecraft.getInstance();
 		return entity == minecraft.getCameraEntity() && minecraft.options.getCameraType().isFirstPerson();
 	}

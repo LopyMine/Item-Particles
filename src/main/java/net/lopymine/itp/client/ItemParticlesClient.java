@@ -10,10 +10,8 @@ import net.minecraft.client.gui.components.ChatComponent;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.item.*;
 import org.jspecify.annotations.Nullable;
 import org.slf4j.helpers.MessageFormatter;
-
 
 public class ItemParticlesClient {
 
@@ -50,54 +48,6 @@ public class ItemParticlesClient {
 
 	public static void onInitializeClient() {
 		LOGGER.info("{} Client Initialized", ItemParticles.MOD_NAME);
-
-		//Item[] items = {
-		//	//? if >=26.2 {
-		//	/^Items.BED.red(),
-		//	^///?} else {
-		//	Items.RED_BED,
-		//	//?}
-		//		Items.DIAMOND_SWORD,
-		//		Items.DIAMOND_SPEAR,
-		//		Items.DECORATED_POT,
-		//		Items.SHIELD
-		//};
-//
-		//ItemStackRenderState[] states = new ItemStackRenderState[items.length];
-//
-		//for (int i = 0; i < states.length; i++) {
-		//	states[i] = new ItemStackRenderState();
-		//}
-		//LevelRenderEvents.COLLECT_SUBMITS.register(context -> {
-		//	Minecraft minecraft = Minecraft.getInstance();
-		//	Vec3 camera = minecraft.gameRenderer.mainCamera().position();
-//
-		//	for (Vector3fc texel : ItemParticleManager.getInstance().getDebugItemTexels()) {
-		//		Gizmos.point(new Vec3(texel.x() + camera.x, texel.y() + camera.y, texel.z() + camera.z), -1, 10F);
-		//	}
-		//	for (Vector3fc texel : ItemParticleManager.getInstance().getDebugUsedTexels()) {
-		//		Gizmos.point(new Vec3(texel.x() + camera.x, texel.y() + camera.y, texel.z() + camera.z), ArgbUtils.getArgb(255, 255, 0, 255), 15F);
-		//	}
-//
-		//	for (int i = 0; i < items.length; i++) {
-		//		Vec3 origin = TEST_ORIGIN.add(i * TEST_SPACING, 0.0D, 0.0D);
-		//		ItemStackRenderState state = states[i];
-//
-		//		minecraft.getItemModelResolver().updateForTopItem(state, items[i].getDefaultInstance(), ItemDisplayContext.FIXED, null, null, 0);
-//
-		//		PoseStack poseStack = new PoseStack();
-		//		poseStack.translate((float) (origin.x - camera.x), (float) (origin.y - camera.y), (float) (origin.z - camera.z));
-//
-		//		state.submit(poseStack, context.submitNodeCollector(), LightCoordsUtil.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, 0);
-//
-		//		ModelTexelScanner.visitPixels(state, poseStack, (sprite, x, y, argb, position, faceCenters) -> {
-		//			for (Vector3fc center : faceCenters) {
-		//				Gizmos.point(new Vec3(center.x() + camera.x, center.y() + camera.y, center.z() + camera.z), -1, 10F);
-		//			}
-		//			//Gizmos.point(new Vec3(position.x() + camera.x, position.y() + camera.y, position.z() + camera.z), ArgbUtils.getArgb(255, 255, 0,0), 10F);
-		//		});
-		//	}
-		//});
 	}
 
 	public static void sendNoticeMessage(int size) {

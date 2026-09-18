@@ -7,7 +7,11 @@ import net.lopymine.itp.utils.*;
 import net.minecraft.client.*;
 //? if >=1.21.9 {
 /*import net.minecraft.client.renderer.feature.FeatureRenderDispatcher;
-*///?}
+*///?} else {
+import com.mojang.blaze3d.vertex.*;
+import net.minecraft.client.particle.ParticleRenderType;
+import net.minecraft.client.renderer.*;
+//?}
 //? if >=26.1 {
 /*import net.minecraft.client.renderer.state.level.QuadParticleRenderState;
 *///?} elif >=1.21.9 {
@@ -115,6 +119,58 @@ public class FirstPersonParticleRenderer {
 	*///?} else {
 	public void render(float tickProgress) {
 		this.particles.removeIf((particle) -> !particle.isAlive());
+		if (this.particles.isEmpty()) {
+			return;
+		}
+
+		Camera camera = GameRendererUtils.getMainCamera();
+
+		Matrix4f levelToHand = FirstPersonSpace.getToHand(new Matrix4f());
+		float sizeScale = 1.0F / FirstPersonSpace.getFovScale();
+
+		Map<ParticleRenderType, List<ItemParticle>> particlesByType = new LinkedHashMap<>();
+		for (ItemParticle particle : this.particles) {
+			if (particle.isInFrontOfHand(camera, tickProgress)) {
+				particlesByType.computeIfAbsent(particle.getRenderType(), (type) -> new ArrayList<>()).add(particle);
+			}
+		}
+
+		if (particlesByType.isEmpty()) {
+			return;
+		}
+
+		Matrix4fStack modelViewStack = RenderSystem.getModelViewStack();
+		modelViewStack.pushMatrix().mul(GameRendererUtils.getViewRotationMatrix(new Matrix4f()));
+		RenderSystem.applyModelViewMatrix();
+
+		Minecraft minecraft = Minecraft.getInstance();
+		LightTexture lightTexture = minecraft.gameRenderer.lightTexture();
+		lightTexture.turnOnLightLayer();
+		RenderSystem.enableDepthTest();
+
+		for (Map.Entry<ParticleRenderType, List<ItemParticle>> entry : particlesByType.entrySet()) {
+			RenderSystem.setShader(GameRenderer::getParticleShader);
+			BufferBuilder builder = entry.getKey().begin(Tesselator.getInstance(), minecraft.getTextureManager());
+			if (builder == null) {
+				continue;
+			}
+
+			for (ItemParticle particle : entry.getValue()) {
+				particle.renderInHandSpace(builder, camera, tickProgress, levelToHand, sizeScale);
+			}
+
+			MeshData mesh = builder.build();
+			if (mesh != null) {
+				BufferUploader.drawWithShader(mesh);
+			}
+		}
+
+		RenderSystem.depthMask(true);
+		RenderSystem.disableBlend();
+		lightTexture.turnOffLightLayer();
+
+		modelViewStack.popMatrix();
+		RenderSystem.applyModelViewMatrix();
 	}
 	//?}
 }

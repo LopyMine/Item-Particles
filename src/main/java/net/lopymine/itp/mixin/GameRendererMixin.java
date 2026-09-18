@@ -25,6 +25,9 @@ public class GameRendererMixin {
 	@Inject(at = @At(value = "INVOKE", shift = Shift.AFTER, target = "Lnet/minecraft/client/renderer/GameRenderer;renderItemInHand(Lnet/minecraft/client/Camera;FLorg/joml/Matrix4f;)V"), method = "renderLevel")
 	//?}
 	private void renderFirstPersonParticles(DeltaTracker deltaTracker, CallbackInfo ci) {
+		//? if <1.21.4 {
+		ItemParticleManager.getInstance().acceptPendingFirstPersonItemParticleRequests();
+		//?}
 		FirstPersonParticleRenderer.getInstance().render(deltaTracker.getGameTimeDeltaPartialTick(false));
 	}
 }

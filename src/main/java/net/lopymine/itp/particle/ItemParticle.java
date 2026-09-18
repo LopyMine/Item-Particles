@@ -1,6 +1,5 @@
 package net.lopymine.itp.particle;
 
-import com.mojang.blaze3d.vertex.VertexFormat.Mode;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import net.lopymine.itp.atlas.ItemParticlesAtlasManager;
@@ -23,6 +22,7 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 *///?} else {
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
+import com.mojang.blaze3d.vertex.VertexFormat.Mode;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.texture.TextureManager;
 //?}

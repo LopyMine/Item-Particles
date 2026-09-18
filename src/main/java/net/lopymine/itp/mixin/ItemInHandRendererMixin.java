@@ -29,8 +29,12 @@ public class ItemInHandRendererMixin {
 	private void acceptItemParticleRequests(LivingEntity entity, ItemStack itemStack, ItemDisplayContext displayContext, boolean leftHand, PoseStack poseStack, MultiBufferSource multiBufferSource, int lightCoords, CallbackInfo ci) {
 		ItemParticleManager manager = ItemParticleManager.getInstance();
 
+		if (ItemParticleManager.isFirstPersonCameraEntity(entity)) {
+			manager.acceptFirstPersonItemParticleRequests(itemStack, poseStack, displayContext, entity);
+			return;
+		}
+
 		switch (displayContext) {
-			case FIRST_PERSON_RIGHT_HAND, FIRST_PERSON_LEFT_HAND -> manager.acceptFirstPersonItemParticleRequests(itemStack, poseStack, displayContext, entity);
 			case THIRD_PERSON_RIGHT_HAND -> manager.acceptArmedItemParticleRequests(itemStack, poseStack, HumanoidArm.RIGHT, entity);
 			case THIRD_PERSON_LEFT_HAND -> manager.acceptArmedItemParticleRequests(itemStack, poseStack, HumanoidArm.LEFT, entity);
 			default -> { }
