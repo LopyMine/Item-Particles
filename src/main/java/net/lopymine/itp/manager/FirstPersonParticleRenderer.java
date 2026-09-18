@@ -7,15 +7,19 @@ import net.lopymine.itp.utils.*;
 import net.minecraft.client.*;
 import net.minecraft.client.renderer.feature.FeatureRenderDispatcher;
 //? if >=26.1 {
-/*import net.minecraft.client.renderer.state.level.QuadParticleRenderState;
-*///?} else {
-import net.minecraft.client.renderer.state.QuadParticleRenderState;
-//?}
+import net.minecraft.client.renderer.state.level.QuadParticleRenderState;
+//?} else {
+/*import net.minecraft.client.renderer.state.QuadParticleRenderState;
+*///?}
 import net.minecraft.world.phys.Vec3;
 import org.joml.*;
 //? if >=26.2 {
-/*import net.minecraft.client.renderer.SubmitNodeStorage;
-*///?}
+import net.minecraft.client.renderer.SubmitNodeStorage;
+//?}
+//? if >=26.3 {
+import com.mojang.renderpearl.api.commands.RenderPass;
+import com.mojang.renderpearl.api.textures.GpuTextureView;
+//?}
 
 public class FirstPersonParticleRenderer {
 
@@ -24,8 +28,8 @@ public class FirstPersonParticleRenderer {
 	private final List<ItemParticle> particles = new ArrayList<>();
 	private final QuadParticleRenderState renderState = new QuadParticleRenderState();
 	//? if >=26.2 {
-	/*private final SubmitNodeStorage submitNodeStorage = new SubmitNodeStorage();
-	*///?}
+	private final SubmitNodeStorage submitNodeStorage = new SubmitNodeStorage();
+	//?}
 
 	private FirstPersonParticleRenderer() { }
 
@@ -53,7 +57,7 @@ public class FirstPersonParticleRenderer {
 		this.clear();
 	}
 
-	public void render(float tickProgress) {
+	public void render(float tickProgress/*? if >=26.3 {*/, GpuTextureView depthTextureView/*?}*/) {
 		if (this.particles.isEmpty()) {
 			return;
 		}
@@ -92,14 +96,23 @@ public class FirstPersonParticleRenderer {
 		modelViewStack.pushMatrix().mul(GameRendererUtils.getViewRotationMatrix(new Matrix4f()));
 
 		FeatureRenderDispatcher dispatcher = GameRendererUtils.getFeatureRenderDispatcher();
-		//? if >=26.2 {
+		//? if >=26.3 {
+		this.submitNodeStorage.submitQuadParticleGroup(this.renderState);
+		try (
+				FeatureRenderDispatcher.PreparedFrame frame = dispatcher.prepareFrame(this.submitNodeStorage);
+				RenderPass renderPass = RenderSystem.getDevice().createCommandEncoder().createRenderPass(() -> "Item Particles First Person", Minecraft.getInstance().gameRenderer.mainRenderTarget().getColorTextureView(), Optional.empty(), depthTextureView, OptionalDouble.empty())
+		) {
+			RenderSystem.bindDefaultUniforms(renderPass);
+			FeatureRenderDispatcher.renderAllFeatures(renderPass, frame);
+		}
+		//?} elif >=26.2 {
 		/*this.submitNodeStorage.submitQuadParticleGroup(this.renderState);
 		dispatcher.renderAllFeatures(this.submitNodeStorage);
 		*///?} else {
-		dispatcher.getSubmitNodeStorage().submitParticleGroup(this.renderState);
+		/*dispatcher.getSubmitNodeStorage().submitParticleGroup(this.renderState);
 		dispatcher.renderAllFeatures();
 		dispatcher.endFrame();
-		//?}
+		*///?}
 
 		modelViewStack.popMatrix();
 	}

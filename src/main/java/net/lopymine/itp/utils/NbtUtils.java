@@ -36,16 +36,16 @@ public class NbtUtils {
 			//? if >=1.21 {
 			return Optional.ofNullable(stack.getComponents().get(DataComponents.CHARGED_PROJECTILES))
 					//? if >=26.1 {
-					/*.map(ChargedProjectiles::items)
-					*///?} else {
-					.map(ChargedProjectiles::getItems)
-					 //?}
+					.map(ChargedProjectiles::items)
+					//?} else {
+					/*.map(ChargedProjectiles::getItems)
+					 *///?}
 					.filter((list) -> !list.isEmpty())
 					.map((list) -> getColorFromPotionContentsStack(
 							list.get(0)
 							//? if >=26.1 {
-							/*.create()
-							*///?}
+							.create()
+							//?}
 					))
 					.filter(Optional::isPresent)
 					.map(Optional::get);
@@ -68,14 +68,14 @@ public class NbtUtils {
 		}
 
 		//? if >=26.1 {
-		/*if (stack.is(net.minecraft.tags.ItemTags.DYES)) {
+		if (stack.is(net.minecraft.tags.ItemTags.DYES)) {
 			return getColorFromDyedStack(stack);
 		}
-		*///?} elif >=1.21 {
-		if (stack.is(net.minecraft.tags.ItemTags.DYEABLE)) {
+		//?} elif >=1.21 {
+		/*if (stack.is(net.minecraft.tags.ItemTags.DYEABLE)) {
 			return getColorFromDyedStack(stack);
 		}
-		//?} else {
+		*///?} else {
 		/*if (stack.getItem() instanceof DyeableLeatherItem) {
 			return getColorFromDyedStack(stack);
 		}

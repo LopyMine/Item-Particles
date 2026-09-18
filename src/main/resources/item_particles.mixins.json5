@@ -25,7 +25,13 @@
 		*///?}
 
 		//? if >=26.2 {
-		/*"TextureAtlasMixin",
+		"TextureAtlasMixin",
+		//?}
+
+		//? if >=26.3 {
+		"FirstPersonHandsAndItemsRendererMixin",
+		//?} else {
+		/*"ItemInHandRendererMixin",
 		*///?}
 
 		//? if >=1.21.9 {
@@ -37,7 +43,6 @@
 		"AtlasLoaderMixin",
 		"MinecraftRenderCallMixin",
 		"ItemInHandLayerMixin",
-		"ItemInHandRendererMixin",
 		"SpriteContentsAccessor",
 		"RenderTypeAccessor",
 		"RenderSetupAccessor",

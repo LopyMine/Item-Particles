@@ -2,7 +2,7 @@ package net.lopymine.itp.element.texture;
 
 import java.util.function.Function;
 import lombok.*;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.Identifier;
 import org.jetbrains.annotations.Nullable;

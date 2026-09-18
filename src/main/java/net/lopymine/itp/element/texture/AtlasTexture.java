@@ -5,7 +5,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import lombok.*;
 import net.lopymine.itp.ItemParticles;
 import net.lopymine.itp.atlas.ItemParticlesAtlasManager;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.Identifier;
 import org.jetbrains.annotations.*;

@@ -19,10 +19,10 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.SingleQuadParticle;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 //? if >=26.1 {
-/*import net.minecraft.client.renderer.state.level.QuadParticleRenderState;
-*///?} else {
-import net.minecraft.client.renderer.state.QuadParticleRenderState;
-//?}
+import net.minecraft.client.renderer.state.level.QuadParticleRenderState;
+//?} else {
+/*import net.minecraft.client.renderer.state.QuadParticleRenderState;
+*///?}
 import net.minecraft.util.*;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.*;
@@ -237,10 +237,10 @@ public abstract class AbstractItemParticle<E extends AbstractItemParticle<E>> ex
 				this.getV1(),
 				ARGB.colorFromFloat(this.alpha, this.rCol, this.gCol, this.bCol),
 				//? if >=26.1 {
-				/*this.getLightCoords(tickProgress)
-				*///?} else {
-				this.getLightColor(tickProgress)
-				//?}
+				this.getLightCoords(tickProgress)
+				//?} else {
+				/*this.getLightColor(tickProgress)
+				*///?}
 		);
 	}
 
@@ -248,10 +248,10 @@ public abstract class AbstractItemParticle<E extends AbstractItemParticle<E>> ex
 	@Nullable
 	public Quaternionf getFacingRotation(Quaternionf quaternion) {
 		//? if >=26.2 {
-		/*Camera camera = Minecraft.getInstance().gameRenderer.mainCamera();
-		*///?} else {
-		Camera camera = Minecraft.getInstance().gameRenderer.getMainCamera();
-		 //?}
+		Camera camera = Minecraft.getInstance().gameRenderer.mainCamera();
+		//?} else {
+		/*Camera camera = Minecraft.getInstance().gameRenderer.getMainCamera();
+		 *///?}
 
 		if (!camera.isInitialized()) {
 			return null;

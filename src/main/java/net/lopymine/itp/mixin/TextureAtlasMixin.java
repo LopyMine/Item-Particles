@@ -2,7 +2,7 @@ package net.lopymine.itp.mixin;
 
 //? if >=26.2 {
 
-/*import com.llamalad7.mixinextras.injector.wrapoperation.*;
+import com.llamalad7.mixinextras.injector.wrapoperation.*;
 import java.util.List;
 import java.util.function.Consumer;
 import net.lopymine.itp.ItemParticles;
@@ -28,4 +28,4 @@ public class TextureAtlasMixin {
 	}
 
 }
-*///?}
+//?}

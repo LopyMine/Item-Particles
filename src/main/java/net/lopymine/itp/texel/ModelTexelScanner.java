@@ -28,27 +28,30 @@ import net.minecraft.world.phys.Vec3;
 import org.joml.*;
 import org.jspecify.annotations.Nullable;
 //? if >=26.2 {
-/*import net.minecraft.client.renderer.gizmos.DrawableGizmoPrimitives.Group;
+import net.minecraft.client.renderer.gizmos.DrawableGizmoPrimitives.Group;
 import net.minecraft.world.phys.shapes.VoxelShape;
-*///?}
+//?}
+//? if >=26.3 {
+import net.minecraft.client.resources.model.geometry.ItemQuads;
+//?}
 //? if >=26.1 {
-/*import net.minecraft.client.renderer.block.dispatch.*;
+import net.minecraft.client.renderer.block.dispatch.*;
 import net.minecraft.client.renderer.state.level.*;
 import net.minecraft.client.resources.model.geometry.BakedQuad;
 import net.minecraft.client.resources.model.geometry.BakedQuad.MaterialInfo;
-*///?} else {
-import net.minecraft.client.renderer.block.model.*;
+//?} else {
+/*import net.minecraft.client.renderer.block.model.*;
 import net.minecraft.client.renderer.state.*;
 import net.minecraft.world.level.block.state.BlockState;
-//?}
+*///?}
 
 public class ModelTexelScanner {
 
 	//? if >=26.1 {
-	/*private static final int FULL_BRIGHT = LightCoordsUtil.FULL_BRIGHT;
-	*///?} else {
-	private static final int FULL_BRIGHT = LightTexture.FULL_BRIGHT;
-	 //?}
+	private static final int FULL_BRIGHT = LightCoordsUtil.FULL_BRIGHT;
+	//?} else {
+	/*private static final int FULL_BRIGHT = LightTexture.FULL_BRIGHT;
+	 *///?}
 
 	private static final Map<Identifier, Optional<TexelSource>> TEXTURES = new HashMap<>();
 
@@ -176,11 +179,11 @@ public class ModelTexelScanner {
 
 	private static void visitBakedQuad(BakedQuad quad, Matrix4fc transform, int[] tints, RawTexelVisitor output) {
 		//? if >=26.1 {
-		/*MaterialInfo materialInfo = quad.materialInfo();
+		MaterialInfo materialInfo = quad.materialInfo();
 		TextureAtlasSprite sprite = materialInfo.sprite();
-		*///?} else {
-		TextureAtlasSprite sprite = quad.sprite();
-		//?}
+		//?} else {
+		/*TextureAtlasSprite sprite = quad.sprite();
+		*///?}
 		TexelSource source = TexelSource.of(sprite);
 
 		float minU = sprite.getU0();
@@ -194,12 +197,12 @@ public class ModelTexelScanner {
 		long packedUV3 = quad.packedUV(3);
 
 		//? if >=26.1 {
-		/*int tintIndex = materialInfo.tintIndex();
+		int tintIndex = materialInfo.tintIndex();
 		int tint = materialInfo.isTinted() && tintIndex < tints.length ? tints[tintIndex] : -1;
-		*///?} else {
-		int tintIndex = quad.tintIndex();
+		//?} else {
+		/*int tintIndex = quad.tintIndex();
 		int tint = quad.isTinted() && tintIndex < tints.length ? tints[tintIndex] : -1;
-		//?}
+		*///?}
 
 		visitQuad(
 				quad.position0(), quad.position1(), quad.position2(), quad.position3(),
@@ -278,7 +281,17 @@ public class ModelTexelScanner {
 	@SuppressWarnings("NullableProblems")
 	private record TexelCollector(RawTexelVisitor output) implements SubmitNodeCollector {
 
-		//? if >=26.1 {
+		//? if >=26.3 {
+		@Override
+		public void submitItem(PoseStack poseStack, ItemDisplayContext displayContext, int light, int overlay, int color, int[] tints, ItemQuads quads, FoilType foilType) {
+			this.visitQuads(poseStack, tints, quads.all());
+		}
+
+		@Override
+		public <S> void submitModel(Model<? super S> model, S state, PoseStack poseStack, Identifier texture, int light, int overlay, int outlineColor) {
+			this.submitModel(model, state, poseStack, getTexture(texture), -1);
+		}
+		//?} elif >=26.1 {
 		/*@Override
 		public void submitItem(PoseStack poseStack, ItemDisplayContext displayContext, int light, int overlay, int color, int[] tints, List<BakedQuad> quads, FoilType foilType) {
 			this.visitQuads(poseStack, tints, quads);
@@ -289,11 +302,11 @@ public class ModelTexelScanner {
 			this.submitModel(model, state, poseStack, getTexture(texture), -1);
 		}
 		*///?} else {
-		@Override
+		/*@Override
 		public void submitItem(PoseStack poseStack, ItemDisplayContext displayContext, int light, int overlay, int color, int[] tints, List<BakedQuad> quads, RenderType renderType, FoilType foilType) {
 			this.visitQuads(poseStack, tints, quads);
 		}
-		//?}
+		*///?}
 
 		private void visitQuads(PoseStack poseStack, int[] tints, List<BakedQuad> quads) {
 			Matrix4f transform = poseStack.last().pose();
@@ -303,10 +316,22 @@ public class ModelTexelScanner {
 			}
 		}
 
+		//? if >=26.3 {
 		@Override
+		public <S> void submitModel(Model<? super S> model, S state, PoseStack poseStack, RenderType renderType, int light, int overlay, int color, @Nullable UvMapping uvMapping, int outline) {
+			this.submitModel(model, state, poseStack, getSource(uvMapping instanceof TextureAtlasSprite sprite ? sprite : null, renderType), color);
+		}
+
+		@Override
+		public <S> void submitCrumblingOverlay(Model<? super S> model, S state, PoseStack poseStack, RenderType renderType, int light, int overlay, int color, CrumblingOverlay crumblingOverlay) {
+			// NO-OP
+		}
+		//?} else {
+		/*@Override
 		public <S> void submitModel(Model<? super S> model, S state, PoseStack poseStack, RenderType renderType, int light, int overlay, int color, TextureAtlasSprite sprite, int outline, CrumblingOverlay crumblingOverlay) {
 			this.submitModel(model, state, poseStack, getSource(sprite, renderType), color);
 		}
+		*///?}
 
 		private <S> void submitModel(Model<? super S> model, S state, PoseStack poseStack, @Nullable TexelSource source, int color) {
 			if (source == null) {
@@ -328,12 +353,12 @@ public class ModelTexelScanner {
 		}
 
 		//? if >=26.2 {
-		/*@Override
+		@Override
 		public void submitMovingBlock(PoseStack poseStack, MovingBlockRenderState movingBlockRenderState, int outlineColor) {
 			// NO-OP
 		}
-		*///?} else {
-		@Override
+		//?} else {
+		/*@Override
 		public void submitMovingBlock(PoseStack poseStack, MovingBlockRenderState movingBlockRenderState) {
 			// NO-OP
 		}
@@ -347,7 +372,7 @@ public class ModelTexelScanner {
 
 			visitModelPart(modelPart, poseStack, source, color, this.output);
 		}
-		//?}
+		*///?}
 
 		@Override
 		public void submitShadow(PoseStack poseStack, float radius, List<EntityRenderState.ShadowPiece> pieces) {
@@ -355,21 +380,28 @@ public class ModelTexelScanner {
 		}
 
 		//? if >=26.2 {
-		/*@Override
+		@Override
 		public void submitNameTag(PoseStack poseStack, @Nullable Vec3 nameTagAttachment, int offset, Component name, boolean seeThrough, int lightCoords, CameraRenderState camera) {
 			// NO-OP
 		}
-		*///?} else {
-		@Override
+		//?} else {
+		/*@Override
 		public void submitNameTag(PoseStack poseStack, @Nullable Vec3 nameTagAttachment, int offset, Component name, boolean seeThrough, int lightCoords, double distanceToCameraSq, CameraRenderState camera) {
 			// NO-OP
 		}
-		//?}
+		*///?}
 
 		@Override
 		public void submitText(PoseStack poseStack, float x, float y, FormattedCharSequence text, boolean dropShadow, Font.DisplayMode displayMode, int light, int color, int backgroundColor, int outline) {
 			// NO-OP
 		}
+
+		//? if >=26.3 {
+		@Override
+		public void submitTextBackground(PoseStack poseStack, float x0, float y0, float x1, float y1, int color, Font.DisplayMode displayMode, int light) {
+			// NO-OP
+		}
+		//?}
 
 		@Override
 		public void submitFlame(PoseStack poseStack, EntityRenderState entityRenderState, Quaternionf rotation) {
@@ -382,12 +414,12 @@ public class ModelTexelScanner {
 		}
 
 		//? if >=26.1 {
-		/*@Override
+		@Override
 		public void submitBlockModel(PoseStack poseStack, RenderType renderType, List<BlockStateModelPart> parts, int[] tints, int light, int overlay, int outline) {
 			// NO-OP
 		}
-		*///?} else {
-		@Override
+		//?} else {
+		/*@Override
 		public void submitBlockModel(PoseStack poseStack, RenderType renderType, BlockStateModel blockStateModel, float red, float green, float blue, int light, int overlay, int outline) {
 			// NO-OP
 		}
@@ -396,19 +428,26 @@ public class ModelTexelScanner {
 		public void submitBlock(PoseStack poseStack, BlockState blockState, int light, int overlay, int outline) {
 			// NO-OP
 		}
-		//?}
+		*///?}
 
 		//? if >=26.2 {
+		//? if >=26.3 {
+		@Override
+		public void submitBreakingBlockModel(PoseStack poseStack, List<BlockStateModelPart> parts, int progress, boolean isBlockTranslucent) {
+			// NO-OP
+		}
+		//?} else {
 		/*@Override
 		public void submitBreakingBlockModel(PoseStack poseStack, List<BlockStateModelPart> parts, int progress) {
 			// NO-OP
 		}
+		*///?}
 
 		@Override
 		public void submitShapeOutline(PoseStack poseStack, VoxelShape shape, RenderType renderType, int color, float width, boolean afterTerrain) {
 			// NO-OP
 		}
-		*///?} elif >=26.1 {
+		//?} elif >=26.1 {
 		/*@Override
 		public void submitBreakingBlockModel(PoseStack poseStack, BlockStateModel model, long seed, int progress) {
 			// NO-OP
@@ -421,7 +460,7 @@ public class ModelTexelScanner {
 		}
 
 		//? if >=26.2 {
-		/*@Override
+		@Override
 		public void submitQuadParticleGroup(QuadParticleRenderState particles) {
 			// NO-OP
 		}
@@ -430,12 +469,12 @@ public class ModelTexelScanner {
 		public void submitGizmoPrimitives(Group group, CameraRenderState camera, boolean onTop) {
 			// NO-OP
 		}
-		*///?} else {
-		@Override
+		//?} else {
+		/*@Override
 		public void submitParticleGroup(ParticleGroupRenderer particleGroupRenderer) {
 			// NO-OP
 		}
-		//?}
+		*///?}
 
 	}
 

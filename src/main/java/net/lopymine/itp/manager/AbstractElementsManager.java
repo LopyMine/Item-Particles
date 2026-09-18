@@ -29,10 +29,10 @@ public abstract class AbstractElementsManager<E extends IElement, R> extends Tic
 			if (player != null) {
 				MutableComponent text = Component.literal("[%s] ".formatted(this.getModName())).append(Component.literal("Unexpected error with id \"%s\", please report this issue with your game logs! Item Particles was automatically disabled to prevent spamming ^^".formatted(action)).withStyle(ChatFormatting.RED));
 				//? if >=26.1 {
-				/*player.sendSystemMessage(text);
-				*///?} else {
-				player.displayClientMessage(text, false);
-				 //?}
+				player.sendSystemMessage(text);
+				//?} else {
+				/*player.displayClientMessage(text, false);
+				 *///?}
 			}
 		}
 	}

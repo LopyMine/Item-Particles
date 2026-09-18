@@ -14,8 +14,8 @@ import net.minecraft.server.packs.resources.ResourceMetadata;
 //?}
 
 //? if >=26.1 {
-/*import net.minecraft.client.resources.metadata.texture.TextureMetadataSection;
-*///?}
+import net.minecraft.client.resources.metadata.texture.TextureMetadataSection;
+//?}
 
 @Setter
 @Getter
@@ -68,14 +68,14 @@ public class AtlasSprite {
 		FrameSize dimensions = new FrameSize(width, height);
 
 		//? if >=26.1 {
-		/*var metadata = ResourceMetadata.EMPTY;
+		var metadata = ResourceMetadata.EMPTY;
 		Optional<AnimationMetadataSection> decode = metadata.getSection(AnimationMetadataSection.TYPE);
 		Optional<TextureMetadataSection> decode2 = metadata.getSection(TextureMetadataSection.TYPE);
 
 		SpriteContents contents = new SpriteContents(sprite.getSpriteId(), dimensions, image, decode, List.of(), decode2);
-		*///?} elif >=1.21.10 {
-		SpriteContents contents = new SpriteContents(sprite.getSpriteId(), dimensions, image);
-		//?} elif >=1.21.1 {
+		//?} elif >=1.21.10 {
+		/*SpriteContents contents = new SpriteContents(sprite.getSpriteId(), dimensions, image);
+		*///?} elif >=1.21.1 {
 		/*SpriteContents contents = new SpriteContents(sprite.getSpriteId(), dimensions, image, ResourceMetadata.EMPTY);
 		*///?} else {
 		/*SpriteContents contents = new SpriteContents(sprite.getSpriteId(), dimensions, image, AnimationMetadataSection.EMPTY);

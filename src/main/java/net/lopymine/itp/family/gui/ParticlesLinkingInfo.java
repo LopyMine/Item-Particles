@@ -6,7 +6,7 @@ import net.lopymine.itp.family.cache.FamilyParticlesCacheManager;
 import net.lopymine.itp.resourcepack.manager.ParticlesConfigsManager;
 import net.lopymine.itp.resourcepack.manager.ParticlesConfigsManager.ReloadInfo;
 import net.lopymine.mossylib.utils.DrawUtils;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
@@ -17,7 +17,7 @@ public class ParticlesLinkingInfo {
 	public static final Identifier LOADING_0 = ItemParticles.id("textures/gui/loading_0.png");
 	public static final Identifier LOADING_1 = ItemParticles.id("textures/gui/loading_1.png");
 
-	public static void render(GuiGraphics graphics, int x, int y, int mouseX, int mouseY) {
+	public static void render(GuiGraphicsExtractor graphics, int x, int y, int mouseX, int mouseY) {
 		ReloadInfo reloadInfo = ParticlesConfigsManager.RELOAD_INFO;
 		int progress = reloadInfo.getProgress();
 		int totalItems = reloadInfo.getTotalItems();

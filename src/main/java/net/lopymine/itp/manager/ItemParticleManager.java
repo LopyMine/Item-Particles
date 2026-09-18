@@ -197,10 +197,10 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 		Minecraft minecraft = Minecraft.getInstance();
 		ClientLevel level = minecraft.level;
 		//? if >=26.2 {
-		/*Vec3 camera = Minecraft.getInstance().gameRenderer.mainCamera().position();
-		*///?} else {
-		Vec3 camera = Minecraft.getInstance().gameRenderer.getMainCamera().position();
-		 //?}
+		Vec3 camera = Minecraft.getInstance().gameRenderer.mainCamera().position();
+		//?} else {
+		/*Vec3 camera = Minecraft.getInstance().gameRenderer.getMainCamera().position();
+		 *///?}
 		if (level == null) {
 			return;
 		}

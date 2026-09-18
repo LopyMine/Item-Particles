@@ -68,15 +68,15 @@ public class ItemParticlesAtlasManager {
 				MutableComponent message = Component.literal("[Item Particles] Hey, wait! This error is special, and I don’t know when or why it happens. If you see this message, please report this bug with the !!full game logs!! — they’re important. Thanks!\n")
 						.append("\n Another mod might be breaking Item Particles. \n\n To find it, try disabling half of your active mods at a time until the problem goes away, that will help you find that mod quickly. \nThat would be a huge help <3");
 				//? if >=26.2 {
-				/*ChatComponent chat = Minecraft.getInstance().gui.hud.getChat();
-				*///?} else {
-				ChatComponent chat = Minecraft.getInstance().gui.getChat();
-				 //?}
+				ChatComponent chat = Minecraft.getInstance().gui.hud.getChat();
+				//?} else {
+				/*ChatComponent chat = Minecraft.getInstance().gui.getChat();
+				 *///?}
 				//? if >=26.1 {
-				/*chat.addClientSystemMessage(message);
-				*///?} else {
-				chat.addMessage(message);
-				 //?}
+				chat.addClientSystemMessage(message);
+				//?} else {
+				/*chat.addMessage(message);
+				 *///?}
 
 				ItemParticles.LOGGER.error("TRIED TO GET SPRITE FROM ATLAS, BUT IT'S NOT INITIALIZED YET: " + (id == null ? "null" : id.toString()) + " " + (atlasId == null ? "null" : atlasId.toString()));
 			}

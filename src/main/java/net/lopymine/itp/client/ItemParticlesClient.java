@@ -19,10 +19,10 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.*;
 //? if >=26.1 {
-/*import net.minecraft.util.LightCoordsUtil;
-*///?} else {
-import net.minecraft.client.renderer.LightTexture;
-//?}
+import net.minecraft.util.LightCoordsUtil;
+//?} else {
+/*import net.minecraft.client.renderer.LightTexture;
+*///?}
 import net.minecraft.world.phys.Vec3;
 import org.joml.Vector3fc;
 
@@ -37,10 +37,10 @@ public class ItemParticlesClient {
 
 		Item[] items = {
 				//? if >=26.2 {
-				/*Items.BED.red(),
-				*///?} else {
-				Items.RED_BED,
-				//?}
+				Items.BED.red(),
+				//?} else {
+				/*Items.RED_BED,
+				*///?}
 				Items.DIAMOND_SWORD,
 				Items.DIAMOND_SPEAR,
 				Items.DECORATED_POT,
@@ -95,16 +95,16 @@ public class ItemParticlesClient {
 		MutableComponent message = ItemParticles.text("notice_message", name, size);
 
 		//? if >=26.2 {
-		/*ChatComponent chat = Minecraft.getInstance().gui.hud.getChat();
-		*///?} else {
-		ChatComponent chat = Minecraft.getInstance().gui.getChat();
-		 //?}
+		ChatComponent chat = Minecraft.getInstance().gui.hud.getChat();
+		//?} else {
+		/*ChatComponent chat = Minecraft.getInstance().gui.getChat();
+		 *///?}
 
 		//? if >=26.1 {
-		/*chat.addClientSystemMessage(message);
-		*///?} else {
-		chat.addMessage(message);
-		 //?}
+		chat.addClientSystemMessage(message);
+		//?} else {
+		/*chat.addMessage(message);
+		 *///?}
 
 		Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.EXPERIENCE_ORB_PICKUP, 1.0F, 1.5F));
 

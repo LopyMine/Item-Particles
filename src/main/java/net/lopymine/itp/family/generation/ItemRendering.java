@@ -2,9 +2,11 @@ package net.lopymine.itp.family.generation;
 
 //? if >=26.2 {
 
-/*import com.mojang.blaze3d.*;
+import com.mojang.blaze3d.*;
 import com.mojang.blaze3d.platform.NativeImage;
-import com.mojang.blaze3d.textures.*;
+//? if <26.3 {
+/*import com.mojang.blaze3d.textures.*;
+*///?}
 import com.mojang.blaze3d.vertex.PoseStack;
 import java.util.*;
 import java.util.function.Consumer;
@@ -120,7 +122,7 @@ public class ItemRendering {
 	}
 
 }
-*///?} elif >=26.1 {
+//?} elif >=26.1 {
 
 /*import com.mojang.blaze3d.platform.*;
 import com.mojang.blaze3d.textures.*;
@@ -239,7 +241,7 @@ public class ItemRendering {
 }
 *///?} elif >=1.21.10 {
 
-import com.mojang.blaze3d.platform.*;
+/*import com.mojang.blaze3d.platform.*;
 import com.mojang.blaze3d.textures.*;
 import com.mojang.blaze3d.vertex.PoseStack;
 import java.util.*;
@@ -267,8 +269,8 @@ import org.jetbrains.annotations.Nullable;
 //? if fabric {
 import net.fabricmc.fabric.api.client.render.fluid.v1.*;
 //?} else {
-/*import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
-*///?}
+/^import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
+^///?}
 
 @ExtensionMethod(NativeImageExtension.class)
 public class ItemRendering {
@@ -357,7 +359,7 @@ public class ItemRendering {
 		});
 		//?} else {
 
-		/*IClientFluidTypeExtensions extensions = IClientFluidTypeExtensions.of(fluidState);
+		/^IClientFluidTypeExtensions extensions = IClientFluidTypeExtensions.of(fluidState);
 		TextureAtlas atlas;
 		try {
 			atlas = Minecraft.getInstance().getAtlasManager().getAtlasOrThrow(AtlasIds.BLOCKS);
@@ -401,8 +403,8 @@ public class ItemRendering {
 				return extensions.getTintColor(fluidState, level, pos);
 			}
 		});
-		*///?}
+		^///?}
 	}
 
 }
-//?}
+*///?}

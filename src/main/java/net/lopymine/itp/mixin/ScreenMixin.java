@@ -19,21 +19,21 @@ public class ScreenMixin {
 			at = @At(
 					value = "INVOKE",
 					//? if >=26.1 {
-					/*target = "Lnet/minecraft/client/gui/screens/Screen;extractRenderState(Lnet/minecraft/client/gui/GuiGraphics;IIF)V",
-					*///?} else {
-					target = "Lnet/minecraft/client/gui/screens/Screen;render(Lnet/minecraft/client/gui/GuiGraphics;IIF)V",
-					//?}
+					target = "Lnet/minecraft/client/gui/screens/Screen;extractRenderState(Lnet/minecraft/client/gui/GuiGraphicsExtractor;IIF)V",
+					//?} else {
+					/*target = "Lnet/minecraft/client/gui/screens/Screen;render(Lnet/minecraft/client/gui/GuiGraphicsExtractor;IIF)V",
+					*///?}
 					shift = Shift.AFTER
 			),
 			//? if >=26.1 {
-			/*method = "extractRenderStateWithTooltipAndSubtitles"
-			*///?} elif >=1.21.9 {
-			method = "renderWithTooltipAndSubtitles"
-			//?} else {
+			method = "extractRenderStateWithTooltipAndSubtitles"
+			//?} elif >=1.21.9 {
+			/*method = "renderWithTooltipAndSubtitles"
+			*///?} else {
 			/*method = "renderWithTooltip"
 			*///?}
 	)
-	private void renderInventoryParticles(GuiGraphics context, int mouseX, int mouseY, float delta, CallbackInfo ci) {
+	private void renderInventoryParticles(GuiGraphicsExtractor context, int mouseX, int mouseY, float delta, CallbackInfo ci) {
 		ParticlesLinkingInfo.render(context, this.width - 5 - 8, 5, mouseX, mouseY);
 	}
 }

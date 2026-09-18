@@ -2,7 +2,7 @@ package net.lopymine.itp.element.texture;
 
 import lombok.*;
 import net.lopymine.itp.config.misc.CachedItem;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
