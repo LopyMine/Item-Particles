@@ -36,21 +36,18 @@ public record AdvancedSpawnAreas(Map<ResourceLocation, AdvancedSpawnAreaId> area
 		return (id) -> {
 			AdvancedSpawnAreaId spawnAreaId = this.areas.get(id);
 			if (spawnAreaId == null) {
-				if (ItemParticlesClient.VALIDATION_ENABLED) {
-					ItemParticlesClient.LOGGER.error("No spawn area for {}, requested: {}, available: {} ", ItemParticlesClient.CURRENT_STACK, id, new ArrayList<>(this.areas.keySet()));
-				}
 				return null;
 			}
 			AdvancedSpawnArea area = spawnAreaId.getArea();
 			if (area == null) {
-				if (ItemParticlesClient.VALIDATION_ENABLED) {
-					ItemParticlesClient.LOGGER.error("Failed to get spawn area from [{}|{}] for {}, requested: {}",  spawnAreaId.getBaseTexture(), spawnAreaId.getMaskTexture(), ItemParticlesClient.CURRENT_STACK, id);
+				if (ItemParticlesClient.isValidationEnabled()) {
+					ItemParticlesClient.logValidationError("Failed to get spawn area from [{}|{}] for {}, requested: {}", spawnAreaId.getBaseTexture(), spawnAreaId.getMaskTexture(), ItemParticlesClient.CURRENT_STACK, id);
 				}
 				return null;
 			}
 			IParticleSpawnPos pos = area.getRandomPosFunction(random).apply(id);
-			if (pos == null && ItemParticlesClient.VALIDATION_ENABLED) {
-				ItemParticlesClient.LOGGER.error("Failed to get pos from spawn area from [{}|{}] for {}, requested: {}",  spawnAreaId.getBaseTexture(), spawnAreaId.getMaskTexture(), ItemParticlesClient.CURRENT_STACK, id);
+			if (pos == null && ItemParticlesClient.isValidationEnabled()) {
+				ItemParticlesClient.logValidationError("Failed to get pos from spawn area from [{}|{}] for {}, requested: {}", spawnAreaId.getBaseTexture(), spawnAreaId.getMaskTexture(), ItemParticlesClient.CURRENT_STACK, id);
 			}
 			return pos;
 		};

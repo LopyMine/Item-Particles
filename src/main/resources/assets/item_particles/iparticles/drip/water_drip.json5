@@ -324,7 +324,11 @@
 			"item": "minecraft:trident",
 			"spawn_area": {
 				"minecraft:item/trident": "2d/trident_drip.png",
-				"minecraft:textures/entity/trident/trident": "3d/trident_3d.png"
+				//? if >=26.1 {
+				/*"minecraft:textures/entity/trident/trident": "3d/trident_drip.png"
+				*///?} else {
+				"minecraft:textures/entity/trident": "3d/trident_drip.png"
+				//?}
 			},
 			"spawn_count": [0, 2],
 			"spawn_frequency": [20, 80],

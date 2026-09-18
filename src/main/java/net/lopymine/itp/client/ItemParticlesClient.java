@@ -1,5 +1,6 @@
 package net.lopymine.itp.client;
 
+import java.util.*;
 import net.lopymine.itp.ItemParticles;
 import net.lopymine.itp.config.ItemParticlesConfig;
 import net.lopymine.mossylib.loader.MossyLoader;
@@ -11,14 +12,41 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.*;
 import org.jspecify.annotations.Nullable;
+import org.slf4j.helpers.MessageFormatter;
 
 
 public class ItemParticlesClient {
 
-	public static boolean VALIDATION_ENABLED = false;
+	@Nullable
+	private static Thread VALIDATION_THREAD = null;
 	@Nullable
 	public static String CURRENT_STACK = null;
 	public static MossyLogger LOGGER = ItemParticles.LOGGER.extend("Client");
+	private static final Map<String, Set<String>> VALIDATION_ERRORS = new LinkedHashMap<>();
+
+	public static boolean isValidationEnabled() {
+		return VALIDATION_THREAD == Thread.currentThread();
+	}
+
+	public static void setValidationEnabled(boolean enabled) {
+		VALIDATION_THREAD = enabled ? Thread.currentThread() : null;
+		if (!enabled) {
+			printValidationErrors();
+		}
+	}
+
+	public static void logValidationError(String message, Object... args) {
+		VALIDATION_ERRORS.computeIfAbsent(message, (key) -> new LinkedHashSet<>()).add(MessageFormatter.arrayFormat(message, args).getMessage());
+	}
+
+	private static void printValidationErrors() {
+		for (Set<String> errors : VALIDATION_ERRORS.values()) {
+			for (String error : errors) {
+				LOGGER.error(error);
+			}
+		}
+		VALIDATION_ERRORS.clear();
+	}
 
 	public static void onInitializeClient() {
 		LOGGER.info("{} Client Initialized", ItemParticles.MOD_NAME);

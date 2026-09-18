@@ -28,8 +28,8 @@
 		{
 			"item": "minecraft:muddy_mangrove_roots",
             "spawn_area": {
-                "minecraft:block/muddy_mangrove_roots_side": "3d/muddy_mangrove_roots_side_piece_manrove_roots.png",
-                "minecraft:block/muddy_mangrove_roots_top": "3d/muddy_mangrove_roots_top_piece_manrove_roots.png"
+                "minecraft:block/muddy_mangrove_roots_side": "3d/muddy_mangrove_roots_side_piece_mangrove_roots.png",
+                "minecraft:block/muddy_mangrove_roots_top": "3d/muddy_mangrove_roots_top_piece_mangrove_roots.png"
             },
 			"spawn_count": [0, 3],
 			"spawn_frequency": [10, 40],

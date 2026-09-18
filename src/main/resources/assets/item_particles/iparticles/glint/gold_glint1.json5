@@ -477,6 +477,7 @@
 		{
 			"item": "minecraft:spyglass",
             "spawn_area": {
+                "minecraft:item/spyglass": "2d/spyglass_glint_gold.png",
                 "minecraft:item/spyglass_model": "3d/spyglass_model_glint_gold.png"
             },
 			"spawn_count": [0, 1],

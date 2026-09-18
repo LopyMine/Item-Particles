@@ -66,22 +66,29 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 		if (Minecraft.getInstance().level == null) {
 			return;
 		}
-		ItemParticlesClient.VALIDATION_ENABLED = true;
+		ItemParticlesClient.setValidationEnabled(true);
 
-		for (Entry<ResourceKey<Item>, Item> entry : BuiltInRegistries.ITEM.entrySet()) {
-			Item item = entry.getValue();
-			if (Minecraft.getInstance().level == null) {
-				break;
+		try {
+			for (Entry<ResourceKey<Item>, Item> entry : BuiltInRegistries.ITEM.entrySet()) {
+				Item item = entry.getValue();
+				if (Minecraft.getInstance().level == null) {
+					break;
+				}
+
+				ItemStack stack = item.getDefaultInstance();
+				if (stack.isEmpty()) {
+					continue;
+				}
+
+				ItemDisplayContext displayContext = ItemDisplayContext.FIXED;
+				ItemParticlesClient.CURRENT_STACK = "%s [%s]".formatted(stack.getDescriptionId(), displayContext.getSerializedName());
+				List<ItemParticleRequest> particleRequests = this.createParticleRequests(stack, SpawnCategory.DROPPED_ITEM, Vec3.ZERO);
+				this.acceptItemParticles(getSpawnPositions(stack, displayContext, new PoseStack()), particleRequests);
 			}
-
-			ItemStack stack = item.getDefaultInstance();
-			List<ItemParticleRequest> particleRequests = this.createParticleRequests(stack, SpawnCategory.DROPPED_ITEM, Vec3.ZERO);
-			ItemParticlesClient.CURRENT_STACK = stack.getDescriptionId();
-			this.acceptItemParticles(getSpawnPositions(stack, ItemDisplayContext.FIXED, new PoseStack()), particleRequests);
+		} finally {
 			ItemParticlesClient.CURRENT_STACK = null;
+			ItemParticlesClient.setValidationEnabled(false);
 		}
-
-		ItemParticlesClient.VALIDATION_ENABLED = false;
 	}
 
 	@Nullable
@@ -91,29 +98,21 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 			return null;
 		}
 
-		if (ItemParticlesClient.VALIDATION_ENABLED) {
-			for (ResourceLocation key : keys) {
-				IParticleSpawnPos pos = spawnPosFunction.apply(key);
-				if (pos == null) {
-					ItemParticlesClient.LOGGER.error("No spawn pos for {}", ItemParticlesClient.CURRENT_STACK);
-				}
-			}
+		if (ItemParticlesClient.isValidationEnabled() && keys.stream().noneMatch((key) -> spawnPosFunction.apply(key) != null)) {
+			ItemParticlesClient.logValidationError("No spawn pos for any of rendered textures {}, for {} from {}", keys, ItemParticlesClient.CURRENT_STACK, getValidationSource(request));
 		}
 
 		ResourceLocation actualTexture = keys.get(request.random.nextInt(0, keys.size()));
 
 		IParticleSpawnPos pos = spawnPosFunction.apply(actualTexture);
 		if (pos == null) {
-			if (ItemParticlesClient.VALIDATION_ENABLED) {
-				ItemParticlesClient.LOGGER.error("No spawn pos for {}", ItemParticlesClient.CURRENT_STACK);
-			}
 			return null;
 		}
 
 		Map<PixelPos, Vector3fc[]> map = spawnPositions.map.get(actualTexture);
 		if (map == null) {
-			if (ItemParticlesClient.VALIDATION_ENABLED) {
-				ItemParticlesClient.LOGGER.error("No pixels map for texture {}, for {}", actualTexture, ItemParticlesClient.CURRENT_STACK);
+			if (ItemParticlesClient.isValidationEnabled()) {
+				ItemParticlesClient.logValidationError("No pixels map for texture {}, for {} from {}", actualTexture, ItemParticlesClient.CURRENT_STACK, getValidationSource(request));
 			}
 			return null;
 		}
@@ -121,13 +120,26 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 		Vector3fc[] array = pos.get(request, map);
 
 		if (array == null || array.length == 0) {
-			if (ItemParticlesClient.VALIDATION_ENABLED) {
-				ItemParticlesClient.LOGGER.error("No position vectors for texture {}, for {}", actualTexture, ItemParticlesClient.CURRENT_STACK);
+			if (ItemParticlesClient.isValidationEnabled()) {
+				ItemParticlesClient.logValidationError("No position vectors for pixel [{}, {}] of texture {}, for {} from {}", pos.x(), pos.y(), actualTexture, ItemParticlesClient.CURRENT_STACK, getValidationSource(request));
 			}
 			return null;
 		}
 
 		return array[request.getRandom().nextInt(array.length)];
+	}
+
+	private static String getValidationSource(ItemParticleRequest request) {
+		ParticleSpawner spawner = request.getSpawner();
+		if (spawner == null) {
+			return "unknown spawner";
+		}
+
+		if (spawner.getSpawnArea() instanceof AdvancedSpawnAreas areas) {
+			return "%s, configured textures: %s".formatted(spawner.getSource(), areas.areas().keySet());
+		}
+
+		return String.valueOf(spawner.getSource());
 	}
 
 	//? if >=1.21.4 {
@@ -192,7 +204,6 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 		this.acceptItemParticles(getSpawnPositions(state, poseStack), this.itemFrameParticles.remove(uuid));
 	}
 	*///?} else {
-	// before 1.21.4 the renderers still hand out the entity itself, so the render states carrying a uuid are not needed
 	public void acceptDroppedItemParticleRequests(ItemStack stack, PoseStack poseStack, ItemEntity itemEntity) {
 		List<ItemParticleRequest> requests = this.droppedItemParticles.remove(itemEntity.getUUID());
 		if (requests == null || requests.isEmpty()) {
@@ -273,7 +284,6 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 		//? if >=1.21.4 {
 		/*this.acceptItemParticles(getSpawnPositions(state, poseStack), requests, FirstPersonSpace.getToLevel(new Matrix4f()));
 		*///?} else {
-		// the hand space transform needs a render pass that does not exist yet, so these particles stay in world space
 		this.acceptItemParticles(getSpawnPositions(stack, displayContext, poseStack), requests, null);
 		//?}
 	}
@@ -298,14 +308,14 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 
 	private void acceptItemParticles(SpawnPositions spawnPositions, @Nullable List<ItemParticleRequest> requests, @Nullable Matrix4f transform) {
 		if (requests == null || requests.isEmpty()) {
-			if (ItemParticlesClient.VALIDATION_ENABLED) {
-				ItemParticlesClient.LOGGER.error("No particles were spawned for " + ItemParticlesClient.CURRENT_STACK);
+			if (ItemParticlesClient.isValidationEnabled()) {
+				ItemParticlesClient.logValidationError("No particles were spawned for {}", ItemParticlesClient.CURRENT_STACK);
 			}
 			return;
 		}
 		if (spawnPositions.map.isEmpty() || spawnPositions.keys.isEmpty()) {
-			if (ItemParticlesClient.VALIDATION_ENABLED) {
-				ItemParticlesClient.LOGGER.error("No spawn positions were found for " + ItemParticlesClient.CURRENT_STACK);
+			if (ItemParticlesClient.isValidationEnabled()) {
+				ItemParticlesClient.logValidationError("No spawn positions were found for {}", ItemParticlesClient.CURRENT_STACK);
 			}
 			return;
 		}
@@ -323,8 +333,8 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 		for (ItemParticleRequest request : requests) {
 			Function<ResourceLocation, @Nullable IParticleSpawnPos> spawnPosFunction = request.getSpawnPosFunction();
 			if (spawnPosFunction == null) {
-				if (ItemParticlesClient.VALIDATION_ENABLED) {
-					ItemParticlesClient.LOGGER.error("No spawn pos func for " + ItemParticlesClient.CURRENT_STACK);
+				if (ItemParticlesClient.isValidationEnabled()) {
+					ItemParticlesClient.logValidationError("No spawn pos func for {}", ItemParticlesClient.CURRENT_STACK);
 				}
 				continue;
 			}
@@ -340,13 +350,13 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 
 			ItemParticle particle = request.create(vector.x() + camera.x(), vector.y() + camera.y(), vector.z() + camera.z());
 			if (particle == null) {
-				if (ItemParticlesClient.VALIDATION_ENABLED) {
-					ItemParticlesClient.LOGGER.error("Failed to create particle from request for {}", ItemParticlesClient.CURRENT_STACK);
+				if (ItemParticlesClient.isValidationEnabled()) {
+					ItemParticlesClient.logValidationError("Failed to create particle from request for {}", ItemParticlesClient.CURRENT_STACK);
 				}
 				continue;
 			}
 
-			if (ItemParticlesClient.VALIDATION_ENABLED) {
+			if (ItemParticlesClient.isValidationEnabled()) {
 				continue;
 			}
 
@@ -381,8 +391,8 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 	private List<ItemParticleRequest> createParticleRequests(ItemStack stack, SpawnCategory category, Vec3 impulse) {
 		List<IParticleSpawner> particleSpawners = ParticlesConfigsManager.getSpawnersForItem(stack.getItem());
 		if (particleSpawners == null) {
-			if (ItemParticlesClient.VALIDATION_ENABLED) {
-				ItemParticlesClient.LOGGER.error("No registered particle spawners for " + stack.getDescriptionId());
+			if (ItemParticlesClient.isValidationEnabled()) {
+				ItemParticlesClient.logValidationError("No registered particle spawners for {}", ItemParticlesClient.CURRENT_STACK);
 			}
 			return new ArrayList<>();
 		}
@@ -391,7 +401,7 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 		List<ItemParticleRequest> particles = new ArrayList<>();
 
 		for (IParticleSpawner spawner : particleSpawners) {
-			if (ItemParticlesClient.VALIDATION_ENABLED) {
+			if (ItemParticlesClient.isValidationEnabled()) {
 				particles.addAll(spawner.spawn(context));
 			} else {
 				particles.addAll(spawner.tickAndSpawn(context));
@@ -544,6 +554,8 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 		private ParticleConfig config;
 		@Nullable
 		private Function<ResourceLocation, @Nullable IParticleSpawnPos> spawnPosFunction;
+		@Nullable
+		private ParticleSpawner spawner;
 
 		@Nullable
 		public ItemParticle create(double x, double y, double z) {

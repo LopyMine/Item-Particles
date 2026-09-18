@@ -9,14 +9,14 @@
 	},
 
 	"textures": [
-		"item_particles:piece/blocks/wool/light_gray_wool_piece_0.png",
-		"item_particles:piece/blocks/wool/light_gray_wool_piece_1.png",
-		"item_particles:piece/blocks/wool/light_gray_wool_piece_2.png"
+		"item_particles:piece/blocks/wool/red_wool_piece_0.png",
+		"item_particles:piece/blocks/wool/red_wool_piece_1.png",
+		"item_particles:piece/blocks/wool/red_wool_piece_2.png"
 	],
 	
 	"holders": [
 		{
-			"item": "minecraft:light_gray_wool",
+			"item": "minecraft:red_wool",
 			"spawn_area": "#full",
 			"spawn_count": [0, 3],
 			"spawn_frequency": [10, 40],
@@ -26,7 +26,7 @@
 			"nbt_conditions": []
 		},
 		{
-			"item": "minecraft:light_gray_carpet",
+			"item": "minecraft:red_carpet",
 			"spawn_area": "#full",
 			"spawn_count": [0, 2],
 			"spawn_frequency": [10, 40],
@@ -36,9 +36,13 @@
 			"nbt_conditions": []
 		},
 		{
-			"item": "minecraft:light_gray_banner",
+			"item": "minecraft:red_banner",
             "spawn_area": {
-                "minecraft:entity/banner/banner_base": "3d/banner_base_piece.png"
+                //? if >=26.1 {
+                /*"minecraft:entity/banner/banner_base": "3d/banner_base_piece.png"
+                *///?} else {
+                "minecraft:entity/banner_base": "3d/banner_base_piece.png"
+                //?}
             },
 			"spawn_count": [0, 2],
 			"spawn_frequency": [10, 40],
@@ -48,17 +52,21 @@
 			"nbt_conditions": []
 		},
 		{
-			"item": "minecraft:light_gray_bed",
+			"item": "minecraft:red_bed",
 			"spawn_area": {
-                "minecraft:block/bed_down": "3d/bed_down_piece.png",
+                //? if >=26.2 {
+                /*"minecraft:block/bed_down": "3d/bed_down_piece.png",
                 "minecraft:block/bed_head_north": "3d/bed_head_north_piece.png",
-                "minecraft:block/light_gray_bed_foot_east": "3d/bed_foot_east_piece.png",
-                "minecraft:block/light_gray_bed_foot_south": "3d/bed_foot_south_piece.png",
-                "minecraft:block/light_gray_bed_foot_up": "3d/bed_foot_up_piece.png",
-                "minecraft:block/light_gray_bed_foot_west": "3d/bed_foot_west_piece.png",
-                "minecraft:block/light_gray_bed_head_east": "3d/bed_head_east_piece.png",
-                "minecraft:block/light_gray_bed_head_up": "3d/bed_head_up_piece.png",
-                "minecraft:block/light_gray_bed_head_west": "3d/bed_head_west_piece.png"
+                "minecraft:block/red_bed_foot_east": "3d/bed_foot_east_piece.png",
+                "minecraft:block/red_bed_foot_south": "3d/bed_foot_south_piece.png",
+                "minecraft:block/red_bed_foot_up": "3d/bed_foot_up_piece.png",
+                "minecraft:block/red_bed_foot_west": "3d/bed_foot_west_piece.png",
+                "minecraft:block/red_bed_head_east": "3d/bed_head_east_piece.png",
+                "minecraft:block/red_bed_head_up": "3d/bed_head_up_piece.png",
+                "minecraft:block/red_bed_head_west": "3d/bed_head_west_piece.png"
+                *///?} else {
+                "minecraft:entity/bed/red": "3d/bed_piece.png"
+                //?}
             },
 			"spawn_count": [0, 2],
 			"spawn_frequency": [10, 40],
@@ -68,8 +76,8 @@
 			"nbt_conditions": []
 		},
 		{
-			"item": "minecraft:light_gray_harness",
-			"spawn_area": "2d/light_gray_harness_piece.png",
+			"item": "minecraft:red_harness",
+			"spawn_area": "2d/red_harness_piece.png",
 			"spawn_count": [0, 2],
 			"spawn_frequency": [10, 40],
 			"speed_coefficient": 0.15,

@@ -30,6 +30,8 @@ public class ParticleSpawner extends TickElement implements IParticleSpawner {
 	private IColorProvider colorType;
 	private ISpawnPredicate spawnCondition;
 	private Function<SpawnContext, ItemParticleRequest> function;
+	@Nullable
+	private String source;
 	private int nextSpawnTicks = 0;
 
 	public ParticleSpawner(IParticleSpawnArea spawnArea, IntegerRange countRange, IntegerRange frequencyRange, double speedCoefficient, IColorProvider colorType, ISpawnPredicate spawnCondition, Function<SpawnContext, ItemParticleRequest> function) {
@@ -66,29 +68,30 @@ public class ParticleSpawner extends TickElement implements IParticleSpawner {
 	}
 
 	private List<ItemParticleRequest> createParticles(int spawnCount, SpawnContext context, Consumer<ItemParticleRequest> consumer) {
-		if (!ItemParticlesClient.VALIDATION_ENABLED && !this.spawnCondition.test(context.stack())) {
+		if (!ItemParticlesClient.isValidationEnabled() && !this.spawnCondition.test(context.stack())) {
 			return List.of();
 		}
 
 		SpawnCategory category = context.category();
 		ItemParticlesConfig config = ItemParticlesConfig.getInstance();
 
-		if (!ItemParticlesClient.VALIDATION_ENABLED && !config.getParticleConfig().isSpawnEnabled(category)) {
+		if (!ItemParticlesClient.isValidationEnabled() && !config.getParticleConfig().isSpawnEnabled(category)) {
 			return List.of();
 		}
 
-		if (!ItemParticlesClient.VALIDATION_ENABLED && config.getWhitelistsConfig().getConfig(category).cannotProcess(context.stack().getItem())) {
+		if (!ItemParticlesClient.isValidationEnabled() && config.getWhitelistsConfig().getConfig(category).cannotProcess(context.stack().getItem())) {
 			return List.of();
 		}
 
 		float count = (float) ((((float) spawnCount)) * config.getCoefficientsConfig().getCountCoefficient(category));
-		int countOfParticles = ItemParticlesClient.VALIDATION_ENABLED ? 1 : (count > 0.0F && count < 1.0F ? 1 : (int) count);
+		int countOfParticles = ItemParticlesClient.isValidationEnabled() ? 1 : (count > 0.0F && count < 1.0F ? 1 : (int) count);
 
 		List<ItemParticleRequest> particles = new ArrayList<>();
 		for (int i = 0; i < countOfParticles; i++) {
 			ItemParticleRequest particle = this.function.apply(context);
 			consumer.accept(particle);
 
+			particle.setSpawner(this);
 			this.setSpawnPos(particle);
 			this.setParticleColorController(particle, context);
 

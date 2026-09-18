@@ -38,7 +38,11 @@
 		{
 			"item": "minecraft:gray_banner",
             "spawn_area": {
-                "minecraft:entity/banner/banner_base": "3d/banner_base_piece.png"
+                //? if >=26.1 {
+                /*"minecraft:entity/banner/banner_base": "3d/banner_base_piece.png"
+                *///?} else {
+                "minecraft:entity/banner_base": "3d/banner_base_piece.png"
+                //?}
             },
 			"spawn_count": [0, 2],
 			"spawn_frequency": [10, 40],
@@ -50,7 +54,8 @@
 		{
 			"item": "minecraft:gray_bed",
 			"spawn_area": {
-                "minecraft:block/bed_down": "3d/bed_down_piece.png",
+                //? if >=26.2 {
+                /*"minecraft:block/bed_down": "3d/bed_down_piece.png",
                 "minecraft:block/bed_head_north": "3d/bed_head_north_piece.png",
                 "minecraft:block/gray_bed_foot_east": "3d/bed_foot_east_piece.png",
                 "minecraft:block/gray_bed_foot_south": "3d/bed_foot_south_piece.png",
@@ -59,6 +64,9 @@
                 "minecraft:block/gray_bed_head_east": "3d/bed_head_east_piece.png",
                 "minecraft:block/gray_bed_head_up": "3d/bed_head_up_piece.png",
                 "minecraft:block/gray_bed_head_west": "3d/bed_head_west_piece.png"
+                *///?} else {
+                "minecraft:entity/bed/gray": "3d/bed_piece.png"
+                //?}
             },
 			"spawn_count": [0, 2],
 			"spawn_frequency": [10, 40],

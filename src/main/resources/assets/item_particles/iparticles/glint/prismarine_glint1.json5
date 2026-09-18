@@ -175,7 +175,12 @@
 		{
 			"item": "minecraft:trident",
             "spawn_area": {
-                "minecraft:entity/trident/trident": "3d/trident_glint_prismarine.png"
+                "minecraft:item/trident": "2d/trident_glint_prismarine.png",
+                //? if >=26.1 {
+                /*"minecraft:entity/trident/trident": "3d/trident_glint_prismarine.png"
+                *///?} else {
+                "minecraft:entity/trident": "3d/trident_glint_prismarine.png"
+                //?}
             },
 			"spawn_count": [0, 2],
 			"spawn_frequency": [10, 40],

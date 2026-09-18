@@ -189,7 +189,7 @@
 		
 		
 		//? if <=1.21.4 {
-		/*{
+		{
 			"item": "minecraft:pig_spawn_egg",
 			"spawn_area": "2d/spawn_egg.png",
 			"spawn_count": [0, 2],
@@ -217,8 +217,8 @@
 			"nbt_conditions_match": "any",
 			"nbt_conditions": []
 		},
-		*///?} else {
-		{
+		//?} else {
+		/*{
 			"item": "minecraft:pig_spawn_egg",
 			"spawn_area": "2d/pig_spawn_egg_sand.png",
 			"spawn_count": [0, 2],
@@ -246,7 +246,7 @@
 			"nbt_conditions_match": "any",
 			"nbt_conditions": []
 		},
-		//?}
+		*///?}
 		
 		
 		

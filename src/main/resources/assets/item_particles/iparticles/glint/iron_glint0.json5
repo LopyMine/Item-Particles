@@ -353,8 +353,13 @@
 		{
 			"item": "minecraft:shield",
             "spawn_area": {
-                "minecraft:entity/shield/shield_base_nopattern": "3d/shield_base_nopattern_glint.png",
+                //? if >=26.1 {
+                /*"minecraft:entity/shield/shield_base_nopattern": "3d/shield_base_nopattern_glint.png",
                 "minecraft:entity/shield/shield_base": "3d/shield_base_glint.png"
+                *///?} else {
+                "minecraft:entity/shield_base_nopattern": "3d/shield_base_nopattern_glint.png",
+                "minecraft:entity/shield_base": "3d/shield_base_glint.png"
+                //?}
             },
 			"spawn_count": [0, 2],
 			"spawn_frequency": [10, 40],
@@ -386,7 +391,12 @@
 		{
 			"item": "minecraft:trident",
             "spawn_area": {
-                "minecraft:entity/trident/trident": "3d/trident_glint_iron.png"
+                "minecraft:item/trident": "2d/trident_glint_iron.png",
+                //? if >=26.1 {
+                /*"minecraft:entity/trident/trident": "3d/trident_glint_iron.png"
+                *///?} else {
+                "minecraft:entity/trident": "3d/trident_glint_iron.png"
+                //?}
             },
 			"spawn_count": [0, 2],
 			"spawn_frequency": [10, 40],

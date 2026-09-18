@@ -78,7 +78,6 @@ public abstract class AbstractItemParticle<E extends AbstractItemParticle<E>> ex
 		//? if >=1.21.9 {
 		/*super(level, x, y, z, sprite);
 		*///?} else {
-		// before 1.21.9 the sprite lives on TextureSheetParticle instead of the quad particle itself
 		super(level, x, y, z);
 		this.setSprite(sprite);
 		//?}

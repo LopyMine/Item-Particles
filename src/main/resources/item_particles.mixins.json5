@@ -45,8 +45,7 @@
 		"SpriteContentsAccessor",
 		"GameRendererMixin",
 		"ItemEntityRendererMixin",
-		"ScreenMixin",
-		"ParticleEngineMixin"
+		"ScreenMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

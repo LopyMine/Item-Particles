@@ -367,6 +367,7 @@ public class ParticlesConfigsManager extends AbstractConfigsManager<ParticleConf
 							particleData.getSpeedCoefficient()
 					);
 					ParticleSpawner spawner = familyHolder.createSpawner(copy::createParticle);
+					spawner.setSource("%s (%s)".formatted(config.getLocation(), id));
 					list.add(spawner);
 				}
 			}
@@ -539,6 +540,7 @@ public class ParticlesConfigsManager extends AbstractConfigsManager<ParticleConf
 
 		for (ParticleHolder holder : config.getHolders()) {
 			ParticleSpawner spawner = holder.createSpawner(config::createParticle);
+			spawner.setSource(id.toString());
 			Either<CachedItem, ResourceLocation> itemOrTag = holder.getItemOrTag();
 			itemOrTag.ifLeft((cachedItem) -> {
 				Item item = cachedItem.getItem();
