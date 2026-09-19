@@ -608,15 +608,10 @@ public class ModelTexelScanner {
 			this.texture = this.atlas == null ? getTexture(location) : null;
 		}
 
-		@Override
+		//? if >=1.21 {
+		/*@Override
 		public void putBulkData(PoseStack.Pose pose, BakedQuad quad, float[] brightness, float red, float green, float blue, float alpha, int[] lights, int overlay, boolean readExistingColor) {
-			if (this.glint) {
-				return;
-			}
-
-			int tint = FastColor.ARGB32.color((int) (alpha * 255.0F), (int) (red * 255.0F), (int) (green * 255.0F), (int) (blue * 255.0F));
-
-			visitBakedQuad(quad, pose.pose(), tint, this.output);
+			this.putBakedQuad(pose, quad, red, green, blue, alpha);
 		}
 
 		@Override
@@ -637,11 +632,7 @@ public class ModelTexelScanner {
 			this.vs[this.vertexIndex] = v;
 
 			// every textured vertex sets its uv exactly once, so this doubles as the end of a vertex
-			if (++this.vertexIndex == 4) {
-				this.vertexIndex = 0;
-				this.visitCollectedQuad();
-			}
-
+			this.nextVertex();
 			return this;
 		}
 
@@ -658,6 +649,76 @@ public class ModelTexelScanner {
 		@Override
 		public @NonNull VertexConsumer setNormal(float x, float y, float z) {
 			return this;
+		}
+		*///?} else {
+		@Override
+		public void putBulkData(PoseStack.Pose pose, BakedQuad quad, float[] brightness, float red, float green, float blue, int[] lights, int overlay, boolean readExistingColor) {
+			this.putBakedQuad(pose, quad, red, green, blue, 1.0F);
+		}
+
+		@Override
+		public @NonNull VertexConsumer vertex(double x, double y, double z) {
+			this.positions[this.vertexIndex].set((float) x, (float) y, (float) z);
+			return this;
+		}
+
+		@Override
+		public @NonNull VertexConsumer color(int red, int green, int blue, int alpha) {
+			this.color = FastColor.ARGB32.color(alpha, red, green, blue);
+			return this;
+		}
+
+		@Override
+		public @NonNull VertexConsumer uv(float u, float v) {
+			this.us[this.vertexIndex] = u;
+			this.vs[this.vertexIndex] = v;
+			return this;
+		}
+
+		@Override
+		public @NonNull VertexConsumer overlayCoords(int u, int v) {
+			return this;
+		}
+
+		@Override
+		public @NonNull VertexConsumer uv2(int u, int v) {
+			return this;
+		}
+
+		@Override
+		public @NonNull VertexConsumer normal(float x, float y, float z) {
+			return this;
+		}
+
+		@Override
+		public void endVertex() {
+			this.nextVertex();
+		}
+
+		@Override
+		public void defaultColor(int red, int green, int blue, int alpha) {
+		}
+
+		@Override
+		public void unsetDefaultColor() {
+		}
+		//?}
+
+		private void putBakedQuad(PoseStack.Pose pose, BakedQuad quad, float red, float green, float blue, float alpha) {
+			if (this.glint) {
+				return;
+			}
+
+			int tint = FastColor.ARGB32.color((int) (alpha * 255.0F), (int) (red * 255.0F), (int) (green * 255.0F), (int) (blue * 255.0F));
+
+			visitBakedQuad(quad, pose.pose(), tint, this.output);
+		}
+
+		private void nextVertex() {
+			if (++this.vertexIndex == 4) {
+				this.vertexIndex = 0;
+				this.visitCollectedQuad();
+			}
 		}
 
 		private void visitCollectedQuad() {

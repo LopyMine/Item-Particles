@@ -19,10 +19,10 @@ public record AdvancedSpawnAreas(Map<ResourceLocation, AdvancedSpawnAreaId> area
 
 		for (Entry<ResourceLocation, String> entry : map.entrySet()) {
 			DataResult<AdvancedSpawnAreaId> result = AdvancedSpawnAreaId.read(entry.getKey(), entry.getValue());
-			if (result.isError()) {
+			if (result.error().isPresent()) {
 				return DataResult.error(() -> result.error().orElseThrow().message());
 			}
-			areas.put(AdvancedSpawnAreaId.getValidatedBaseTexture(entry.getKey()), result.getOrThrow());
+			areas.put(AdvancedSpawnAreaId.getValidatedBaseTexture(entry.getKey()), result.result().orElseThrow());
 		}
 
 		return DataResult.success(new AdvancedSpawnAreas(areas));

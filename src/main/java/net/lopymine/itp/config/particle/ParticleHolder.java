@@ -62,7 +62,11 @@ public class ParticleHolder {
 				}
 				throw new IllegalArgumentException("Unknown advanced spawn area format: " + s);
 			} else {
-				AdvancedSpawnAreaId id = AdvancedSpawnAreaId.read(null, s).getOrThrow();
+				//? if >=1.21 {
+				/*AdvancedSpawnAreaId id = AdvancedSpawnAreaId.read(null, s).getOrThrow();
+				*///?} else {
+				AdvancedSpawnAreaId id = AdvancedSpawnAreaId.read(null, s).getOrThrow(false, (error) -> { });
+				//?}
 				return new AdvancedSpawnAreas(new AbstractMap<>() {
 
 					@Override

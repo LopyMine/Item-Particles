@@ -85,6 +85,6 @@ public class ItemParticlesAtlasManager {
 	}
 
 	public TextureAtlasSprite getMissingSprite() {
-		return /*? if >=1.21 {*/ this.atlas.missingSprite /*?} else {*/ /*this.atlas.getSprite(MissingTextureAtlasSprite.getLocation()) *//*?}*/;
+		return /*? if >=1.21 {*/ /*this.atlas.missingSprite *//*?} else {*/ this.atlas.getSprite(MissingTextureAtlasSprite.getLocation()) /*?}*/;
 	}
 }

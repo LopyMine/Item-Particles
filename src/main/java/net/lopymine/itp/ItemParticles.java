@@ -12,18 +12,18 @@ public class ItemParticles {
 
 	public static ResourceLocation id(String path) {
 		//? if >=1.21 {
-		return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
-		//?} else {
-		/*return ResourceLocation.tryBuild(MOD_ID, path);
-		 *///?}
+		/*return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
+		*///?} else {
+		return ResourceLocation.tryBuild(MOD_ID, path);
+		 //?}
 	}
 
 	public static ResourceLocation parseId(String path) {
 		//? if >=1.21 {
-		return ResourceLocation.parse(path);
-		//?} else {
-		/*return new ResourceLocation(path);
-		 *///?}
+		/*return ResourceLocation.parse(path);
+		*///?} else {
+		return new ResourceLocation(path);
+		 //?}
 	}
 
 	public static MutableComponent text(String path, Object... args) {

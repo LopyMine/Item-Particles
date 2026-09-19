@@ -139,8 +139,14 @@ public class FirstPersonParticleRenderer {
 			return;
 		}
 
-		Matrix4fStack modelViewStack = RenderSystem.getModelViewStack();
+		//? if >=1.21 {
+		/*Matrix4fStack modelViewStack = RenderSystem.getModelViewStack();
 		modelViewStack.pushMatrix().mul(GameRendererUtils.getViewRotationMatrix(new Matrix4f()));
+		*///?} else {
+		PoseStack modelViewStack = RenderSystem.getModelViewStack();
+		modelViewStack.pushPose();
+		modelViewStack.mulPoseMatrix(GameRendererUtils.getViewRotationMatrix(new Matrix4f()));
+		//?}
 		RenderSystem.applyModelViewMatrix();
 
 		Minecraft minecraft = Minecraft.getInstance();
@@ -150,26 +156,40 @@ public class FirstPersonParticleRenderer {
 
 		for (Map.Entry<ParticleRenderType, List<ItemParticle>> entry : particlesByType.entrySet()) {
 			RenderSystem.setShader(GameRenderer::getParticleShader);
-			BufferBuilder builder = entry.getKey().begin(Tesselator.getInstance(), minecraft.getTextureManager());
+			//? if >=1.21 {
+			/*BufferBuilder builder = entry.getKey().begin(Tesselator.getInstance(), minecraft.getTextureManager());
 			if (builder == null) {
 				continue;
 			}
+			*///?} else {
+			Tesselator tesselator = Tesselator.getInstance();
+			BufferBuilder builder = tesselator.getBuilder();
+			entry.getKey().begin(builder, minecraft.getTextureManager());
+			//?}
 
 			for (ItemParticle particle : entry.getValue()) {
 				particle.renderInHandSpace(builder, camera, tickProgress, levelToHand, sizeScale);
 			}
 
-			MeshData mesh = builder.build();
+			//? if >=1.21 {
+			/*MeshData mesh = builder.build();
 			if (mesh != null) {
 				BufferUploader.drawWithShader(mesh);
 			}
+			*///?} else {
+			entry.getKey().end(tesselator);
+			//?}
 		}
 
 		RenderSystem.depthMask(true);
 		RenderSystem.disableBlend();
 		lightTexture.turnOffLightLayer();
 
-		modelViewStack.popMatrix();
+		//? if >=1.21 {
+		/*modelViewStack.popMatrix();
+		*///?} else {
+		modelViewStack.popPose();
+		//?}
 		RenderSystem.applyModelViewMatrix();
 	}
 	//?}

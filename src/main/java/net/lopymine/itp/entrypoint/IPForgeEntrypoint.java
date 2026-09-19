@@ -1,7 +1,7 @@
 package net.lopymine.itp.entrypoint;
 
 //? if forge {
-/*import net.lopymine.ip.ItemParticles;
+/*import net.lopymine.itp.ItemParticles;
 import net.lopymine.mossylib.MossyLib;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;

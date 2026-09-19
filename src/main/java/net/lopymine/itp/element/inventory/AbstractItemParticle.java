@@ -45,6 +45,11 @@ public abstract class AbstractItemParticle<E extends AbstractItemParticle<E>> ex
 	public static float SPEED_SCALE = 1.0F / 24.0F;
 	public static double HAND_DEPTH_BIAS = 0.005D;
 	public static double FIRST_PERSON_FACING_OFFSET = 0.0D;
+	//? if <1.21 {
+	private static final float QUAD_SIDE = -1.0F;
+	//?} elif <1.21.9 {
+	/*private static final float QUAD_SIDE = 1.0F;
+	*///?}
 
 	protected boolean initialized = false;
 	private double standardParticleAngle;
@@ -189,7 +194,7 @@ public abstract class AbstractItemParticle<E extends AbstractItemParticle<E>> ex
 			return;
 		}
 
-		this.renderRotatedQuad(consumer, camera, this.getRolledBillboardRotation(camera, tickProgress), tickProgress);
+		this.renderQuad(consumer, this.getRolledBillboardRotation(camera, tickProgress), this.getRelativePosition(camera, tickProgress), this.getQuadSize(tickProgress), this.getLightColor(tickProgress));
 	}
 	//?}
 
@@ -202,12 +207,16 @@ public abstract class AbstractItemParticle<E extends AbstractItemParticle<E>> ex
 	}
 
 	private Vector3f getPositionInHandSpace(Camera camera, float tickProgress, Matrix4f levelToHand) {
+		return levelToHand.transformPosition(this.getRelativePosition(camera, tickProgress));
+	}
+
+	private Vector3f getRelativePosition(Camera camera, float tickProgress) {
 		Vec3 cameraPos = GameRendererUtils.getPosition(camera);
-		return levelToHand.transformPosition(new Vector3f(
+		return new Vector3f(
 				(float) (Mth.lerp(tickProgress, this.xo, this.x) - cameraPos.x()),
 				(float) (Mth.lerp(tickProgress, this.yo, this.y) - cameraPos.y()),
 				(float) (Mth.lerp(tickProgress, this.zo, this.z) - cameraPos.z())
-		));
+		);
 	}
 
 	public Quaternionf getBillboardRotation(Camera camera, float tickProgress, Quaternionf dest) {
@@ -286,18 +295,23 @@ public abstract class AbstractItemParticle<E extends AbstractItemParticle<E>> ex
 		Quaternionf rotation = this.getRolledBillboardRotation(camera, tickProgress);
 		Vector3f position = this.getPositionInHandSpace(camera, tickProgress, levelToHand);
 
-		float size = this.getQuadSize(tickProgress) * sizeScale;
-		int light = this.getLightColor(tickProgress);
-
-		this.renderVertexInHandSpace(consumer, rotation, position, 1.0F, -1.0F, size, this.getU1(), this.getV1(), light);
-		this.renderVertexInHandSpace(consumer, rotation, position, 1.0F, 1.0F, size, this.getU1(), this.getV0(), light);
-		this.renderVertexInHandSpace(consumer, rotation, position, -1.0F, 1.0F, size, this.getU0(), this.getV0(), light);
-		this.renderVertexInHandSpace(consumer, rotation, position, -1.0F, -1.0F, size, this.getU0(), this.getV1(), light);
+		this.renderQuad(consumer, rotation, position, this.getQuadSize(tickProgress) * sizeScale, this.getLightColor(tickProgress));
 	}
 
-	private void renderVertexInHandSpace(VertexConsumer consumer, Quaternionf rotation, Vector3f position, float offsetX, float offsetY, float size, float u, float v, int light) {
+	private void renderQuad(VertexConsumer consumer, Quaternionf rotation, Vector3f position, float size, int light) {
+		this.renderQuadVertex(consumer, rotation, position, QUAD_SIDE, -1.0F, size, this.getU1(), this.getV1(), light);
+		this.renderQuadVertex(consumer, rotation, position, QUAD_SIDE, 1.0F, size, this.getU1(), this.getV0(), light);
+		this.renderQuadVertex(consumer, rotation, position, -QUAD_SIDE, 1.0F, size, this.getU0(), this.getV0(), light);
+		this.renderQuadVertex(consumer, rotation, position, -QUAD_SIDE, -1.0F, size, this.getU0(), this.getV1(), light);
+	}
+
+	private void renderQuadVertex(VertexConsumer consumer, Quaternionf rotation, Vector3f position, float offsetX, float offsetY, float size, float u, float v, int light) {
 		Vector3f vertex = new Vector3f(offsetX, offsetY, 0.0F).rotate(rotation).mul(size).add(position);
-		consumer.addVertex(vertex.x(), vertex.y(), vertex.z()).setUv(u, v).setColor(this.rCol, this.gCol, this.bCol, this.alpha).setLight(light);
+		//? if >=1.21 {
+		/*consumer.addVertex(vertex.x(), vertex.y(), vertex.z()).setUv(u, v).setColor(this.rCol, this.gCol, this.bCol, this.alpha).setLight(light);
+		*///?} else {
+		consumer.vertex(vertex.x(), vertex.y(), vertex.z()).uv(u, v).color(this.rCol, this.gCol, this.bCol, this.alpha).uv2(light).endVertex();
+		//?}
 	}
 	//?}
 

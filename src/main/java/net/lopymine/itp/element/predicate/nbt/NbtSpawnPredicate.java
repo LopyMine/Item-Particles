@@ -39,14 +39,14 @@ public class NbtSpawnPredicate implements ISpawnPredicate {
 			}
 
 			//? if >=1.21 {
-			Tag nbt = ItemStack.CODEC.encodeStart(player.registryAccess().createSerializationContext(NbtOps.INSTANCE), stack).getOrThrow();
+			/*Tag nbt = ItemStack.CODEC.encodeStart(player.registryAccess().createSerializationContext(NbtOps.INSTANCE), stack).getOrThrow();
 			if (!(nbt instanceof CompoundTag root)) {
 				this.debugLog(null, DebugLogReason.ENCODED_WRONG_ROOT, stack.getItem().getStringName());
 				return false;
 			}
-			//?} else {
-			/*CompoundTag root = stack.save(new CompoundTag());
-			 *///?}
+			*///?} else {
+			CompoundTag root = stack.save(new CompoundTag());
+			 //?}
 
 			int success = 0;
 			List<DebugNbtPath> successPaths = new ArrayList<>();

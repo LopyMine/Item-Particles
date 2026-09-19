@@ -430,7 +430,9 @@ import org.jetbrains.annotations.Nullable;
 
 //? if fabric {
 import net.fabricmc.fabric.api.client.render.fluid.v1.*;
-//?} else {
+//?} elif forge {
+/*import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
+*///?} else {
 /*import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 *///?}
 

@@ -166,12 +166,25 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 
 		//? if >=1.21.4 {
 		/*ModelTexelScanner.visitPixels(state, poseStack, collectSpawnPositions(map));
+		*///?} elif >=1.21 {
+		/*ModelTexelScanner.visitPixels(stack, displayContext, poseStack, collectSpawnPositions(map));
 		*///?} else {
-		ModelTexelScanner.visitPixels(stack, displayContext, poseStack, collectSpawnPositions(map));
+		ModelTexelScanner.visitPixels(stack, displayContext, getLevelPose(poseStack), collectSpawnPositions(map));
 		//?}
 
 		return new SpawnPositions(map, new ArrayList<>(map.keySet()));
 	}
+
+	//? if <1.21 {
+	private static PoseStack getLevelPose(PoseStack viewPose) {
+		Matrix4f viewToLevel = GameRendererUtils.getViewRotationMatrix(new Matrix4f()).invert();
+
+		PoseStack pose = new PoseStack();
+		pose.last().pose().set(viewToLevel).mul(viewPose.last().pose());
+		pose.last().normal().set(viewToLevel).mul(viewPose.last().normal());
+		return pose;
+	}
+	//?}
 
 	private static ModelTexelScanner.PixelVisitor collectSpawnPositions(Map<ResourceLocation, Map<PixelPos, Vector3fc[]>> map) {
 		return (texture, x, y, argb, position, faceCenters) -> {

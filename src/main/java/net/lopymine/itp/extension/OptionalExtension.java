@@ -1,14 +1,14 @@
 package net.lopymine.itp.extension;
 
 //? if <=1.20.1 {
-/*import java.util.Optional;
+import java.util.Optional;
 import net.minecraft.nbt.*;
-*///?}
+//?}
 
 public class OptionalExtension {
 
 	//? if <=1.20.1 {
-	/*public static <T extends Tag> Optional<T> to(Optional<CompoundTag> optional, String id, Class<T> clazz) {
+	public static <T extends Tag> Optional<T> to(Optional<CompoundTag> optional, String id, Class<T> clazz) {
 		return to(to(optional, id), clazz);
 	}
 
@@ -31,6 +31,6 @@ public class OptionalExtension {
 	public static Optional<Tag> toFirst(Optional<ListTag> optional) {
 		return optional.map((l) -> l.get(0));
 	}
-	*///?}
+	//?}
 
 }

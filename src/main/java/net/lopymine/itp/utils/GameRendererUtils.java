@@ -6,6 +6,9 @@ import net.minecraft.client.renderer.GameRenderer;
 //? if >=1.21.9 {
 /*import net.minecraft.client.renderer.feature.FeatureRenderDispatcher;
 *///?}
+//? if <1.21 {
+import net.minecraft.util.Mth;
+//?}
 import net.minecraft.world.phys.Vec3;
 import org.joml.*;
 
@@ -48,9 +51,9 @@ public class GameRendererUtils {
 		*///?} else {
 		Camera camera = GameRendererUtils.getMainCamera();
 		//? if >=1.21.10 {
-		/*return Minecraft.getInstance().gameRenderer.getFov(camera, camera.getPartialTickTime(), true);
+		/*return Minecraft.getInstance().gameRenderer.getFov(camera, getPartialTick(camera), true);
 		*///?} else {
-		return (float) Minecraft.getInstance().gameRenderer.getFov(camera, camera.getPartialTickTime(), true);
+		return (float) Minecraft.getInstance().gameRenderer.getFov(camera, getPartialTick(camera), true);
 		//?}
 		//?}
 	}
@@ -63,20 +66,33 @@ public class GameRendererUtils {
 		*///?} else {
 		Camera camera = GameRendererUtils.getMainCamera();
 		//? if >=1.21.10 {
-		/*return Minecraft.getInstance().gameRenderer.getFov(camera, camera.getPartialTickTime(), false);
+		/*return Minecraft.getInstance().gameRenderer.getFov(camera, getPartialTick(camera), false);
 		*///?} else {
-		return (float) Minecraft.getInstance().gameRenderer.getFov(camera, camera.getPartialTickTime(), false);
+		return (float) Minecraft.getInstance().gameRenderer.getFov(camera, getPartialTick(camera), false);
 		//?}
 		//?}
 	}
+
+	//? if <26.1 {
+	private static float getPartialTick(Camera camera) {
+		//? if >=1.21 {
+		/*return camera.getPartialTickTime();
+		*///?} else {
+		return Minecraft.getInstance().getFrameTime();
+		//?}
+	}
+	//?}
 
 	public static Matrix4f getViewRotationMatrix(Matrix4f dest) {
 		//? if >=26.2 {
 		/*return dest.set(Minecraft.getInstance().gameRenderer.gameRenderState().levelRenderState.cameraRenderState.viewRotationMatrix);
 		*///?} elif >=26.1 {
 		/*return dest.set(Minecraft.getInstance().gameRenderer.getGameRenderState().levelRenderState.cameraRenderState.viewRotationMatrix);
+		*///?} elif >=1.21 {
+		/*return dest.rotation(GameRendererUtils.getMainCamera().rotation().conjugate(new Quaternionf()));
 		*///?} else {
-		return dest.rotation(GameRendererUtils.getMainCamera().rotation().conjugate(new Quaternionf()));
+		Camera camera = GameRendererUtils.getMainCamera();
+		return dest.rotationX(camera.getXRot() * Mth.DEG_TO_RAD).rotateY((camera.getYRot() + 180.0F) * Mth.DEG_TO_RAD);
 		//?}
 	}
 }

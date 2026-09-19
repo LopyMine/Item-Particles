@@ -10,8 +10,8 @@ import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.*;
 
 //? if >=1.21.1 {
-import net.minecraft.server.packs.resources.ResourceMetadata;
-//?}
+/*import net.minecraft.server.packs.resources.ResourceMetadata;
+*///?}
 
 //? if >=26.1 {
 /*import net.minecraft.client.resources.metadata.texture.TextureMetadataSection;
@@ -76,10 +76,10 @@ public class AtlasSprite {
 		*///?} elif >=1.21.10 {
 		/*SpriteContents contents = new SpriteContents(sprite.getSpriteId(), dimensions, image);
 		*///?} elif >=1.21.1 {
-		SpriteContents contents = new SpriteContents(sprite.getSpriteId(), dimensions, image, ResourceMetadata.EMPTY);
-		//?} else {
-		/*SpriteContents contents = new SpriteContents(sprite.getSpriteId(), dimensions, image, AnimationMetadataSection.EMPTY);
-		*///?}
+		/*SpriteContents contents = new SpriteContents(sprite.getSpriteId(), dimensions, image, ResourceMetadata.EMPTY);
+		*///?} else {
+		SpriteContents contents = new SpriteContents(sprite.getSpriteId(), dimensions, image, AnimationMetadataSection.EMPTY);
+		//?}
 
 		sprite.setContents(contents);
 	}

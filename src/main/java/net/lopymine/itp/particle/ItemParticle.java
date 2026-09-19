@@ -133,7 +133,8 @@ public class ItemParticle extends AbstractItemParticle<ItemParticle> {
 	private static ParticleRenderType createRenderType(ResourceLocation atlasId) {
 		ParticleRenderType type = new ParticleRenderType() {
 
-			@Override
+			//? if >=1.21 {
+			/*@Override
 			public BufferBuilder begin(Tesselator tesselator, TextureManager textureManager) {
 				RenderSystem.depthMask(true);
 				RenderSystem.setShaderTexture(0, atlasId);
@@ -141,6 +142,21 @@ public class ItemParticle extends AbstractItemParticle<ItemParticle> {
 				RenderSystem.defaultBlendFunc();
 				return tesselator.begin(Mode.QUADS, DefaultVertexFormat.PARTICLE);
 			}
+			*///?} else {
+			@Override
+			public void begin(BufferBuilder builder, TextureManager textureManager) {
+				RenderSystem.depthMask(true);
+				RenderSystem.setShaderTexture(0, atlasId);
+				RenderSystem.enableBlend();
+				RenderSystem.defaultBlendFunc();
+				builder.begin(Mode.QUADS, DefaultVertexFormat.PARTICLE);
+			}
+
+			@Override
+			public void end(Tesselator tesselator) {
+				tesselator.end();
+			}
+			//?}
 
 			@Override
 			public String toString() {

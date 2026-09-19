@@ -1,7 +1,7 @@
 package net.lopymine.itp.mixin.forge;
 
 //? if forge {
-/*import net.lopymine.ip.entrypoint.IPForgeClientEntrypoint.LevelJoinEvent;
+/*import net.lopymine.itp.entrypoint.IPForgeClientEntrypoint.LevelJoinEvent;
 import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.network.protocol.game.ClientboundLoginPacket;
 import net.minecraftforge.common.MinecraftForge;

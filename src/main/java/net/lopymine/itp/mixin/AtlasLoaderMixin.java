@@ -19,14 +19,14 @@ import java.util.function.*;
 import net.minecraft.client.renderer.texture.SpriteContents;
 //?}
 //? if <1.21 {
-/*import net.minecraft.server.packs.resources.ResourceManager;
-*///?}
+import net.minecraft.server.packs.resources.ResourceManager;
+//?}
 
 //? if >=1.21 {
-@Mixin(SpriteSourceList.class)
-//?} else {
-/*@Mixin(SpriteResourceLoader.class)
- *///?}
+/*@Mixin(SpriteSourceList.class)
+*///?} else {
+@Mixin(SpriteResourceLoader.class)
+ //?}
 public class AtlasLoaderMixin implements IAtlasLoaderMixin {
 
 	@Unique
@@ -38,7 +38,7 @@ public class AtlasLoaderMixin implements IAtlasLoaderMixin {
 	}
 
 	//? if >=1.21 {
-	@WrapOperation(at = @At(value = "NEW", target = "(Ljava/util/List;)Lnet/minecraft/client/renderer/texture/atlas/SpriteSourceList;"), method = "load")
+	/*@WrapOperation(at = @At(value = "NEW", target = "(Ljava/util/List;)Lnet/minecraft/client/renderer/texture/atlas/SpriteSourceList;"), method = "load")
 	private static SpriteSourceList markAtlas(List<SpriteSourceList> sources, Operation<SpriteSourceList> original, @Local(argsOnly = true) ResourceLocation path) {
 		SpriteSourceList loader = original.call(sources);
 		if (ItemParticlesAtlasManager.FOLDER_ID.equals(path)) {
@@ -46,8 +46,8 @@ public class AtlasLoaderMixin implements IAtlasLoaderMixin {
 		}
 		return loader;
 	}
-	//?} else {
-	/*@WrapOperation(at = @At(value = "NEW", target = "(Ljava/util/List;)Lnet/minecraft/client/renderer/texture/atlas/SpriteResourceLoader;"), method = "load")
+	*///?} else {
+	@WrapOperation(at = @At(value = "NEW", target = "(Ljava/util/List;)Lnet/minecraft/client/renderer/texture/atlas/SpriteResourceLoader;"), method = "load")
 	private static SpriteResourceLoader markAtlas(List<SpriteResourceLoader> sources, Operation<SpriteResourceLoader> original, @Local(argsOnly = true) ResourceLocation path) {
 		SpriteResourceLoader loader = original.call(sources);
 		if (ItemParticlesAtlasManager.FOLDER_ID.equals(path)) {
@@ -55,7 +55,7 @@ public class AtlasLoaderMixin implements IAtlasLoaderMixin {
 		}
 		return loader;
 	}
-	*///?}
+	//?}
 
 	//? if >=1.21.11 {
 	/*@Inject(
@@ -81,15 +81,15 @@ public class AtlasLoaderMixin implements IAtlasLoaderMixin {
 		cir.setReturnValue(builder.build());
 	}
 	*///?} elif >=1.21 {
-	@Inject(
+	/*@Inject(
 			at = @At(
 					value = "INVOKE",
 					target = "Ljava/util/List;forEach(Ljava/util/function/Consumer;)V",
 					shift = Shift.AFTER
 			),
 			//? if neoforge && >=1.21.10 {
-			/*method = "list(Lnet/minecraft/server/packs/resources/ResourceManager;Ljava/util/Set;)Ljava/util/List;",
-			*///?} else {
+			/^method = "list(Lnet/minecraft/server/packs/resources/ResourceManager;Ljava/util/Set;)Ljava/util/List;",
+			^///?} else {
 			method = "list",
 			//?}
 			cancellable = true
@@ -103,8 +103,8 @@ public class AtlasLoaderMixin implements IAtlasLoaderMixin {
 		builder.addAll(map.values());
 		cir.setReturnValue(builder.build());
 	}
-	//?} else {
-	/*@Inject(at = @At(value = "INVOKE", target = "Ljava/util/List;forEach(Ljava/util/function/Consumer;)V", shift = Shift.AFTER), method = "list", cancellable = true)
+	*///?} else {
+	@Inject(at = @At(value = "INVOKE", target = "Ljava/util/List;forEach(Ljava/util/function/Consumer;)V", shift = Shift.AFTER), method = "list", cancellable = true)
 	private void swapMissingTexture(ResourceManager resourceManager, CallbackInfoReturnable<List<Supplier<SpriteContents>>> cir, @Local Map<ResourceLocation, SpriteSource.SpriteSupplier> map) {
 		if (!this.ItemParticles$marked) {
 			return;
@@ -114,5 +114,5 @@ public class AtlasLoaderMixin implements IAtlasLoaderMixin {
 		builder.addAll(map.values());
 		cir.setReturnValue(builder.build());
 	}
-	*///?}
+	//?}
 }

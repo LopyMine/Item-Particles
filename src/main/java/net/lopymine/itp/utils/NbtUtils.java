@@ -6,16 +6,18 @@ import net.lopymine.itp.extension.OptionalExtension;
 import net.minecraft.world.effect.MobEffectInstance;
 
 //? if >=1.21 {
-import net.minecraft.core.component.DataComponents;
+/*import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.component.*;
-//?} else {
-/*import net.minecraft.nbt.*;
+*///?} else {
+import net.minecraft.nbt.*;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.Potion;
 import org.jetbrains.annotations.Nullable;
-*///?}
+//?}
 
 @ExtensionMethod(OptionalExtension.class)
 public class NbtUtils {
@@ -34,23 +36,23 @@ public class NbtUtils {
 
 		if (stack.is(Items.CROSSBOW)) {
 			//? if >=1.21 {
-			return Optional.ofNullable(stack.getComponents().get(DataComponents.CHARGED_PROJECTILES))
+			/*return Optional.ofNullable(stack.getComponents().get(DataComponents.CHARGED_PROJECTILES))
 					//? if >=26.1 {
-					/*.map(ChargedProjectiles::items)
-					*///?} else {
+					/^.map(ChargedProjectiles::items)
+					^///?} else {
 					.map(ChargedProjectiles::getItems)
 					 //?}
 					.filter((list) -> !list.isEmpty())
 					.map((list) -> getColorFromPotionContentsStack(
 							list.get(0)
 							//? if >=26.1 {
-							/*.create()
-							*///?}
+							/^.create()
+							^///?}
 					))
 					.filter(Optional::isPresent)
 					.map(Optional::get);
-			//?} else {
-			/*return Optional.ofNullable(stack.getTag())
+			*///?} else {
+			return Optional.ofNullable(stack.getTag())
 					.to("ChargedProjectiles", ListTag.class)
 					.toEmpty(false)
 					.toFirst(CompoundTag.class)
@@ -64,7 +66,7 @@ public class NbtUtils {
 					})
 					.filter(Optional::isPresent)
 					.map(Optional::get);
-			*///?}
+			//?}
 		}
 
 		//? if >=26.1 {
@@ -72,14 +74,14 @@ public class NbtUtils {
 			return getColorFromDyedStack(stack);
 		}
 		*///?} elif >=1.21 {
-		if (stack.is(net.minecraft.tags.ItemTags.DYEABLE)) {
+		/*if (stack.is(net.minecraft.tags.ItemTags.DYEABLE)) {
 			return getColorFromDyedStack(stack);
 		}
-		//?} else {
-		/*if (stack.getItem() instanceof DyeableLeatherItem) {
+		*///?} else {
+		if (stack.getItem() instanceof DyeableLeatherItem) {
 			return getColorFromDyedStack(stack);
 		}
-		*///?}
+		//?}
 
 		if (stack.is(Items.FIREWORK_STAR)) {
 			return getColorFromFireworkExplosionStack(stack);
@@ -93,7 +95,7 @@ public class NbtUtils {
 	}
 
 	//? if >=1.21 {
-	public static Optional<Integer[]> getColorFromFirework(ItemStack stack) {
+	/*public static Optional<Integer[]> getColorFromFirework(ItemStack stack) {
 		return Optional.ofNullable(stack.getComponents().get(DataComponents.FIREWORKS))
 				.map(Fireworks::explosions)
 				.map((c) -> c.stream()
@@ -102,8 +104,8 @@ public class NbtUtils {
 						.toArray(Integer[]::new)
 				);
 	}
-	//?} else {
-	/*public static Optional<Integer[]> getColorFromFirework(ItemStack stack) {
+	*///?} else {
+	public static Optional<Integer[]> getColorFromFirework(ItemStack stack) {
 		return getColorFromFirework(stack.getTag());
 	}
 
@@ -118,23 +120,23 @@ public class NbtUtils {
 						.toArray(Integer[]::new)
 				);
 	}
-	*///?}
+	//?}
 
 	public static Optional<Integer[]> getColorFromFireworkExplosionStack(ItemStack stack) {
 		//? if >=1.21 {
-		return Optional.ofNullable(stack.getComponents().get(DataComponents.FIREWORK_EXPLOSION))
+		/*return Optional.ofNullable(stack.getComponents().get(DataComponents.FIREWORK_EXPLOSION))
 				.map(NbtUtils::getColorFromFireworkExplosionStack);
-		//?} else {
-		/*return Optional.ofNullable(stack.getTag())
+		*///?} else {
+		return Optional.ofNullable(stack.getTag())
 				.to("Explosion")
 				.map(NbtUtils::getColorFromFireworkExplosionStack)
 				.filter(Optional::isPresent)
 				.map(Optional::get);
-		*///?}
+		//?}
 	}
 
 	//? if >=1.21 {
-	private static Integer[] getColorFromFireworkExplosionStack(FireworkExplosion component) {
+	/*private static Integer[] getColorFromFireworkExplosionStack(FireworkExplosion component) {
 		Integer[] colors = new Integer[component.colors().size()];
 
 		for (int i = 0; i < component.colors().size(); i++) {
@@ -143,8 +145,8 @@ public class NbtUtils {
 
 		return colors;
 	}
-	//?} else {
-	/*public static Optional<Integer[]> getColorFromFireworkExplosionStack(Tag element) {
+	*///?} else {
+	public static Optional<Integer[]> getColorFromFireworkExplosionStack(Tag element) {
 		return Optional.ofNullable(element)
 				.to(CompoundTag.class)
 				.to("Colors", IntArrayTag.class)
@@ -154,11 +156,11 @@ public class NbtUtils {
 						.map(NbtUtils::notZeroAlpha)
 						.toArray(Integer[]::new));
 	}
-	*///?}
+	//?}
 
 	public static Optional<Integer[]> getColorFromPotionContentsStack(ItemStack stack) {
 		//? if >=1.21 {
-		PotionContents component = stack.getComponents().get(DataComponents.POTION_CONTENTS);
+		/*PotionContents component = stack.getComponents().get(DataComponents.POTION_CONTENTS);
 		if (component != null) {
 			Optional<Integer> optional = component.customColor();
 			if (optional.isPresent()) {
@@ -177,32 +179,32 @@ public class NbtUtils {
 			return Optional.of(new Integer[]{-13083194});
 		}
 		return Optional.of(colors.toArray(Integer[]::new));
-		//?} else {
-		/*return Optional.ofNullable(stack.getTag())
+		*///?} else {
+		return Optional.ofNullable(stack.getTag())
 				.map(NbtUtils::getColorFromPotionNbt)
 				.filter(Optional::isPresent)
 				.map(Optional::get);
-		*///?}
+		//?}
 	}
 
 	public static Optional<Integer[]> getColorFromDyedStack(ItemStack stack) {
 		//? if >=1.21 {
-		return Optional.ofNullable(stack.getComponents().get(DataComponents.DYED_COLOR))
+		/*return Optional.ofNullable(stack.getComponents().get(DataComponents.DYED_COLOR))
 				.map(DyedItemColor::rgb)
 				.map(NbtUtils::notZeroAlpha)
 				.map((i) -> new Integer[]{i});
-		//?} else {
-		/*return Optional.ofNullable(stack.getTag())
+		*///?} else {
+		return Optional.ofNullable(stack.getTag())
 				.to("display", CompoundTag.class)
 				.to("color", IntTag.class)
 				.map(IntTag::getAsInt)
 				.map(NbtUtils::notZeroAlpha)
 				.map((i) -> new Integer[]{i});
-		*///?}
+		//?}
 	}
 
 	//? if <=1.20.1 {
-	/*public static Optional<Integer[]> getColorFromPotionNbt(CompoundTag compound) {
+	public static Optional<Integer[]> getColorFromPotionNbt(CompoundTag compound) {
 		Optional<List<MobEffectInstance>> optional = Optional.ofNullable(compound.get("Potion"))
 				.to(StringTag.class)
 				.map(Tag::getAsString)
@@ -216,7 +218,7 @@ public class NbtUtils {
 				.map(Optional::get)
 				.map((i) -> new Integer[]{i});
 	}
-	*///?}
+	//?}
 
 	private static int notZeroAlpha(int color) {
 		int alpha = ArgbUtils2.getAlpha(color);
