@@ -69,14 +69,14 @@ public class ParticlesSpawnCategory {
 		);
 
 		//? if >=1.21.9 {
-		createSection(
+		/*createSection(
 				category,
 				"shelf",
 				dc.getShelfConfig(), c.getShelfConfig(),
 				dw.getShelfConfig(), w.getShelfConfig(),
 				dp.isShelfSpawnEnabled(), p::isShelfSpawnEnabled, p::setShelfSpawnEnabled
 		);
-		//?}
+		*///?}
 
 		return category;
 	}
