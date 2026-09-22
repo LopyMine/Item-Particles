@@ -68,6 +68,7 @@ public class ParticlesSpawnCategory {
 				dp.isItemFrameSpawnEnabled(), p::isItemFrameSpawnEnabled, p::setItemFrameSpawnEnabled
 		);
 
+		//? if >=1.21.9 {
 		createSection(
 				category,
 				"shelf",
@@ -75,6 +76,7 @@ public class ParticlesSpawnCategory {
 				dw.getShelfConfig(), w.getShelfConfig(),
 				dp.isShelfSpawnEnabled(), p::isShelfSpawnEnabled, p::setShelfSpawnEnabled
 		);
+		//?}
 
 		return category;
 	}

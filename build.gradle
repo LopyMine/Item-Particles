@@ -18,7 +18,13 @@ mossyDependencies {
 	additional {
 		override("mossyCompileOnly", "oritech")
 		override("mossyCompileOnly", "geckolib")
-		//disable("punchy-fpa")
+		//override("mossyCompileOnly", "punchy-fpa")
+		//override("mossyCompileOnly", "hold-my-items-reforged")
+		//override("mossyCompileOnly", "hold-my-items")
+
+		disable("punchy-fpa")
+		disable("hold-my-items-reforged")
+		disable("hold-my-items")
 	}
 }
 
