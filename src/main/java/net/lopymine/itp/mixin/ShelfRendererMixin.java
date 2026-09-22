@@ -22,8 +22,15 @@ public class ShelfRendererMixin {
 		ItemParticleManager.getInstance().trackShelfItems(blockEntity.getBlockPos(), blockEntity.getItems());
 	}
 
+	//? if >=26.3 {
 	@Inject(at = @At(value = "INVOKE", shift = Shift.AFTER, target = "Lnet/minecraft/client/renderer/item/ItemStackRenderState;submit(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;III)V"), method = "submitItem(Lnet/minecraft/client/renderer/blockentity/state/ShelfRenderState;Lnet/minecraft/client/renderer/item/ItemStackRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;IF)V")
-	private void acceptItemParticleRequests(ShelfRenderState state, ItemStackRenderState itemStackRenderState, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int slot, float yRot, CallbackInfo ci) {
+	private static void acceptItemParticleRequests(ShelfRenderState state, ItemStackRenderState itemStackRenderState, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int slot, float yRot, CallbackInfo ci) {
 		ItemParticleManager.getInstance().acceptShelfItemParticleRequests(itemStackRenderState, poseStack, state.blockPos, slot);
 	}
+	//?} else {
+	/*@Inject(at = @At(value = "INVOKE", shift = Shift.AFTER, target = "Lnet/minecraft/client/renderer/item/ItemStackRenderState;submit(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;III)V"), method = "submitItem(Lnet/minecraft/client/renderer/blockentity/state/ShelfRenderState;Lnet/minecraft/client/renderer/item/ItemStackRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;IF)V")
+	private  void acceptItemParticleRequests(ShelfRenderState state, ItemStackRenderState itemStackRenderState, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int slot, float yRot, CallbackInfo ci) {
+		ItemParticleManager.getInstance().acceptShelfItemParticleRequests(itemStackRenderState, poseStack, state.blockPos, slot);
+	}
+	*///?}
 }

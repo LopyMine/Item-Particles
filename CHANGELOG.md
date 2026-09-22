@@ -1,2 +1,1 @@
-- Added compatibility with Punchy
-- Added compatibility with CIT Resewn Continuation
+- Ported to 26.3
