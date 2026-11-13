@@ -32,20 +32,6 @@
 			"nbt_conditions_match": "any",
 			"nbt_conditions": []
 		},
-		{
-			"item": "minecraft:filled_map",
-			"spawn_area": "2d/filled_map_small_sand.png",
-			"spawn_count": [0, 2],
-			"spawn_frequency": [10, 40],
-			"speed_coefficient": 0.1,
-			"color": {
-				"mode": "gradient_random_static",
-				"values": ["#6B6867", "#8B8887"],
-				"speed": 5.0
-			},
-			"nbt_conditions_match": "any",
-			"nbt_conditions": []
-		},
 		
 		
 		
@@ -465,7 +451,7 @@
 		
 		{
 			"item": "minecraft:red_bed",
-			"spawn_area": "2d/bed.png",
+			"spawn_area": "#full",
 			"spawn_count": [0, 2],
 			"spawn_frequency": [10, 40],
 			"speed_coefficient": 0.1,
@@ -479,7 +465,7 @@
 		},
 		{
 			"item": "minecraft:orange_bed",
-			"spawn_area": "2d/bed.png",
+			"spawn_area": "#full",
 			"spawn_count": [0, 2],
 			"spawn_frequency": [10, 40],
 			"speed_coefficient": 0.1,
@@ -493,7 +479,7 @@
 		},
 		{
 			"item": "minecraft:yellow_bed",
-			"spawn_area": "2d/bed.png",
+			"spawn_area": "#full",
 			"spawn_count": [0, 2],
 			"spawn_frequency": [10, 40],
 			"speed_coefficient": 0.1,
@@ -507,7 +493,7 @@
 		},
 		{
 			"item": "minecraft:lime_bed",
-			"spawn_area": "2d/bed.png",
+			"spawn_area": "#full",
 			"spawn_count": [0, 2],
 			"spawn_frequency": [10, 40],
 			"speed_coefficient": 0.1,
@@ -521,7 +507,7 @@
 		},
 		{
 			"item": "minecraft:green_bed",
-			"spawn_area": "2d/bed.png",
+			"spawn_area": "#full",
 			"spawn_count": [0, 2],
 			"spawn_frequency": [10, 40],
 			"speed_coefficient": 0.1,
@@ -535,7 +521,7 @@
 		},
 		{
 			"item": "minecraft:cyan_bed",
-			"spawn_area": "2d/bed.png",
+			"spawn_area": "#full",
 			"spawn_count": [0, 2],
 			"spawn_frequency": [10, 40],
 			"speed_coefficient": 0.1,
@@ -549,7 +535,7 @@
 		},
 		{
 			"item": "minecraft:light_blue_bed",
-			"spawn_area": "2d/bed.png",
+			"spawn_area": "#full",
 			"spawn_count": [0, 2],
 			"spawn_frequency": [10, 40],
 			"speed_coefficient": 0.1,
@@ -563,7 +549,7 @@
 		},
 		{
 			"item": "minecraft:blue_bed",
-			"spawn_area": "2d/bed.png",
+			"spawn_area": "#full",
 			"spawn_count": [0, 2],
 			"spawn_frequency": [10, 40],
 			"speed_coefficient": 0.1,
@@ -577,7 +563,7 @@
 		},
 		{
 			"item": "minecraft:purple_bed",
-			"spawn_area": "2d/bed.png",
+			"spawn_area": "#full",
 			"spawn_count": [0, 2],
 			"spawn_frequency": [10, 40],
 			"speed_coefficient": 0.1,
@@ -591,7 +577,7 @@
 		},
 		{
 			"item": "minecraft:magenta_bed",
-			"spawn_area": "2d/bed.png",
+			"spawn_area": "#full",
 			"spawn_count": [0, 2],
 			"spawn_frequency": [10, 40],
 			"speed_coefficient": 0.1,
@@ -605,7 +591,7 @@
 		},
 		{
 			"item": "minecraft:pink_bed",
-			"spawn_area": "2d/bed.png",
+			"spawn_area": "#full",
 			"spawn_count": [0, 2],
 			"spawn_frequency": [10, 40],
 			"speed_coefficient": 0.1,
@@ -619,7 +605,7 @@
 		},
 		{
 			"item": "minecraft:brown_bed",
-			"spawn_area": "2d/bed.png",
+			"spawn_area": "#full",
 			"spawn_count": [0, 2],
 			"spawn_frequency": [10, 40],
 			"speed_coefficient": 0.1,
@@ -633,7 +619,7 @@
 		},
 		{
 			"item": "minecraft:black_bed",
-			"spawn_area": "2d/bed.png",
+			"spawn_area": "#full",
 			"spawn_count": [0, 2],
 			"spawn_frequency": [10, 40],
 			"speed_coefficient": 0.1,
@@ -647,7 +633,7 @@
 		},
 		{
 			"item": "minecraft:gray_bed",
-			"spawn_area": "2d/bed.png",
+			"spawn_area": "#full",
 			"spawn_count": [0, 2],
 			"spawn_frequency": [10, 40],
 			"speed_coefficient": 0.1,
@@ -661,7 +647,7 @@
 		},
 		{
 			"item": "minecraft:light_gray_bed",
-			"spawn_area": "2d/bed.png",
+			"spawn_area": "#full",
 			"spawn_count": [0, 2],
 			"spawn_frequency": [10, 40],
 			"speed_coefficient": 0.1,
@@ -675,7 +661,7 @@
 		},
 		{
 			"item": "minecraft:white_bed",
-			"spawn_area": "2d/bed.png",
+			"spawn_area": "#full",
 			"spawn_count": [0, 2],
 			"spawn_frequency": [10, 40],
 			"speed_coefficient": 0.1,

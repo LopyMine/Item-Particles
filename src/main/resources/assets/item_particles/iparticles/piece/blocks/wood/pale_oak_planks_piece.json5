@@ -159,7 +159,7 @@
 		
 		{
 			"item": "minecraft:pale_oak_button",
-			"spawn_area": "2d/button.png",
+			"spawn_area": "#full",
 			"spawn_count": [0, 1],
 			"spawn_frequency": [10, 40],
 			"speed_coefficient": 0.1,
