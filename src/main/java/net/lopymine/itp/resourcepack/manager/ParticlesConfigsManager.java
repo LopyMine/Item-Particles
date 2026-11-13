@@ -25,6 +25,7 @@ import net.lopymine.itp.family.atlas.manager.*;
 import net.lopymine.itp.family.cache.*;
 import net.lopymine.itp.family.generation.*;
 import net.lopymine.itp.family.generation.batch.*;
+import net.lopymine.itp.manager.ItemParticleManager;
 import net.lopymine.itp.utils.ArgbUtils2;
 import net.lopymine.itp.utils.iac.RenderedItemImage;
 import net.lopymine.mossylib.logger.MossyLogger;
@@ -138,6 +139,8 @@ public class ParticlesConfigsManager extends AbstractConfigsManager<ParticleConf
 		}).exceptionally(throwable -> {
 			ItemParticlesClient.LOGGER.error("Failed to update combined particle map:", throwable);
 			return null;
+		}).thenRun(() -> {
+			ItemParticleManager.getInstance().startValidation();
 		});
 	}
 
@@ -364,6 +367,7 @@ public class ParticlesConfigsManager extends AbstractConfigsManager<ParticleConf
 							particleData.getSpeedCoefficient()
 					);
 					ParticleSpawner spawner = familyHolder.createSpawner(copy::createParticle);
+					spawner.setSource("%s (%s)".formatted(config.getLocation(), id));
 					list.add(spawner);
 				}
 			}
@@ -536,6 +540,7 @@ public class ParticlesConfigsManager extends AbstractConfigsManager<ParticleConf
 
 		for (ParticleHolder holder : config.getHolders()) {
 			ParticleSpawner spawner = holder.createSpawner(config::createParticle);
+			spawner.setSource(id.toString());
 			Either<CachedItem, Identifier> itemOrTag = holder.getItemOrTag();
 			itemOrTag.ifLeft((cachedItem) -> {
 				Item item = cachedItem.getItem();

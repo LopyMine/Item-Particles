@@ -1,5 +1,7 @@
 package net.lopymine.itp.mixin;
 
+//? if >=1.21.4 {
+
 import java.util.UUID;
 import net.lopymine.itp.utils.mixin.RenderStateWithUUID;
 import net.minecraft.client.renderer.entity.state.ArmedEntityRenderState;
@@ -30,3 +32,4 @@ public class ArmedEntityRenderStateMixin implements RenderStateWithUUID {
 		this.uuid = uuid;
 	}
 }
+//?}

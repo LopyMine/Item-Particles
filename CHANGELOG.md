@@ -1,1 +1,3 @@
 - New particles for 26.3 items
+- Added support for older version (1.20.1, 1.21.1, fabric and (neo)forge)
+- Added compatibility with Hold My Items

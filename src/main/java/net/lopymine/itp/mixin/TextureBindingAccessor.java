@@ -1,5 +1,7 @@
 package net.lopymine.itp.mixin;
 
+//? if >=1.21.4 {
+
 import net.minecraft.resources.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
@@ -11,3 +13,4 @@ public interface TextureBindingAccessor {
 	Identifier ItemParticles$getLocation();
 
 }
+//?}

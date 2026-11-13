@@ -1,6 +1,6 @@
 package net.lopymine.itp.particle;
 
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import net.lopymine.itp.atlas.ItemParticlesAtlasManager;
 import net.lopymine.itp.config.particle.*;
@@ -15,8 +15,17 @@ import net.lopymine.itp.element.texture.provider.ITextureProvider;
 import net.lopymine.itp.manager.ItemParticleManager.ItemParticleRequest;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.client.particle.*;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+//? if >=1.21.9 {
+import net.minecraft.client.renderer.RenderPipelines;
+//?} else {
+/*import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.*;
+import com.mojang.blaze3d.vertex.VertexFormat.Mode;
+import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.renderer.texture.TextureManager;
+*///?}
 import net.minecraft.core.Direction.Axis;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.RandomSource;
@@ -24,7 +33,11 @@ import org.jetbrains.annotations.*;
 
 public class ItemParticle extends AbstractItemParticle<ItemParticle> {
 
+	//? if >=1.21.9 {
 	private static final Map<Identifier, Layer> LAYERS_BY_ATLAS = new ConcurrentHashMap<>();
+	//?} else {
+	/*private static final Map<Identifier, ParticleRenderType> RENDER_TYPES_BY_ATLAS = new ConcurrentHashMap<>();
+	*///?}
 
 	protected ItemParticle(ClientLevel level, double x, double y, double z, TextureAtlasSprite sprite) {
 		super(level, x, y, z, sprite);
@@ -98,12 +111,65 @@ public class ItemParticle extends AbstractItemParticle<ItemParticle> {
 		return this;
 	}
 
+	private Identifier getAtlasId() {
+		return this.getElementTexture() instanceof AtlasTexture atlasTexture
+				? atlasTexture.getAtlas()
+				: ItemParticlesAtlasManager.ATLAS_ID;
+	}
+
+	//? if >=1.21.9 {
 	@Override
 	@NotNull
 	protected Layer getLayer() {
-		Identifier atlasId = this.getElementTexture() instanceof AtlasTexture atlasTexture
-				? atlasTexture.getAtlas()
-				: ItemParticlesAtlasManager.ATLAS_ID;
-		return LAYERS_BY_ATLAS.computeIfAbsent(atlasId, (id) -> new Layer(true, id, RenderPipelines.TRANSLUCENT_PARTICLE));
+		return LAYERS_BY_ATLAS.computeIfAbsent(this.getAtlasId(), (id) -> new Layer(true, id, RenderPipelines.TRANSLUCENT_PARTICLE));
 	}
+	//?} else {
+	/*@Override
+	@NotNull
+	public ParticleRenderType getRenderType() {
+		return RENDER_TYPES_BY_ATLAS.computeIfAbsent(this.getAtlasId(), ItemParticle::createRenderType);
+	}
+
+	private static ParticleRenderType createRenderType(Identifier atlasId) {
+		ParticleRenderType type = new ParticleRenderType() {
+
+			//? if >=1.21 {
+			@Override
+			public BufferBuilder begin(Tesselator tesselator, TextureManager textureManager) {
+				RenderSystem.depthMask(true);
+				RenderSystem.setShaderTexture(0, atlasId);
+				RenderSystem.enableBlend();
+				RenderSystem.defaultBlendFunc();
+				return tesselator.begin(Mode.QUADS, DefaultVertexFormat.PARTICLE);
+			}
+			//?} else {
+			/^@Override
+			public void begin(BufferBuilder builder, TextureManager textureManager) {
+				RenderSystem.depthMask(true);
+				RenderSystem.setShaderTexture(0, atlasId);
+				RenderSystem.enableBlend();
+				RenderSystem.defaultBlendFunc();
+				builder.begin(Mode.QUADS, DefaultVertexFormat.PARTICLE);
+			}
+
+			@Override
+			public void end(Tesselator tesselator) {
+				tesselator.end();
+			}
+			^///?}
+
+			@Override
+			public String toString() {
+				return atlasId.toString();
+			}
+		};
+
+		ArrayList<ParticleRenderType> list = new ArrayList<>(ParticleEngine.RENDER_ORDER);
+		int index = list.indexOf(ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT);
+		list.add(index >= 0 ? index + 1 : list.size() - 1, type);
+		ParticleEngine.RENDER_ORDER = list;
+
+		return type;
+	}
+	*///?}
 }

@@ -32,6 +32,10 @@ import org.jspecify.annotations.Nullable;
 //?} else {
 /*import net.minecraft.util.Util;
 *///?}
+//? if <1.21.4 {
+/*import com.mojang.datafixers.util.Pair;
+import java.util.Map.Entry;
+*///?}
 
 public class TagsCommand {
 

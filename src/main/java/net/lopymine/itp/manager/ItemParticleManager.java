@@ -6,6 +6,7 @@ import java.util.Map.Entry;
 import java.util.function.Function;
 import lombok.*;
 import net.lopymine.itp.ItemParticles;
+import net.lopymine.itp.client.ItemParticlesClient;
 import net.lopymine.itp.config.ItemParticlesConfig;
 import net.lopymine.itp.config.particle.ParticleConfig;
 import net.lopymine.itp.element.controller.color.ColorController;
@@ -14,16 +15,21 @@ import net.lopymine.itp.manager.ItemParticleManager.ItemParticleRequest;
 import net.lopymine.itp.particle.ItemParticle;
 import net.lopymine.itp.resourcepack.manager.ParticlesConfigsManager;
 import net.lopymine.itp.texel.ModelTexelScanner;
-import net.lopymine.itp.utils.FirstPersonSpace;
+import net.lopymine.itp.utils.*;
 import net.lopymine.itp.utils.mixin.RenderStateWithUUID;
+import net.lopymine.mossylib.loader.MossyLoader;
 import net.lopymine.mossylib.logger.MossyLogger;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
+//? if >=1.21.4 {
 import net.minecraft.client.renderer.entity.state.*;
 import net.minecraft.client.renderer.item.ItemStackRenderState;
+//?}
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.Identifier;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.*;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.decoration.ItemFrame;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -46,11 +52,54 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 	private final Map<UUID, List<ItemParticleRequest>> itemFrameParticles = new HashMap<>();
 	private final Map<BlockPos, Map<Integer, List<ItemParticleRequest>>> shelfParticles = new HashMap<>();
 	private final Map<BlockPos, List<ItemStack>> trackedShelfItems = new HashMap<>();
+	//? if <1.21.4 {
+	/*private final List<Runnable> pendingFirstPersonRequests = new ArrayList<>();
+	*///?}
 
 	private ItemParticleManager() { }
 
 	public static ItemParticleManager getInstance() {
 		return INSTANCE;
+	}
+
+	public void startValidation() {
+		if (!MossyLoader.isDevelopmentEnvironment() || !ItemParticlesConfig.getInstance().getMainConfig().isDebugModeEnabled()) {
+			return;
+		}
+		if (Minecraft.getInstance().level == null) {
+			return;
+		}
+		ItemParticlesClient.setValidationEnabled(true);
+
+		try {
+			for (Entry<ResourceKey<Item>, Item> entry : BuiltInRegistries.ITEM.entrySet()) {
+				Item item = entry.getValue();
+				if (Minecraft.getInstance().level == null) {
+					break;
+				}
+
+				ItemStack stack = item.getDefaultInstance();
+				if (stack.isEmpty()) {
+					continue;
+				}
+
+				ItemDisplayContext displayContext = ItemDisplayContext.FIXED;
+				ItemParticlesClient.CURRENT_STACK = "%s [%s]".formatted(item.getDescriptionId(), displayContext.getSerializedName());
+				List<ItemParticleRequest> particleRequests = this.createParticleRequests(stack, SpawnCategory.DROPPED_ITEM, Vec3.ZERO);
+
+				//? if >=1.21.4 {
+				ItemStackRenderState state = new ItemStackRenderState();
+				Minecraft.getInstance().getItemModelResolver().updateForTopItem(state, stack, displayContext, null, null, 0);
+				SpawnPositions spawnPositions = getSpawnPositions(state, new PoseStack());
+				//?} else {
+				/*SpawnPositions spawnPositions = getSpawnPositions(stack, displayContext, new PoseStack());
+				*///?}
+				this.acceptItemParticles(spawnPositions, particleRequests);
+			}
+		} finally {
+			ItemParticlesClient.CURRENT_STACK = null;
+			ItemParticlesClient.setValidationEnabled(false);
+		}
 	}
 
 	@Nullable
@@ -59,6 +108,11 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 		if (keys.isEmpty()) {
 			return null;
 		}
+
+		if (ItemParticlesClient.isValidationEnabled() && keys.stream().noneMatch((key) -> spawnPosFunction.apply(key) != null)) {
+			ItemParticlesClient.logValidationError("No spawn pos for any of rendered textures {}, for {} from {}", keys, ItemParticlesClient.CURRENT_STACK, getValidationSource(request));
+		}
+
 		Identifier actualTexture = keys.get(request.random.nextInt(0, keys.size()));
 
 		IParticleSpawnPos pos = spawnPosFunction.apply(actualTexture);
@@ -68,34 +122,82 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 
 		Map<PixelPos, Vector3fc[]> map = spawnPositions.map.get(actualTexture);
 		if (map == null) {
+			if (ItemParticlesClient.isValidationEnabled()) {
+				ItemParticlesClient.logValidationError("No pixels map for texture {}, for {} from {}", actualTexture, ItemParticlesClient.CURRENT_STACK, getValidationSource(request));
+			}
 			return null;
 		}
 
 		Vector3fc[] array = pos.get(request, map);
 
 		if (array == null || array.length == 0) {
+			if (ItemParticlesClient.isValidationEnabled()) {
+				ItemParticlesClient.logValidationError("No position vectors for pixel [{}, {}] of texture {}, for {} from {}", pos.x(), pos.y(), actualTexture, ItemParticlesClient.CURRENT_STACK, getValidationSource(request));
+			}
 			return null;
 		}
 
 		return array[request.getRandom().nextInt(array.length)];
 	}
 
+	private static String getValidationSource(ItemParticleRequest request) {
+		ParticleSpawner spawner = request.getSpawner();
+		if (spawner == null) {
+			return "unknown spawner";
+		}
+
+		if (spawner.getSpawnArea() instanceof AdvancedSpawnAreas areas) {
+			return "%s, configured textures: %s".formatted(spawner.getSource(), areas.areas().keySet());
+		}
+
+		return String.valueOf(spawner.getSource());
+	}
+
+	//? if >=1.21.4 {
 	private static SpawnPositions getSpawnPositions(ItemStackRenderState state, PoseStack poseStack) {
+	//?} else {
+	/*private static SpawnPositions getSpawnPositions(ItemStack stack, ItemDisplayContext displayContext, PoseStack poseStack) {
+	*///?}
+		if (isCollectingDebugTexels()) {
+			ItemParticleManager.getInstance().getDebugItemTexels().clear();
+		}
+
 		Map<Identifier, Map<PixelPos, Vector3fc[]>> map = new HashMap<>();
 
-		ModelTexelScanner.visitPixels(state, poseStack, (texture, x, y, argb, position, faceCenters) -> {
+		//? if >=1.21.4 {
+		ModelTexelScanner.visitPixels(state, poseStack, collectSpawnPositions(map));
+		//?} elif >=1.21 {
+		/*ModelTexelScanner.visitPixels(stack, displayContext, poseStack, collectSpawnPositions(map));
+		*///?} else {
+		/*ModelTexelScanner.visitPixels(stack, displayContext, getLevelPose(poseStack), collectSpawnPositions(map));
+		*///?}
+
+		return new SpawnPositions(map, new ArrayList<>(map.keySet()));
+	}
+
+	//? if <1.21 {
+	/*private static PoseStack getLevelPose(PoseStack viewPose) {
+		Matrix4f viewToLevel = GameRendererUtils.getViewRotationMatrix(new Matrix4f()).invert();
+
+		PoseStack pose = new PoseStack();
+		pose.last().pose().set(viewToLevel).mul(viewPose.last().pose());
+		pose.last().normal().set(viewToLevel).mul(viewPose.last().normal());
+		return pose;
+	}
+	*///?}
+
+	private static ModelTexelScanner.PixelVisitor collectSpawnPositions(Map<Identifier, Map<PixelPos, Vector3fc[]>> map) {
+		return (texture, x, y, argb, position, faceCenters) -> {
 			PixelPos pos = new PixelPos(x, y);
 
 			map.computeIfAbsent(AdvancedSpawnAreaId.getValidatedBaseTexture(texture), (key) -> new HashMap<>()).put(pos, faceCenters);
 
-			if (ItemParticlesConfig.getInstance().getMainConfig().isDebugModeEnabled()) {
+			if (isCollectingDebugTexels()) {
 				for (Vector3fc center : faceCenters) {
 					ItemParticleManager.getInstance().getDebugItemTexels().add(center);
 				}
 			}
-		});
-
-		return new SpawnPositions(map, new ArrayList<>(map.keySet()));
+		};
 	}
 
 	@Override
@@ -108,6 +210,7 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 		return ItemParticles.MOD_NAME;
 	}
 
+	//? if >=1.21.4 {
 	public void acceptDroppedItemParticleRequests(ItemStackRenderState state, PoseStack poseStack, ItemClusterRenderState renderState) {
 		UUID uuid = ((RenderStateWithUUID) renderState).itemParticles$getUUID();
 		if (uuid == null) {
@@ -117,7 +220,7 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 		if (requests == null || requests.isEmpty()) {
 			return;
 		}
-		this.acceptItemParticles(state, poseStack, requests);
+		this.acceptItemParticles(getSpawnPositions(state, poseStack), requests);
 		this.droppedItemParticles.remove(uuid);
 	}
 
@@ -126,35 +229,71 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 		if (uuid == null) {
 			return;
 		}
-		this.acceptItemParticles(state, poseStack, this.itemFrameParticles.remove(uuid));
+		this.acceptItemParticles(getSpawnPositions(state, poseStack), this.itemFrameParticles.remove(uuid));
+	}
+	//?} else {
+	/*public void acceptDroppedItemParticleRequests(ItemStack stack, PoseStack poseStack, ItemEntity itemEntity) {
+		List<ItemParticleRequest> requests = this.droppedItemParticles.remove(itemEntity.getUUID());
+		if (requests == null || requests.isEmpty()) {
+			return;
+		}
+		this.acceptItemParticles(getSpawnPositions(stack, ItemDisplayContext.GROUND, poseStack), requests);
 	}
 
+	public void acceptItemFrameParticleRequests(ItemStack stack, PoseStack poseStack, ItemFrame itemFrame) {
+		List<ItemParticleRequest> requests = this.itemFrameParticles.remove(itemFrame.getUUID());
+		if (requests == null || requests.isEmpty()) {
+			return;
+		}
+		this.acceptItemParticles(getSpawnPositions(stack, ItemDisplayContext.FIXED, poseStack), requests);
+	}
+	*///?}
+
+	//? if >=1.21.9 {
 	public void acceptShelfItemParticleRequests(ItemStackRenderState state, PoseStack poseStack, BlockPos blockPos, int slot) {
 		Map<Integer, List<ItemParticleRequest>> slots = this.shelfParticles.get(blockPos);
 		if (slots == null) {
 			return;
 		}
 
-		this.acceptItemParticles(state, poseStack, slots.remove(slot));
+		this.acceptItemParticles(getSpawnPositions(state, poseStack), slots.remove(slot));
 
 		if (slots.isEmpty()) {
 			this.shelfParticles.remove(blockPos);
 		}
 	}
+	//?}
 
 	public void trackShelfItems(BlockPos blockPos, List<ItemStack> items) {
 		this.trackedShelfItems.put(blockPos.immutable(), new ArrayList<>(items));
 	}
 
+	//? if >=1.21.4 {
 	public void acceptArmedItemParticleRequests(ItemStackRenderState state, PoseStack poseStack, HumanoidArm arm, ArmedEntityRenderState entityState) {
 		UUID uuid = ((RenderStateWithUUID) entityState).itemParticles$getUUID();
 		if (uuid == null) {
 			return;
 		}
-		this.acceptItemParticles(state, poseStack, this.pollArmRequests(uuid, arm), null);
+		this.acceptItemParticles(getSpawnPositions(state, poseStack), this.pollArmRequests(uuid, arm), null);
 	}
+	//?} else {
+	/*public void acceptArmedItemParticleRequests(ItemStack stack, PoseStack poseStack, HumanoidArm arm, LivingEntity entity) {
+		List<ItemParticleRequest> requests = this.pollArmRequests(entity.getUUID(), arm);
+		if (requests == null || requests.isEmpty()) {
+			return;
+		}
 
+		ItemDisplayContext displayContext = arm == HumanoidArm.RIGHT ? ItemDisplayContext.THIRD_PERSON_RIGHT_HAND : ItemDisplayContext.THIRD_PERSON_LEFT_HAND;
+
+		this.acceptItemParticles(getSpawnPositions(stack, displayContext, poseStack), requests, null);
+	}
+	*///?}
+
+	//? if >=1.21.4 {
 	public void acceptFirstPersonItemParticleRequests(ItemStackRenderState state, PoseStack poseStack, ItemDisplayContext displayContext, LivingEntity entity) {
+	//?} else {
+	/*public void acceptFirstPersonItemParticleRequests(ItemStack stack, PoseStack poseStack, ItemDisplayContext displayContext, LivingEntity entity) {
+	*///?}
 		HumanoidArm arm = switch (displayContext) {
 			case FIRST_PERSON_RIGHT_HAND -> HumanoidArm.RIGHT;
 			case FIRST_PERSON_LEFT_HAND -> HumanoidArm.LEFT;
@@ -168,8 +307,29 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 			return;
 		}
 
-		this.acceptItemParticles(state, poseStack, this.pollArmRequests(entity.getUUID(), arm), FirstPersonSpace.getToLevel(new Matrix4f()));
+		List<ItemParticleRequest> requests = this.pollArmRequests(entity.getUUID(), arm);
+		if (requests == null || requests.isEmpty()) {
+			return;
+		}
+
+		//? if >=1.21.4 {
+		this.acceptItemParticles(getSpawnPositions(state, poseStack), requests, FirstPersonSpace.getToLevel(new Matrix4f()));
+		//?} else {
+		/*PoseStack pose = new PoseStack();
+		pose.last().pose().set(poseStack.last().pose());
+		pose.last().normal().set(poseStack.last().normal());
+		this.pendingFirstPersonRequests.add(() -> this.acceptItemParticles(getSpawnPositions(stack, displayContext, pose), requests, FirstPersonSpace.getToLevel(new Matrix4f())));
+		*///?}
 	}
+
+	//? if <1.21.4 {
+	/*public void acceptPendingFirstPersonItemParticleRequests() {
+		for (Runnable request : this.pendingFirstPersonRequests) {
+			request.run();
+		}
+		this.pendingFirstPersonRequests.clear();
+	}
+	*///?}
 
 	@Nullable
 	private List<ItemParticleRequest> pollArmRequests(UUID uuid, HumanoidArm arm) {
@@ -185,34 +345,41 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 		return requests;
 	}
 
-	private void acceptItemParticles(ItemStackRenderState state, PoseStack poseStack, @Nullable List<ItemParticleRequest> requests) {
-		this.acceptItemParticles(state, poseStack, requests, null);
+	private void acceptItemParticles(SpawnPositions spawnPositions, @Nullable List<ItemParticleRequest> requests) {
+		this.acceptItemParticles(spawnPositions, requests, null);
 	}
 
-	private void acceptItemParticles(ItemStackRenderState state, PoseStack poseStack, @Nullable List<ItemParticleRequest> requests, @Nullable Matrix4f transform) {
+	private void acceptItemParticles(SpawnPositions spawnPositions, @Nullable List<ItemParticleRequest> requests, @Nullable Matrix4f transform) {
 		if (requests == null || requests.isEmpty()) {
+			if (ItemParticlesClient.isValidationEnabled()) {
+				ItemParticlesClient.logValidationError("No particles were spawned for {}", ItemParticlesClient.CURRENT_STACK);
+			}
+			return;
+		}
+		if (spawnPositions.map.isEmpty() || spawnPositions.keys.isEmpty()) {
+			if (ItemParticlesClient.isValidationEnabled()) {
+				ItemParticlesClient.logValidationError("No spawn positions were found for {}", ItemParticlesClient.CURRENT_STACK);
+			}
 			return;
 		}
 
 		Minecraft minecraft = Minecraft.getInstance();
 		ClientLevel level = minecraft.level;
-		//? if >=26.2 {
-		Vec3 camera = Minecraft.getInstance().gameRenderer.mainCamera().position();
-		//?} else {
-		/*Vec3 camera = Minecraft.getInstance().gameRenderer.getMainCamera().position();
-		 *///?}
+		Vec3 camera = GameRendererUtils.getPosition(GameRendererUtils.getMainCamera());
 		if (level == null) {
 			return;
 		}
 
-		this.debugUsedTexels.clear();
-		this.debugItemTexels.clear();
-
-		SpawnPositions spawnPositions = getSpawnPositions(state, poseStack);
+		if (isCollectingDebugTexels()) {
+			this.debugUsedTexels.clear();
+		}
 
 		for (ItemParticleRequest request : requests) {
 			Function<Identifier, @Nullable IParticleSpawnPos> spawnPosFunction = request.getSpawnPosFunction();
 			if (spawnPosFunction == null) {
+				if (ItemParticlesClient.isValidationEnabled()) {
+					ItemParticlesClient.logValidationError("No spawn pos func for {}", ItemParticlesClient.CURRENT_STACK);
+				}
 				continue;
 			}
 
@@ -227,6 +394,13 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 
 			ItemParticle particle = request.create(vector.x() + camera.x(), vector.y() + camera.y(), vector.z() + camera.z());
 			if (particle == null) {
+				if (ItemParticlesClient.isValidationEnabled()) {
+					ItemParticlesClient.logValidationError("Failed to create particle from request for {}", ItemParticlesClient.CURRENT_STACK);
+				}
+				continue;
+			}
+
+			if (ItemParticlesClient.isValidationEnabled()) {
 				continue;
 			}
 
@@ -239,7 +413,7 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 			particle.tick();
 			Minecraft.getInstance().particleEngine.add(particle);
 
-			if (ItemParticlesConfig.getInstance().getMainConfig().isDebugModeEnabled()) {
+			if (isCollectingDebugTexels()) {
 				ItemParticleManager.getInstance().getDebugUsedTexels().add(vector);
 			}
 		}
@@ -250,6 +424,9 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 			this.debugItemTexels.clear();
 			this.debugUsedTexels.clear();
 		}
+		//? if <1.21.4 {
+		/*this.pendingFirstPersonRequests.clear();
+		*///?}
 		this.runSoft(() -> {
 			this.createArmItemParticleRequests();
 			this.createDroppedItemParticleRequests();
@@ -261,6 +438,9 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 	private List<ItemParticleRequest> createParticleRequests(ItemStack stack, SpawnCategory category, Vec3 impulse) {
 		List<IParticleSpawner> particleSpawners = ParticlesConfigsManager.getSpawnersForItem(stack.getItem());
 		if (particleSpawners == null) {
+			if (ItemParticlesClient.isValidationEnabled()) {
+				ItemParticlesClient.logValidationError("No registered particle spawners for {}", ItemParticlesClient.CURRENT_STACK);
+			}
 			return new ArrayList<>();
 		}
 
@@ -268,7 +448,11 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 		List<ItemParticleRequest> particles = new ArrayList<>();
 
 		for (IParticleSpawner spawner : particleSpawners) {
-			particles.addAll(spawner.tickAndSpawn(context));
+			if (ItemParticlesClient.isValidationEnabled()) {
+				particles.addAll(spawner.spawn(context));
+			} else {
+				particles.addAll(spawner.tickAndSpawn(context));
+			}
 		}
 
 		return particles;
@@ -290,7 +474,7 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 				continue;
 			}
 
-			List<ItemParticleRequest> particleRequests = this.createParticleRequests(stack, SpawnCategory.DROPPED_ITEM, itemEntity.getKnownSpeed());
+			List<ItemParticleRequest> particleRequests = this.createParticleRequests(stack, SpawnCategory.DROPPED_ITEM, getSpeed(itemEntity));
 			if (particleRequests.isEmpty()) {
 				continue;
 			}
@@ -357,12 +541,12 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 				continue;
 			}
 
-			Vec3 impulse = livingEntity.getKnownSpeed();
+			Vec3 impulse = getSpeed(livingEntity);
 			SpawnCategory category = getArmSpawnCategory(livingEntity);
 
 			HashMap<HumanoidArm, List<ItemParticleRequest>> map = new HashMap<>();
 			for (HumanoidArm arm : HumanoidArm.values()) {
-				ItemStack stack = livingEntity.getItemHeldByArm(arm);
+				ItemStack stack = getItemHeldByArm(livingEntity, arm);
 				if (stack.isEmpty()) {
 					continue;
 				}
@@ -373,7 +557,9 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 				}
 				map.putIfAbsent(arm, particleRequests);
 			}
-			this.entityArmParticles.put(livingEntity.getUUID(), map);
+			if (!map.isEmpty()) {
+				this.entityArmParticles.put(livingEntity.getUUID(), map);
+			}
 		}
 	}
 
@@ -381,7 +567,27 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 		return isFirstPersonCameraEntity(entity) ? SpawnCategory.FIRST_PERSON : SpawnCategory.THIRD_PERSON;
 	}
 
-	private static boolean isFirstPersonCameraEntity(LivingEntity entity) {
+	private static Vec3 getSpeed(Entity entity) {
+		//? if >=1.21.9 {
+		return entity.getKnownSpeed();
+		//?} else {
+		/*return entity.getDeltaMovement();
+		*///?}
+	}
+
+	private static ItemStack getItemHeldByArm(LivingEntity entity, HumanoidArm arm) {
+		//? if >=1.21.9 {
+		return entity.getItemHeldByArm(arm);
+		//?} else {
+		/*return entity.getItemInHand(arm == entity.getMainArm() ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND);
+		*///?}
+	}
+
+	private static boolean isCollectingDebugTexels() {
+		return ItemParticlesConfig.getInstance().getMainConfig().isDebugModeEnabled() && !ItemParticlesClient.isValidationEnabled();
+	}
+
+	public static boolean isFirstPersonCameraEntity(LivingEntity entity) {
 		Minecraft minecraft = Minecraft.getInstance();
 		return entity == minecraft.getCameraEntity() && minecraft.options.getCameraType().isFirstPerson();
 	}
@@ -399,6 +605,8 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 		private ParticleConfig config;
 		@Nullable
 		private Function<Identifier, @Nullable IParticleSpawnPos> spawnPosFunction;
+		@Nullable
+		private ParticleSpawner spawner;
 
 		@Nullable
 		public ItemParticle create(double x, double y, double z) {

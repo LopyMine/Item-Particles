@@ -5,34 +5,22 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import java.io.InputStream;
 import java.lang.Math;
 import java.util.*;
+import net.lopymine.itp.extension.NativeImageExtension;
 import net.lopymine.itp.mixin.*;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
-import net.minecraft.client.model.Model;
-import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.client.model.geom.ModelPart.*;
-import net.minecraft.client.model.geom.builders.UVPair;
 import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.block.MovingBlockRenderState;
-import net.minecraft.client.renderer.entity.state.EntityRenderState;
-import net.minecraft.client.renderer.feature.ModelFeatureRenderer.CrumblingOverlay;
-import net.minecraft.client.renderer.item.ItemStackRenderState;
-import net.minecraft.client.renderer.item.ItemStackRenderState.FoilType;
-import net.minecraft.client.renderer.rendertype.*;
 import net.minecraft.client.renderer.texture.*;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.*;
 import net.minecraft.world.item.ItemDisplayContext;
-import net.minecraft.world.phys.Vec3;
 import org.joml.*;
-import org.jspecify.annotations.Nullable;
+import org.jspecify.annotations.*;
+//? if >=26.3 {
+import net.minecraft.client.resources.model.geometry.ItemQuads;
+//?}
 //? if >=26.2 {
 import net.minecraft.client.renderer.gizmos.DrawableGizmoPrimitives.Group;
 import net.minecraft.world.phys.shapes.VoxelShape;
-//?}
-//? if >=26.3 {
-import net.minecraft.client.resources.model.geometry.ItemQuads;
 //?}
 //? if >=26.1 {
 import net.minecraft.client.renderer.block.dispatch.*;
@@ -41,8 +29,28 @@ import net.minecraft.client.resources.model.geometry.BakedQuad;
 import net.minecraft.client.resources.model.geometry.BakedQuad.MaterialInfo;
 //?} else {
 /*import net.minecraft.client.renderer.block.model.*;
+*///?}
+//? if >=1.21.10 {
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.model.Model;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.ModelPart.*;
+import net.minecraft.client.model.geom.builders.UVPair;
+import net.minecraft.client.renderer.block.MovingBlockRenderState;
+import net.minecraft.client.renderer.entity.state.EntityRenderState;
+import net.minecraft.client.renderer.feature.ModelFeatureRenderer.CrumblingOverlay;
+import net.minecraft.client.renderer.item.ItemStackRenderState;
+import net.minecraft.client.renderer.item.ItemStackRenderState.FoilType;
+import net.minecraft.client.renderer.rendertype.*;
 import net.minecraft.client.renderer.state.*;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
+//?} else {
+/*import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.world.item.ItemStack;
 *///?}
 
 public class ModelTexelScanner {
@@ -54,6 +62,9 @@ public class ModelTexelScanner {
 	 *///?}
 
 	private static final Map<Identifier, Optional<TexelSource>> TEXTURES = new HashMap<>();
+	//? if <1.21.10 {
+	/*private static final Map<Identifier, Collection<TextureAtlasSprite>> ATLAS_SPRITES = new HashMap<>();
+	*///?}
 
 	public static void clearTextureCache() {
 		for (Optional<TexelSource> source : TEXTURES.values()) {
@@ -61,6 +72,9 @@ public class ModelTexelScanner {
 		}
 
 		TEXTURES.clear();
+		//? if <1.21.10 {
+		/*ATLAS_SPRITES.clear();
+		*///?}
 	}
 
 	@Nullable
@@ -79,6 +93,7 @@ public class ModelTexelScanner {
 		}).orElse(null);
 	}
 
+	//? if >=1.21.10 {
 	@Nullable
 	private static TexelSource getTexture(@Nullable RenderType renderType) {
 		if (renderType == null) {
@@ -94,16 +109,56 @@ public class ModelTexelScanner {
 				.map((entry) -> getTexture(((TextureBindingAccessor) entry.getValue()).ItemParticles$getLocation()))
 				.orElse(null);
 	}
+	//?} else {
+	/*private static Collection<TextureAtlasSprite> getAtlasSprites(TextureAtlas atlas) {
+		return ATLAS_SPRITES.computeIfAbsent(atlas.location(), (id) -> List.copyOf(atlas.texturesByName.values()));
+	}
 
+	@Nullable
+	private static Identifier getTextureLocation(RenderType renderType) {
+		if (!(renderType instanceof RenderType.CompositeRenderType composite)
+				|| !(composite.state().textureState instanceof RenderStateShard.TextureStateShard textureState)) {
+			return null;
+		}
+
+		return textureState.texture.orElse(null);
+	}
+
+	private static boolean isGlint(Identifier texture) {
+		return ItemRenderer.ENCHANTED_GLINT_ITEM.equals(texture) || ItemRenderer.ENCHANTED_GLINT_ENTITY.equals(texture);
+	}
+	*///?}
+
+	//? if >=1.21.10 {
 	public static void visitPixels(ItemStackRenderState state, PoseStack poseStack, PixelVisitor output) {
 		Map<PixelKey, Pixel> pixels = new LinkedHashMap<>();
 
-		state.submit(poseStack, new TexelCollector((texture, x, y, position, argb) -> {
-			pixels.computeIfAbsent(new PixelKey(texture, x, y), (key) -> new Pixel(argb, new ArrayList<>()))
-					.faceCenters()
-					.add(new Vector3f(position));
-		}), FULL_BRIGHT, OverlayTexture.NO_OVERLAY, 0);
+		state.submit(poseStack, new TexelCollector(collectInto(pixels)), FULL_BRIGHT, OverlayTexture.NO_OVERLAY, 0);
 
+		emitPixels(pixels, output);
+	}
+	//?} else {
+	/*public static void visitPixels(ItemStack stack, ItemDisplayContext displayContext, PoseStack poseStack, PixelVisitor output) {
+		Minecraft minecraft = Minecraft.getInstance();
+		ItemRenderer itemRenderer = minecraft.getItemRenderer();
+		BakedModel model = itemRenderer.getModel(stack, minecraft.level, null, 0);
+
+		boolean leftHand = displayContext == ItemDisplayContext.FIRST_PERSON_LEFT_HAND || displayContext == ItemDisplayContext.THIRD_PERSON_LEFT_HAND;
+
+		Map<PixelKey, Pixel> pixels = new LinkedHashMap<>();
+		itemRenderer.render(stack, displayContext, leftHand, poseStack, new TexelBufferSource(collectInto(pixels)), FULL_BRIGHT, OverlayTexture.NO_OVERLAY, model);
+		emitPixels(pixels, output);
+	}
+	*///?}
+
+	private static RawTexelVisitor collectInto(Map<PixelKey, Pixel> pixels) {
+		return (texture, x, y, position, argb) -> pixels
+				.computeIfAbsent(new PixelKey(texture, x, y), (key) -> new Pixel(argb, new ArrayList<>()))
+				.faceCenters()
+				.add(new Vector3f(position));
+	}
+
+	private static void emitPixels(Map<PixelKey, Pixel> pixels, PixelVisitor output) {
 		for (Map.Entry<PixelKey, Pixel> entry : pixels.entrySet()) {
 			PixelKey key = entry.getKey();
 			Pixel pixel = entry.getValue();
@@ -146,13 +201,17 @@ public class ModelTexelScanner {
 				int x = Mth.clamp((int) (bilinear(u0, u1, u2, u3, s, t) * width), 0, width - 1);
 				int y = Mth.clamp((int) (bilinear(v0, v1, v2, v3, s, t) * height), 0, height - 1);
 
+				//? if >=1.21.4 {
 				int color = image.getPixel(x, y);
-				if (ARGB.alpha(color) == 0) {
+				//?} else {
+				/*int color = NativeImageExtension.getPixelArgb(image, x, y);
+				*///?}
+				if (alpha(color) == 0) {
 					continue;
 				}
 
 				if (tint != -1) {
-					color = ARGB.multiply(color, tint);
+					color = multiply(color, tint);
 				}
 
 				position.set(
@@ -177,6 +236,28 @@ public class ModelTexelScanner {
 		return Mth.lerp(t, Mth.lerp(s, corner0, corner1), Mth.lerp(s, corner3, corner2));
 	}
 
+	private static int alpha(int argb) {
+		//? if >=1.21.2 {
+		return ARGB.alpha(argb);
+		//?} else {
+		/*return FastColor.ARGB32.alpha(argb);
+		*///?}
+	}
+
+	private static int multiply(int argb, int tint) {
+		//? if >=1.21.2 {
+		return ARGB.multiply(argb, tint);
+		//?} else {
+		/*return FastColor.ARGB32.color(
+				FastColor.ARGB32.alpha(argb) * FastColor.ARGB32.alpha(tint) / 255,
+				FastColor.ARGB32.red(argb) * FastColor.ARGB32.red(tint) / 255,
+				FastColor.ARGB32.green(argb) * FastColor.ARGB32.green(tint) / 255,
+				FastColor.ARGB32.blue(argb) * FastColor.ARGB32.blue(tint) / 255
+		);
+		*///?}
+	}
+
+	//? if >=1.21.10 {
 	private static void visitBakedQuad(BakedQuad quad, Matrix4fc transform, int[] tints, RawTexelVisitor output) {
 		//? if >=26.1 {
 		MaterialInfo materialInfo = quad.materialInfo();
@@ -213,7 +294,51 @@ public class ModelTexelScanner {
 				transform, source, tint, output
 		);
 	}
+	//?} else {
+	/*private static void visitBakedQuad(BakedQuad quad, Matrix4fc transform, int tint, RawTexelVisitor output) {
+		TextureAtlasSprite sprite = quad.getSprite();
 
+		float minU = sprite.getU0();
+		float minV = sprite.getV0();
+		float spanU = sprite.getU1() - minU;
+		float spanV = sprite.getV1() - minV;
+
+		if (spanU == 0.0F || spanV == 0.0F) {
+			return;
+		}
+
+		int[] vertices = quad.getVertices();
+
+		visitQuad(
+				readPosition(vertices, 0), readPosition(vertices, 1), readPosition(vertices, 2), readPosition(vertices, 3),
+				(readU(vertices, 0) - minU) / spanU, (readV(vertices, 0) - minV) / spanV,
+				(readU(vertices, 1) - minU) / spanU, (readV(vertices, 1) - minV) / spanV,
+				(readU(vertices, 2) - minU) / spanU, (readV(vertices, 2) - minV) / spanV,
+				(readU(vertices, 3) - minU) / spanU, (readV(vertices, 3) - minV) / spanV,
+				transform, TexelSource.of(sprite), tint, output
+		);
+	}
+
+	private static Vector3f readPosition(int[] vertices, int vertex) {
+		int offset = vertex * 8;
+
+		return new Vector3f(
+				Float.intBitsToFloat(vertices[offset]),
+				Float.intBitsToFloat(vertices[offset + 1]),
+				Float.intBitsToFloat(vertices[offset + 2])
+		);
+	}
+
+	private static float readU(int[] vertices, int vertex) {
+		return Float.intBitsToFloat(vertices[vertex * 8 + 4]);
+	}
+
+	private static float readV(int[] vertices, int vertex) {
+		return Float.intBitsToFloat(vertices[vertex * 8 + 5]);
+	}
+	*///?}
+
+	//? if >=1.21.10 {
 	private static void visitModelPart(ModelPart part, PoseStack poseStack, TexelSource source, int tint, RawTexelVisitor output) {
 		Vector3f corner0 = new Vector3f();
 		Vector3f corner1 = new Vector3f();
@@ -253,6 +378,7 @@ public class ModelTexelScanner {
 	private static <T> void setupAnim(Model<T> model, T state) {
 		model.setupAnim(state);
 	}
+	//?}
 
 	@FunctionalInterface
 	public interface PixelVisitor {
@@ -278,6 +404,7 @@ public class ModelTexelScanner {
 
 	}
 
+	//? if >=1.21.10 {
 	@SuppressWarnings("NullableProblems")
 	private record TexelCollector(RawTexelVisitor output) implements SubmitNodeCollector {
 
@@ -477,6 +604,227 @@ public class ModelTexelScanner {
 		*///?}
 
 	}
+	//?} else {
+	/*private record TexelBufferSource(RawTexelVisitor output) implements MultiBufferSource {
+
+		@Override
+		public @NonNull VertexConsumer getBuffer(RenderType renderType) {
+			return new TexelCollector(this.output, renderType);
+		}
+
+	}
+
+	private static class TexelCollector implements VertexConsumer {
+
+		private static final Matrix4f NO_TRANSFORM = new Matrix4f();
+
+		private final RawTexelVisitor output;
+		private final boolean glint;
+		@Nullable
+		private final TextureAtlas atlas;
+		@Nullable
+		private final TexelSource texture;
+
+		private final Vector3f[] positions = {new Vector3f(), new Vector3f(), new Vector3f(), new Vector3f()};
+		private final float[] us = new float[4];
+		private final float[] vs = new float[4];
+
+		private int vertexIndex;
+		private int color = -1;
+		@Nullable
+		private TextureAtlasSprite lastSprite;
+
+		private TexelCollector(RawTexelVisitor output, RenderType renderType) {
+			this.output = output;
+			Identifier location = getTextureLocation(renderType);
+			this.glint = location != null && isGlint(location);
+			if (location == null || this.glint) {
+				this.atlas   = null;
+				this.texture = null;
+				return;
+			}
+			this.atlas   = Minecraft.getInstance().getTextureManager().getTexture(location, null) instanceof TextureAtlas atlas ? atlas : null;
+			this.texture = this.atlas == null ? getTexture(location) : null;
+		}
+
+		//? if >=1.21 {
+		@Override
+		public void putBulkData(PoseStack.Pose pose, BakedQuad quad, float[] brightness, float red, float green, float blue, float alpha, int[] lights, int overlay, boolean readExistingColor) {
+			this.putBakedQuad(pose, quad, red, green, blue, alpha);
+		}
+
+		@Override
+		public @NonNull VertexConsumer addVertex(float x, float y, float z) {
+			this.positions[this.vertexIndex].set(x, y, z);
+			return this;
+		}
+
+		@Override
+		public @NonNull VertexConsumer setColor(int red, int green, int blue, int alpha) {
+			this.color = FastColor.ARGB32.color(alpha, red, green, blue);
+			return this;
+		}
+
+		@Override
+		public @NonNull VertexConsumer setUv(float u, float v) {
+			this.us[this.vertexIndex] = u;
+			this.vs[this.vertexIndex] = v;
+
+			// every textured vertex sets its uv exactly once, so this doubles as the end of a vertex
+			this.nextVertex();
+			return this;
+		}
+
+		@Override
+		public @NonNull VertexConsumer setUv1(int u, int v) {
+			return this;
+		}
+
+		@Override
+		public @NonNull VertexConsumer setUv2(int u, int v) {
+			return this;
+		}
+
+		@Override
+		public @NonNull VertexConsumer setNormal(float x, float y, float z) {
+			return this;
+		}
+		//?} else {
+		/^@Override
+		public void putBulkData(PoseStack.Pose pose, BakedQuad quad, float[] brightness, float red, float green, float blue, int[] lights, int overlay, boolean readExistingColor) {
+			this.putBakedQuad(pose, quad, red, green, blue, 1.0F);
+		}
+
+		@Override
+		public @NonNull VertexConsumer vertex(double x, double y, double z) {
+			this.positions[this.vertexIndex].set((float) x, (float) y, (float) z);
+			return this;
+		}
+
+		@Override
+		public @NonNull VertexConsumer color(int red, int green, int blue, int alpha) {
+			this.color = FastColor.ARGB32.color(alpha, red, green, blue);
+			return this;
+		}
+
+		@Override
+		public @NonNull VertexConsumer uv(float u, float v) {
+			this.us[this.vertexIndex] = u;
+			this.vs[this.vertexIndex] = v;
+			return this;
+		}
+
+		@Override
+		public @NonNull VertexConsumer overlayCoords(int u, int v) {
+			return this;
+		}
+
+		@Override
+		public @NonNull VertexConsumer uv2(int u, int v) {
+			return this;
+		}
+
+		@Override
+		public @NonNull VertexConsumer normal(float x, float y, float z) {
+			return this;
+		}
+
+		@Override
+		public void endVertex() {
+			this.nextVertex();
+		}
+
+		@Override
+		public void defaultColor(int red, int green, int blue, int alpha) {
+		}
+
+		@Override
+		public void unsetDefaultColor() {
+		}
+		^///?}
+
+		private void putBakedQuad(PoseStack.Pose pose, BakedQuad quad, float red, float green, float blue, float alpha) {
+			if (this.glint) {
+				return;
+			}
+
+			int tint = FastColor.ARGB32.color((int) (alpha * 255.0F), (int) (red * 255.0F), (int) (green * 255.0F), (int) (blue * 255.0F));
+
+			visitBakedQuad(quad, pose.pose(), tint, this.output);
+		}
+
+		private void nextVertex() {
+			if (++this.vertexIndex == 4) {
+				this.vertexIndex = 0;
+				this.visitCollectedQuad();
+			}
+		}
+
+		private void visitCollectedQuad() {
+			if (this.texture != null) {
+				visitQuad(
+						this.positions[0], this.positions[1], this.positions[2], this.positions[3],
+						this.us[0], this.vs[0],
+						this.us[1], this.vs[1],
+						this.us[2], this.vs[2],
+						this.us[3], this.vs[3],
+						NO_TRANSFORM, this.texture, this.color, this.output
+				);
+				return;
+			}
+
+			TextureAtlasSprite sprite = this.findSprite();
+			if (sprite == null) {
+				return;
+			}
+
+			float minU = sprite.getU0();
+			float minV = sprite.getV0();
+			float spanU = sprite.getU1() - minU;
+			float spanV = sprite.getV1() - minV;
+
+			if (spanU == 0.0F || spanV == 0.0F) {
+				return;
+			}
+
+			visitQuad(
+					this.positions[0], this.positions[1], this.positions[2], this.positions[3],
+					(this.us[0] - minU) / spanU, (this.vs[0] - minV) / spanV,
+					(this.us[1] - minU) / spanU, (this.vs[1] - minV) / spanV,
+					(this.us[2] - minU) / spanU, (this.vs[2] - minV) / spanV,
+					(this.us[3] - minU) / spanU, (this.vs[3] - minV) / spanV,
+					NO_TRANSFORM, TexelSource.of(sprite), this.color, this.output
+			);
+		}
+
+		@Nullable
+		private TextureAtlasSprite findSprite() {
+			if (this.atlas == null) {
+				return null;
+			}
+
+			float u = (this.us[0] + this.us[1] + this.us[2] + this.us[3]) / 4.0F;
+			float v = (this.vs[0] + this.vs[1] + this.vs[2] + this.vs[3]) / 4.0F;
+
+			if (this.lastSprite != null && contains(this.lastSprite, u, v)) {
+				return this.lastSprite;
+			}
+
+			for (TextureAtlasSprite sprite : getAtlasSprites(this.atlas)) {
+				if (contains(sprite, u, v)) {
+					return this.lastSprite = sprite;
+				}
+			}
+
+			return null;
+		}
+
+		private static boolean contains(TextureAtlasSprite sprite, float u, float v) {
+			return u >= sprite.getU0() && u <= sprite.getU1() && v >= sprite.getV0() && v <= sprite.getV1();
+		}
+
+	}
+	*///?}
 
 	private record Pixel(int argb, List<Vector3f> faceCenters) {
 

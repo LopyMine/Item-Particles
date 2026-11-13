@@ -3,6 +3,12 @@ package net.lopymine.itp.utils;
 import com.mojang.blaze3d.platform.NativeImage;
 import net.minecraft.client.renderer.texture.*;
 import net.minecraft.client.resources.metadata.animation.FrameSize;
+//? if >=1.21 && <=1.21.8 {
+/*import net.minecraft.server.packs.resources.ResourceMetadata;
+*///?}
+//? if <1.21 {
+/*import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
+*///?}
 
 public class MissingSpriteUtils {
 

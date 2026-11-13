@@ -5,10 +5,16 @@ import java.util.*;
 import net.lopymine.itp.particle.ItemParticle;
 import net.lopymine.itp.utils.*;
 import net.minecraft.client.*;
+//? if >=1.21.9 {
 import net.minecraft.client.renderer.feature.FeatureRenderDispatcher;
+//?} else {
+/*import com.mojang.blaze3d.vertex.*;
+import net.minecraft.client.particle.ParticleRenderType;
+import net.minecraft.client.renderer.*;
+*///?}
 //? if >=26.1 {
 import net.minecraft.client.renderer.state.level.QuadParticleRenderState;
-//?} else {
+//?} elif >=1.21.9 {
 /*import net.minecraft.client.renderer.state.QuadParticleRenderState;
 *///?}
 import net.minecraft.world.phys.Vec3;
@@ -26,7 +32,9 @@ public class FirstPersonParticleRenderer {
 	private static final FirstPersonParticleRenderer INSTANCE = new FirstPersonParticleRenderer();
 
 	private final List<ItemParticle> particles = new ArrayList<>();
+	//? if >=1.21.9 {
 	private final QuadParticleRenderState renderState = new QuadParticleRenderState();
+	//?}
 	//? if >=26.2 {
 	private final SubmitNodeStorage submitNodeStorage = new SubmitNodeStorage();
 	//?}
@@ -38,7 +46,11 @@ public class FirstPersonParticleRenderer {
 	}
 
 	public static double getViewDepth(Vec3 cameraPos, double x, double y, double z) {
+		//? if >=1.21.9 {
 		Vector3fc forward = GameRendererUtils.getMainCamera().forwardVector();
+		//?} else {
+		/*Vector3fc forward = GameRendererUtils.getMainCamera().getLookVector();
+		*///?}
 		return (x - cameraPos.x()) * forward.x() + (y - cameraPos.y()) * forward.y() + (z - cameraPos.z()) * forward.z();
 	}
 
@@ -57,6 +69,7 @@ public class FirstPersonParticleRenderer {
 		this.clear();
 	}
 
+	//? if >=1.21.9 {
 	public void render(float tickProgress/*? if >=26.3 {*/, GpuTextureView depthTextureView/*?}*/) {
 		if (this.particles.isEmpty()) {
 			return;
@@ -116,4 +129,81 @@ public class FirstPersonParticleRenderer {
 
 		modelViewStack.popMatrix();
 	}
+	//?} else {
+	/*public void render(float tickProgress) {
+		this.particles.removeIf((particle) -> !particle.isAlive());
+		if (this.particles.isEmpty()) {
+			return;
+		}
+
+		Camera camera = GameRendererUtils.getMainCamera();
+
+		Matrix4f levelToHand = FirstPersonSpace.getToHand(new Matrix4f());
+		float sizeScale = 1.0F / FirstPersonSpace.getFovScale();
+
+		Map<ParticleRenderType, List<ItemParticle>> particlesByType = new LinkedHashMap<>();
+		for (ItemParticle particle : this.particles) {
+			if (particle.isInFrontOfHand(camera, tickProgress)) {
+				particlesByType.computeIfAbsent(particle.getRenderType(), (type) -> new ArrayList<>()).add(particle);
+			}
+		}
+
+		if (particlesByType.isEmpty()) {
+			return;
+		}
+
+		//? if >=1.21 {
+		Matrix4fStack modelViewStack = RenderSystem.getModelViewStack();
+		modelViewStack.pushMatrix().mul(GameRendererUtils.getViewRotationMatrix(new Matrix4f()));
+		//?} else {
+		/^PoseStack modelViewStack = RenderSystem.getModelViewStack();
+		modelViewStack.pushPose();
+		modelViewStack.mulPoseMatrix(GameRendererUtils.getViewRotationMatrix(new Matrix4f()));
+		^///?}
+		RenderSystem.applyModelViewMatrix();
+
+		Minecraft minecraft = Minecraft.getInstance();
+		LightTexture lightTexture = minecraft.gameRenderer.lightTexture();
+		lightTexture.turnOnLightLayer();
+		RenderSystem.enableDepthTest();
+
+		for (Map.Entry<ParticleRenderType, List<ItemParticle>> entry : particlesByType.entrySet()) {
+			RenderSystem.setShader(GameRenderer::getParticleShader);
+			//? if >=1.21 {
+			BufferBuilder builder = entry.getKey().begin(Tesselator.getInstance(), minecraft.getTextureManager());
+			if (builder == null) {
+				continue;
+			}
+			//?} else {
+			/^Tesselator tesselator = Tesselator.getInstance();
+			BufferBuilder builder = tesselator.getBuilder();
+			entry.getKey().begin(builder, minecraft.getTextureManager());
+			^///?}
+
+			for (ItemParticle particle : entry.getValue()) {
+				particle.renderInHandSpace(builder, camera, tickProgress, levelToHand, sizeScale);
+			}
+
+			//? if >=1.21 {
+			MeshData mesh = builder.build();
+			if (mesh != null) {
+				BufferUploader.drawWithShader(mesh);
+			}
+			//?} else {
+			/^entry.getKey().end(tesselator);
+			^///?}
+		}
+
+		RenderSystem.depthMask(true);
+		RenderSystem.disableBlend();
+		lightTexture.turnOffLightLayer();
+
+		//? if >=1.21 {
+		modelViewStack.popMatrix();
+		//?} else {
+		/^modelViewStack.popPose();
+		^///?}
+		RenderSystem.applyModelViewMatrix();
+	}
+	*///?}
 }

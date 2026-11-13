@@ -1,5 +1,10 @@
 package net.lopymine.itp.utils;
 
+//? if <=1.20.1 {
+/*import java.util.Optional;
+import net.minecraft.world.effect.MobEffectInstance;
+*///?}
+
 public class EffectUtils {
 
 	//? if <=1.20.1 {

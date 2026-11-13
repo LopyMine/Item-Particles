@@ -12,10 +12,6 @@
 		/*"family.CompositeRenderTypeMixin",
 		*///?}
 
-		//? if <=1.21.4 {
-		/*"family.GameRendererMixin",
-		*///?}
-
 		//? if neoforge {
 		/*"neoforge.ClientPacketListenerMixin",
 		*///?}
@@ -28,29 +24,31 @@
 		"TextureAtlasMixin",
 		//?}
 
+		//? if >=1.21.9 {
+		"ShelfRendererMixin",
+		//?}
+
+		//? if >=1.21.4 {
+		"ItemFrameRenderStateMixin",
+		"ItemInHandLayerMixin",
+		"RenderTypeAccessor",
+		"RenderSetupAccessor",
+		"TextureBindingAccessor",
+		"ArmedEntityRenderStateMixin",
+		"ItemClusterRenderStateMixin",
+		//?}
+
+		"ItemFrameRendererMixin",
+		"AtlasLoaderMixin",
+		"MinecraftRenderCallMixin",
 		//? if >=26.3 {
 		"FirstPersonHandsAndItemsRendererMixin",
 		//?} else {
 		/*"ItemInHandRendererMixin",
 		*///?}
-
-		//? if >=1.21.9 {
-		"ShelfRendererMixin",
-		//?}
-
-		"ItemFrameRendererMixin",
-		"ItemFrameRenderStateMixin",
-		"AtlasLoaderMixin",
-		"MinecraftRenderCallMixin",
-		"ItemInHandLayerMixin",
 		"SpriteContentsAccessor",
-		"RenderTypeAccessor",
-		"RenderSetupAccessor",
-		"TextureBindingAccessor",
-		"ArmedEntityRenderStateMixin",
 		"GameRendererMixin",
 		"ItemEntityRendererMixin",
-		"ItemClusterRenderStateMixin",
 		"ScreenMixin"
 	],
 	"injectors": {

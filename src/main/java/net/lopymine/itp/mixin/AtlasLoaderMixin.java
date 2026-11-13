@@ -14,6 +14,13 @@ import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.At.Shift;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+//? if <1.21.11 {
+/*import java.util.function.*;
+import net.minecraft.client.renderer.texture.SpriteContents;
+*///?}
+//? if <1.21 {
+/*import net.minecraft.server.packs.resources.ResourceManager;
+*///?}
 
 //? if >=1.21 {
 @Mixin(SpriteSourceList.class)
@@ -25,6 +32,11 @@ public class AtlasLoaderMixin implements IAtlasLoaderMixin {
 	@Unique
 	private boolean ItemParticles$marked;
 
+	@Override
+	public void itemParticles$mark() {
+		this.ItemParticles$marked = true;
+	}
+
 	//? if >=1.21 {
 	@WrapOperation(at = @At(value = "NEW", target = "(Ljava/util/List;)Lnet/minecraft/client/renderer/texture/atlas/SpriteSourceList;"), method = "load")
 	private static SpriteSourceList markAtlas(List<SpriteSourceList> sources, Operation<SpriteSourceList> original, @Local(argsOnly = true) Identifier path) {
@@ -33,6 +45,40 @@ public class AtlasLoaderMixin implements IAtlasLoaderMixin {
 			((IAtlasLoaderMixin) loader).itemParticles$mark();
 		}
 		return loader;
+	}
+	//?} else {
+	/*@WrapOperation(at = @At(value = "NEW", target = "(Ljava/util/List;)Lnet/minecraft/client/renderer/texture/atlas/SpriteResourceLoader;"), method = "load")
+	private static SpriteResourceLoader markAtlas(List<SpriteResourceLoader> sources, Operation<SpriteResourceLoader> original, @Local(argsOnly = true) Identifier path) {
+		SpriteResourceLoader loader = original.call(sources);
+		if (ItemParticlesAtlasManager.FOLDER_ID.equals(path)) {
+			((IAtlasLoaderMixin) loader).itemParticles$mark();
+		}
+		return loader;
+	}
+	*///?}
+
+	//? if >=1.21.11 {
+	@Inject(
+			at = @At(
+					value = "INVOKE",
+					target = "Ljava/util/List;forEach(Ljava/util/function/Consumer;)V",
+					shift = Shift.AFTER
+			),
+			//? if neoforge {
+			/*method = "list(Lnet/minecraft/server/packs/resources/ResourceManager;Ljava/util/Set;)Ljava/util/List;",
+			*///?} else {
+			method = "list",
+			//?}
+			cancellable = true
+	)
+	private void swapMissingTexture(CallbackInfoReturnable<List<SpriteSource.Loader>> cir, @Local Map<Identifier, SpriteSource.DiscardableLoader> map) {
+		if (!this.ItemParticles$marked) {
+			return;
+		}
+		Builder<SpriteSource.Loader> builder = ImmutableList.builder();
+		builder.add((opener) -> MissingSpriteUtils.getMissingParticle());
+		builder.addAll(map.values());
+		cir.setReturnValue(builder.build());
 	}
 	//?} elif >=1.21 {
 	/*@Inject(
@@ -67,45 +113,6 @@ public class AtlasLoaderMixin implements IAtlasLoaderMixin {
 		builder.add(MissingSpriteUtils::getMissingParticle);
 		builder.addAll(map.values());
 		cir.setReturnValue(builder.build());
-	}
-	*///?}
-
-	//? if >=1.21.11 {
-	@Inject(
-			at = @At(
-					value = "INVOKE",
-					target = "Ljava/util/List;forEach(Ljava/util/function/Consumer;)V",
-					shift = Shift.AFTER
-			),
-			//? if neoforge {
-			/*method = "list(Lnet/minecraft/server/packs/resources/ResourceManager;Ljava/util/Set;)Ljava/util/List;",
-			*///?} else {
-			method = "list",
-			//?}
-			cancellable = true
-	)
-	private void swapMissingTexture(CallbackInfoReturnable<List<SpriteSource.Loader>> cir, @Local Map<Identifier, SpriteSource.DiscardableLoader> map) {
-		if (!this.ItemParticles$marked) {
-			return;
-		}
-		Builder<SpriteSource.Loader> builder = ImmutableList.builder();
-		builder.add((opener) -> MissingSpriteUtils.getMissingParticle());
-		builder.addAll(map.values());
-		cir.setReturnValue(builder.build());
-	}
-
-	@Override
-	public void itemParticles$mark() {
-		this.ItemParticles$marked = true;
-	}
-	//?} else {
-	/*@WrapOperation(at = @At(value = "NEW", target = "(Ljava/util/List;)Lnet/minecraft/client/renderer/texture/atlas/SpriteResourceLoader;"), method = "load")
-	private static SpriteResourceLoader markAtlas(List<SpriteResourceLoader> sources, Operation<SpriteResourceLoader> original, @Local(argsOnly = true) Identifier path) {
-		SpriteResourceLoader loader = original.call(sources);
-		if (ItemParticlesAtlasManager.FOLDER_ID.equals(path)) {
-			((IAtlasLoaderMixin) loader).ItemParticles$mark();
-		}
-		return loader;
 	}
 	*///?}
 }

@@ -407,4 +407,130 @@ public class ItemRendering {
 	}
 
 }
+*///?} else {
+
+/*import com.mojang.blaze3d.platform.NativeImage;
+import com.mojang.blaze3d.vertex.PoseStack;
+import java.util.*;
+import java.util.function.Consumer;
+import lombok.experimental.ExtensionMethod;
+import net.lopymine.itp.extension.NativeImageExtension;
+import net.lopymine.itp.family.utils.FamilySafeRenderExecutor;
+import net.lopymine.itp.texel.ModelTexelScanner;
+import net.lopymine.itp.utils.iac.*;
+import net.lopymine.itp.utils.iac.RenderedFluidImage.ColorGetter;
+import net.lopymine.itp.utils.iac.RenderedItemImage.Pixel;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.renderer.texture.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.*;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.FluidState;
+import org.jetbrains.annotations.Nullable;
+
+//? if fabric {
+import net.fabricmc.fabric.api.client.render.fluid.v1.*;
+//?} elif forge {
+/^import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
+^///?} else {
+/^import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
+^///?}
+
+@ExtensionMethod(NativeImageExtension.class)
+public class ItemRendering {
+
+	public static void renderItems(List<ItemStack> itemStacks, Consumer<List<RenderedItemImage>> consumer) {
+		FamilySafeRenderExecutor.submit(() -> {
+			List<RenderedItemImage> list = new ArrayList<>();
+
+			for (ItemStack itemStack : itemStacks) {
+				Set<Pixel> colors = new HashSet<>();
+				for (ItemDisplayContext context : ItemDisplayContext.values()) {
+					ModelTexelScanner.visitPixels(itemStack, context, new PoseStack(), (texture, x, y, argb, position, faceCenters) -> {
+						colors.add(new Pixel(texture, x, y, argb));
+					});
+				}
+				list.add(new RenderedItemImage(new ArrayList<>(colors)));
+			}
+
+			consumer.accept(list);
+		});
+	}
+
+	public static void renderFluidsIntoImages(List<BucketItem> bucketItems, Consumer<List<RenderedFluidImage>> consumer) {
+		FamilySafeRenderExecutor.submit(() -> {
+			List<RenderedFluidImage> images = new ArrayList<>();
+			for (BucketItem bucketItem : bucketItems) {
+				images.add(ItemRendering.createFluidImage(bucketItem));
+			}
+
+			consumer.accept(images);
+		});
+	}
+
+	@Nullable
+	private static RenderedFluidImage createFluidImage(BucketItem bucketItem) {
+		FluidState fluidState = bucketItem.content.defaultFluidState();
+		//? if fabric {
+		FluidRenderHandler handler = FluidRenderHandlerRegistry.INSTANCE.get(bucketItem.content);
+		if (handler == null) {
+			return null;
+		}
+
+		TextureAtlasSprite sprite = handler.getFluidSprites(null, null, fluidState)[0];
+		//?} else {
+		/^IClientFluidTypeExtensions extensions = IClientFluidTypeExtensions.of(fluidState);
+
+		Identifier stillTexture = extensions.getStillTexture();
+		if (stillTexture == null) { // can be null!! Ignore warning
+			return null;
+		}
+
+		TextureAtlasSprite sprite = Minecraft.getInstance().getModelManager().getAtlas(TextureAtlas.LOCATION_BLOCKS).getSprite(stillTexture);
+		^///?}
+
+		if (sprite == null || sprite.contents().name().getPath().equals("missingno")) {
+			return null;
+		}
+
+		ArrayList<Pixel> pixels = new ArrayList<>();
+
+		NativeImage originalImage = sprite.contents().originalImage;
+		int d = Math.min(originalImage.getWidth(), originalImage.getHeight());
+
+		for (int x = 0; x < d; x++) {
+			for (int y = 0; y < d; y++) {
+				pixels.add(new Pixel(sprite.contents().name(), x, y, originalImage.getPixelArgb(x, y)));
+			}
+		}
+
+		if (pixels.isEmpty()) {
+			return null;
+		}
+
+		return new RenderedFluidImage(pixels, new ColorGetter() {
+
+			@Override
+			public int getFallback(BlockState state) {
+				//? if fabric {
+				return handler.getFluidColor(null, null, fluidState);
+				//?} else {
+				/^return extensions.getTintColor();
+				^///?}
+			}
+
+			@Override
+			public int getWorld(BlockState state, ClientLevel level, BlockPos pos) {
+				//? if fabric {
+				return handler.getFluidColor(level, pos, fluidState);
+				//?} else {
+				/^return extensions.getTintColor(fluidState, level, pos);
+				^///?}
+			}
+		});
+	}
+
+}
 *///?}

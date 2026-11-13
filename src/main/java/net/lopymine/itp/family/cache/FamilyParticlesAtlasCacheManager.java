@@ -16,6 +16,9 @@ import net.lopymine.itp.family.utils.FamilySafeRenderExecutor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
+//? if <1.21.4 {
+/*import net.minecraft.world.item.Items;
+*///?}
 import org.jetbrains.annotations.Nullable;
 
 @ExtensionMethod(NativeImageExtension.class)

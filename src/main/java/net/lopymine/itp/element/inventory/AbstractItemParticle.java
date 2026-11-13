@@ -12,15 +12,20 @@ import net.lopymine.itp.element.size.StaticSize;
 import net.lopymine.itp.element.texture.*;
 import net.lopymine.itp.element.texture.provider.ITextureProvider;
 import net.lopymine.itp.manager.FirstPersonParticleRenderer;
-import net.lopymine.itp.utils.ArgbUtils2;
+import net.lopymine.itp.utils.*;
 import net.lopymine.mossylib.utils.ArgbUtils;
 import net.minecraft.client.*;
 import net.minecraft.client.multiplayer.ClientLevel;
+//? if >=1.21.9 {
 import net.minecraft.client.particle.SingleQuadParticle;
+//?} else {
+/*import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.particle.TextureSheetParticle;
+*///?}
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 //? if >=26.1 {
 import net.minecraft.client.renderer.state.level.QuadParticleRenderState;
-//?} else {
+//?} elif >=1.21.9 {
 /*import net.minecraft.client.renderer.state.QuadParticleRenderState;
 *///?}
 import net.minecraft.util.*;
@@ -30,12 +35,21 @@ import org.joml.*;
 
 @Setter
 @Getter
+//? if >=1.21.9 {
 public abstract class AbstractItemParticle<E extends AbstractItemParticle<E>> extends SingleQuadParticle implements IElement, IRotatableElement, IRepaintable, IRandomizable, IResizableElement, IBillboardElement {
+//?} else {
+/*public abstract class AbstractItemParticle<E extends AbstractItemParticle<E>> extends TextureSheetParticle implements IElement, IRotatableElement, IRepaintable, IRandomizable, IResizableElement, IBillboardElement {
+*///?}
 
 	public static float SIZE_SCALE = 1.0F / 64.0F;
 	public static float SPEED_SCALE = 1.0F / 24.0F;
 	public static double HAND_DEPTH_BIAS = 0.005D;
 	public static double FIRST_PERSON_FACING_OFFSET = 0.0D;
+	//? if <1.21 {
+	/*private static final float QUAD_SIDE = -1.0F;
+	*///?} elif <1.21.9 {
+	/*private static final float QUAD_SIDE = 1.0F;
+	*///?}
 
 	protected boolean initialized = false;
 	private double standardParticleAngle;
@@ -67,7 +81,12 @@ public abstract class AbstractItemParticle<E extends AbstractItemParticle<E>> ex
 	private double textureAngle;
 
 	protected AbstractItemParticle(ClientLevel level, double x, double y, double z, TextureAtlasSprite sprite) {
+		//? if >=1.21.9 {
 		super(level, x, y, z, sprite);
+		//?} else {
+		/*super(level, x, y, z);
+		this.setSprite(sprite);
+		*///?}
 		this.hasPhysics = true;
 		this.gravity    = 0.0F;
 		this.friction   = 1.0F;
@@ -148,6 +167,7 @@ public abstract class AbstractItemParticle<E extends AbstractItemParticle<E>> ex
 
 	protected void processCustomControllers() { }
 
+	//? if >=1.21.9 {
 	@Override
 	@SuppressWarnings("NullableProblems")
 	public void extract(QuadParticleRenderState state, Camera camera, float tickProgress) {
@@ -160,11 +180,43 @@ public abstract class AbstractItemParticle<E extends AbstractItemParticle<E>> ex
 			return;
 		}
 
+		this.extractRotatedQuad(state, camera, this.getRolledBillboardRotation(camera, tickProgress), tickProgress);
+	}
+	//?} else {
+	/*@Override
+	public void render(VertexConsumer consumer, Camera camera, float tickProgress) {
+		if (this.isInFrontOfHand(camera, tickProgress)) {
+			return;
+		}
+
+		if (!this.spawnedInHand) {
+			super.render(consumer, camera, tickProgress);
+			return;
+		}
+
+		this.renderQuad(consumer, this.getRolledBillboardRotation(camera, tickProgress), this.getRelativePosition(camera, tickProgress), this.getQuadSize(tickProgress), this.getLightColor(tickProgress));
+	}
+	*///?}
+
+	private Quaternionf getRolledBillboardRotation(Camera camera, float tickProgress) {
 		Quaternionf rotation = this.getBillboardRotation(camera, tickProgress, new Quaternionf());
 		if (this.roll != 0.0F) {
 			rotation.rotateZ(Mth.lerp(tickProgress, this.oRoll, this.roll));
 		}
-		this.extractRotatedQuad(state, camera, rotation, tickProgress);
+		return rotation;
+	}
+
+	private Vector3f getPositionInHandSpace(Camera camera, float tickProgress, Matrix4f levelToHand) {
+		return levelToHand.transformPosition(this.getRelativePosition(camera, tickProgress));
+	}
+
+	private Vector3f getRelativePosition(Camera camera, float tickProgress) {
+		Vec3 cameraPos = GameRendererUtils.getPosition(camera);
+		return new Vector3f(
+				(float) (Mth.lerp(tickProgress, this.xo, this.x) - cameraPos.x()),
+				(float) (Mth.lerp(tickProgress, this.yo, this.y) - cameraPos.y()),
+				(float) (Mth.lerp(tickProgress, this.zo, this.z) - cameraPos.z())
+		);
 	}
 
 	public Quaternionf getBillboardRotation(Camera camera, float tickProgress, Quaternionf dest) {
@@ -172,8 +224,12 @@ public abstract class AbstractItemParticle<E extends AbstractItemParticle<E>> ex
 			return dest.set(camera.rotation());
 		}
 
-		Vec3 cameraPos = camera.position();
+		Vec3 cameraPos = GameRendererUtils.getPosition(camera);
+		//? if >=1.21.9 {
 		Vector3fc forward = camera.forwardVector();
+		//?} else {
+		/*Vector3fc forward = camera.getLookVector();
+		*///?}
 
 		Vector3f normal = new Vector3f(
 				(float) (Mth.lerp(tickProgress, this.xo, this.x) - cameraPos.x() - forward.x() * FIRST_PERSON_FACING_OFFSET),
@@ -198,7 +254,7 @@ public abstract class AbstractItemParticle<E extends AbstractItemParticle<E>> ex
 		}
 
 		double depth = FirstPersonParticleRenderer.getViewDepth(
-				camera.position(),
+				GameRendererUtils.getPosition(camera),
 				Mth.lerp(tickProgress, this.xo, this.x),
 				Mth.lerp(tickProgress, this.yo, this.y),
 				Mth.lerp(tickProgress, this.zo, this.z)
@@ -207,19 +263,10 @@ public abstract class AbstractItemParticle<E extends AbstractItemParticle<E>> ex
 		return depth < this.handDepth - HAND_DEPTH_BIAS;
 	}
 
+	//? if >=1.21.9 {
 	public void extractInHandSpace(QuadParticleRenderState particleTypeRenderState, Camera camera, float tickProgress, Matrix4f levelToHand, float sizeScale) {
-		Quaternionf rotation = this.getBillboardRotation(camera, tickProgress, new Quaternionf());
-
-		if (this.roll != 0.0F) {
-			rotation.rotateZ(Mth.lerp(tickProgress, this.oRoll, this.roll));
-		}
-
-		Vec3 cameraPos = camera.position();
-		Vector3f position = levelToHand.transformPosition(new Vector3f(
-				(float) (Mth.lerp(tickProgress, this.xo, this.x) - cameraPos.x()),
-				(float) (Mth.lerp(tickProgress, this.yo, this.y) - cameraPos.y()),
-				(float) (Mth.lerp(tickProgress, this.zo, this.z) - cameraPos.z())
-		));
+		Quaternionf rotation = this.getRolledBillboardRotation(camera, tickProgress);
+		Vector3f position = this.getPositionInHandSpace(camera, tickProgress, levelToHand);
 
 		particleTypeRenderState.add(
 				this.getLayer(),
@@ -243,6 +290,30 @@ public abstract class AbstractItemParticle<E extends AbstractItemParticle<E>> ex
 				*///?}
 		);
 	}
+	//?} else {
+	/*public void renderInHandSpace(VertexConsumer consumer, Camera camera, float tickProgress, Matrix4f levelToHand, float sizeScale) {
+		Quaternionf rotation = this.getRolledBillboardRotation(camera, tickProgress);
+		Vector3f position = this.getPositionInHandSpace(camera, tickProgress, levelToHand);
+
+		this.renderQuad(consumer, rotation, position, this.getQuadSize(tickProgress) * sizeScale, this.getLightColor(tickProgress));
+	}
+
+	private void renderQuad(VertexConsumer consumer, Quaternionf rotation, Vector3f position, float size, int light) {
+		this.renderQuadVertex(consumer, rotation, position, QUAD_SIDE, -1.0F, size, this.getU1(), this.getV1(), light);
+		this.renderQuadVertex(consumer, rotation, position, QUAD_SIDE, 1.0F, size, this.getU1(), this.getV0(), light);
+		this.renderQuadVertex(consumer, rotation, position, -QUAD_SIDE, 1.0F, size, this.getU0(), this.getV0(), light);
+		this.renderQuadVertex(consumer, rotation, position, -QUAD_SIDE, -1.0F, size, this.getU0(), this.getV1(), light);
+	}
+
+	private void renderQuadVertex(VertexConsumer consumer, Quaternionf rotation, Vector3f position, float offsetX, float offsetY, float size, float u, float v, int light) {
+		Vector3f vertex = new Vector3f(offsetX, offsetY, 0.0F).rotate(rotation).mul(size).add(position);
+		//? if >=1.21 {
+		consumer.addVertex(vertex.x(), vertex.y(), vertex.z()).setUv(u, v).setColor(this.rCol, this.gCol, this.bCol, this.alpha).setLight(light);
+		//?} else {
+		/^consumer.vertex(vertex.x(), vertex.y(), vertex.z()).uv(u, v).color(this.rCol, this.gCol, this.bCol, this.alpha).uv2(light).endVertex();
+		^///?}
+	}
+	*///?}
 
 	@Override
 	@Nullable

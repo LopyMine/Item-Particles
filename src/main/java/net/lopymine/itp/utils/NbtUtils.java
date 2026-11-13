@@ -12,6 +12,8 @@ import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.component.*;
 //?} else {
 /*import net.minecraft.nbt.*;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.Potion;
 import org.jetbrains.annotations.Nullable;

@@ -4,6 +4,7 @@ import com.mojang.serialization.*;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.function.Function;
+import net.lopymine.itp.client.ItemParticlesClient;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.RandomSource;
 import org.jspecify.annotations.Nullable;
@@ -18,10 +19,10 @@ public record AdvancedSpawnAreas(Map<Identifier, AdvancedSpawnAreaId> areas) imp
 
 		for (Entry<Identifier, String> entry : map.entrySet()) {
 			DataResult<AdvancedSpawnAreaId> result = AdvancedSpawnAreaId.read(entry.getKey(), entry.getValue());
-			if (result.isError()) {
+			if (result.error().isPresent()) {
 				return DataResult.error(() -> result.error().orElseThrow().message());
 			}
-			areas.put(AdvancedSpawnAreaId.getValidatedBaseTexture(entry.getKey()), result.getOrThrow());
+			areas.put(AdvancedSpawnAreaId.getValidatedBaseTexture(entry.getKey()), result.result().orElseThrow());
 		}
 
 		return DataResult.success(new AdvancedSpawnAreas(areas));
@@ -38,7 +39,17 @@ public record AdvancedSpawnAreas(Map<Identifier, AdvancedSpawnAreaId> areas) imp
 				return null;
 			}
 			AdvancedSpawnArea area = spawnAreaId.getArea();
-			return area == null ? null : area.getRandomPosFunction(random).apply(id);
+			if (area == null) {
+				if (ItemParticlesClient.isValidationEnabled()) {
+					ItemParticlesClient.logValidationError("Failed to get spawn area from [{}|{}] for {}, requested: {}", spawnAreaId.getBaseTexture(), spawnAreaId.getMaskTexture(), ItemParticlesClient.CURRENT_STACK, id);
+				}
+				return null;
+			}
+			IParticleSpawnPos pos = area.getRandomPosFunction(random).apply(id);
+			if (pos == null && ItemParticlesClient.isValidationEnabled()) {
+				ItemParticlesClient.logValidationError("Failed to get pos from spawn area from [{}|{}] for {}, requested: {}", spawnAreaId.getBaseTexture(), spawnAreaId.getMaskTexture(), ItemParticlesClient.CURRENT_STACK, id);
+			}
+			return pos;
 		};
 	}
 }

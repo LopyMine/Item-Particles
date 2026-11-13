@@ -19,8 +19,8 @@ public class RenderedItemImage {
 
 		@Override
 		public boolean equals(Object o) {
-			if (!(o instanceof Pixel(Identifier texture1, int x1, int y1, int color1))) return false;
-			return x() == x1 && y() == y1 && color() == color1 && Objects.equals(texture(), texture1);
+			if (!(o instanceof Pixel pixel)) return false;
+			return x() == pixel.x() && y() == pixel.y() && color() == pixel.color() && Objects.equals(texture(), pixel.texture());
 		}
 
 		@Override
