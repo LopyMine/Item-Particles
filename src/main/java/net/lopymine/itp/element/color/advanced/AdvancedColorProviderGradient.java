@@ -30,7 +30,7 @@ public class AdvancedColorProviderGradient extends TickElement implements IAdvan
 			return compiledColors[compiledColors.length - 1];
 		}
 
-		this.tick();
+		this.tickElement();
 
 		float progress = (float) (this.ticks % this.time) / (float) this.time;
 		int totalSegments = compiledColors.length - 1;

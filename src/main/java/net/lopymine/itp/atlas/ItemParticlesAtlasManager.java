@@ -1,7 +1,7 @@
 package net.lopymine.itp.atlas;
 
 import java.util.Set;
-import java.util.concurrent.Executor;
+import java.util.concurrent.*;
 import net.lopymine.itp.ItemParticles;
 import net.lopymine.itp.family.atlas.manager.FamilyParticlesAtlasManager;
 import net.minecraft.client.Minecraft;
@@ -14,14 +14,19 @@ import org.jetbrains.annotations.Nullable;
 
 public class ItemParticlesAtlasManager {
 
-	public static final Identifier ATLAS_ID = ItemParticles.id("textures/atlas/iparticles");
-	public static final Identifier FOLDER_ID = ItemParticles.id("iparticles");
+	public static final Identifier ATLAS_ID = ItemParticles.id("textures/atlas/particles");
+	public static final Identifier LEGACY_ATLAS_ID = ItemParticles.id("textures/atlas/iparticles");
+	public static final Identifier FOLDER_ID = ItemParticles.id("particles");
+	public static final Identifier LEGACY_FOLDER_ID = ItemParticles.id("iparticles");
 	private static ItemParticlesAtlasManager INSTANCE;
 	private final TextureAtlas atlas;
+	private final TextureAtlas legacyAtlas;
 
 	public ItemParticlesAtlasManager() {
 		this.atlas = new TextureAtlas(ATLAS_ID);
+		this.legacyAtlas = new TextureAtlas(LEGACY_ATLAS_ID);
 		Minecraft.getInstance().getTextureManager().register(ATLAS_ID, this.atlas);
+		Minecraft.getInstance().getTextureManager().register(LEGACY_ATLAS_ID, this.legacyAtlas);
 	}
 
 	public static ItemParticlesAtlasManager getInstance() {
@@ -32,22 +37,40 @@ public class ItemParticlesAtlasManager {
 	}
 
 	public void reload(PreparableReloadListener.PreparationBarrier synchronizer, ResourceManager resourceManager, Executor prepareExecutor, Executor applyExecutor) {
+		CompletableFuture<SpriteLoader.Preparations> preparations = stitch(this.atlas, FOLDER_ID, resourceManager, prepareExecutor);
+		CompletableFuture<SpriteLoader.Preparations> legacyPreparations = stitch(this.legacyAtlas, LEGACY_FOLDER_ID, resourceManager, prepareExecutor);
+
+		CompletableFuture.allOf(preparations, legacyPreparations)
+				.thenCompose(synchronizer::wait)
+				.thenAcceptAsync((unused) -> {
+					this.atlas.upload(preparations.join());
+					this.legacyAtlas.upload(legacyPreparations.join());
+				}, applyExecutor);
+	}
+
+	private static CompletableFuture<SpriteLoader.Preparations> stitch(TextureAtlas atlas, Identifier folderId, ResourceManager resourceManager, Executor prepareExecutor) {
 		//? if >=1.21.9 {
-		SpriteLoader.create(this.atlas)
-				.loadAndStitch(resourceManager, FOLDER_ID, 0, prepareExecutor, Set.of())
-				.thenCompose(synchronizer::wait)
-				.thenAcceptAsync(this.atlas::upload, applyExecutor);
+		return SpriteLoader.create(atlas).loadAndStitch(resourceManager, folderId, 0, prepareExecutor, Set.of());
 		//?} else {
-		/*SpriteLoader.create(this.atlas)
-				.loadAndStitch(resourceManager, FOLDER_ID, 0, prepareExecutor)
-				.thenCompose(SpriteLoader.Preparations::waitForUpload)
-				.thenCompose(synchronizer::wait)
-				.thenAcceptAsync(this.atlas::upload, applyExecutor);
+		/*return SpriteLoader.create(atlas)
+				.loadAndStitch(resourceManager, folderId, 0, prepareExecutor)
+				.thenCompose(SpriteLoader.Preparations::waitForUpload);
 		*///?}
 	}
 
 	public void close() {
 		this.atlas.close();
+		this.legacyAtlas.close();
+	}
+
+	public Identifier resolveAtlasId(@Nullable Identifier id, Identifier atlasId) {
+		if (id == null || !(ATLAS_ID.equals(atlasId) || LEGACY_ATLAS_ID.equals(atlasId))) {
+			return atlasId;
+		}
+		if (this.atlas.getSprite(id) != getMissingSprite(this.atlas)) {
+			return ATLAS_ID;
+		}
+		return this.legacyAtlas.getSprite(id) == getMissingSprite(this.legacyAtlas) ? ATLAS_ID : LEGACY_ATLAS_ID;
 	}
 
 	public TextureAtlasSprite getSprite(@Nullable Identifier id, @Nullable Identifier atlasId) {
@@ -55,8 +78,13 @@ public class ItemParticlesAtlasManager {
 			if (id == null) {
 				return this.getMissingSprite();
 			}
-			if (atlasId == null || ATLAS_ID.equals(atlasId)) {
-				return this.atlas.getSprite(id);
+			if (atlasId == null || ATLAS_ID.equals(atlasId) || LEGACY_ATLAS_ID.equals(atlasId)) {
+				TextureAtlasSprite sprite = this.atlas.getSprite(id);
+				if (sprite != getMissingSprite(this.atlas)) {
+					return sprite;
+				}
+				TextureAtlasSprite legacySprite = this.legacyAtlas.getSprite(id);
+				return legacySprite == getMissingSprite(this.legacyAtlas) ? sprite : legacySprite;
 			}
 			FamilyParticlesAtlasManager familyManager = FamilyParticlesAtlasManager.get(atlasId.getPath());
 			if (familyManager != null) {
@@ -85,6 +113,10 @@ public class ItemParticlesAtlasManager {
 	}
 
 	public TextureAtlasSprite getMissingSprite() {
-		return /*? if >=1.21 {*/ this.atlas.missingSprite /*?} else {*/ /*this.atlas.getSprite(MissingTextureAtlasSprite.getLocation()) *//*?}*/;
+		return getMissingSprite(this.atlas);
+	}
+
+	private static TextureAtlasSprite getMissingSprite(TextureAtlas atlas) {
+		return /*? if >=1.21 {*/ atlas.missingSprite /*?} else {*/ /*atlas.getSprite(MissingTextureAtlasSprite.getLocation()) *//*?}*/;
 	}
 }

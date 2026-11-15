@@ -36,7 +36,10 @@
 		"TextureBindingAccessor",
 		"ArmedEntityRenderStateMixin",
 		"ItemClusterRenderStateMixin",
-		//?}
+		"ItemStackRenderStateMixin",
+		//?} else {
+		/*"ItemRendererMixin",
+		*///?}
 
 		"ItemFrameRendererMixin",
 		"AtlasLoaderMixin",

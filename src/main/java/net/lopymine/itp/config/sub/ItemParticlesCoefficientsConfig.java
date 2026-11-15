@@ -5,6 +5,7 @@ import java.util.function.Supplier;
 import lombok.*;
 import net.lopymine.itp.element.spawner.SpawnCategory;
 import static com.mojang.serialization.Codec.DOUBLE;
+import static com.mojang.serialization.Codec.INT;
 import static com.mojang.serialization.codecs.RecordCodecBuilder.create;
 import static net.lopymine.mossylib.utils.CodecUtils.option;
 import static net.lopymine.mossylib.utils.CodecUtils.parseNewInstanceHacky;
@@ -52,6 +53,10 @@ public class ItemParticlesCoefficientsConfig {
 		return this.globalConfig.getCooldownCoefficient() * this.getConfig(category).getCooldownCoefficient();
 	}
 
+	public int getSpawnDistance(SpawnCategory category) {
+		return this.getConfig(category).getSpawnDistance();
+	}
+
 	@Getter
 	@Setter
 	@AllArgsConstructor
@@ -59,11 +64,13 @@ public class ItemParticlesCoefficientsConfig {
 
 		public static final Codec<ParticleCoefficientConfig> CODEC = create((instance) -> instance.group(
 				option("count_coefficient", 1.0D, DOUBLE, ParticleCoefficientConfig::getCountCoefficient),
-				option("cooldown_coefficient", 1.0D, DOUBLE, ParticleCoefficientConfig::getCooldownCoefficient)
+				option("cooldown_coefficient", 1.0D, DOUBLE, ParticleCoefficientConfig::getCooldownCoefficient),
+				option("spawn_distance", 32, INT, ParticleCoefficientConfig::getSpawnDistance)
 		).apply(instance, ParticleCoefficientConfig::new));
 
 		private double countCoefficient;
 		private double cooldownCoefficient;
+		private int spawnDistance;
 
 		public static Supplier<ParticleCoefficientConfig> getNewInstance() {
 			return () -> parseNewInstanceHacky(CODEC);

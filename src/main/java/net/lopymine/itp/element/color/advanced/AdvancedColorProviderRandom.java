@@ -22,7 +22,7 @@ public class AdvancedColorProviderRandom extends AbstractAdvancedColorProviderWi
 
 	@Override
 	public int tickResolve(Integer[] compiledColors, RandomSource random) {
-		this.tick();
+		this.tickElement();
 
 		if (this.currentColor != null && this.ticks < this.changeColorTick) {
 			return this.currentColor;

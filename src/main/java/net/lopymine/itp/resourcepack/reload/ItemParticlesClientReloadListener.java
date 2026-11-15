@@ -10,6 +10,7 @@ import net.lopymine.itp.family.FamilyParticlesConfigManager;
 import net.lopymine.itp.family.atlas.manager.FamilyParticlesAtlasManager;
 import net.lopymine.itp.family.cache.*;
 import net.lopymine.itp.resourcepack.manager.ParticlesConfigsManager;
+import net.lopymine.itp.texel.ModelTexelScanner;
 import net.lopymine.mossylib.reload.AbstractResourceReloadListener;
 import net.minecraft.client.Minecraft;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -34,6 +35,7 @@ public class ItemParticlesClientReloadListener extends AbstractResourceReloadLis
 		this.first = false;
 
 		ITextureProvider.clear(); // clear cached sprites
+		ModelTexelScanner.clearTextureCache();
 		FamilyParticlesAtlasManager.closeAll();
 		FamilyParticlesAtlasCacheManager.clear(); // release images
 		FamilyParticlesSpawnAreasCacheManager.clear(); // clear spawn areas

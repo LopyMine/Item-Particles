@@ -45,6 +45,9 @@
 	"${mod_id}.modmenu.option.cooldown_coefficient.name": "Cooldown Coefficient",
 	"${mod_id}.modmenu.option.cooldown_coefficient.description": "Multiplier for the cooldown between particles spawns in this context.",
 
+	"${mod_id}.modmenu.option.spawn_distance.name": "Spawn Distance",
+	"${mod_id}.modmenu.option.spawn_distance.description": "Maximum distance in blocks from the camera at which particles will be spawned in this context.",
+
 	"${mod_id}.modmenu.option.whitelist_mode.disabled": "Disabled",
 	"${mod_id}.modmenu.option.whitelist_mode.whitelist": "Whitelist",
 	"${mod_id}.modmenu.option.whitelist_mode.blacklist": "Blacklist",

@@ -106,7 +106,7 @@ public abstract class AbstractItemParticle<E extends AbstractItemParticle<E>> ex
 
 		this.age++;
 
-		this.textureProvider.tick();
+		this.textureProvider.tickElement();
 		this.setElementTexture(this.textureProvider.getTexture(this.random));
 
 		if (this.textureProvider.isShouldDead() || this.age > this.getLifeTimeTicks()) {
@@ -402,6 +402,11 @@ public abstract class AbstractItemParticle<E extends AbstractItemParticle<E>> ex
 	@Override
 	public int getTicks() {
 		return this.age;
+	}
+
+	@Override
+	public void tickElement() {
+		this.tick();
 	}
 
 	public int getLifeTimeTicks() {

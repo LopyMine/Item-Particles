@@ -41,7 +41,7 @@ public class AtlasLoaderMixin implements IAtlasLoaderMixin {
 	@WrapOperation(at = @At(value = "NEW", target = "(Ljava/util/List;)Lnet/minecraft/client/renderer/texture/atlas/SpriteSourceList;"), method = "load")
 	private static SpriteSourceList markAtlas(List<SpriteSourceList> sources, Operation<SpriteSourceList> original, @Local(argsOnly = true) Identifier path) {
 		SpriteSourceList loader = original.call(sources);
-		if (ItemParticlesAtlasManager.FOLDER_ID.equals(path)) {
+		if (ItemParticlesAtlasManager.FOLDER_ID.equals(path) || ItemParticlesAtlasManager.LEGACY_FOLDER_ID.equals(path)) {
 			((IAtlasLoaderMixin) loader).itemParticles$mark();
 		}
 		return loader;
@@ -50,7 +50,7 @@ public class AtlasLoaderMixin implements IAtlasLoaderMixin {
 	/*@WrapOperation(at = @At(value = "NEW", target = "(Ljava/util/List;)Lnet/minecraft/client/renderer/texture/atlas/SpriteResourceLoader;"), method = "load")
 	private static SpriteResourceLoader markAtlas(List<SpriteResourceLoader> sources, Operation<SpriteResourceLoader> original, @Local(argsOnly = true) Identifier path) {
 		SpriteResourceLoader loader = original.call(sources);
-		if (ItemParticlesAtlasManager.FOLDER_ID.equals(path)) {
+		if (ItemParticlesAtlasManager.FOLDER_ID.equals(path) || ItemParticlesAtlasManager.LEGACY_FOLDER_ID.equals(path)) {
 			((IAtlasLoaderMixin) loader).itemParticles$mark();
 		}
 		return loader;

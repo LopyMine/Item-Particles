@@ -30,7 +30,7 @@ public class AdvancedColorProviderGradientRandomStatic extends AdvancedColorProv
 	}
 
 	@Override
-	public void tick() {
+	public void tickElement() {
 	}
 
 	@Override

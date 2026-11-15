@@ -90,10 +90,12 @@ public class ParticlesSpawnCategory {
 	) {
 
 		Option<?>[] coefficientsOptions = createCoefficientsOptions(defConfig, config);
+		Option<?>[] distanceOptions = defWhitelistConfig != null && whitelistConfig != null
+				? createDistanceOptions(defConfig, config) : new Option[0];
 		Option<?>[] whitelistOptions = defWhitelistConfig != null && whitelistConfig != null
 				? createWhitelistOptions(defWhitelistConfig, whitelistConfig) : new Option[0];
 
-		createSection(category, id, defValue, getter, setter, coefficientsOptions, whitelistOptions);
+		createSection(category, id, defValue, getter, setter, coefficientsOptions, distanceOptions, whitelistOptions);
 	}
 
 	public static void createSection(
@@ -166,6 +168,16 @@ public class ParticlesSpawnCategory {
 				SimpleOption.<Double>startBuilder("cooldown_coefficient")
 						.withBinding(defConfig.getCooldownCoefficient(), config::getCooldownCoefficient, config::setCooldownCoefficient, true)
 						.withController(0.0D, 50D, 0.1D, false)
+						.withDescription(SimpleContent.NONE)
+						.build(ItemParticles.MOD_ID)
+		};
+	}
+
+	private static Option<?>[] createDistanceOptions(ParticleCoefficientConfig defConfig, ParticleCoefficientConfig config) {
+		return new Option[]{
+				SimpleOption.<Integer>startBuilder("spawn_distance")
+						.withBinding(defConfig.getSpawnDistance(), config::getSpawnDistance, config::setSpawnDistance, true)
+						.withController(8, 64, 1, false)
 						.withDescription(SimpleContent.NONE)
 						.build(ItemParticles.MOD_ID)
 		};

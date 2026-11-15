@@ -49,7 +49,7 @@ import net.minecraft.world.phys.Vec3;
 //?} else {
 /*import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.entity.ItemRenderer;
-import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 *///?}
 
@@ -138,15 +138,14 @@ public class ModelTexelScanner {
 		emitPixels(pixels, output);
 	}
 	//?} else {
-	/*public static void visitPixels(ItemStack stack, ItemDisplayContext displayContext, PoseStack poseStack, PixelVisitor output) {
+	/*public static void visitPixels(ItemStack stack, ItemDisplayContext displayContext, PoseStack poseStack, @Nullable LivingEntity entity, int seed, PixelVisitor output) {
 		Minecraft minecraft = Minecraft.getInstance();
 		ItemRenderer itemRenderer = minecraft.getItemRenderer();
-		BakedModel model = itemRenderer.getModel(stack, minecraft.level, null, 0);
 
 		boolean leftHand = displayContext == ItemDisplayContext.FIRST_PERSON_LEFT_HAND || displayContext == ItemDisplayContext.THIRD_PERSON_LEFT_HAND;
 
 		Map<PixelKey, Pixel> pixels = new LinkedHashMap<>();
-		itemRenderer.render(stack, displayContext, leftHand, poseStack, new TexelBufferSource(collectInto(pixels)), FULL_BRIGHT, OverlayTexture.NO_OVERLAY, model);
+		itemRenderer.renderStatic(entity, stack, displayContext, leftHand, poseStack, new TexelBufferSource(collectInto(pixels)), minecraft.level, FULL_BRIGHT, OverlayTexture.NO_OVERLAY, seed);
 		emitPixels(pixels, output);
 	}
 	*///?}

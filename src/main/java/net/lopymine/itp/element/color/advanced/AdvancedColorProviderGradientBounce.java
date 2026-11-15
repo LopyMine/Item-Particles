@@ -26,7 +26,7 @@ public class AdvancedColorProviderGradientBounce extends TickElement implements 
 			return compiledColors[0];
 		}
 
-		this.tick();
+		this.tickElement();
 
 		int totalSegments = compiledColors.length - 1;
 		int cycle = this.time * 2;

@@ -1,3 +1,5 @@
-- New particles for 26.3 items
-- Added support for older version (1.20.1, 1.21.1, fabric and (neo)forge)
-- Added compatibility with Hold My Items
+- Particles now respect the vanilla "Particles" option
+- Reduced particles lifetime
+- Fixed spawn areas not matching shields and tridents while they are being used on 1.20.1 and 1.21.1
+- Added compatibility with Item Physic & Interactic Renewed mods
+- Moved assets to the mod id prefixed layout (`item_particles/particles`, `item_particles/families`, `item_particles/spawn_areas`, `textures/item_particles/particles`, `textures/item_particles/family`), old layout is still supported

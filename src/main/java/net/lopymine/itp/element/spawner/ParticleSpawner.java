@@ -11,6 +11,7 @@ import net.lopymine.itp.element.color.IColorProvider;
 import net.lopymine.itp.element.controller.color.ColorController;
 import net.lopymine.itp.element.predicate.ISpawnPredicate;
 import net.lopymine.itp.manager.ItemParticleManager.ItemParticleRequest;
+import net.lopymine.itp.utils.ParticlesOptionUtils;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
@@ -45,7 +46,7 @@ public class ParticleSpawner extends TickElement implements IParticleSpawner {
 	}
 
 	public List<ItemParticleRequest> tickAndSpawn(SpawnContext context) {
-		this.tick();
+		this.tickElement();
 
 		if (this.nextSpawnTicks == 0) {
 			int ticks = this.random.nextIntBetweenInclusive(this.frequencyRange.getMin(), this.frequencyRange.getMax());
@@ -60,6 +61,11 @@ public class ParticleSpawner extends TickElement implements IParticleSpawner {
 		this.nextSpawnTicks = 0;
 
 		return this.spawn(context);
+	}
+
+	@Override
+	public void resetCooldown() {
+		this.nextSpawnTicks = 0;
 	}
 
 	@Override
@@ -88,6 +94,10 @@ public class ParticleSpawner extends TickElement implements IParticleSpawner {
 
 		List<ItemParticleRequest> particles = new ArrayList<>();
 		for (int i = 0; i < countOfParticles; i++) {
+			if (!ItemParticlesClient.isValidationEnabled() && !ParticlesOptionUtils.canSpawnParticle(this.random)) {
+				continue;
+			}
+
 			ItemParticleRequest particle = this.function.apply(context);
 			consumer.accept(particle);
 

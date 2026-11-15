@@ -45,6 +45,9 @@
 	"${mod_id}.modmenu.option.cooldown_coefficient.name": "Коэффициент частоты",
 	"${mod_id}.modmenu.option.cooldown_coefficient.description": "Множитель для времени между появлениями частиц в этом контексте.",
 
+	"${mod_id}.modmenu.option.spawn_distance.name": "Дистанция появления",
+	"${mod_id}.modmenu.option.spawn_distance.description": "Максимальное расстояние в блоках от камеры, на котором будут появляться частицы в этом контексте.",
+
 	"${mod_id}.modmenu.option.whitelist_mode.disabled": "Отключено",
 	"${mod_id}.modmenu.option.whitelist_mode.whitelist": "Белый список",
 	"${mod_id}.modmenu.option.whitelist_mode.blacklist": "Чёрный список",

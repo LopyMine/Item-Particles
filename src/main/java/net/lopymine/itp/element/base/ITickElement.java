@@ -2,7 +2,7 @@ package net.lopymine.itp.element.base;
 
 public interface ITickElement {
 
-	void tick();
+	void tickElement();
 
 	int getTicks();
 

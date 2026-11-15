@@ -9,4 +9,6 @@ public interface IParticleSpawner {
 
 	List<ItemParticleRequest> spawn(SpawnContext context);
 
+	void resetCooldown();
+
 }

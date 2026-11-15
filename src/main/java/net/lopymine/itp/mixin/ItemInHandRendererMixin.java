@@ -20,6 +20,7 @@ import net.minecraft.client.renderer.item.ItemStackRenderState;
 @Mixin(ItemInHandRenderer.class)
 public class ItemInHandRendererMixin {
 
+
 	//? if >=1.21.4 {
 	@Inject(at = @At(value = "INVOKE", shift = Shift.AFTER, target = "Lnet/minecraft/client/renderer/item/ItemStackRenderState;submit(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;III)V"), method = "renderItem")
 	private void acceptFirstPersonItemParticleRequests(LivingEntity entity, ItemStack itemStack, ItemDisplayContext displayContext, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int lightCoords, CallbackInfo ci, @Local ItemStackRenderState state) {

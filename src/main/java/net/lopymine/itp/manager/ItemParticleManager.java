@@ -52,6 +52,16 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 	private final Map<UUID, List<ItemParticleRequest>> itemFrameParticles = new HashMap<>();
 	private final Map<BlockPos, Map<Integer, List<ItemParticleRequest>>> shelfParticles = new HashMap<>();
 	private final Map<BlockPos, List<ItemStack>> trackedShelfItems = new HashMap<>();
+	private final Set<IParticleSpawner> tickedSpawners = new HashSet<>();
+	private final Set<IParticleSpawner> skippedSpawners = new HashSet<>();
+	private Vec3 cameraPos = Vec3.ZERO;
+	//? if >=1.21.4 {
+	@Nullable
+	private ItemClusterRenderState currentDroppedRenderState;
+	//?} else {
+	/*@Nullable
+	private ItemEntity currentDroppedItemEntity;
+	*///?}
 	//? if <1.21.4 {
 	/*private final List<Runnable> pendingFirstPersonRequests = new ArrayList<>();
 	*///?}
@@ -85,14 +95,14 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 
 				ItemDisplayContext displayContext = ItemDisplayContext.FIXED;
 				ItemParticlesClient.CURRENT_STACK = "%s [%s]".formatted(item.getDescriptionId(), displayContext.getSerializedName());
-				List<ItemParticleRequest> particleRequests = this.createParticleRequests(stack, SpawnCategory.DROPPED_ITEM, Vec3.ZERO);
+				List<ItemParticleRequest> particleRequests = this.createParticleRequests(stack, SpawnCategory.DROPPED_ITEM, Vec3.ZERO, Vec3.ZERO);
 
 				//? if >=1.21.4 {
 				ItemStackRenderState state = new ItemStackRenderState();
 				Minecraft.getInstance().getItemModelResolver().updateForTopItem(state, stack, displayContext, null, null, 0);
 				SpawnPositions spawnPositions = getSpawnPositions(state, new PoseStack());
 				//?} else {
-				/*SpawnPositions spawnPositions = getSpawnPositions(stack, displayContext, new PoseStack());
+				/*SpawnPositions spawnPositions = getSpawnPositions(stack, displayContext, new PoseStack(), null, 0);
 				*///?}
 				this.acceptItemParticles(spawnPositions, particleRequests);
 			}
@@ -156,7 +166,7 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 	//? if >=1.21.4 {
 	private static SpawnPositions getSpawnPositions(ItemStackRenderState state, PoseStack poseStack) {
 	//?} else {
-	/*private static SpawnPositions getSpawnPositions(ItemStack stack, ItemDisplayContext displayContext, PoseStack poseStack) {
+	/*private static SpawnPositions getSpawnPositions(ItemStack stack, ItemDisplayContext displayContext, PoseStack poseStack, @Nullable LivingEntity entity, int seed) {
 	*///?}
 		if (isCollectingDebugTexels()) {
 			ItemParticleManager.getInstance().getDebugItemTexels().clear();
@@ -167,13 +177,19 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 		//? if >=1.21.4 {
 		ModelTexelScanner.visitPixels(state, poseStack, collectSpawnPositions(map));
 		//?} elif >=1.21 {
-		/*ModelTexelScanner.visitPixels(stack, displayContext, poseStack, collectSpawnPositions(map));
+		/*ModelTexelScanner.visitPixels(stack, displayContext, poseStack, entity, seed, collectSpawnPositions(map));
 		*///?} else {
-		/*ModelTexelScanner.visitPixels(stack, displayContext, getLevelPose(poseStack), collectSpawnPositions(map));
+		/*ModelTexelScanner.visitPixels(stack, displayContext, getLevelPose(poseStack), entity, seed, collectSpawnPositions(map));
 		*///?}
 
 		return new SpawnPositions(map, new ArrayList<>(map.keySet()));
 	}
+
+	//? if <1.21.4 {
+	/*private static int getModelSeed(LivingEntity entity, ItemDisplayContext displayContext) {
+		return entity.getId() + displayContext.ordinal();
+	}
+	*///?}
 
 	//? if <1.21 {
 	/*private static PoseStack getLevelPose(PoseStack viewPose) {
@@ -216,12 +232,11 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 		if (uuid == null) {
 			return;
 		}
-		List<ItemParticleRequest> requests = this.droppedItemParticles.get(uuid);
+		List<ItemParticleRequest> requests = this.droppedItemParticles.remove(uuid);
 		if (requests == null || requests.isEmpty()) {
 			return;
 		}
 		this.acceptItemParticles(getSpawnPositions(state, poseStack), requests);
-		this.droppedItemParticles.remove(uuid);
 	}
 
 	public void acceptItemFrameParticleRequests(ItemStackRenderState state, PoseStack poseStack, ItemFrameRenderState renderState) {
@@ -232,12 +247,12 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 		this.acceptItemParticles(getSpawnPositions(state, poseStack), this.itemFrameParticles.remove(uuid));
 	}
 	//?} else {
-	/*public void acceptDroppedItemParticleRequests(ItemStack stack, PoseStack poseStack, ItemEntity itemEntity) {
+	/*public void acceptDroppedItemParticleRequests(ItemStack stack, ItemDisplayContext displayContext, PoseStack poseStack, ItemEntity itemEntity) {
 		List<ItemParticleRequest> requests = this.droppedItemParticles.remove(itemEntity.getUUID());
 		if (requests == null || requests.isEmpty()) {
 			return;
 		}
-		this.acceptItemParticles(getSpawnPositions(stack, ItemDisplayContext.GROUND, poseStack), requests);
+		this.acceptItemParticles(getSpawnPositions(stack, displayContext, poseStack, null, itemEntity.getId()), requests);
 	}
 
 	public void acceptItemFrameParticleRequests(ItemStack stack, PoseStack poseStack, ItemFrame itemFrame) {
@@ -245,7 +260,7 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 		if (requests == null || requests.isEmpty()) {
 			return;
 		}
-		this.acceptItemParticles(getSpawnPositions(stack, ItemDisplayContext.FIXED, poseStack), requests);
+		this.acceptItemParticles(getSpawnPositions(stack, ItemDisplayContext.FIXED, poseStack, null, itemFrame.getId()), requests);
 	}
 	*///?}
 
@@ -285,7 +300,7 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 
 		ItemDisplayContext displayContext = arm == HumanoidArm.RIGHT ? ItemDisplayContext.THIRD_PERSON_RIGHT_HAND : ItemDisplayContext.THIRD_PERSON_LEFT_HAND;
 
-		this.acceptItemParticles(getSpawnPositions(stack, displayContext, poseStack), requests, null);
+		this.acceptItemParticles(getSpawnPositions(stack, displayContext, poseStack, entity, getModelSeed(entity, displayContext)), requests, null);
 	}
 	*///?}
 
@@ -318,7 +333,7 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 		/*PoseStack pose = new PoseStack();
 		pose.last().pose().set(poseStack.last().pose());
 		pose.last().normal().set(poseStack.last().normal());
-		this.pendingFirstPersonRequests.add(() -> this.acceptItemParticles(getSpawnPositions(stack, displayContext, pose), requests, FirstPersonSpace.getToLevel(new Matrix4f())));
+		this.pendingFirstPersonRequests.add(() -> this.acceptItemParticles(getSpawnPositions(stack, displayContext, pose, entity, getModelSeed(entity, displayContext)), requests, FirstPersonSpace.getToLevel(new Matrix4f())));
 		*///?}
 	}
 
@@ -428,19 +443,40 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 		/*this.pendingFirstPersonRequests.clear();
 		*///?}
 		this.runSoft(() -> {
+			this.cameraPos = GameRendererUtils.getPosition(GameRendererUtils.getMainCamera());
 			this.createArmItemParticleRequests();
 			this.createDroppedItemParticleRequests();
 			this.createItemFrameParticleRequests();
 			this.createShelfItemParticleRequests();
+			this.resetSkippedSpawners();
 		}, "ticking_item_particles");
 	}
 
-	private List<ItemParticleRequest> createParticleRequests(ItemStack stack, SpawnCategory category, Vec3 impulse) {
+	private void resetSkippedSpawners() {
+		this.skippedSpawners.removeAll(this.tickedSpawners);
+		for (IParticleSpawner spawner : this.skippedSpawners) {
+			spawner.resetCooldown();
+		}
+		this.skippedSpawners.clear();
+		this.tickedSpawners.clear();
+	}
+
+	private boolean isOutOfSpawnDistance(SpawnCategory category, Vec3 pos) {
+		int distance = ItemParticlesConfig.getInstance().getCoefficientsConfig().getSpawnDistance(category);
+		return pos.distanceToSqr(this.cameraPos) > distance * distance;
+	}
+
+	private List<ItemParticleRequest> createParticleRequests(ItemStack stack, SpawnCategory category, Vec3 impulse, Vec3 pos) {
 		List<IParticleSpawner> particleSpawners = ParticlesConfigsManager.getSpawnersForItem(stack.getItem());
 		if (particleSpawners == null) {
 			if (ItemParticlesClient.isValidationEnabled()) {
 				ItemParticlesClient.logValidationError("No registered particle spawners for {}", ItemParticlesClient.CURRENT_STACK);
 			}
+			return new ArrayList<>();
+		}
+
+		if (!ItemParticlesClient.isValidationEnabled() && this.isOutOfSpawnDistance(category, pos)) {
+			this.skippedSpawners.addAll(particleSpawners);
 			return new ArrayList<>();
 		}
 
@@ -451,6 +487,7 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 			if (ItemParticlesClient.isValidationEnabled()) {
 				particles.addAll(spawner.spawn(context));
 			} else {
+				this.tickedSpawners.add(spawner);
 				particles.addAll(spawner.tickAndSpawn(context));
 			}
 		}
@@ -474,7 +511,7 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 				continue;
 			}
 
-			List<ItemParticleRequest> particleRequests = this.createParticleRequests(stack, SpawnCategory.DROPPED_ITEM, getSpeed(itemEntity));
+			List<ItemParticleRequest> particleRequests = this.createParticleRequests(stack, SpawnCategory.DROPPED_ITEM, getSpeed(itemEntity), itemEntity.position());
 			if (particleRequests.isEmpty()) {
 				continue;
 			}
@@ -498,7 +535,7 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 				continue;
 			}
 
-			List<ItemParticleRequest> particleRequests = this.createParticleRequests(stack, SpawnCategory.ITEM_FRAME, Vec3.ZERO);
+			List<ItemParticleRequest> particleRequests = this.createParticleRequests(stack, SpawnCategory.ITEM_FRAME, Vec3.ZERO, itemFrame.position());
 			if (particleRequests.isEmpty()) {
 				continue;
 			}
@@ -510,6 +547,7 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 		this.shelfParticles.clear();
 		for (Entry<BlockPos, List<ItemStack>> entry : this.trackedShelfItems.entrySet()) {
 			List<ItemStack> items = entry.getValue();
+			Vec3 pos = Vec3.atCenterOf(entry.getKey());
 			Map<Integer, List<ItemParticleRequest>> slots = new HashMap<>();
 
 			for (int slot = 0; slot < items.size(); slot++) {
@@ -518,7 +556,7 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 					continue;
 				}
 
-				List<ItemParticleRequest> particleRequests = this.createParticleRequests(stack, SpawnCategory.SHELF, Vec3.ZERO);
+				List<ItemParticleRequest> particleRequests = this.createParticleRequests(stack, SpawnCategory.SHELF, Vec3.ZERO, pos);
 				if (particleRequests.isEmpty()) {
 					continue;
 				}
@@ -551,7 +589,7 @@ public class ItemParticleManager extends AbstractElementsManager<ItemParticle, I
 					continue;
 				}
 
-				List<ItemParticleRequest> particleRequests = this.createParticleRequests(stack, category, impulse);
+				List<ItemParticleRequest> particleRequests = this.createParticleRequests(stack, category, impulse, livingEntity.position());
 				if (particleRequests.isEmpty()) {
 					continue;
 				}

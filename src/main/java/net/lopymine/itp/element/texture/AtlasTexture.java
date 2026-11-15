@@ -47,7 +47,9 @@ public class AtlasTexture implements ITexture {
 
 	@Override
 	public void initialize() {
-		this.atlasSprite = ItemParticlesAtlasManager.getInstance().getSprite(this.sprite, this.atlas);
+		ItemParticlesAtlasManager manager = ItemParticlesAtlasManager.getInstance();
+		this.atlas = manager.resolveAtlasId(this.sprite, this.atlas);
+		this.atlasSprite = manager.getSprite(this.sprite, this.atlas);
 	}
 
 	@Override

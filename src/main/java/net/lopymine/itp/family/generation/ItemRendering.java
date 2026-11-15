@@ -448,7 +448,7 @@ public class ItemRendering {
 			for (ItemStack itemStack : itemStacks) {
 				Set<Pixel> colors = new HashSet<>();
 				for (ItemDisplayContext context : ItemDisplayContext.values()) {
-					ModelTexelScanner.visitPixels(itemStack, context, new PoseStack(), (texture, x, y, argb, position, faceCenters) -> {
+					ModelTexelScanner.visitPixels(itemStack, context, new PoseStack(), null, 0, (texture, x, y, argb, position, faceCenters) -> {
 						colors.add(new Pixel(texture, x, y, argb));
 					});
 				}

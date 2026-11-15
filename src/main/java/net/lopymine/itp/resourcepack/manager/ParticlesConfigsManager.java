@@ -330,7 +330,7 @@ public class ParticlesConfigsManager extends AbstractConfigsManager<ParticleConf
 			List<IParticleSpawner> list = new ArrayList<>();
 
 			for (FamilyParticleData particleData : particles) {
-				Identifier id = ItemParticles.id("%s/%s.json".formatted(getInstance().getFolderName(), particleData.getId().getPath()));
+				Identifier id = ItemParticles.id("%s/%s.json".formatted(getInstance().getFolderPath(), particleData.getId().getPath()));
 				List<ParticleConfig> configs = REGISTERED_CONFIGS.get(id);
 				if (configs == null || configs.isEmpty()) {
 					getInstance().getLogger().error("Failed to find config from \"%s\" for family config from \"%s\"!".formatted(id.getPath(), config.getLocation()));
@@ -512,6 +512,11 @@ public class ParticlesConfigsManager extends AbstractConfigsManager<ParticleConf
 	@Override
 	protected String getFolderName() {
 		return ItemParticlesAtlasManager.FOLDER_ID.getPath();
+	}
+
+	@Override
+	protected String getLegacyFolderName() {
+		return ItemParticlesAtlasManager.LEGACY_FOLDER_ID.getPath();
 	}
 
 	@Override

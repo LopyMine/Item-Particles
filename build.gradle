@@ -25,6 +25,8 @@ mossyDependencies {
 		disable("punchy-fpa")
 		disable("hold-my-items-reforged")
 		disable("hold-my-items")
+		disable("itemphysic")
+		disable("interactic-renewed")
 	}
 }
 
@@ -69,15 +71,15 @@ stonecutter {
 
 processResources {
 	if (stonecutter.compare(stonecutter.current.version, "1.21.8") <= 0) {
-		fletchingTable.relocate(it, "assets/${prop("data.mod_id")}/spawn_areas_1_21_8/*.png -> ../spawn_areas")
+		fletchingTable.relocate(it, "assets/${prop("data.mod_id")}/${prop("data.mod_id")}/spawn_areas_1_21_8/*.png -> ../spawn_areas")
 	} else {
-		exclude("assets/${prop("data.mod_id")}/spawn_areas_1_21_8/")
+		exclude("assets/${prop("data.mod_id")}/${prop("data.mod_id")}/spawn_areas_1_21_8/")
 	}
 
 	if (stonecutter.compare(stonecutter.current.version, "26.2") <= 0) {
-		fletchingTable.relocate(it, "assets/${prop("data.mod_id")}/spawn_areas_26_2/*.png -> ../spawn_areas")
+		fletchingTable.relocate(it, "assets/${prop("data.mod_id")}/${prop("data.mod_id")}/spawn_areas_26_2/*.png -> ../spawn_areas")
 	} else {
-		exclude("assets/${prop("data.mod_id")}/spawn_areas_26_2/")
+		exclude("assets/${prop("data.mod_id")}/${prop("data.mod_id")}/spawn_areas_26_2/")
 	}
 }
 

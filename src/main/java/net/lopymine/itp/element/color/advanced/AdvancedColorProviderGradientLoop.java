@@ -26,7 +26,7 @@ public class AdvancedColorProviderGradientLoop extends TickElement implements IA
 			return compiledColors[0];
 		}
 
-		this.tick();
+		this.tickElement();
 
 		float progress = (float) (this.ticks % this.time) / (float) this.time;
 		int totalSegments = compiledColors.length;

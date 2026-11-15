@@ -22,18 +22,27 @@ public class AdvancedSpawnAreaId {
 	// "minecraft:item/trident": "2d/trident_drip.png",
 	// id id
 
+	public static final String FOLDER_NAME = "spawn_areas";
+
 	@Nullable
 	private final Identifier baseTexture;
 	@Nullable
 	private final Identifier maskTexture;
+	@Nullable
+	private final Identifier legacyMaskTexture;
 
 	private boolean initialized;
 	@Nullable
 	private AdvancedSpawnArea area;
 
 	public AdvancedSpawnAreaId(@Nullable Identifier baseTexture, @Nullable Identifier maskTexture) {
+		this(baseTexture, maskTexture, null);
+	}
+
+	public AdvancedSpawnAreaId(@Nullable Identifier baseTexture, @Nullable Identifier maskTexture, @Nullable Identifier legacyMaskTexture) {
 		this.baseTexture = AdvancedSpawnAreaId.getValidatedBaseTexture(baseTexture);
 		this.maskTexture = maskTexture;
+		this.legacyMaskTexture = legacyMaskTexture;
 	}
 
 	public static DataResult<AdvancedSpawnAreaId> read(@Nullable Identifier texture, String maskPath) {
@@ -56,7 +65,11 @@ public class AdvancedSpawnAreaId {
 		}
 
 		// "minecraft:item/trident": "2d/trident_drip.png",
-		return DataResult.success(new AdvancedSpawnAreaId(texture, ItemParticles.id("spawn_areas/" + path)));
+		return DataResult.success(new AdvancedSpawnAreaId(
+				texture,
+				ItemParticles.id("%s/%s/%s".formatted(ItemParticles.MOD_ID, FOLDER_NAME, path)),
+				ItemParticles.id("%s/%s".formatted(FOLDER_NAME, path))
+		));
 	}
 
 	@Nullable
@@ -88,6 +101,12 @@ public class AdvancedSpawnAreaId {
 				}
 			} else {
 				this.area = AdvancedSpawnArea.readFromTexture(this.baseTexture, this.maskTexture);
+				if (this.area.isEmpty() && this.legacyMaskTexture != null) {
+					AdvancedSpawnArea legacyArea = AdvancedSpawnArea.readFromTexture(this.baseTexture, this.legacyMaskTexture);
+					if (!legacyArea.isEmpty()) {
+						this.area = legacyArea;
+					}
+				}
 			}
 			this.initialized = true;
 		}
