@@ -2,6 +2,7 @@ package net.lopymine.itp.element.inventory;
 
 import java.lang.Math;
 import lombok.*;
+import net.lopymine.itp.atlas.MissingSpritesReporter;
 import net.lopymine.itp.config.ItemParticlesConfig;
 import net.lopymine.itp.element.base.*;
 import net.lopymine.itp.element.controller.IController;
@@ -64,6 +65,8 @@ public abstract class AbstractItemParticle<E extends AbstractItemParticle<E>> ex
 	private TextureRotationSpeedController<E> textureRotationSpeedController;
 	private IController<E>[] controllers;
 	private ITexture elementTexture;
+	private boolean missingTextureReported;
+	private boolean textureReported;
 
 	private boolean spawnedInHand;
 	private double handDepth;
@@ -175,6 +178,7 @@ public abstract class AbstractItemParticle<E extends AbstractItemParticle<E>> ex
 			return;
 		}
 
+		this.reportTexture();
 		if (!this.spawnedInHand) {
 			super.extract(state, camera, tickProgress);
 			return;
@@ -189,6 +193,7 @@ public abstract class AbstractItemParticle<E extends AbstractItemParticle<E>> ex
 			return;
 		}
 
+		this.reportTexture();
 		if (!this.spawnedInHand) {
 			super.render(consumer, camera, tickProgress);
 			return;
@@ -197,6 +202,21 @@ public abstract class AbstractItemParticle<E extends AbstractItemParticle<E>> ex
 		this.renderQuad(consumer, this.getRolledBillboardRotation(camera, tickProgress), this.getRelativePosition(camera, tickProgress), this.getQuadSize(tickProgress), this.getLightColor(tickProgress));
 	}
 	*///?}
+
+	private void reportTexture() {
+		ITexture texture = this.getElementTexture();
+		if (texture == null) {
+			return;
+		}
+		if (!this.missingTextureReported && texture instanceof AtlasTexture atlasTexture && atlasTexture.isMissingSprite()) {
+			this.missingTextureReported = true;
+			this.textureReported        = true;
+			MissingSpritesReporter.reportMissing(atlasTexture);
+		} else if (!this.textureReported && MissingSpritesReporter.isDebug()) {
+			this.textureReported = true;
+			MissingSpritesReporter.reportTexture(texture);
+		}
+	}
 
 	private Quaternionf getRolledBillboardRotation(Camera camera, float tickProgress) {
 		Quaternionf rotation = this.getBillboardRotation(camera, tickProgress, new Quaternionf());

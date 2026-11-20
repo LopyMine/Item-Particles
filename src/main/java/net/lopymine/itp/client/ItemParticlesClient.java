@@ -48,6 +48,7 @@ public class ItemParticlesClient {
 
 	public static void onInitializeClient() {
 		LOGGER.info("{} Client Initialized", ItemParticles.MOD_NAME);
+		ItemParticlesAnnouncements.register();
 	}
 
 	public static void sendNoticeMessage(int size) {

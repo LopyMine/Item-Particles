@@ -1,11 +1,14 @@
 package net.lopymine.itp.yacl.category;
 
+import dev.isxander.yacl3.api.Option;
 import lombok.experimental.ExtensionMethod;
+import net.lopymine.itp.ItemParticles;
 import net.lopymine.itp.config.ItemParticlesConfig;
 import net.lopymine.itp.config.sub.*;
 import net.lopymine.itp.config.sub.ItemParticlesCacheConfig.CacheInvalidateMode;
 import net.lopymine.itp.config.sub.ItemParticlesFamilyGenerationConfig.Mode;
-import net.lopymine.itp.family.cache.FamilyParticlesCacheManager;
+import net.lopymine.itp.yacl.screen.*;
+import net.lopymine.mossylib.utils.ScreenUtils;
 import net.lopymine.mossylib.yacl.api.*;
 import net.lopymine.mossylib.yacl.extension.SimpleOptionExtension;
 
@@ -21,23 +24,30 @@ public class GeneralCategory {
 	}
 
 	private static SimpleGroup getFamilyGenerationGroup(ItemParticlesFamilyGenerationConfig defConfig, ItemParticlesFamilyGenerationConfig config) {
+		Option<String> itemsOption = SimpleOption.<String>startBuilder("family_generation_items")
+				.withBinding(defConfig.getItems(), config::getItems, config::setItems, true)
+				.withController()
+				.withDescription(SimpleContent.NONE)
+				.build(ItemParticles.MOD_ID);
+
 		return SimpleGroup.startBuilder("family_generation").options(
 				SimpleOption.<Mode>startBuilder("family_generation_mods_mode")
 						.withBinding(defConfig.getModsMode(), config::getModsMode, config::setModsMode, true)
 						.withController(Mode.class)
-						.withDescription(SimpleContent.NONE),
+						.withDescription(SimpleContent.NONE)
+						.build(ItemParticles.MOD_ID),
 				SimpleOption.<String>startBuilder("family_generation_mods")
 						.withBinding(defConfig.getMods(), config::getMods, config::setMods, true)
 						.withController()
-						.withDescription(SimpleContent.NONE),
+						.withDescription(SimpleContent.NONE)
+						.build(ItemParticles.MOD_ID),
 				SimpleOption.<Mode>startBuilder("family_generation_items_mode")
 						.withBinding(defConfig.getItemsMode(), config::getItemsMode, config::setItemsMode, true)
 						.withController(Mode.class)
-						.withDescription(SimpleContent.NONE),
-				SimpleOption.<String>startBuilder("family_generation_items")
-						.withBinding(defConfig.getItems(), config::getItems, config::setItems, true)
-						.withController()
 						.withDescription(SimpleContent.NONE)
+						.build(ItemParticles.MOD_ID),
+				itemsOption,
+				ItemsSelectionOption.create("family_generation_select_items", itemsOption)
 //				,SimpleOption.<Float>startBuilder("123")
 //						.withBinding(0.005F, () -> (float) AbstractItemParticle.HAND_DEPTH_BIAS, (d) -> AbstractItemParticle.HAND_DEPTH_BIAS = d, true)
 //						.withController(-1.0f, 1f, 0.01f, true)
@@ -82,7 +92,7 @@ public class GeneralCategory {
 						.withController(CacheInvalidateMode.class)
 						.withDescription(SimpleContent.NONE),
 				SimpleOption.startButtonBuilder("invalidate_now", (screen, option) -> {
-					FamilyParticlesCacheManager.deleteSilence();
+					ScreenUtils.set(CacheInvalidationScreen.create(screen));
 				}).withDescription(SimpleContent.NONE)
 		);
 	}

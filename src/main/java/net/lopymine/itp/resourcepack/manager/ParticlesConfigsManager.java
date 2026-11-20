@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.*;
 import lombok.*;
 import net.lopymine.itp.ItemParticles;
-import net.lopymine.itp.atlas.ItemParticlesAtlasManager;
+import net.lopymine.itp.atlas.*;
 import net.lopymine.itp.client.ItemParticlesClient;
 import net.lopymine.itp.config.ItemParticlesConfig;
 import net.lopymine.itp.config.misc.CachedItem;
@@ -56,6 +56,8 @@ public class ParticlesConfigsManager extends AbstractConfigsManager<ParticleConf
 	}
 
 	public static void updateCombinedMap() {
+		FamilyParticlesCacheManager.clearLoadedIfRequested();
+		MissingSpritesReporter.reset();
 		boolean debug = Boolean.getBoolean("item_particles.debug_generate");
 		int currentVersion = VERSION.incrementAndGet();
 
@@ -134,6 +136,7 @@ public class ParticlesConfigsManager extends AbstractConfigsManager<ParticleConf
 						return;
 					}
 					COMBINED_MAP = combinedMap2;
+					MissingSpritesReporter.activate();
 				});
 			});
 		}).exceptionally(throwable -> {
@@ -561,6 +564,7 @@ public class ParticlesConfigsManager extends AbstractConfigsManager<ParticleConf
 	public void reload() {
 		VERSION.incrementAndGet();
 		COMBINED_MAP = new IdentityHashMap<>();
+		MissingSpritesReporter.reset();
 
 		REGISTERED_CONFIGS.clear();
 		PER_ITEM_PARTICLE_SPAWNERS.clear();

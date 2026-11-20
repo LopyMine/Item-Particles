@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import lombok.*;
 import net.lopymine.itp.ItemParticles;
-import net.lopymine.itp.atlas.ItemParticlesAtlasManager;
+import net.lopymine.itp.atlas.*;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.Identifier;
@@ -29,10 +29,12 @@ public class AtlasTexture implements ITexture {
 
 	@Nullable
 	private TextureAtlasSprite atlasSprite;
+	private boolean missingSprite;
 
 	public AtlasTexture(@Nullable TextureAtlasSprite sprite) {
 		this(null, null);
-		this.atlasSprite = sprite;
+		this.atlasSprite   = sprite;
+		this.missingSprite = MissingSpritesReporter.isMissing(sprite);
 	}
 
 	public AtlasTexture(@Nullable Identifier sprite, @Nullable Identifier atlas) {
@@ -50,11 +52,13 @@ public class AtlasTexture implements ITexture {
 		ItemParticlesAtlasManager manager = ItemParticlesAtlasManager.getInstance();
 		this.atlas = manager.resolveAtlasId(this.sprite, this.atlas);
 		this.atlasSprite = manager.getSprite(this.sprite, this.atlas);
+		this.missingSprite = MissingSpritesReporter.isMissing(this.atlasSprite);
 	}
 
 	@Override
 	public void clear() {
-		this.atlasSprite = null;
+		this.atlasSprite   = null;
+		this.missingSprite = false;
 	}
 
 	@NotNull

@@ -50,6 +50,7 @@
 		/*"ItemInHandRendererMixin",
 		*///?}
 		"SpriteContentsAccessor",
+		"TextureAtlasAccessor",
 		"GameRendererMixin",
 		"ItemEntityRendererMixin",
 		"ScreenMixin"

@@ -2,6 +2,7 @@ package net.lopymine.itp.atlas;
 
 import java.util.Set;
 import java.util.concurrent.*;
+import lombok.Getter;
 import net.lopymine.itp.ItemParticles;
 import net.lopymine.itp.family.atlas.manager.FamilyParticlesAtlasManager;
 import net.minecraft.client.Minecraft;
@@ -19,7 +20,9 @@ public class ItemParticlesAtlasManager {
 	public static final Identifier FOLDER_ID = ItemParticles.id("particles");
 	public static final Identifier LEGACY_FOLDER_ID = ItemParticles.id("iparticles");
 	private static ItemParticlesAtlasManager INSTANCE;
+	@Getter
 	private final TextureAtlas atlas;
+	@Getter
 	private final TextureAtlas legacyAtlas;
 
 	public ItemParticlesAtlasManager() {

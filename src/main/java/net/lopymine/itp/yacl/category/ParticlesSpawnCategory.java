@@ -10,6 +10,7 @@ import net.lopymine.itp.config.ItemParticlesConfig;
 import net.lopymine.itp.config.sub.*;
 import net.lopymine.itp.config.sub.ItemParticlesCoefficientsConfig.ParticleCoefficientConfig;
 import net.lopymine.itp.config.sub.ItemParticlesItemWhitelistsConfig.*;
+import net.lopymine.itp.yacl.screen.ItemsSelectionOption;
 import net.lopymine.mossylib.yacl.api.*;
 import net.lopymine.mossylib.yacl.extension.SimpleOptionExtension;
 import org.jetbrains.annotations.Nullable;
@@ -149,7 +150,7 @@ public class ParticlesSpawnCategory {
 				b.addListener((o, e) -> {
 					boolean value = Boolean.TRUE.equals(getter.get());
 					for (Option<?> option : dependents) {
-						option.setAvailable(value);
+						option.setAvailable(value && ItemsSelectionOption.isAvailable(option));
 					}
 				});
 			});
@@ -184,17 +185,20 @@ public class ParticlesSpawnCategory {
 	}
 
 	private static Option<?>[] createWhitelistOptions(ParticlesItemWhitelistConfig defConfig, ParticlesItemWhitelistConfig config) {
+		Option<String> itemsOption = SimpleOption.<String>startBuilder("whitelist_items")
+				.withBinding(defConfig.getItems(), config::getItems, config::setItems, true)
+				.withController()
+				.withDescription(SimpleContent.NONE)
+				.build(ItemParticles.MOD_ID);
+
 		return new Option[]{
 				SimpleOption.<Mode>startBuilder("whitelist_mode")
 						.withBinding(defConfig.getMode(), config::getMode, config::setMode, true)
 						.withController(Mode.class)
 						.withDescription(SimpleContent.NONE)
 						.build(ItemParticles.MOD_ID),
-				SimpleOption.<String>startBuilder("whitelist_items")
-						.withBinding(defConfig.getItems(), config::getItems, config::setItems, true)
-						.withController()
-						.withDescription(SimpleContent.NONE)
-						.build(ItemParticles.MOD_ID)
+				itemsOption,
+				ItemsSelectionOption.create("whitelist_select_items", itemsOption)
 		};
 	}
 
