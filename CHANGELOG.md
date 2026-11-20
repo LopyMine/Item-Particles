@@ -1,11 +1,1 @@
-- Particles now respect the vanilla "Particles" option
-- Reduced particles lifetime
-- Fixed spawn areas not matching shields and tridents while they are being used on 1.20.1 and 1.21.1
-- Added compatibility with Item Physic & Interactic Renewed mods
-- Moved assets to the mod id prefixed layout
-- Fixed family particles not matching keywords of modded items with `/` in their id
-- Fixed `@` prefixed tags in families not matching anything
-- Added a one-time screen after the update that offers to regenerate the cache for modded items
-- Improved the "Invalidate Cache Now" button
-- Added new config buttons for easier configuration
-- Better log system for weird rendering cases
+- little particle rendering fix

@@ -121,7 +121,7 @@ public class ItemParticle extends AbstractItemParticle<ItemParticle> {
 	@Override
 	@NotNull
 	protected Layer getLayer() {
-		return LAYERS_BY_ATLAS.computeIfAbsent(this.getAtlasId(), (id) -> new Layer(true, id, RenderPipelines.TRANSLUCENT_PARTICLE));
+		return LAYERS_BY_ATLAS.computeIfAbsent(this.getAtlasId(), (id) -> new Layer(true, id, RenderPipelines.TRANSLUCENT_PARTICLE/*? if >=26.3 {*/, RenderPipelines.OIT_PARTICLE/*?}*/));
 	}
 	//?} else {
 	/*@Override
